@@ -1,0 +1,25 @@
+.
+├── application
+├── assets
+├── headers
+│   ├── widgets
+│   │   ├── image.h
+│   │   ├── label.h
+│   │   ├── spinner.h
+│   │   └── text_view.h
+│   └── windows
+│       ├── dialog.h
+│       └── window.h
+├── includes.h
+├── main.c
+├── Makefile
+├── src
+│   ├── widgets
+│   │   ├── image.c
+│   │   ├── label.c
+│   │   ├── spinner.c
+│   │   └── text_view.c
+│   └── windows
+│       ├── dialog.c
+│       └── window.c
+└── the_project_structure.txt
