@@ -7,7 +7,7 @@
  * 
  * @author Ayyoub el kouri
  * @date 21/01/2025
- * @version 1.0 (last update 21/01/2025)
+ * @version 1.0 (last update 24/01/2025)
  * 
  ****************************************************************************************************************************/
 
@@ -20,7 +20,9 @@
 #include "headers/widgets/image.h"
 #include "headers/widgets/spinner.h"
 #include "headers/widgets/text_view.h"
-
+#include "headers/widgets/level_bar.h"
+#include "headers/widgets/progress_bar.h"
+#include "headers/widgets/scale.h"
 
 
 #endif // INCLUDES_H
