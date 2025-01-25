@@ -1,25 +1,52 @@
 .
 ├── application
 ├── assets
+├── data_structres_includes.h
+├── data_structures
+│   └── linked_list
+│       ├── linked_list.c
+│       └── linked_list.h
 ├── headers
 │   ├── widgets
+│   │   ├── button.h
+│   │   ├── check_button.h
 │   │   ├── image.h
 │   │   ├── label.h
+│   │   ├── level_bar.h
+│   │   ├── link_button.h
+│   │   ├── menu_button.h
+│   │   ├── menu.h
+│   │   ├── menu_item.h
+│   │   ├── progress_bar.h
+│   │   ├── scale.h
+│   │   ├── separator.h
 │   │   ├── spinner.h
 │   │   └── text_view.h
 │   └── windows
 │       ├── dialog.h
 │       └── window.h
-├── includes.h
 ├── main.c
 ├── Makefile
 ├── src
 │   ├── widgets
+│   │   ├── button.c
+│   │   ├── check_button.c
 │   │   ├── image.c
 │   │   ├── label.c
+│   │   ├── level_bar.c
+│   │   ├── link_button.c
+│   │   ├── menu_button.c
+│   │   ├── menu.c
+│   │   ├── menu_item.c
+│   │   ├── progress_bar.c
+│   │   ├── scale.c
+│   │   ├── separator.c
 │   │   ├── spinner.c
 │   │   └── text_view.c
 │   └── windows
 │       ├── dialog.c
 │       └── window.c
-└── the_project_structure.txt
+├── the_project_structure.txt
+└── widgets_includes.h
+
+10 directories, 40 files
