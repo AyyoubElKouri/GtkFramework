@@ -27,6 +27,7 @@
 #include "headers/widgets/link_button.h"
 #include "headers/widgets/menu_item.h"
 #include "headers/widgets/menu.h"
+#include "headers/widgets/menu_button.h"
 
 
 #endif // INCLUDES_H

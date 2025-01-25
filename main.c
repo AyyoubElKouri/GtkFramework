@@ -149,8 +149,12 @@ static void activate(GtkApplication *app, gpointer data)
     menuInfos *menuInformation = get_properties_menu(menu);
     printf("is_primary: %d\nlabel: %s\nitems: %p\n", menuInformation->is_primary, menuInformation->label, menuInformation->items);
 
+    GtkWidget *menu_button = create_menu_button(NULL, "/home/ayyoub/Téléchargements/home (1).png", menu, GTK_ARROW_RIGHT);
 
-    gtk_container_add(GTK_CONTAINER(window), menu);
+    menuButtonInfos *menuButtonInformation = get_properties_menuButton(menu_button);
+    printf("label: %s\npath_to_image: %s\nmenu: %p\narrow_type: %d\n", menuButtonInformation->label, menuButtonInformation->path_to_image, menuButtonInformation->menu, menuButtonInformation->arrow_type);
+
+    gtk_container_add(GTK_CONTAINER(window), menu_button);
 
 
     gtk_widget_show_all(window);

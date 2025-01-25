@@ -48,15 +48,9 @@ GtkWidget *set_properties_menu(menuInfos *menuInformation)
     }
 
     if(menuInformation->is_primary)
-    {
-        GtkWidget *menu_button = gtk_menu_button_new();
-        gtk_menu_button_set_popup(GTK_MENU_BUTTON(menu_button), menu);
-        gtk_button_set_label(GTK_BUTTON(menu_button), menuInformation->label);
         gtk_widget_show_all(menu);
-        return menu_button;
-    }
-    else
-        return menu;
+    
+    return menu;
 }
 
 menuInfos *get_properties_menu(GtkWidget *menu)
