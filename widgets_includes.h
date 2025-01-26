@@ -30,6 +30,7 @@
 #include "headers/widgets/menu_button.h"
 #include "headers/containers/box.h"
 #include "headers/windows/scrolled_window.h"
+#include "headers/windows/header_bar.h"
 
 
 #endif // WIDGETS_INCLUDES_H

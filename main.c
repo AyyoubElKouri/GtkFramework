@@ -272,11 +272,37 @@ static void activate(GtkApplication *app, gpointer data)
     // GtkWidget *menuItem;
 
     GtkWidget *window;
+    GtkWidget *header_bar;
     GtkWidget *dialog;
 
+    GtkWidget *buttonA = create_button(GTK_RELIEF_NORMAL, "click", FALSE, NULL, NULL, NULL);
+    GtkWidget *buttonB = create_button(GTK_RELIEF_NORMAL, "clickme", FALSE, NULL, NULL, NULL);
+
+    LinkedList *list = create_linked_list();
+
+    insert_at_end(list, buttonA);
+    insert_at_end(list, buttonB);
 
     window = create_window(app, GTK_WINDOW_TOPLEVEL, "Contry", 900, 660, TRUE, GTK_WIN_POS_CENTER, TRUE, NULL, 1, FALSE);
-    dialog = create_dialog("Confirmer votre choix hhh , juste pour rir, bien sûr que vous voulez entre", window, GTK_DIALOG_MODAL, 800, 70, 1, "Entrer", GTK_RESPONSE_OK, "Quitter", GTK_RESPONSE_CANCEL, "NULL", GTK_RESPONSE_CANCEL);
+    header_bar = create_header_bar(window, "Contry", "This is a subtitle", "assets/w160/ma.png", TRUE, NULL, list);
+    
+    headerBarInfos *headerBarInformations = get_properties_header_bar(header_bar);
+    printf("Title: %s\nSubtitle: %s\nIcon path : %s\nSettings: %d\n", headerBarInformations->title, headerBarInformations->subtitle, headerBarInformations->icon_path, headerBarInformations->settings);
+
+    if(headerBarInformations->window == window)
+        g_print("Oui\n");
+    else
+        g_print("Non\n");
+
+    if(headerBarInformations->start_widgets_liste == NULL)
+        g_print("Oui\n");
+    else
+        g_print("Non\n");
+    
+    if(headerBarInformations->end_widgets_liste == list)
+        g_print("Oui\n");
+    else
+        g_print("Non\n");
     
 
     // Morocco
@@ -361,8 +387,23 @@ static void activate(GtkApplication *app, gpointer data)
     add_box(box_main, boxLine1, START, TRUE, FALSE, 0, 0, 0, 0, 0);
     add_box(box_main, boxLine2, START, TRUE, FALSE, 0, 0, 0, 0, 0);
 
+    GtkWidget *boxDialog = create_box(GTK_ORIENTATION_VERTICAL, GTK_ALIGN_START, 0);
+    GtkWidget *label = gtk_label_new("hello is me");
+    add_box(boxDialog, label, START, TRUE, FALSE, 10, 0, 0, 0, 0);
 
-
+    dialog = create_dialog("Confirmer votre choix hhh , juste pour rir, bien sûr que vous voulez entre", window, GTK_DIALOG_MODAL, 800, 70, 0.5, boxDialog, "Entrer", GTK_RESPONSE_OK, "Quitter", GTK_RESPONSE_CANCEL, "NULL", GTK_RESPONSE_CANCEL);
+    
+    dialogInfos *dialogInformations = get_properties_dialog(dialog);
+    printf("titre : %s\nflags : %d\nwidth : %d\nheight : %d\nopacity : %f\ntitre1 : %s\ntitre2 : %s\ntitre3 : %s\nreponse1 : %d\nreponse2 : %d\nreponse3 : %d\n", dialogInformations->title, dialogInformations->flags, dialogInformations->width, dialogInformations->height, dialogInformations->opacily, dialogInformations->title1, dialogInformations->title2, dialogInformations->title3, dialogInformations->answer1, dialogInformations->answer2, dialogInformations->answer3);
+    if(dialogInformations->parent == window)
+        g_print("Oui\n");
+    else
+        g_print("Non");
+    
+    if(dialogInformations->box_content_area == boxDialog)
+        g_print("Oui\n");
+    else
+        g_print("Non\n");
     
     gtk_container_add(GTK_CONTAINER(window), box_main);
 

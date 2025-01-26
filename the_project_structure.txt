@@ -3,7 +3,15 @@
 │   ├── cppIcon.png
 │   ├── home.png
 │   ├── light.png
-│   └── smallHome.png
+│   ├── red.jpg
+│   ├── smallHome.png
+│   └── w160
+│       ├── ar.png
+│       ├── dz.png
+│       ├── fr.png
+│       ├── it.png
+│       ├── ma.png
+│       └── sa.png
 ├── bin
 │   └── application
 ├── data_structres_includes.h
@@ -31,6 +39,8 @@
 │   │   └── text_view.h
 │   └── windows
 │       ├── dialog.h
+│       ├── header_bar.h
+│       ├── scrolled_window.h
 │       └── window.h
 ├── main.c
 ├── Makefile
@@ -59,6 +69,8 @@
 │   │   │   └── text_view.o
 │   │   └── windows
 │   │       ├── dialog.o
+│   │       ├── heeader_bar.o
+│   │       ├── scolled_window.o
 │   │       └── window.o
 │   ├── widgets
 │   │   ├── button.o
@@ -98,8 +110,10 @@
 │   │   └── text_view.c
 │   └── windows
 │       ├── dialog.c
+│       ├── heeader_bar.c
+│       ├── scolled_window.c
 │       └── window.c
 ├── the_project_structure.txt
 └── widgets_includes.h
 
-22 directories, 81 files
+23 directories, 94 files

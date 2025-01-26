@@ -29,7 +29,8 @@ typedef struct
     GtkDialogFlags flags;
     gint width;
     gint height;
-    double opacily;
+    gdouble opacily;
+    GtkWidget *box_content_area;
     const gchar *title1;
     gint answer1;
     const gchar *title2;
@@ -53,13 +54,13 @@ typedef struct
  * @param title3 The title of the third button in the dialog.
  * @param answer3 The answer associated with the third button.
  * 
- * @note By default, 3 buttons are provided. If you need fewer buttons, you can pass "NULL" as the title to indicate that there is no button here.
- * @note If you need more than 3 buttons, you can use a dedicated function for this purpose.
+ * @note By default, 3 buttons are provided. If you need fewer buttons, you can pass "NULL" as the title to
+ *       indicate that there is no button here.
  * 
  * @return GtkWidget* A pointer to the created dialog.
  */
 
-GtkWidget *create_dialog(const gchar *title, GtkWidget *parent, GtkDialogFlags flags, gint width, gint height, double opacity, const gchar *title1, gint answer1, const gchar *title2, gint answer2, const char *title3, gint answer3);
+GtkWidget *create_dialog(const gchar *title, GtkWidget *parent, GtkDialogFlags flags, gint width, gint height, double opacity, GtkWidget *box_content_area, const gchar *title1, gint answer1, const gchar *title2, gint answer2, const char *title3, gint answer3);
 
 /**
  * @brief This function creates the dialog and sets its properties.
@@ -69,6 +70,15 @@ GtkWidget *create_dialog(const gchar *title, GtkWidget *parent, GtkDialogFlags f
  */
 
 GtkWidget *set_properties_dialog(dialogInfos *dialogInformations);
+
+/**
+ * @brief This function return the properties of the dialog;
+ * 
+ * @param dialog The dialog 
+ * @return dialogInfos pointer to the structre of the dialog in parameter
+ */
+
+dialogInfos *get_properties_dialog(GtkWidget *dialog);
 
 
 
