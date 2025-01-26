@@ -9,8 +9,8 @@
  * 
  ****************************************************************************************************************************/
 
-#ifndef INCLUDES_H
-#define INCLUDES_H
+#ifndef WIDGETS_INCLUDES_H
+#define WIDGETS_INCLUDES_H
 
 #include "headers/windows/window.h"
 #include "headers/windows/dialog.h"
@@ -29,6 +29,7 @@
 #include "headers/widgets/menu.h"
 #include "headers/widgets/menu_button.h"
 #include "headers/containers/box.h"
+#include "headers/windows/scrolled_window.h"
 
 
-#endif // INCLUDES_H
+#endif // WIDGETS_INCLUDES_H

@@ -25,6 +25,7 @@
 typedef struct
 {
     GtkOrientation orientation;
+    GtkAlign align;
     gint spacing;
 }boxInfos;
 
@@ -50,7 +51,7 @@ typedef enum
  * @return GtkWidget* the box
  */
 
-GtkWidget *create_box(GtkOrientation orientation, gint spacing);
+GtkWidget *create_box(GtkOrientation orientation, GtkAlign align, gint spacing);
 
 /**
  * @brief set the properties of the box

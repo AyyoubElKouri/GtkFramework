@@ -163,6 +163,9 @@ GtkWidget *set_properties_label(labelInfos *labelInformations)
     // set the attributes
     gtk_label_set_attributes(GTK_LABEL(label), attrList);
 
+    // set the wrap of the text
+    gtk_label_set_line_wrap(GTK_LABEL(label), labelInformations->wrap);
+
     return label;
 }
 
@@ -173,6 +176,8 @@ labelInfos *get_properties_label(GtkWidget *label)
 
     // get the text
     labelInformation->text = gtk_label_get_text(GTK_LABEL(label));
+
+    labelInformation->wrap  = gtk_label_get_line_wrap(GTK_LABEL(label));
 
         // Lire les attributs du label
     PangoAttrList *labelAttrList = gtk_label_get_attributes(GTK_LABEL(label));

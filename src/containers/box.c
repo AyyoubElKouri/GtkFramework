@@ -14,13 +14,14 @@
 
 static GtkOrientation Gorientation;
 
-GtkWidget *create_box(GtkOrientation orientation, gint spacing)
+GtkWidget *create_box(GtkOrientation orientation, GtkAlign align, gint spacing)
 {
     boxInfos *boxInformations = (boxInfos *)malloc(sizeof(boxInfos));
     if(!boxInformations) return NULL;
 
     boxInformations->orientation = orientation;
     Gorientation = orientation;
+    boxInformations->align = align;
     boxInformations->spacing = spacing;
 
     GtkWidget *box = set_properties_box(boxInformations);
@@ -33,6 +34,12 @@ GtkWidget *create_box(GtkOrientation orientation, gint spacing)
 GtkWidget *set_properties_box(boxInfos *boxInformations)
 {
     GtkWidget *box = gtk_box_new(boxInformations->orientation, boxInformations->spacing);
+    
+    // align the box
+    if(boxInformations->orientation == GTK_ORIENTATION_HORIZONTAL)
+        gtk_widget_set_halign(box, boxInformations->align);
+    else
+        gtk_widget_set_valign(box, boxInformations->align);
 
     return box;
 }
@@ -43,6 +50,13 @@ boxInfos *get_properties_box(GtkWidget *box)
     if(!boxInformations) return NULL;
 
     boxInformations->orientation = Gorientation;
+    if(boxInformations->align != -1)
+        if(Gorientation == GTK_ORIENTATION_HORIZONTAL)
+            boxInformations->align = gtk_widget_get_halign(box);
+        else
+            boxInformations->align = gtk_widget_get_valign(box);
+    
+
     boxInformations->spacing = gtk_box_get_spacing(GTK_BOX(box));
 
     return boxInformations;
