@@ -1,17 +1,47 @@
+#############################################################################################################################
+#                                                                                                                           #
+# @file : Makefile                                                                                                          #
+#                                                                                                                           #
+# Autour : Ayyoub el kouri                                                                                                  #
+#                                                                                                                           #
+# date : 25/01/2025                                                                                                         #
+#                                                                                                                           #
+# lastUpdate : 25/01/2025                                                                                                   #
+#                                                                                                                           #
+#############################################################################################################################
+
+
 
 CC = gcc
-CFLAGS = $(shell pkg-config --cflags gtk+-3.0)
+CFLAGS = -Wall -Wextra -std=c11 -Iheaders $(shell pkg-config --cflags gtk+-3.0)
 LDFLAGS = $(shell pkg-config --libs gtk+-3.0)
-SOURCES = main.c src/windows/window.c src/windows/dialog.c src/widgets/label.c src/widgets/image.c src/widgets/spinner.c src/widgets/text_view.c src/widgets/level_bar.c src/widgets/progress_bar.c src/widgets/scale.c src/widgets/separator.c src/widgets/button.c src/widgets/check_button.c src/widgets/link_button.c src/widgets/menu_item.c src/widgets/menu.c data_structures/linked_list/linked_list.c src/widgets/menu_button.c
-TARGET = application
+
+
+SRC_DIR = src
+OBJ_DIR = obj
+BIN_DIR = bin
+INCLUDE_DIR = headers
+
+
+SOURCES = $(wildcard $(SRC_DIR)/windows/*.c $(SRC_DIR)/widgets/*.c $(SRC_DIR)/containers/*.c) main.c data_structures/linked_list/linked_list.c
+OBJS = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SOURCES))
+TARGET = $(BIN_DIR)/application
 
 
 all: $(TARGET)
 
+$(TARGET): $(OBJS)
+	mkdir -p $(BIN_DIR)
+	$(CC) $(OBJS) $(CFLAGS) $(LDFLAGS) -o $@
 
-$(TARGET): $(SOURCES)
-	$(CC) $(SOURCES) $(CFLAGS) $(LDFLAGS) -o $(TARGET)
-
+$(OBJ_DIR)/%.o: %.c
+	mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(TARGET)
+	rm -rf $(OBJ_DIR) $(BIN_DIR)
+
+
+-include $(OBJS:.o=.d)
+
+.PHONY: all clean

@@ -28,6 +28,7 @@
 #include "headers/widgets/menu_item.h"
 #include "headers/widgets/menu.h"
 #include "headers/widgets/menu_button.h"
+#include "headers/containers/box.h"
 
 
 #endif // INCLUDES_H

@@ -1,12 +1,19 @@
 .
-├── application
 ├── assets
+│   ├── cppIcon.png
+│   ├── home.png
+│   ├── light.png
+│   └── smallHome.png
+├── bin
+│   └── application
 ├── data_structres_includes.h
 ├── data_structures
 │   └── linked_list
 │       ├── linked_list.c
 │       └── linked_list.h
 ├── headers
+│   ├── containers
+│   │   └── box.h
 │   ├── widgets
 │   │   ├── button.h
 │   │   ├── check_button.h
@@ -27,7 +34,53 @@
 │       └── window.h
 ├── main.c
 ├── Makefile
+├── obj
+│   ├── data_structures
+│   │   └── linked_list
+│   │       └── linked_list.o
+│   ├── main.o
+│   ├── src
+│   │   ├── containers
+│   │   │   └── box.o
+│   │   ├── widgets
+│   │   │   ├── button.o
+│   │   │   ├── check_button.o
+│   │   │   ├── image.o
+│   │   │   ├── label.o
+│   │   │   ├── level_bar.o
+│   │   │   ├── link_button.o
+│   │   │   ├── menu_button.o
+│   │   │   ├── menu_item.o
+│   │   │   ├── menu.o
+│   │   │   ├── progress_bar.o
+│   │   │   ├── scale.o
+│   │   │   ├── separator.o
+│   │   │   ├── spinner.o
+│   │   │   └── text_view.o
+│   │   └── windows
+│   │       ├── dialog.o
+│   │       └── window.o
+│   ├── widgets
+│   │   ├── button.o
+│   │   ├── check_button.o
+│   │   ├── image.o
+│   │   ├── label.o
+│   │   ├── level_bar.o
+│   │   ├── link_button.o
+│   │   ├── menu_button.o
+│   │   ├── menu_item.o
+│   │   ├── menu.o
+│   │   ├── progress_bar.o
+│   │   ├── scale.o
+│   │   ├── separator.o
+│   │   ├── spinner.o
+│   │   └── text_view.o
+│   └── windows
+│       ├── dialog.o
+│       └── window.o
 ├── src
+│   ├── containers
+│   │   └── box.c
 │   ├── widgets
 │   │   ├── button.c
 │   │   ├── check_button.c
@@ -49,4 +102,4 @@
 ├── the_project_structure.txt
 └── widgets_includes.h
 
-10 directories, 40 files
+22 directories, 81 files

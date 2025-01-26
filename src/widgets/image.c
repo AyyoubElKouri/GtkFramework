@@ -50,4 +50,5 @@ imageInfos *get_properties_image(GtkWidget *image)
 
     return imageInformation;
 }
+ 
 
