@@ -62,7 +62,7 @@ GtkWidget *set_properties_button(buttonInfos *buttonInformation)
 
     // set the callback if it exists
     if(buttonInformation->callback)
-        g_signal_connect(button, "clicked", buttonInformation->callback, buttonInformation->data);
+        g_signal_connect(button, "clicked", G_CALLBACK(buttonInformation->callback), buttonInformation->data);
 
     return button;
 }

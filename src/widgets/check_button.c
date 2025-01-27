@@ -49,7 +49,7 @@ GtkWidget *set_properties_check_button(checkButtonInfos *checkButtonInformation)
     gtk_button_set_use_underline(GTK_BUTTON(checkButton), checkButtonInformation->use_underline);
 
     if(checkButtonInformation->callback)
-        g_signal_connect(G_OBJECT(checkButton), "toggled", checkButtonInformation->callback, checkButtonInformation->data);
+        g_signal_connect(G_OBJECT(checkButton), "toggled", G_CALLBACK(checkButtonInformation->callback), checkButtonInformation->data);
     
     return checkButton;
 }

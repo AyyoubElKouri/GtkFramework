@@ -8,7 +8,7 @@
  * 
  * @author Ayyoub el kouri
  * @date 20/01/2025
- * @version 1.0 (last update 24/01/2025)
+ * @version 1.0 (last update 27/01/2025)
  * 
  *****************************************************************************************************************************/
 
@@ -263,6 +263,11 @@ static void stop(GtkWidget *spinner, gpointer data)
     stop_spinner(GTK_WIDGET(data));
 }
 
+static void switcherInfos(GtkWidget *widget, gpointer data)
+{
+    g_print("hello\n");
+}
+
 static void activate(GtkApplication *app, gpointer data)
 {
     // GtkWidget *window;
@@ -381,14 +386,38 @@ static void activate(GtkApplication *app, gpointer data)
     add_box(box_algeria, boxButton, START, FALSE, FALSE, 2, 0, 0, 0, 0);
 
     // italy
-    GtkWidget *italy_image = create_image("assets/w160/it.png");
-    GtkWidget *italy_label = create_label("        Italy         ", 18, "Arial Rounded MT Bold", "#000000", "#eda49f", GTK_JUSTIFY_CENTER, TRUE, PANGO_WEIGHT_BOLD, PANGO_STYLE_NORMAL, TRUE);
-    GtkWidget *button5 = create_button(GTK_RELIEF_NORMAL, "click italy", FALSE, NULL, G_CALLBACK(italieInfos), NULL);
+    // GtkWidget *italy_image = create_image("assets/w160/it.png");
+    // GtkWidget *italy_label = create_label("        Italy         ", 18, "Arial Rounded MT Bold", "#000000", "#eda49f", GTK_JUSTIFY_CENTER, TRUE, PANGO_WEIGHT_BOLD, PANGO_STYLE_NORMAL, TRUE);
+    // GtkWidget *button5 = create_button(GTK_RELIEF_NORMAL, "click italy", FALSE, NULL, G_CALLBACK(italieInfos), NULL);
+
+    GtkWidget *Entry = create_entry("hello", NULL, TRUE, FALSE, 7, 0.5);
+    GtkWidget *buttonSpin = create_spin_button(2, 8, 3,3, 2, FALSE, FALSE);
+    GtkWidget *switcher = create_switch_button(FALSE, G_CALLBACK(switcherInfos), NULL);
+    GtkWidget *couleur =  create_color_button("#0044ff", "check me hh", TRUE);
+    GtkWidget *fontChoser = create_font_button("consolas", "hhh", TRUE, TRUE, TRUE, TRUE);
+
+    fontButtonInfos *fontButtonInformations = get_properties_font_button(fontChoser);
+    printf("font : %s\ntitle : %s\nshow_size : %d\nshow_style : %d\nuse_size : %d\n use_font : %d\n", fontButtonInformations->default_font_name, fontButtonInformations->   , fontButtonInformations->show_size, fontButtonInformations->show_style, fontButtonInformations->use_size, fontButtonInformations->use_font);
+
+    colorButtonInfos *colorButtonInformations = get_properties_color_button(couleur);
+    printf("color : %s\ntext : %s\nuse_alpha : %d\n", colorButtonInformations->default_color, colorButtonInformations->title, colorButtonInformations->use_alpha);
+
+
+    switchButtonInfos *switchButtonInformations = get_properties_switch_button(switcher);
+    printf("active : %d\n", switchButtonInformations->default_state);
+
+    spinButtonInfos *spinButtonInformations = get_properties_spin_button(buttonSpin);
+    printf("min : %f\nmax : %f\nvalue : %f\nincrement : %f\ndigit : %d\nwrap : %d\nnumeric : %d\n", spinButtonInformations->min, spinButtonInformations->max, spinButtonInformations->value, spinButtonInformations->step, spinButtonInformations->digits, spinButtonInformations->wrap, spinButtonInformations->numeric);
+
+    entryInfos *entryInformations = get_properties_entry(Entry);
+    printf("text : %s\nplaceholder : %s\nvisible : %d\neditable : %d\nmax_length : %d\nalignment : %f\n", entryInformations->default_text, entryInformations->indicator_text, entryInformations->visible, entryInformations->editable, entryInformations->max_length, entryInformations->alignment);
 
     GtkWidget *box_italy = create_box(GTK_ORIENTATION_VERTICAL, GTK_ALIGN_CENTER, 5);
-    add_box(box_italy, italy_image, START, FALSE, FALSE, 2, 0, 0, 0, 0);
-    add_box(box_italy, italy_label, START, FALSE, FALSE, 2, 0, 0, 0, 0);
-    add_box(box_italy, button5, START, FALSE, FALSE, 2, 0, 0, 0, 0);
+    // add_box(box_italy, italy_image, START, FALSE, FALSE, 2, 0, 0, 0, 0);
+    // add_box(box_italy, italy_label, START, FALSE, FALSE, 2, 0, 0, 0, 0);
+    // add_box(box_italy, button5, START, FALSE, FALSE, 2, 0, 0, 0, 0);
+
+    add_box(box_italy, fontChoser, START, FALSE, FALSE, 2, 0, 0, 0, 0);
 
     // saudi arabia
     // GtkWidget *saudi_image = create_image("assets/w160/sa.png");

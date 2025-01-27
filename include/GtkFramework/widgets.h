@@ -28,5 +28,10 @@
 #include "../widgets/menu_item.h"
 #include "../widgets/menu_button.h"
 #include "../widgets/menu.h"
+#include "../widgets/entry.h"
+#include "../widgets/spin_button.h"
+#include "../widgets/switch_button.h"
+#include "../widgets/color_button.h"
+#include "../widgets/font_button.h"
 
 #endif // WIDGETS_H
