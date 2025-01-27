@@ -15,5 +15,8 @@
 #define CONTAINERS_H
 
 #include "../containers/box.h"
+#include "../containers/stack.h"
+#include "../containers/switcher.h"
+#include "../containers/frame.h"
 
 #endif // CONTAINERS_H

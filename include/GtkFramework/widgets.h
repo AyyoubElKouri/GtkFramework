@@ -33,5 +33,6 @@
 #include "../widgets/switch_button.h"
 #include "../widgets/color_button.h"
 #include "../widgets/font_button.h"
+#include "../widgets/radio_button.h"
 
 #endif // WIDGETS_H

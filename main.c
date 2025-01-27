@@ -12,6 +12,9 @@
  * 
  *****************************************************************************************************************************/
 
+
+/* *********************************************** this file is not structured yet********************************************/
+
 #include <gtk/gtk.h>
 #include "include/GtkFramework/GtkFramework.h"
 
@@ -263,10 +266,6 @@ static void stop(GtkWidget *spinner, gpointer data)
     stop_spinner(GTK_WIDGET(data));
 }
 
-static void switcherInfos(GtkWidget *widget, gpointer data)
-{
-    g_print("hello\n");
-}
 
 static void activate(GtkApplication *app, gpointer data)
 {
@@ -338,6 +337,18 @@ static void activate(GtkApplication *app, gpointer data)
     add_box(box_maroc, maroc_label, START, FALSE, FALSE, 2, 0, 0, 0, 0);
     add_box(box_maroc, button, START, FALSE, FALSE, 2, 0, 0, 0, 0);
 
+    GtkWidget *frame = create_frame("maroc", 0, 1, box_maroc);
+
+    frameInfos *frameInformation = get_properties_frame(frame);
+    printf("Title: %s\nhorizontal_placement: %f\nvertical_placement: %f\n", frameInformation->title, frameInformation->horizontal_placement, frameInformation->vertical_placement);
+
+    printf("-------------\n");
+    printf("-------------\n");
+    if(frameInformation->child == box_maroc)
+        g_print("Oui\n");
+    else
+        g_print("Non\n");
+
     // France
     GtkWidget *french_image = create_image("assets/w160/fr.png");
     GtkWidget *french_label = create_label("      French      ", 18, "Arial Rounded MT Bold", "#000000", "#eda49f", GTK_JUSTIFY_CENTER, TRUE, PANGO_WEIGHT_BOLD, PANGO_STYLE_NORMAL, TRUE);
@@ -376,8 +387,6 @@ static void activate(GtkApplication *app, gpointer data)
     GtkWidget *boxSpinner = create_box(GTK_ORIENTATION_VERTICAL, GTK_ALIGN_CENTER, 0);
     GtkWidget *boxButton = create_box(GTK_ORIENTATION_VERTICAL, GTK_ALIGN_CENTER, 6);
 
-    
-
     add_box(boxSpinner, spinner, START, FALSE, FALSE, 2, 0, 0, 0, 0);
     add_box(boxButton, startButtom, START, FALSE, FALSE, 2, 0, 0, 0, 0);
     add_box(boxButton, stopButtom, START, FALSE, FALSE, 2, 0, 0, 0, 0);
@@ -392,19 +401,22 @@ static void activate(GtkApplication *app, gpointer data)
 
     GtkWidget *Entry = create_entry("hello", NULL, TRUE, FALSE, 7, 0.5);
     GtkWidget *buttonSpin = create_spin_button(2, 8, 3,3, 2, FALSE, FALSE);
-    GtkWidget *switcher = create_switch_button(FALSE, G_CALLBACK(switcherInfos), NULL);
+    // GtkWidget *switcher = create_switch_button(FALSE, G_CALLBACK(switcherInfos), NULL);
     GtkWidget *couleur =  create_color_button("#0044ff", "check me hh", TRUE);
     GtkWidget *fontChoser = create_font_button("consolas", "hhh", TRUE, TRUE, TRUE, TRUE);
+    GtkWidget *radio1 = create_radio_button("hello", NULL, NULL, FALSE);
+    GtkWidget *radio2 = create_radio_button("world", NULL, radio1, TRUE );
+    GtkWidget *radio3 = create_radio_button(NULL, "assets/home.png", radio1, FALSE);
 
     fontButtonInfos *fontButtonInformations = get_properties_font_button(fontChoser);
-    printf("font : %s\ntitle : %s\nshow_size : %d\nshow_style : %d\nuse_size : %d\n use_font : %d\n", fontButtonInformations->default_font_name, fontButtonInformations->   , fontButtonInformations->show_size, fontButtonInformations->show_style, fontButtonInformations->use_size, fontButtonInformations->use_font);
+    printf("font : %s\ntitle : %s\nshow_size : %d\nshow_style : %d\nuse_size : %d\n use_font : %d\n", fontButtonInformations->default_font_name, fontButtonInformations->title, fontButtonInformations->show_size, fontButtonInformations->show_style, fontButtonInformations->use_size, fontButtonInformations->use_font);
 
     colorButtonInfos *colorButtonInformations = get_properties_color_button(couleur);
     printf("color : %s\ntext : %s\nuse_alpha : %d\n", colorButtonInformations->default_color, colorButtonInformations->title, colorButtonInformations->use_alpha);
 
 
-    switchButtonInfos *switchButtonInformations = get_properties_switch_button(switcher);
-    printf("active : %d\n", switchButtonInformations->default_state);
+    // switchButtonInfos *switchButtonInformations = get_properties_switch_button(switcher);
+    // printf("active : %d\n", switchButtonInformations->default_state);
 
     spinButtonInfos *spinButtonInformations = get_properties_spin_button(buttonSpin);
     printf("min : %f\nmax : %f\nvalue : %f\nincrement : %f\ndigit : %d\nwrap : %d\nnumeric : %d\n", spinButtonInformations->min, spinButtonInformations->max, spinButtonInformations->value, spinButtonInformations->step, spinButtonInformations->digits, spinButtonInformations->wrap, spinButtonInformations->numeric);
@@ -417,8 +429,16 @@ static void activate(GtkApplication *app, gpointer data)
     // add_box(box_italy, italy_label, START, FALSE, FALSE, 2, 0, 0, 0, 0);
     // add_box(box_italy, button5, START, FALSE, FALSE, 2, 0, 0, 0, 0);
 
-    add_box(box_italy, fontChoser, START, FALSE, FALSE, 2, 0, 0, 0, 0);
+    add_box(box_italy, radio1, START, FALSE, FALSE, 2, 0, 0, 0, 0);
+    add_box(box_italy, radio2, START, FALSE, FALSE, 2, 0, 0, 0, 0);
+    add_box(box_italy, radio3, START, FALSE, FALSE, 2, 0, 0, 0, 0);
 
+    radioButtonInfos *radioButtonInformations = get_properties_radio_button(radio3);
+    printf("label : %s\nfile_name : %s\nactive : %d\n", radioButtonInformations->label, radioButtonInformations->path_to_image, radioButtonInformations->default_state);
+    if(radioButtonInformations->radio_group_member == radio2)
+        printf("Oui Oui Oui\n");
+    else
+        printf("Non Non Non\n");
     // saudi arabia
     // GtkWidget *saudi_image = create_image("assets/w160/sa.png");
     // GtkWidget *saudi_label = create_label("    Saudi Arabia    ", 18, "Arial Rounded MT Bold", "#000000", "#eda49f", GTK_JUSTIFY_CENTER, TRUE, PANGO_WEIGHT_BOLD, PANGO_STYLE_NORMAL, TRUE);
@@ -430,11 +450,13 @@ static void activate(GtkApplication *app, gpointer data)
     // add_box(box_saudi, saudi_label, START, FALSE, FALSE, 2, 0, 0, 0, 0);
     // add_box(box_saudi, button6, START, FALSE, FALSE, 2, 0, 0, 0, 0);
     add_box(box_saudi, propress, START, FALSE, FALSE, 0, 0, 0, 0, 0);
+    gtk_container_set_border_width(GTK_CONTAINER(box_maroc), 10);
 
     // the line 1 container of morocco, france and argentina
     GtkWidget *boxLine1 = create_box(GTK_ORIENTATION_HORIZONTAL, -1, 10);
 
-    add_box(boxLine1, box_maroc, START, TRUE, FALSE, 0, 0, 0, 0, 0);
+    
+    add_box(boxLine1, frame, START, TRUE, FALSE, 0, 0, 0, 0, 0);
     add_box(boxLine1, box_france, START, TRUE, FALSE, 0, 0, 0, 0, 0);
     add_box(boxLine1, box_argentina, START, TRUE, FALSE, 0, 0, 0, 0, 0);
 
@@ -469,13 +491,36 @@ static void activate(GtkApplication *app, gpointer data)
     else
         g_print("Non\n");
     
-    gtk_container_add(GTK_CONTAINER(window), box_main);
+    GtkWidget *stack = create_stack(GTK_STACK_TRANSITION_TYPE_OVER_LEFT, 500);
+    GtkWidget *switchere = create_switcher(stack, 10, FALSE);
+
+    GtkWidget *buttonH = gtk_button_new_with_label("hello");
+
+    GtkWidget *boxH = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
+
+    add_box(boxH, switchere, START, FALSE, FALSE, 0, 0, 0, 0, 0);
+    add_box(boxH, stack, START, TRUE, TRUE, 0, 0, 0, 0, 0);
+
+    add_stack(stack, buttonH, "button");
+    add_stack(stack, box_main, "main");
+
+    gtk_container_add(GTK_CONTAINER(window), boxH);
+
+    printf("--------------------\n");
+    stackInfos *stackInformations = get_properties_stack(stack);
+    printf("transition_type : %d\ntransition_duration : %d\n", stackInformations->transition_type, stackInformations->transition_duration);
+
+    printf("--------------------\n");
+    switcherInfos *switcherInformations = get_properties_switcher(switchere);
+    printf("spacing : %d\nbuttons_same_size : %d\n", switcherInformations->spacing, switcherInformations->buttons_same_size);
+    if(switcherInformations->stack == stack)
+        g_print("Oui\n");
+    else
+        g_print("Non\n");
 
     int reponse = gtk_dialog_run(GTK_DIALOG(dialog));
     if(reponse == GTK_RESPONSE_CANCEL)
-    {
         g_application_quit(G_APPLICATION(app));
-    }
 
     gtk_widget_destroy(dialog);
         
