@@ -10,7 +10,7 @@
  * 
  ****************************************************************************************************************************/
 
-#include "../../headers/widgets/level_bar.h"
+#include "../../include/widgets/level_bar.h"
 
 GtkWidget *create_level_bar(gdouble min_value, gdouble max_value, gdouble default_value, GtkLevelBarMode mode, gboolean inverted)
 {

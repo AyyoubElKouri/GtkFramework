@@ -12,7 +12,7 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include "../../headers/widgets/label.h"
+#include "../../include/widgets/label.h"
 
 GtkWidget *create_label(const gchar *text, gint size, const gchar *font, const gchar *color, const gchar *background, GtkJustification justify, gboolean underline, PangoWeight weight, PangoStyle style, gboolean wrap)
 {

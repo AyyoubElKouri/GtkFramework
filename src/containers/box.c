@@ -10,7 +10,7 @@
  * 
  ****************************************************************************************************************************/
 
-#include "../../headers/containers/box.h"
+#include "../../include/containers/box.h"
 
 static GtkOrientation Gorientation;
 

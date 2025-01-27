@@ -10,7 +10,7 @@
  * 
  ****************************************************************************************************************************/
 
-#include "../../headers/widgets/link_button.h"
+#include "../../include/widgets/link_button.h"
 
 GtkWidget *create_link_button(const gchar *uri, const gchar *label)
 {

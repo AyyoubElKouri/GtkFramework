@@ -10,7 +10,7 @@
  * 
  ****************************************************************************************************************************/
 
-#include "../../headers/widgets/menu.h"
+#include "../../include/widgets/menu.h"
 
 static gboolean Gis_primary;
 static LinkedList *Gitems;

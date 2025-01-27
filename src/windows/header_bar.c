@@ -10,7 +10,7 @@
  * 
  ****************************************************************************************************************************/
 
-#include "../../headers/windows/header_bar.h"
+#include "../../include/windows/header_bar.h"
 
 static GtkWidget *Gwindow;
 static const gchar * Gicon_path;

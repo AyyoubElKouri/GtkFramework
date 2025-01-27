@@ -10,7 +10,7 @@
  * 
  ****************************************************************************************************************************/
 
-#include "../../headers/widgets/scale.h"
+#include "../../include/widgets/scale.h"
 
 GtkOrientation Gorientation;
 gdouble Gmin_value;

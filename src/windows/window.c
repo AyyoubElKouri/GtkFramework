@@ -10,7 +10,7 @@
  * 
  ****************************************************************************************************************************/
 
-#include "../../headers/windows/window.h"
+#include "../../include/windows/window.h"
 #include <string.h>
 #include <stdlib.h>
 

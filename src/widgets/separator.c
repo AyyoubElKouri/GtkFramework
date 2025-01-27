@@ -10,7 +10,7 @@
  * 
  ****************************************************************************************************************************/
 
-#include "../../headers/widgets/separator.h"
+#include "../../include/widgets/separator.h"
 
 static GtkOrientation Gorientation;
 

@@ -10,7 +10,7 @@
  * 
  ****************************************************************************************************************************/
 
-#include "../../headers/windows/scrolled_window.h"
+#include "../../include/windows/scrolled_window.h"
 
 GtkWidget *create_scrolled_window()
 {

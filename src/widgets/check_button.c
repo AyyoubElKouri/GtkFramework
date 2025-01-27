@@ -10,7 +10,7 @@
  * 
  ****************************************************************************************************************************/
 
-#include "../../headers/widgets/check_button.h"
+#include "../../include/widgets/check_button.h"
 
 static GCallback Gcallback;
 static gpointer Gdata;

@@ -10,7 +10,7 @@
  * 
  ****************************************************************************************************************************/
 
-#include "../../headers/widgets/button.h"
+#include "../../include/widgets/button.h"
 
 gchar *Gfile_name;
 GCallback Gcallback;

@@ -10,7 +10,7 @@
  * 
  ****************************************************************************************************************************/
 
-#include "../../headers/widgets/text_view.h"
+#include "../../include/widgets/text_view.h"
 #define max 100
 
 char *colorG;

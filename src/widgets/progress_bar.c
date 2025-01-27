@@ -10,7 +10,7 @@
  * 
  ****************************************************************************************************************************/
 
-#include "../../headers/widgets/progress_bar.h"
+#include "../../include/widgets/progress_bar.h"
 
 gboolean Gpulse;
 

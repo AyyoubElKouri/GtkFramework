@@ -10,7 +10,7 @@
  * 
  ****************************************************************************************************************************/
 
-#include "../../headers/widgets/spinner.h"
+#include "../../include/widgets/spinner.h"
 gboolean active;
 
 GtkWidget *create_spinner(gboolean active)

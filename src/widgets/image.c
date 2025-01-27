@@ -10,7 +10,7 @@
  * 
  ****************************************************************************************************************************/
 
-#include "../../headers/widgets/image.h"
+#include "../../include/widgets/image.h"
 char path[100];
 
 GtkWidget *create_image(const gchar *path)

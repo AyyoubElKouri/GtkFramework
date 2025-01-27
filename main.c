@@ -12,10 +12,8 @@
  * 
  *****************************************************************************************************************************/
 
-
 #include <gtk/gtk.h>
-#include "widgets_includes.h"
-#include "data_structres_includes.h"
+#include "include/GtkFramework/GtkFramework.h"
 
 static void marocInfos(GtkWidget *widget, gpointer data)
 {
@@ -24,6 +22,7 @@ static void marocInfos(GtkWidget *widget, gpointer data)
     GtkWidget *subtitle1 = create_label("1 - 1 : Morroco history", 20, "consolas", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, TRUE, PANGO_WEIGHT_BOLD, PANGO_STYLE_NORMAL, TRUE);
     GtkWidget *paragraph1 = create_label("Le Maroc, situé au carrefour de l'Afrique, de l'Europe et du monde arabe, possède une riche histoire. Les premiers habitants, les Berbères, s’y sont installés il y a plus de 3000 ans. Les Phéniciens, suivis des Romains, ont laissé leur empreinte dans la région. À partir du VIIe siècle, l'islam a été introduit par les Arabes, marquant un tournant majeur dans la culture et l'organisation politique. Sous les dynasties almoravide, almohade, mérinide et saadienne, le Maroc a connu des périodes de prospérité et d'influence. En 1912, le pays est devenu un protectorat franco-espagnol, avant de recouvrer son indépendance en 1956 sous Mohammed V. Depuis, le Maroc s'est modernisé tout en préservant ses traditions, sous la gouvernance actuelle de Mohammed VI.",
     12, "consolas", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, PANGO_WEIGHT_NORMAL, PANGO_STYLE_NORMAL, TRUE);
+
 
     GtkWidget *subtitle2 = create_label("1 - 2 : Morroco culture", 20, "consolas", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, TRUE, PANGO_WEIGHT_BOLD, PANGO_STYLE_NORMAL, TRUE);
     GtkWidget *paragraph2 = create_label("La culture marocaine est riche et diversifiée, influencée par les Berbères, les Arabes, les Africains subsahariens et les cultures andalouse et européenne. La langue arabe et le berbère (amazigh) sont les langues officielles, avec une grande variété de dialectes. L'islam joue un rôle central dans les traditions et la vie quotidienne. La cuisine marocaine, réputée dans le monde entier, inclut des plats emblématiques comme le couscous, le tajine et les pastillas. L'artisanat marocain, avec ses tapis, poteries, babouches et zellige, reflète un savoir-faire ancestral. Les fêtes religieuses comme l’Aïd et des célébrations culturelles comme le Moussem de Tan-Tan témoignent de l'attachement aux traditions. La musique, notamment le gnawa, le chaâbi et l’andalou, est un pilier culturel. Enfin, le Maroc est connu pour son hospitalité chaleureuse et ses souks animés qui reflètent l’âme de ses villes.",
@@ -254,6 +253,16 @@ static void saudiArabieInfos(GtkWidget *widget, gpointer data)
     gtk_widget_show_all(window);
 }
 
+static void start(GtkWidget *spinner, gpointer data)
+{
+    start_spinner(GTK_WIDGET(data));
+}
+
+static void stop(GtkWidget *spinner, gpointer data)
+{
+    stop_spinner(GTK_WIDGET(data));
+}
+
 static void activate(GtkApplication *app, gpointer data)
 {
     // GtkWidget *window;
@@ -274,17 +283,26 @@ static void activate(GtkApplication *app, gpointer data)
     GtkWidget *window;
     GtkWidget *header_bar;
     GtkWidget *dialog;
+    GtkWidget *item1 = create_menu_item("item1", "normal", NULL, NULL, NULL);
+    GtkWidget *item2 = create_menu_item("item1", "normal", NULL, NULL, NULL);
 
-    GtkWidget *buttonA = create_button(GTK_RELIEF_NORMAL, "click", FALSE, NULL, NULL, NULL);
+    LinkedList *maliste = create_linked_list();
+    insert_at_beginning(maliste, item1);
+    insert_at_beginning(maliste, item2);
+
+    GtkWidget *liste = create_menu(TRUE,"list", maliste);
+    GtkWidget *listeB = create_menu_button("menu", NULL, liste, GTK_ARROW_DOWN);
+
+    GtkWidget *buttonA = create_button(GTK_RELIEF_NORMAL, NULL, FALSE, "assets/home.png", G_CALLBACK(marocInfos), NULL);
     GtkWidget *buttonB = create_button(GTK_RELIEF_NORMAL, "clickme", FALSE, NULL, NULL, NULL);
 
     LinkedList *list = create_linked_list();
 
-    insert_at_end(list, buttonA);
+    insert_at_end(list, listeB);
     insert_at_end(list, buttonB);
 
     window = create_window(app, GTK_WINDOW_TOPLEVEL, "Contry", 900, 660, TRUE, GTK_WIN_POS_CENTER, TRUE, NULL, 1, FALSE);
-    header_bar = create_header_bar(window, "Contry", "This is a subtitle", "assets/w160/ma.png", TRUE, NULL, list);
+    header_bar = create_header_bar(window, "Contry", "This is a subtitle", "assets/smallHome.png", TRUE, NULL, list);
     
     headerBarInfos *headerBarInformations = get_properties_header_bar(header_bar);
     printf("Title: %s\nSubtitle: %s\nIcon path : %s\nSettings: %d\n", headerBarInformations->title, headerBarInformations->subtitle, headerBarInformations->icon_path, headerBarInformations->settings);
@@ -307,7 +325,7 @@ static void activate(GtkApplication *app, gpointer data)
 
     // Morocco
     GtkWidget *maroc_image = create_image("assets/w160/ma.png");
-    GtkWidget *maroc_label = create_label("    Maroc    ", 18, "Arial Rounded MT Bold", "#000000", "#eda49f", GTK_JUSTIFY_CENTER, TRUE, PANGO_WEIGHT_BOLD, PANGO_STYLE_ITALIC, TRUE);
+    GtkWidget *maroc_label = create_label("       Maroc       ", 18, "Arial Rounded MT Bold", "#000000", "#eda49f", GTK_JUSTIFY_CENTER, TRUE, PANGO_WEIGHT_BOLD, PANGO_STYLE_NORMAL, TRUE);
     GtkWidget *button = create_button(GTK_RELIEF_NORMAL, "click maroc", FALSE, NULL, G_CALLBACK(marocInfos), NULL);
 
     GtkWidget *box_maroc = create_box(GTK_ORIENTATION_VERTICAL, GTK_ALIGN_CENTER, 5);
@@ -317,7 +335,7 @@ static void activate(GtkApplication *app, gpointer data)
 
     // France
     GtkWidget *french_image = create_image("assets/w160/fr.png");
-    GtkWidget *french_label = create_label("    French    ", 18, "Arial Rounded MT Bold", "#000000", "#eda49f", GTK_JUSTIFY_CENTER, TRUE, PANGO_WEIGHT_BOLD, PANGO_STYLE_ITALIC, TRUE);
+    GtkWidget *french_label = create_label("      French      ", 18, "Arial Rounded MT Bold", "#000000", "#eda49f", GTK_JUSTIFY_CENTER, TRUE, PANGO_WEIGHT_BOLD, PANGO_STYLE_NORMAL, TRUE);
     GtkWidget *button2 = create_button(GTK_RELIEF_NORMAL, "click french", FALSE, NULL, G_CALLBACK(franceInfos), NULL);
 
     GtkWidget *box_france = create_box(GTK_ORIENTATION_VERTICAL, GTK_ALIGN_CENTER, 5);
@@ -328,7 +346,7 @@ static void activate(GtkApplication *app, gpointer data)
 
     // argentina
     GtkWidget *argentina_image = create_image("assets/w160/ar.png");
-    GtkWidget *argentina_label = create_label("    Argentina    ", 18, "Arial Rounded MT Bold", "#000000", "#eda49f", GTK_JUSTIFY_CENTER, TRUE, PANGO_WEIGHT_BOLD, PANGO_STYLE_ITALIC, TRUE);
+    GtkWidget *argentina_label = create_label("    Argentina    ", 18, "Arial Rounded MT Bold", "#000000", "#eda49f", GTK_JUSTIFY_CENTER, TRUE, PANGO_WEIGHT_BOLD, PANGO_STYLE_NORMAL, TRUE);
     GtkWidget *button3 = create_button(GTK_RELIEF_NORMAL, "click argentina", FALSE, NULL, G_CALLBACK(argentinaInfos), NULL);
 
     GtkWidget *box_argentina = create_box(GTK_ORIENTATION_VERTICAL, GTK_ALIGN_CENTER, 5);
@@ -337,19 +355,34 @@ static void activate(GtkApplication *app, gpointer data)
     add_box(box_argentina, button3, START, FALSE, FALSE, 2, 0, 0, 0, 0);
 
     // algeria
-    GtkWidget *algeria_image = create_image("assets/w160/dz.png");
-    GtkWidget *algeria_label = create_label("    Algeria    ", 18, "Arial Rounded MT Bold", "#000000", "#eda49f", GTK_JUSTIFY_CENTER, TRUE, PANGO_WEIGHT_BOLD, PANGO_STYLE_ITALIC, TRUE);
-    GtkWidget *button4 = create_button(GTK_RELIEF_NORMAL, "click algeria", FALSE, NULL, G_CALLBACK(algerieInfos), NULL);
+    // GtkWidget *algeria_image = create_image("assets/w160/dz.png");
+    // GtkWidget *algeria_label = create_label("      Algeria      ", 18, "Arial Rounded MT Bold", "#000000", "#eda49f", GTK_JUSTIFY_CENTER, TRUE, PANGO_WEIGHT_BOLD, PANGO_STYLE_NORMAL, TRUE);
+    // GtkWidget *button4 = create_button(GTK_RELIEF_NORMAL, "click algeria", FALSE, NULL, G_CALLBACK(algerieInfos), NULL);
+    GtkWidget *spinner = create_spinner(FALSE);
+    GtkWidget *startButtom = create_button(GTK_RELIEF_NORMAL, "Start", FALSE, NULL, G_CALLBACK(start), spinner);
+    GtkWidget *stopButtom = create_button(GTK_RELIEF_NORMAL, "Stop", FALSE, NULL, G_CALLBACK(stop), spinner);
+
 
     GtkWidget *box_algeria = create_box(GTK_ORIENTATION_VERTICAL, GTK_ALIGN_CENTER, 5);
-    add_box(box_algeria, algeria_image, START, FALSE, FALSE, 2, 0, 0, 0, 0);
-    add_box(box_algeria, algeria_label, START, FALSE, FALSE, 2, 0, 0, 0, 0);
-    add_box(box_algeria, button4, START, FALSE, FALSE, 2, 0, 0, 0, 0);
+    // add_box(box_algeria, algeria_image, START, FALSE, FALSE, 2, 0, 0, 0, 0);
+    // add_box(box_algeria, algeria_label, START, FALSE, FALSE, 2, 0, 0, 0, 0);
+    // add_box(box_algeria, button4, START, FALSE, FALSE, 2, 0, 0, 0, 0);
 
+    GtkWidget *boxSpinner = create_box(GTK_ORIENTATION_VERTICAL, GTK_ALIGN_CENTER, 0);
+    GtkWidget *boxButton = create_box(GTK_ORIENTATION_VERTICAL, GTK_ALIGN_CENTER, 6);
+
+    
+
+    add_box(boxSpinner, spinner, START, FALSE, FALSE, 2, 0, 0, 0, 0);
+    add_box(boxButton, startButtom, START, FALSE, FALSE, 2, 0, 0, 0, 0);
+    add_box(boxButton, stopButtom, START, FALSE, FALSE, 2, 0, 0, 0, 0);
+
+    add_box(box_algeria, boxSpinner, START, FALSE, FALSE, 2, 0, 0, 0, 0);
+    add_box(box_algeria, boxButton, START, FALSE, FALSE, 2, 0, 0, 0, 0);
 
     // italy
     GtkWidget *italy_image = create_image("assets/w160/it.png");
-    GtkWidget *italy_label = create_label("    Italy    ", 18, "Arial Rounded MT Bold", "#000000", "#eda49f", GTK_JUSTIFY_CENTER, TRUE, PANGO_WEIGHT_BOLD, PANGO_STYLE_ITALIC, TRUE);
+    GtkWidget *italy_label = create_label("        Italy         ", 18, "Arial Rounded MT Bold", "#000000", "#eda49f", GTK_JUSTIFY_CENTER, TRUE, PANGO_WEIGHT_BOLD, PANGO_STYLE_NORMAL, TRUE);
     GtkWidget *button5 = create_button(GTK_RELIEF_NORMAL, "click italy", FALSE, NULL, G_CALLBACK(italieInfos), NULL);
 
     GtkWidget *box_italy = create_box(GTK_ORIENTATION_VERTICAL, GTK_ALIGN_CENTER, 5);
@@ -358,14 +391,16 @@ static void activate(GtkApplication *app, gpointer data)
     add_box(box_italy, button5, START, FALSE, FALSE, 2, 0, 0, 0, 0);
 
     // saudi arabia
-    GtkWidget *saudi_image = create_image("assets/w160/sa.png");
-    GtkWidget *saudi_label = create_label("    Saudi Arabia    ", 18, "Arial Rounded MT Bold", "#000000", "#eda49f", GTK_JUSTIFY_CENTER, TRUE, PANGO_WEIGHT_BOLD, PANGO_STYLE_ITALIC, TRUE);
-    GtkWidget *button6 = create_button(GTK_RELIEF_NORMAL, "click saudi arabia", FALSE, NULL, G_CALLBACK(saudiArabieInfos), NULL);
+    // GtkWidget *saudi_image = create_image("assets/w160/sa.png");
+    // GtkWidget *saudi_label = create_label("    Saudi Arabia    ", 18, "Arial Rounded MT Bold", "#000000", "#eda49f", GTK_JUSTIFY_CENTER, TRUE, PANGO_WEIGHT_BOLD, PANGO_STYLE_NORMAL, TRUE);
+    // GtkWidget *button6 = create_button(GTK_RELIEF_NORMAL, "click saudi arabia", FALSE, NULL, G_CALLBACK(saudiArabieInfos), NULL);
+    GtkWidget *propress = create_progress_bar("progress bar : ", 0.5, TRUE, FALSE, FALSE);
 
     GtkWidget *box_saudi = create_box(GTK_ORIENTATION_VERTICAL, GTK_ALIGN_CENTER, 5);
-    add_box(box_saudi, saudi_image, START, FALSE, FALSE, 2, 0, 0, 0, 0);
-    add_box(box_saudi, saudi_label, START, FALSE, FALSE, 2, 0, 0, 0, 0);
-    add_box(box_saudi, button6, START, FALSE, FALSE, 2, 0, 0, 0, 0);
+    // add_box(box_saudi, saudi_image, START, FALSE, FALSE, 2, 0, 0, 0, 0);
+    // add_box(box_saudi, saudi_label, START, FALSE, FALSE, 2, 0, 0, 0, 0);
+    // add_box(box_saudi, button6, START, FALSE, FALSE, 2, 0, 0, 0, 0);
+    add_box(box_saudi, propress, START, FALSE, FALSE, 0, 0, 0, 0, 0);
 
     // the line 1 container of morocco, france and argentina
     GtkWidget *boxLine1 = create_box(GTK_ORIENTATION_HORIZONTAL, -1, 10);
@@ -391,7 +426,7 @@ static void activate(GtkApplication *app, gpointer data)
     GtkWidget *label = gtk_label_new("hello is me");
     add_box(boxDialog, label, START, TRUE, FALSE, 10, 0, 0, 0, 0);
 
-    dialog = create_dialog("Confirmer votre choix hhh , juste pour rir, bien sûr que vous voulez entre", window, GTK_DIALOG_MODAL, 800, 70, 0.5, boxDialog, "Entrer", GTK_RESPONSE_OK, "Quitter", GTK_RESPONSE_CANCEL, "NULL", GTK_RESPONSE_CANCEL);
+    dialog = create_dialog("Confirmer votre choix hhh , juste pour rir, bien sûr que vous voulez entre", window, GTK_DIALOG_MODAL, 800, 70, 1, boxDialog, "Entrer", GTK_RESPONSE_OK, "Quitter", GTK_RESPONSE_CANCEL, "NULL", GTK_RESPONSE_CANCEL);
     
     dialogInfos *dialogInformations = get_properties_dialog(dialog);
     printf("titre : %s\nflags : %d\nwidth : %d\nheight : %d\nopacity : %f\ntitre1 : %s\ntitre2 : %s\ntitre3 : %s\nreponse1 : %d\nreponse2 : %d\nreponse3 : %d\n", dialogInformations->title, dialogInformations->flags, dialogInformations->width, dialogInformations->height, dialogInformations->opacily, dialogInformations->title1, dialogInformations->title2, dialogInformations->title3, dialogInformations->answer1, dialogInformations->answer2, dialogInformations->answer3);

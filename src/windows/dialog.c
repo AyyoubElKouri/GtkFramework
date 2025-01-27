@@ -10,7 +10,7 @@
  * 
  ****************************************************************************************************************************/
 
-#include "../../headers/windows/dialog.h"
+#include "../../include/windows/dialog.h"
 #include <string.h>
 
 static const gchar *Gtitle;

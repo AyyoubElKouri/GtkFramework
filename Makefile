@@ -20,7 +20,7 @@ LDFLAGS = $(shell pkg-config --libs gtk+-3.0)
 SRC_DIR = src
 OBJ_DIR = obj
 BIN_DIR = bin
-INCLUDE_DIR = headers
+INCLUDE_DIR = include
 
 
 SOURCES = $(wildcard $(SRC_DIR)/windows/*.c $(SRC_DIR)/widgets/*.c $(SRC_DIR)/containers/*.c) main.c data_structures/linked_list/linked_list.c
