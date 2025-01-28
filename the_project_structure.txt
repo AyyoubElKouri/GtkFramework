@@ -31,10 +31,17 @@
 │   └── linked_list
 │       ├── linked_list.c
 │       └── linked_list.h
+├── DossierForTesting
+│   └── test_project_1
+│       ├── Contry.c
+│       └── Contry.h
 ├── include
 │   ├── containers
 │   │   ├── box.h
+│   │   ├── fixed.h
 │   │   ├── frame.h
+│   │   ├── grid.h
+│   │   ├── paned.h
 │   │   ├── stack.h
 │   │   └── switcher.h
 │   ├── GtkFramework
@@ -42,6 +49,7 @@
 │   │   ├── GtkFramework.h
 │   │   ├── widgets.h
 │   │   └── windows.h
+│   ├── supp.h
 │   ├── widgets
 │   │   ├── button.h
 │   │   ├── check_button.h
@@ -74,11 +82,16 @@
 │   ├── data_structures
 │   │   └── linked_list
 │   │       └── linked_list.o
+│   ├── DossierForTesting
+│   │   └── Contry.o
 │   ├── main.o
 │   └── src
 │       ├── containers
 │       │   ├── box.o
+│       │   ├── fixed.o
 │       │   ├── frame.o
+│       │   ├── grid.o
+│       │   ├── paned.o
 │       │   ├── stack.o
 │       │   └── switcher.o
 │       ├── widgets
@@ -110,9 +123,13 @@
 ├── src
 │   ├── containers
 │   │   ├── box.c
+│   │   ├── fixed.c
 │   │   ├── frame.c
+│   │   ├── grid.c
+│   │   ├── paned.c
 │   │   ├── stack.c
 │   │   └── switcher.c
+│   ├── supp.c
 │   ├── widgets
 │   │   ├── button.c
 │   │   ├── check_button.c
@@ -141,4 +158,4 @@
 │       └── window.c
 └── the_project_structure.txt
 
-22 directories, 106 files
+25 directories, 120 files
