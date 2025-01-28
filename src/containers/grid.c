@@ -67,5 +67,5 @@ gridInfos *get_properties_grid(GtkWidget *grid)
 
 void add_to_grid(GtkWidget *grid, GtkWidget *child, guint row, guint column, guint row_span, guint column_span)
 {
-    gtk_grid_attach(GTK_GRID(grid), child, row, column, row_span, column_span);
+    gtk_grid_attach(GTK_GRID(grid), child, column, row, row_span, column_span);
 }

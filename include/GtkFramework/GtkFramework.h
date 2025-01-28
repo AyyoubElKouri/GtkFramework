@@ -20,5 +20,6 @@
 #include "containers.h"
 #include "windows.h"
 #include "../../data_structures/linked_list/linked_list.h"
+#include "../supp.h"
 
 #endif // GTKFRAMEWORK_H

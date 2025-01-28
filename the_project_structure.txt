@@ -14,6 +14,8 @@
 
 .
 ├── assets
+│   ├── Application_icon
+│   │   └── apple.png
 │   ├── home.png
 │   ├── ma.png
 │   ├── smallHome.png
@@ -33,8 +35,10 @@
 │       └── linked_list.h
 ├── DossierForTesting
 │   └── test_project_1
-│       ├── Contry.c
-│       └── Contry.h
+│       ├── Countries.c
+│       ├── Countries.h
+│       ├── project_header.c
+│       └── project_header.h
 ├── include
 │   ├── containers
 │   │   ├── box.h
@@ -83,7 +87,10 @@
 │   │   └── linked_list
 │   │       └── linked_list.o
 │   ├── DossierForTesting
-│   │   └── Contry.o
+│   │   ├── Contry.o
+│   │   └── test_project_1
+│   │       ├── Countries.o
+│   │       └── project_header.o
 │   ├── main.o
 │   └── src
 │       ├── containers
@@ -94,6 +101,7 @@
 │       │   ├── paned.o
 │       │   ├── stack.o
 │       │   └── switcher.o
+│       ├── *.o
 │       ├── widgets
 │       │   ├── button.o
 │       │   ├── check_button.o
@@ -158,4 +166,5 @@
 │       └── window.c
 └── the_project_structure.txt
 
-25 directories, 120 files
+27 directories, 126 files
+

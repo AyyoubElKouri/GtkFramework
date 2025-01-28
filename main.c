@@ -17,10 +17,23 @@
 
 #include <gtk/gtk.h>
 #include "include/GtkFramework/GtkFramework.h"
+#include "DossierForTesting/test_project_1/project_header.h"
 
 
 static void activate(GtkApplication *app, gpointer data)
 {
+    // let only the project you want to run
+    // comment the others
+    // after choosing the project all you want to do is to run it the main function
+
+    // i hope you like it
+    // Ayyoub el Kouri
+
+    project1(app);
+    // project2(app);
+    // project3(app);
+
+    
     
 }
 

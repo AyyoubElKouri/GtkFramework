@@ -10,7 +10,7 @@
  * 
  ****************************************************************************************************************************/
 
-#include "../../include/supp.h"
+#include "../include/supp.h"
 
 void add_to_container(GtkWidget *container, GtkWidget *widget)
 {
@@ -19,7 +19,7 @@ void add_to_container(GtkWidget *container, GtkWidget *widget)
 
 void show_widget(GtkWidget *widget)
 {
-    gtk_widget_show(widget);
+    gtk_widget_show_all(widget);
 }
 
 gint run_dialog(GtkWidget *dialog)
