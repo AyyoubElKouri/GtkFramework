@@ -66,5 +66,13 @@ GtkWidget *create_window(GtkApplication *app, GtkWindowType type, const gchar *t
 
 GtkWidget *set_properties_window(windowInfos *windowInformations);
 
-#endif // WINDOW_H
+/**
+ * @brief This function adds a header bar to the window.
+ * 
+ * @param window The window to add the header bar to
+ * @param headerBar The header bar to add to the window
+ */
 
+void add_header_bar_to_window(GtkWidget *window, GtkWidget *headerBar);
+
+#endif // WINDOW_H

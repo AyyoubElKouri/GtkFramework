@@ -41,7 +41,8 @@ GtkWidget *set_properties_switch_button(switchButtonInfos *switchButtonInformati
     gtk_switch_set_active(GTK_SWITCH(switchButton), switchButtonInformations->default_state);
 
     // set the callback and the data
-    g_signal_connect(switchButton, "state-set", G_CALLBACK(switchButtonInformations->callback), switchButtonInformations->data);
+    if(switchButtonInformations->callback)
+        g_signal_connect(switchButton, "state-set", G_CALLBACK(switchButtonInformations->callback), switchButtonInformations->data);
 
     return switchButton;
 }

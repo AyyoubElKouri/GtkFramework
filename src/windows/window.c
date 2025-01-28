@@ -84,3 +84,9 @@ GtkWidget *set_properties_window(windowInfos *windowInformations)
 
     return window;
 }
+
+void add_header_bar_to_window(GtkWidget *window, GtkWidget *headerBar)
+{
+    // Add the header bar to the window
+    gtk_window_set_titlebar(GTK_WINDOW(window), headerBar);
+}

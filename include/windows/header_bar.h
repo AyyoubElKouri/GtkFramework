@@ -28,7 +28,6 @@
 
 typedef struct
 {
-    GtkWidget *window;
     const gchar *title;
     const gchar *subtitle;
     const gchar *icon_path;
@@ -37,6 +36,13 @@ typedef struct
     LinkedList *end_widgets_liste;
 }headerBarInfos;
 
+typedef enum
+{
+    LEFT,
+    RIGHT
+}HeaderBarPosition;
+
+
 /**
  * @brief create a header bar with its properties
  * 
@@ -44,7 +50,7 @@ typedef struct
  * @return a header bar
  */
 
-GtkWidget *create_header_bar(GtkWidget *window, const gchar *title, const gchar *subtitle, const gchar *icon_path, gboolean settings, LinkedList *start_widgets_liste, LinkedList *end_widgets_liste);
+GtkWidget *create_header_bar(const gchar *title, const gchar *subtitle, const gchar *icon_path, gboolean settings);
 
 /**
  * @brief set the properties of the header bar
@@ -63,5 +69,7 @@ GtkWidget *set_properties_header_bar(headerBarInfos *headerBarInformations);
  */
 
 headerBarInfos *get_properties_header_bar(GtkWidget *headerBar);
+
+void add_to_header_bar(GtkWidget *header_bar, GtkWidget *widget, HeaderBarPosition LEFT_OR_RIGHT);
 
 #endif // HEADER_BAR_H

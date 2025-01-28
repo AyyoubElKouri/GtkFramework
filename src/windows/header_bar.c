@@ -12,17 +12,15 @@
 
 #include "../../include/windows/header_bar.h"
 
-static GtkWidget *Gwindow;
 static const gchar * Gicon_path;
 static LinkedList *Gstart_widgets_liste;
 static LinkedList *Gend_widgets_liste;
 
-GtkWidget *create_header_bar(GtkWidget *window, const gchar *title, const gchar *subtitle, const gchar *icon_path, gboolean settings, LinkedList *start_widgets_liste, LinkedList *end_widgets_liste)
+GtkWidget *create_header_bar(const gchar *title, const gchar *subtitle, const gchar *icon_path, gboolean settings)
 {
     headerBarInfos *headerBarInformations = (headerBarInfos *)malloc(sizeof(headerBarInfos));
     if(!headerBarInformations) return NULL;
 
-    headerBarInformations->window = window;
     headerBarInformations->title = g_strdup(title);
     if(!headerBarInformations->title)
     {
@@ -38,10 +36,6 @@ GtkWidget *create_header_bar(GtkWidget *window, const gchar *title, const gchar 
     headerBarInformations->icon_path = g_strdup(icon_path);
     Gicon_path = g_strdup(icon_path);
     headerBarInformations->settings = settings;
-    headerBarInformations->start_widgets_liste = start_widgets_liste;
-    Gstart_widgets_liste = start_widgets_liste;
-    headerBarInformations->end_widgets_liste = end_widgets_liste;
-    Gend_widgets_liste = end_widgets_liste;
 
     GtkWidget *header_bar = set_properties_header_bar(headerBarInformations);
     free(headerBarInformations);
@@ -52,10 +46,6 @@ GtkWidget *create_header_bar(GtkWidget *window, const gchar *title, const gchar 
 GtkWidget *set_properties_header_bar(headerBarInfos *headerBarInformations)
 {
     GtkWidget *header_bar = gtk_header_bar_new();
-
-    // set the window
-    gtk_window_set_titlebar(GTK_WINDOW(headerBarInformations->window), header_bar);
-    Gwindow = headerBarInformations->window;
 
     // set the title 
     if(headerBarInformations->title)
@@ -89,28 +79,6 @@ GtkWidget *set_properties_header_bar(headerBarInfos *headerBarInformations)
     // set the settings button
     gtk_header_bar_set_show_close_button(GTK_HEADER_BAR(header_bar), headerBarInformations->settings);
 
-    // set the start widgets
-    if(headerBarInformations->start_widgets_liste)
-    {
-        Node *current = headerBarInformations->start_widgets_liste->head;
-        while(current)
-        {
-            gtk_header_bar_pack_start(GTK_HEADER_BAR(header_bar), current->widget);
-            current = current->next;
-        }
-    }
-
-    // set the end widgets
-    if(headerBarInformations->end_widgets_liste)
-    {
-        Node *current = headerBarInformations->end_widgets_liste->head;
-        while(current)
-        {
-            gtk_header_bar_pack_end(GTK_HEADER_BAR(header_bar), current->widget);
-            current = current->next;
-        }
-    }
-
     return header_bar;
 }
 
@@ -119,13 +87,18 @@ headerBarInfos *get_properties_header_bar(GtkWidget *headerBar)
     headerBarInfos *headerBarInformations = (headerBarInfos *)malloc(sizeof(headerBarInfos));
     if(!headerBarInformations) return NULL;
 
-    headerBarInformations->window = Gwindow;
     headerBarInformations->title = gtk_header_bar_get_title(GTK_HEADER_BAR(headerBar));
     headerBarInformations->subtitle = gtk_header_bar_get_subtitle(GTK_HEADER_BAR(headerBar));
     headerBarInformations->icon_path = g_strdup(Gicon_path);
     headerBarInformations->settings = gtk_header_bar_get_show_close_button(GTK_HEADER_BAR(headerBar));
-    headerBarInformations->start_widgets_liste = Gstart_widgets_liste;
-    headerBarInformations->end_widgets_liste = Gend_widgets_liste;
 
     return headerBarInformations;
+}
+
+void add_to_header_bar(GtkWidget *header_bar, GtkWidget *widget, HeaderBarPosition LEFT_OR_RIGHT)
+{
+    if(LEFT_OR_RIGHT == LEFT)
+        gtk_header_bar_pack_start(GTK_HEADER_BAR(header_bar), widget);
+    else
+        gtk_header_bar_pack_end(GTK_HEADER_BAR(header_bar), widget);
 }

@@ -14,7 +14,7 @@
 
 static const gchar *Gpath_to_image;
 
-GtkWidget *create_menu_button(const gchar *label, const gchar *path_to_image, GtkWidget *menu, GtkArrowType arrow_type)
+GtkWidget *create_menu_button(const gchar *label, const gchar *path_to_image, GtkArrowType arrow_type)
 {
     menuButtonInfos *menuButtonInformation = (menuButtonInfos *)malloc(sizeof(menuButtonInfos));
     if(!menuButtonInformation) return NULL;
@@ -22,7 +22,6 @@ GtkWidget *create_menu_button(const gchar *label, const gchar *path_to_image, Gt
     menuButtonInformation->label = g_strdup(label);
     menuButtonInformation->path_to_image = g_strdup(path_to_image);
     Gpath_to_image = g_strdup(path_to_image);
-    menuButtonInformation->menu = menu;
     menuButtonInformation->arrow_type = arrow_type;
 
     GtkWidget *menuButton = set_properties_menuButton(menuButtonInformation);
@@ -49,7 +48,6 @@ GtkWidget *set_properties_menuButton(menuButtonInfos *menuButtonInformation)
         }
     
     // set the menu
-    gtk_menu_button_set_popup(GTK_MENU_BUTTON(menuButton), menuButtonInformation->menu);
 
     // set the arrow direction
     gtk_menu_button_set_direction(GTK_MENU_BUTTON(menuButton), menuButtonInformation->arrow_type);
@@ -64,8 +62,13 @@ menuButtonInfos *get_properties_menuButton(GtkWidget *menuButton)
 
     menuButtonInformation->label = gtk_button_get_label(GTK_BUTTON(menuButton));
     menuButtonInformation->path_to_image = g_strdup(Gpath_to_image);
-    menuButtonInformation->menu = GTK_WIDGET(gtk_menu_button_get_popup(GTK_MENU_BUTTON(menuButton)));
     menuButtonInformation->arrow_type = gtk_menu_button_get_direction(GTK_MENU_BUTTON(menuButton));
 
     return menuButtonInformation;
+}
+
+void add_to_menu_button(GtkWidget *menuButton, GtkWidget *menu)
+{
+    gtk_menu_button_set_popup(GTK_MENU_BUTTON(menuButton), menu);
+    gtk_widget_show_all(menu);
 }

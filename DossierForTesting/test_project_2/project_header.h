@@ -1,11 +1,11 @@
 /*****************************************************************************************************************************
  * 
- * @project: Information about countries
+ * @project: Information about all widgets in the static library
  * @file project_header.h
- * @brief the header file containing all the functions declarations for the countries project exemple
+ * @brief the header file containing all the functions declarations for the widgets project exemple
  * 
  * 
- * @test testCountries N°: 1.1.0
+ * @test testWidgets N°: 1.2.0
  * 
  * @author Ayyoub el Kouri
  * @date 28/01/2025
@@ -17,9 +17,7 @@
 #define PROJECT_HEADER_H
 
 #include "../../include/GtkFramework/GtkFramework.h"
-#include "Countries.h"
 
-void project1(GtkApplication *app);
-
+void project2(GtkApplication *app);
 
 #endif // PROJECT_HEADER_H

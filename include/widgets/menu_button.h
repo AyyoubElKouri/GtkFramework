@@ -26,7 +26,6 @@ typedef struct
 {
     const gchar *label;
     const gchar *path_to_image;
-    GtkWidget *menu;
     GtkArrowType arrow_type;
     
 } menuButtonInfos;
@@ -36,7 +35,6 @@ typedef struct
  * 
  * @param label the label of the menu button
  * @param path_to_image the path to the image of the menu button
- * @param menu the menu of the menu button
  * @param arrow_type the arrow type of the menu button
  * 
  * @return GtkWidget pointer to the menu button
@@ -44,7 +42,7 @@ typedef struct
  * @warning you can chose only one between label and path_to_image, give NULL to the other
  */
 
-GtkWidget *create_menu_button(const gchar *label, const gchar *path_to_image, GtkWidget *menu, GtkArrowType arrow_type);
+GtkWidget *create_menu_button(const gchar *label, const gchar *path_to_image, GtkArrowType arrow_type);
 
 /**
  * @brief set the properties of the menu button
@@ -65,5 +63,15 @@ GtkWidget *set_properties_menuButton(menuButtonInfos *menuButtonInformation);
  */
 
 menuButtonInfos *get_properties_menuButton(GtkWidget *menuButton);
+
+/**
+ * @brief add a menu to the menu button
+ * 
+ * @param menuButton the menu button
+ * @param menu the menu
+ */
+
+void add_to_menu_button(GtkWidget *menuButton, GtkWidget *men);
+
 
 #endif // MENU_BUTTON_H

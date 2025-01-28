@@ -2,6 +2,7 @@
     "C_Cpp.errorSquiggles": "enabled",
     "files.associations": {
         "link_button.h": "c",
-        "radio_button.h": "c"
+        "radio_button.h": "c",
+        "project_header.h": "c"
     }
 }

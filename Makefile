@@ -24,7 +24,7 @@ INCLUDE_DIR = include
 TEST_DIR = DossierForTesting
 
 
-SOURCES = $(wildcard $(SRC_DIR)/windows/*.c $(SRC_DIR)/widgets/*.c $(SRC_DIR)/containers/*.c $(TEST_DIR)/test_project_1/*.c) main.c data_structures/linked_list/linked_list.c src/*.c
+SOURCES = $(wildcard $(SRC_DIR)/windows/*.c $(SRC_DIR)/widgets/*.c $(SRC_DIR)/containers/*.c $(TEST_DIR)/test_project_1/*.c $(TEST_DIR)/test_project_2/*.c) main.c data_structures/linked_list/linked_list.c src/*.c
 OBJS = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SOURCES))
 TARGET = $(BIN_DIR)/application
 

@@ -39,7 +39,7 @@ typedef struct
  * @return the created menu
  */
 
-GtkWidget *create_menu(gboolean is_primary, const gchar *label, LinkedList *items);
+GtkWidget *create_menu(gboolean is_primary, const gchar *label);
 
 /**
  * @brief sets the properties of the menu
@@ -60,5 +60,14 @@ GtkWidget *set_properties_menu(menuInfos *menuInformation);
  */
 
 menuInfos *get_properties_menu(GtkWidget *menu);
+
+/**
+ * @brief adds an item to the menu
+ * 
+ * @param menu the menu
+ * @param menu_item the item to add
+ */
+
+void add_to_menu(GtkWidget *menu, GtkWidget *menu_item);
 
 #endif // MENU_H
