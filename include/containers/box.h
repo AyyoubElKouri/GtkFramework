@@ -7,7 +7,7 @@
  * 
  * @author Ayyoub el Kouri
  * @date 25/01/2025
- * @version 1.0 (last update 25/01/2025)
+ * @version 1.1 (last update 28/01/2025)
  * 
  ******************************************************************************************************************************/
 
@@ -77,6 +77,6 @@ GtkWidget *set_properties_box(boxInfos *boxInformations);
 
 boxInfos *get_properties_box(GtkWidget *box);
 
-void add_box(GtkWidget *box, GtkWidget *child, BoxPosition position , gboolean expand, gboolean fill, guint padding, gint margin_top, gint margin_buttom, gint margin_right, gint left);
+void add_to_box(GtkWidget *box, GtkWidget *child, BoxPosition position , gboolean expand, gboolean fill, guint padding, gint margin_top, gint margin_buttom, gint margin_right, gint left);
 
 #endif // BOX_H

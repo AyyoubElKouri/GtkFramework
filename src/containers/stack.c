@@ -6,7 +6,7 @@
  * 
  * @author Ayyoub el kouri
  * @date 27/01/2025
- * @version 1.0 (last update 27/01/2025)
+ * @version 1.1 (last update 28/01/2025)
  * 
  ****************************************************************************************************************************/
 
@@ -48,7 +48,7 @@ stackInfos *get_properties_stack(GtkWidget *stack)
     return stackInformations;
 }
 
-void add_stack(GtkWidget *stack, GtkWidget *widget, const gchar *name)
+void add_to_stack(GtkWidget *stack, GtkWidget *widget, const gchar *name)
 {
     // Add the widget to the stack
     gtk_stack_add_titled(GTK_STACK(stack), widget, name, name);

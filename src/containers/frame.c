@@ -6,7 +6,7 @@
  * 
  * @author Ayyoub el kouri
  * @date 27/01/2025
- * @version 1.0 (last update 27/01/2025)
+ * @version 1.1 (last update 28/01/2025)
  * 
  ****************************************************************************************************************************/
 
@@ -55,3 +55,7 @@ frameInfos *get_properties_frame(GtkWidget *frame)
     return frameInformations;
 }
 
+void add_to_frame(GtkWidget *frame, GtkWidget *widget)
+{
+    gtk_container_add(GTK_CONTAINER(frame), widget);
+}

@@ -18,5 +18,8 @@
 #include "../containers/stack.h"
 #include "../containers/switcher.h"
 #include "../containers/frame.h"
+#include "../containers/grid.h" 
+#include "../containers/fixed.h"
+#include "../containers/paned.h"
 
 #endif // CONTAINERS_H

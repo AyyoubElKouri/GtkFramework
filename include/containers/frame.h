@@ -7,7 +7,7 @@
  * 
  * @author Ayyoub el Kouri
  * @date 27/01/2025
- * @version 1.0 (last update 27/01/2025)
+ * @version 1.1 (last update 28/01/2025)
  * 
  ******************************************************************************************************************************/
 
@@ -61,5 +61,14 @@ GtkWidget *set_properties_frame(frameInfos *frameInformation);
  */
 
 frameInfos *get_properties_frame(GtkWidget *frame);
+
+/**
+ * @brief This function adds a widget to the frame
+ * 
+ * @param frame The frame
+ * @param widget The widget to add
+ */
+
+void add_to_frame(GtkWidget *frame, GtkWidget *widget);
 
 #endif // FRAME_H

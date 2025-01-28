@@ -7,7 +7,7 @@
  * 
  * @author Ayyoub el Kouri
  * @date 27/01/2025
- * @version 1.0 (last update 27/01/2025)
+ * @version 1.1 (last update 28/01/2025)
  * 
  ******************************************************************************************************************************/
 
@@ -65,7 +65,7 @@ stackInfos *get_properties_stack(GtkWidget *stack);
  * @param widget the widget to add
  */
 
-void add_stack(GtkWidget *stack, GtkWidget *widget, const gchar *name);
+void add_to_stack(GtkWidget *stack, GtkWidget *widget, const gchar *name);
 
 #endif // STACK_H
 
