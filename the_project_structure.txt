@@ -15,7 +15,7 @@
 .
 ├── assets
 │   ├── Application_icon
-│   │   └── apple.png
+│   │   └── apple.png
 │   ├── home.png
 │   ├── ma.png
 │   ├── smallHome.png

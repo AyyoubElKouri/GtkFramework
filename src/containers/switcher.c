@@ -12,12 +12,11 @@
 
 #include "../../include/containers/switcher.h"
 
-GtkWidget *create_switcher(GtkWidget *stack, gint spacing, gboolean buttons_same_size)
+GtkWidget *create_switcher(gint spacing, gboolean buttons_same_size)
 {
     switcherInfos *switcherInformations = (switcherInfos *)malloc(sizeof(switcherInfos));
     if(!switcherInformations) return NULL;
 
-    switcherInformations->stack = stack;
     switcherInformations->spacing = spacing;
     switcherInformations->buttons_same_size = buttons_same_size;
 
@@ -31,7 +30,6 @@ GtkWidget *set_properties_switcher(switcherInfos *switcherInformations)
 {
     GtkWidget *switcher = gtk_stack_switcher_new();
 
-    gtk_stack_switcher_set_stack(GTK_STACK_SWITCHER(switcher), GTK_STACK(switcherInformations->stack));
     gtk_box_set_spacing(GTK_BOX(switcher), switcherInformations->spacing);
     gtk_box_set_homogeneous(GTK_BOX(switcher), switcherInformations->buttons_same_size);
 
@@ -43,9 +41,13 @@ switcherInfos *get_properties_switcher(GtkWidget *switcher)
     switcherInfos *switcherInformations = (switcherInfos *)malloc(sizeof(switcherInfos));
     if(!switcherInformations) return NULL;
 
-    switcherInformations->stack = GTK_WIDGET(gtk_stack_switcher_get_stack(GTK_STACK_SWITCHER(switcher)));
     switcherInformations->spacing = gtk_box_get_spacing(GTK_BOX(switcher));
     switcherInformations->buttons_same_size = gtk_box_get_homogeneous(GTK_BOX(switcher));
 
     return switcherInformations;
+}
+
+void add_to_switcher(GtkWidget *switcher, GtkWidget *stack)
+{
+    gtk_stack_switcher_set_stack(GTK_STACK_SWITCHER(switcher), GTK_STACK(stack));
 }

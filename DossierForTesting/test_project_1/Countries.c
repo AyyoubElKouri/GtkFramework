@@ -47,7 +47,7 @@ void marocInfos(GtkWidget *widget, gpointer data)
     add_to_box(main_box, box_for_subtitle2, START, FALSE, FALSE, 0, 30, 0, 0, 0);
     add_to_box(main_box, paragraph2, START, FALSE, FALSE, 0, 4, 0, 10, 0);
 
-    GtkWidget *scrolled_window = create_scrolled_window();
+    GtkWidget *scrolled_window = create_scrolled_window(TRUE, TRUE);
     add_to_scrolled_window(scrolled_window, main_box);
 
     gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled_window), GTK_POLICY_NEVER, GTK_POLICY_ALWAYS);
@@ -87,7 +87,7 @@ void franceInfos(GtkWidget *widget, gpointer data)
     add_to_box(main_box, box_for_subtitle2, START, FALSE, FALSE, 0, 30, 0, 0, 0);
     add_to_box(main_box, paragraph2, START, FALSE, FALSE, 0, 4, 0, 10, 0);
 
-    GtkWidget *scrolled_window = create_scrolled_window();
+    GtkWidget *scrolled_window = create_scrolled_window(TRUE, TRUE);
     add_to_scrolled_window(scrolled_window, main_box);
 
     gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled_window), GTK_POLICY_NEVER, GTK_POLICY_ALWAYS);
@@ -126,7 +126,7 @@ void argentinaInfos(GtkWidget *widget, gpointer data)
     add_to_box(main_box, box_for_subtitle2, START, FALSE, FALSE, 0, 30, 0, 0, 0);
     add_to_box(main_box, paragraph2, START, FALSE, FALSE, 0, 4, 0, 10, 0);
 
-    GtkWidget *scrolled_window = create_scrolled_window();
+    GtkWidget *scrolled_window = create_scrolled_window(TRUE, TRUE);
     add_to_scrolled_window(scrolled_window, main_box);
 
     gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled_window), GTK_POLICY_NEVER, GTK_POLICY_ALWAYS);
@@ -165,7 +165,7 @@ void algerieInfos(GtkWidget *widget, gpointer data)
     add_to_box(main_box, box_for_subtitle2, START, FALSE, FALSE, 0, 30, 0, 0, 0);
     add_to_box(main_box, paragraph2, START, FALSE, FALSE, 0, 4, 0, 10, 0);
 
-    GtkWidget *scrolled_window = create_scrolled_window();
+    GtkWidget *scrolled_window = create_scrolled_window(TRUE, TRUE);
     add_to_scrolled_window(scrolled_window, main_box);
 
     gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled_window), GTK_POLICY_NEVER, GTK_POLICY_ALWAYS);
@@ -204,7 +204,7 @@ void italieInfos(GtkWidget *widget, gpointer data)
     add_to_box(main_box, box_for_subtitle2, START, FALSE, FALSE, 0, 30, 0, 0, 0);
     add_to_box(main_box, paragraph2, START, FALSE, FALSE, 0, 4, 0, 10, 0);
 
-    GtkWidget *scrolled_window = create_scrolled_window();
+    GtkWidget *scrolled_window = create_scrolled_window(TRUE, TRUE);
     add_to_scrolled_window(scrolled_window, main_box);
 
     gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled_window), GTK_POLICY_NEVER, GTK_POLICY_ALWAYS);
@@ -243,7 +243,7 @@ void saudiArabieInfos(GtkWidget *widget, gpointer data)
     add_to_box(main_box, box_for_subtitle2, START, FALSE, FALSE, 0, 30, 0, 0, 0);
     add_to_box(main_box, paragraph2, START, FALSE, FALSE, 0, 4, 0, 10, 0);
 
-    GtkWidget *scrolled_window = create_scrolled_window();
+    GtkWidget *scrolled_window = create_scrolled_window(TRUE, TRUE);
     add_to_scrolled_window(scrolled_window, main_box);
 
     gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled_window), GTK_POLICY_NEVER, GTK_POLICY_ALWAYS);

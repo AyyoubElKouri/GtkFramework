@@ -1,0 +1,16 @@
+<!-- fdffsd -->
+
+<window id = "12" app = "app" title = "mywindow" height = "2000" width = 1000>
+    <!-- Start -->
+    <box id = "EE" orientation = GTK_ORIENTATION_HORIZONTAL align = GTK_ALIGN_START spacing = 10>
+    <!-- ddd -->
+    </box>
+    <!-- End -->
+
+    <!-- Start dd -->
+    <window id = "window" app = "app">
+
+    </window>
+    <!-- End dd -->
+</window>
+<!-- dsjdsk -->

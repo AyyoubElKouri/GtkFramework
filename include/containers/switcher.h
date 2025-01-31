@@ -23,7 +23,6 @@
 
 typedef struct
 {
-    GtkWidget *stack;
     gint spacing;
     gboolean buttons_same_size;
 
@@ -32,14 +31,13 @@ typedef struct
 /**
  * @brief creates a switcher container
  * 
- * @param stack the stack to switch between
  * @param spacing the spacing between the buttons
  * @param buttons_same_size if the buttons have the same size
  * 
  * @return the switcher container
  */
 
-GtkWidget *create_switcher(GtkWidget *stack, gint spacing, gboolean buttons_same_size);
+GtkWidget *create_switcher(gint spacing, gboolean buttons_same_size);
 
 /**
  * @brief sets the properties of the switcher container
@@ -60,5 +58,8 @@ GtkWidget *set_properties_switcher(switcherInfos *switcherInformations);
  */
 
 switcherInfos *get_properties_switcher(GtkWidget *switcher);
+
+
+void add_to_switcher(GtkWidget *switcher, GtkWidget *stack);
 
 #endif // SWITCHER_H

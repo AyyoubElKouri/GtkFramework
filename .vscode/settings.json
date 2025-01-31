@@ -1,8 +1,13 @@
 {
     "C_Cpp.errorSquiggles": "enabled",
     "files.associations": {
+        "*.txt": "html",
         "link_button.h": "c",
         "radio_button.h": "c",
-        "project_header.h": "c"
+        "project_header.h": "c",
+        "project_header_2.h": "c",
+        "widgets_data_bases.h": "c",
+        "xml_style.h": "c",
+        "analyzer.h": "c"
     }
 }

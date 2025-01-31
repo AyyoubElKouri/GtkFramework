@@ -1,0 +1,1 @@
+GtkWidget *window = create_window(NULL, jjj, "Default title", 700, 600, F, GTKPOS_CENTER, TRUE, NULL, 1.0, FALSE);

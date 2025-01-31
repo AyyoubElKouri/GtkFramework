@@ -1,0 +1,28 @@
+<window app="hello">
+
+    <headerBar title="header">
+
+        <label title="hello">
+
+        </label add_to_header_bar="header">
+
+    </headerBar add_header_bar_to_window="window">
+
+    <box id = "box.id.1" alignement = "GTK_HORISANTAL">
+
+        <switch_button>
+
+        </switch_button>
+        
+    </box add_to_window = "box">
+    <box orientation = GTK_ORIENTATION_HORIZONTAL space_betwen = 30>
+        
+        <!-- Start label this -->
+        <label title = "this is a label ">
+
+        </label>
+        <!-- End label this -->
+
+    </box add_to_window = "window principale">
+
+</window show_widget>

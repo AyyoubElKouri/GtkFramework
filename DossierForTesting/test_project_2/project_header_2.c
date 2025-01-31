@@ -13,7 +13,7 @@
  * 
  ******************************************************************************************************************************/
 
-#include "project_header.h"
+#include "project_header_2.h"
 
 static void start_spinner_callback(GtkWidget *widget, gpointer data)
 {
@@ -483,6 +483,8 @@ void project2(GtkApplication *app)
                             add_to_box(login_box, login_grid, START, FALSE, FALSE, 0, 0, 10, 0, 0);
                             /*---End login grid---*/
 
+                            gtk_widget_set_size_request(login_grid, 300, 1);
+
                         add_to_box(stack_box2, login_box, START, TRUE, FALSE, 0, 0, 10, 0, 0);
                         /*---End login box---*/
 
@@ -494,7 +496,8 @@ void project2(GtkApplication *app)
                 /*---End Main Stack---*/
 
                 /*---Start Switcher---*/
-                GtkWidget *switcher = create_switcher(main_stack, 5, TRUE);
+                GtkWidget *switcher = create_switcher(5, TRUE);
+                add_to_switcher(switcher, main_stack);
                 add_to_box(main_box, switcher, START, FALSE, FALSE, 0, 0, 10, 0, 0);
                 /*---End Switcher---*/
             
