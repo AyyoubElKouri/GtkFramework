@@ -1,3 +1,14 @@
+/*****************************************************************************************************************************
+ * 
+ * @file analyzer.h
+ * @brief the header file of the functions and algorithms used for the analyzer xml style file
+ * 
+ * 
+ * @author Ayyoub el Kouri
+ * @date 26/01/2025
+ * @version 2.0 (last update 01/02/2025)
+ * 
+ ****************************************************************************************************************************/
 
 
 
@@ -54,5 +65,12 @@ int is_comment(char *line);
 
 int is_close_tag(char *line);
 
+char* extraire_contenu(const char* chaine);
+
+char* my_strdup(const char* str);
+
+char* my_strndup(const char* str, size_t n);
+
+size_t my_strnlen(const char* str, size_t maxlen);
 
 #endif

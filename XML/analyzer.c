@@ -1,3 +1,16 @@
+/*****************************************************************************************************************************
+ * 
+ * @file analyzer.c
+ * @brief the implementation of the functions in analyzer.h
+ * 
+ * 
+ * @author Ayyoub el Kouri
+ * @date 26/01/2025
+ * @version 2.0 (last update 01/02/2025)
+ * 
+ ****************************************************************************************************************************/
+
+
 #include "analyzer.h"
 
 // Helper function to create a new NodeA
@@ -6,8 +19,8 @@ NodeA *create_node(const char *key, const char *val, int is_string)
     NodeA *new_node = (NodeA *)malloc(sizeof(NodeA));
     if (!new_node) return NULL;
 
-    new_node->key = strdup(key);
-    new_node->val = strdup(val);
+    new_node->key = my_strdup(key);
+    new_node->val = my_strdup(val);
     new_node->is_string = is_string;
     new_node->next = NULL;
     return new_node;
@@ -23,6 +36,7 @@ void free_list(NodeA *head)
         free(temp->val);
         free(temp);
     }
+    
 }
 
 // Main parsing function
@@ -38,7 +52,7 @@ NodeA *parse_widget(const char *input)
     while (*p && isspace(*p)) p++;
     const char *widget_start = p;
     while (*p && !isspace(*p) && *p != '>' && *p != '/') p++;
-    char *widget_type = strndup(widget_start, p - widget_start);
+    char *widget_type = my_strndup(widget_start, p - widget_start);
     head = create_node("widget", widget_type, 1);
     free(widget_type);
     current = head;
@@ -52,7 +66,7 @@ NodeA *parse_widget(const char *input)
         // Get key
         const char *key_start = p;
         while (*p && !isspace(*p) && *p != '=') p++;
-        char *key = strndup(key_start, p - key_start);
+        char *key = my_strndup(key_start, p - key_start);
 
         // Skip to '='
         while (*p && *p != '=') p++;
@@ -69,7 +83,7 @@ NodeA *parse_widget(const char *input)
         }
         const char *val_start = p;
         while (*p && ((quote && *p != quote) || (!quote && !isspace(*p) && *p != '>'))) p++;
-        char *val = strndup(val_start, p - val_start);
+        char *val = my_strndup(val_start, p - val_start);
         if (quote && *p == quote) p++;  // Skip closing quote
 
         // Add to list
@@ -314,3 +328,105 @@ int is_close_tag(char *line)
     return (line[i] == '<' && line[i+1] == '/') ? 1 : 0;
 }
 
+char* extraire_contenu(const char* chaine)
+{
+    // Vérifier le format de base : commence par "</" et finit par ">"
+    size_t len = strlen(chaine);
+    if (len < 3 || strncmp(chaine, "</", 2) != 0 || chaine[len-1] != '>') {
+        return NULL;
+    }
+
+    // Trouver la fin du nom de la balise (après "</")
+    const char* debut_nom = chaine + 2; // Après "</"
+    const char* fin_nom = debut_nom;
+    
+    // Avancer jusqu'au premier espace/tabulation
+    while (*fin_nom && !isspace(*fin_nom) && (fin_nom < chaine + len - 1)) {
+        fin_nom++;
+    }
+
+    // Trouver le début du contenu (après les espaces)
+    const char* debut_contenu = fin_nom;
+    while (isspace(*debut_contenu) && debut_contenu < chaine + len - 1) {
+        debut_contenu++;
+    }
+
+    // Trouver la fin du contenu (avant le '>' final)
+    const char* fin_contenu = chaine + len - 1; // Position avant '>'
+    while (fin_contenu > debut_contenu && isspace(*(fin_contenu - 1))) {
+        fin_contenu--;
+    }
+
+    // Calculer la longueur du contenu
+    size_t contenu_len = fin_contenu - debut_contenu;
+    if (contenu_len <= 0) {
+        return NULL;
+    }
+
+    // Allouer et copier
+    char* resultat = malloc(contenu_len + 1);
+    if (!resultat) return NULL;
+    
+    memcpy(resultat, debut_contenu, contenu_len);
+    resultat[contenu_len] = '\0';
+
+    return resultat;
+}
+
+#include <stdlib.h>
+#include <string.h>
+
+char* my_strdup(const char* str)
+{
+    if (str == NULL) {
+        return NULL;
+    }
+
+    // Calculate the length of the string
+    size_t len = strlen(str) + 1; // +1 for the null terminator
+
+    // Allocate memory for the new string
+    char* new_str = (char*)malloc(len);
+
+    if (new_str != NULL) {
+        // Copy the original string into the new memory location
+        memcpy(new_str, str, len);
+    }
+
+    return new_str;
+}
+
+char* my_strndup(const char* str, size_t n)
+{
+    if (str == NULL) {
+        return NULL;
+    }
+
+    // Calculate the length to copy (up to n characters or the end of the string)
+    size_t len = my_strnlen(str, n); // strnlen is safer than strlen for bounded lengths
+
+    // Allocate memory for the new string (+1 for the null terminator)
+    char* new_str = (char*)malloc(len + 1);
+
+    if (new_str != NULL) {
+        // Copy the characters from the original string
+        memcpy(new_str, str, len);
+
+        // Add the null terminator
+        new_str[len] = '\0';
+    }
+
+    return new_str;
+}
+
+
+#include <stddef.h>
+
+size_t my_strnlen(const char* str, size_t maxlen)
+{
+    size_t len = 0;
+    while (len < maxlen && str[len] != '\0') {
+        len++;
+    }
+    return len;
+}

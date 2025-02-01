@@ -33,25 +33,27 @@ static void activate(GtkApplication *app, gpointer data)
     // Ayyoub el Kouri
 
     // project1(app);
-    // project2(app);
+    project2(app);
     
-    use_xml_style_file(app, (arg *)data);
+    // use_xml_style_file(app, (arg *)data);
 
     
     
 }
+
 
 
 int main(int argc, char **argv)
 {
     GtkApplication *app = gtk_application_new("id.gtk", G_APPLICATION_DEFAULT_FLAGS);
     int status = 0;
-    arg myarg;
-    myarg.argc = argc;
-    myarg.argv = argv;
-    g_signal_connect(app, "activate", G_CALLBACK(activate), &myarg);
+    // arg myarg;
+    // myarg.argc = argc;
+    // myarg.argv = argv;
+    g_signal_connect(app, "activate", G_CALLBACK(activate), NULL);
     status = g_application_run(G_APPLICATION(app), argc, argv);
     g_object_unref(app);
     return status;
 }
+
 

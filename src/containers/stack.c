@@ -12,11 +12,12 @@
 
 #include "../../include/containers/stack.h"
 
-GtkWidget *create_stack(GtkStackTransitionType transition_type, gint transition_duration)
+GtkWidget *create_stack(GtkWidget *switcher, GtkStackTransitionType transition_type, gint transition_duration)
 {
     stackInfos *stackInformations = (stackInfos *)malloc(sizeof(stackInfos));
     if(!stackInformations) return NULL;
 
+    stackInformations->switcher = switcher;
     stackInformations->transition_type = transition_type;
     stackInformations->transition_duration = transition_duration;
 
@@ -27,6 +28,9 @@ GtkWidget *create_stack(GtkStackTransitionType transition_type, gint transition_
 GtkWidget *set_properties_stack(stackInfos *stackInformations)
 {
     GtkWidget *stack = gtk_stack_new();
+
+    // set the switcher
+    gtk_stack_switcher_set_stack(GTK_STACK_SWITCHER(stackInformations->switcher), GTK_STACK(stack));
 
     // set the transition type
     gtk_stack_set_transition_type(GTK_STACK(stack), stackInformations->transition_type);

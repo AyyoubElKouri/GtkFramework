@@ -23,6 +23,7 @@
 
 typedef struct
 {
+    GtkWidget *switcher;
     GtkStackTransitionType transition_type;
     gint transition_duration;
 }stackInfos;
@@ -36,7 +37,7 @@ typedef struct
  * @return the stack widget
  */
 
-GtkWidget *create_stack(GtkStackTransitionType transition_type, gint transition_duration);
+GtkWidget *create_stack(GtkWidget *switcher, GtkStackTransitionType transition_type, gint transition_duration);
 
 /**
  * @brief sets the properties of the stack

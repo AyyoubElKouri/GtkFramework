@@ -1,3 +1,15 @@
+/*****************************************************************************************************************************
+ * 
+ * @file xml_style.c
+ * @brief the implementation of the functions in xml_style.h
+ * 
+ * 
+ * @author Ayyoub el Kouri
+ * @date 26/01/2025
+ * @version 2.0 (last update 01/02/2025)
+ * 
+ ****************************************************************************************************************************/
+
 
 #include "xml_style.h"
 
@@ -19,7 +31,7 @@ void use_xml_style_file(GtkApplication *app, arg *myarg)
 
 
     
-    FILE *temp = fopen("temp.c", "w");
+    FILE *temp = fopen("../temp.c", "w");
     
     if(!analyse(file_to_read))
     {
@@ -27,17 +39,12 @@ void use_xml_style_file(GtkApplication *app, arg *myarg)
         exit(1);
     }
     else
-    {
         printf("file valide\n");
-        printf("ccc\n");
-    }
-    printf("hhh\n");
 
-    printf("ici\n");
     rewind(file_to_read);
 
     fprintf(temp, "#include <gtk/gtk.h>\n");
-    fprintf(temp, "#include \"../include/GtkFramework/GtkFramework.h\"\n");
+    fprintf(temp, "#include \"include/GtkFramework/GtkFramework.h\"\n");
 
     fprintf(temp, "static void activate(GtkApplication *app, gpointer data){\n");
     // printf("ddd\n");
@@ -49,7 +56,6 @@ void use_xml_style_file(GtkApplication *app, arg *myarg)
     int index = 0;
 
 
-
     while((car = fgetc(file_to_read)) == ' ');
     if(car == '\n') continue;
 
@@ -59,14 +65,17 @@ void use_xml_style_file(GtkApplication *app, arg *myarg)
         line[index] = car;
         index++;
         car = fgetc(file_to_read);
-        
     }
 
     line[index] = '\0';
     index = 0;
 
     if(is_comment(line)) continue;
-    if(is_close_tag(line)) continue;
+    if(is_close_tag(line))
+    {
+        fprintf(temp, "%s;\n", extraire_contenu(line));
+        continue;
+    }
 
     NodeA *widget = parse_widget(line);
     

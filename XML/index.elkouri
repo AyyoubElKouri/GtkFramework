@@ -1,0 +1,8 @@
+<window id = "hello" height = 200 app = "app" width = 900>
+
+    <header_bar id = "header_bar" title = "myApp" subtitle = "this is a subtitle" icon_path = "assets/ma.png" settings = TRUE>
+
+    </header_bar add_header_bar_to_window(hello, header_bar)>
+
+
+</window show_widget(hello)>

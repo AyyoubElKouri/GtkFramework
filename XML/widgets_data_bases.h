@@ -1,3 +1,17 @@
+/*****************************************************************************************************************************
+ * 
+ * @file widgets_data_bases.h
+ * @brief the header file of the widgets data bases
+ * 
+ * 
+ * @author Ayyoub el Kouri
+ * @date 26/01/2025
+ * @version 2.0 (last update 01/02/2025)
+ * 
+ ****************************************************************************************************************************/
+
+
+
 #include "analyzer.h"
 /*****************************************************************************************************************************
  * 
@@ -129,29 +143,6 @@
  * text_view:
  *      GtkWidget *create_text_view(const gchar *text, gint size, const gchar *font, const gchar *color, const gchar *background, GtkJustification justify, PangoWeight weight, PangoStyle style, gboolean wrap, gboolean cursor_visible, gboolean editable);
  *      <text_view id = "text view" text = "Click me" size = 10 font = "Arial" color = "#FFFFFF" background = "#000000" justify = "GTK_JUSTIFY_CENTER" wrap = TRUE cursor_visible = true editable = true>
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
  * 
  **********************************************************************************************/
 

@@ -57,21 +57,27 @@ void project2(GtkApplication *app)
                 
                 add_to_menu_button(menu_button, menu);
                 /*---End Menu---*/
-            
+
             add_to_header_bar(header_bar, menu_button, LEFT);
             /*---End Menu Button---*/
 
         add_header_bar_to_window(window, header_bar);
         /*---End Header Bar---*/
-    
+
         /*---Start Scrolled Window---*/
         GtkWidget *scrolled_window = create_scrolled_window(FALSE, TRUE);
         
             /*---Start Main Box---*/
             GtkWidget *main_box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
 
+                /*---Start Switcher---*/
+                GtkWidget *switcher = create_switcher(5, TRUE);
+                add_to_box(main_box, switcher, START, FALSE, FALSE, 0, 0, 10, 0, 0);
+                /*---End Switcher---*/
+
+
                 /*---Start Main Stack---*/
-                GtkWidget *main_stack = create_stack(GTK_STACK_TRANSITION_TYPE_SLIDE_LEFT_RIGHT, 500);
+                GtkWidget *main_stack = create_stack(switcher, GTK_STACK_TRANSITION_TYPE_SLIDE_LEFT_RIGHT, 500);
 
                     /*---Start Stack box 1---*/
                     GtkWidget *stack_box1 = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
@@ -495,11 +501,6 @@ void project2(GtkApplication *app)
                 add_to_box(main_box, main_stack, START, FALSE, FALSE, 0, 0, 0, 0, 0);
                 /*---End Main Stack---*/
 
-                /*---Start Switcher---*/
-                GtkWidget *switcher = create_switcher(5, TRUE);
-                add_to_switcher(switcher, main_stack);
-                add_to_box(main_box, switcher, START, FALSE, FALSE, 0, 0, 10, 0, 0);
-                /*---End Switcher---*/
             
             add_to_scrolled_window(scrolled_window, main_box);
             /*---End Main Box---*/

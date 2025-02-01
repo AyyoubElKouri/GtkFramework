@@ -71,7 +71,7 @@ menuButtonInfos *get_properties_menuButton(GtkWidget *menuButton);
  * @param menu the menu
  */
 
-void add_to_menu_button(GtkWidget *menuButton, GtkWidget *men);
+void add_to_menu_button(GtkWidget *menuButton, GtkWidget *menu);
 
 
 #endif // MENU_BUTTON_H

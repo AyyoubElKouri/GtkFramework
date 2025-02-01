@@ -47,7 +47,3 @@ switcherInfos *get_properties_switcher(GtkWidget *switcher)
     return switcherInformations;
 }
 
-void add_to_switcher(GtkWidget *switcher, GtkWidget *stack)
-{
-    gtk_stack_switcher_set_stack(GTK_STACK_SWITCHER(switcher), GTK_STACK(stack));
-}

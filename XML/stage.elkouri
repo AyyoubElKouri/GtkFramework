@@ -1,16 +1,82 @@
-<!-- fdffsd -->
+<!-- Start Window -->
+<window id = "window" app = "app" title = "Window Principal" width = 900 height = "660" type = "GTK_WINDOW_TOPLEVEL" position = "GTK_WIN_POS_CENTER">
 
-<window id = "12" app = "app" title = "mywindow" height = "2000" width = 1000>
-    <!-- Start -->
-    <box id = "EE" orientation = GTK_ORIENTATION_HORIZONTAL align = GTK_ALIGN_START spacing = 10>
-    <!-- ddd -->
-    </box>
-    <!-- End -->
+    <!-- Start header bar -->
+    <header_bar id = "header_bar" title = "Ayyoub El Kouri" subtitle = "this is a subtitle" icon_path = "assets/ma.png" settings = TRUE>
 
-    <!-- Start dd -->
-    <window id = "window" app = "app">
+        <!-- Start menu button -->
+        <menu_button id = "menu_button" label = "click me to see" path = NULL>
 
-    </window>
-    <!-- End dd -->
-</window>
-<!-- dsjdsk -->
+            <!-- Start Menu -->
+            <menu id = "menu" is_primary = TRUE label = "CLICK">
+
+                <!-- Start menu item1 -->
+                <menu_item id = "item1" type = "radio">
+
+                </menu_item add_to_menu(menu, item1)>
+                <!-- End menu item1 -->
+
+                <!-- Start menu item2 -->
+                <menu_item id = "item2" type = "radio">
+
+                </menu_item add_to_menu(menu, item2)>
+                <!-- End menu item2 -->
+
+                <!-- Start item3 -->
+                <menu_item id = "item3" type = "radio">
+
+                </menu_item add_to_menu(menu, item3)>
+                <!-- End item3 -->
+
+            </menu add_to_menu_button(menu_button, menu)>
+            <!-- End Menu -->
+
+        </menu_button add_to_header_bar(header_bar, menu_button, LEFT)>
+        <!-- End menu button -->
+
+        <!-- Start button -->
+        <button id = "button1" label = "click me">
+        </button add_to_header_bar(header_bar, button1, RIGHT)>
+        <!-- End button -->
+
+    </header_bar add_header_bar_to_window(window, header_bar)>
+    <!-- End header bar -->
+
+    <!-- Start box image -->
+    <box id = "image_box" position = GTK_POSITION_>
+
+        <!-- Start image -->
+        <image id = "image" path = "assets/ma.png">
+        </image add_to_box(image_box, image, START, FALSE, FALSE, 10, 0, 0, 0, 0)>
+        <!-- End Image -->
+
+        <!-- Start label -->
+        <label id = "label1" font = "consolas" size = "18" label = "hello">
+        </label add_to_box(image_box, label1, START, FALSE, FALSE, 10, 0, 0, 0, 0)>
+        <!-- End label -->
+
+    </box add_to_container(window, image_box)>
+    <!-- End box image -->
+
+
+</window show_widget(window)>
+<!-- End Window -->
+
+
+<box id = "main_box">
+
+    <box id = "box1">
+
+        <image path_image = "assets/ma.png">
+        </image add_to_box(box1, image, START, FALSE, FALSE, 10, 0, 0, 0, 0)>
+
+    </box add_to_box(main_box, box1, START, FALSE, FALSE, 10, 0, 0, 0, 0)>
+
+    <box id = "box2">
+
+        <image path_image = "assets/fr.png">
+        </image add_to_box(box2, image, START, FALSE, FALSE, 10, 0, 0, 0, 0)>
+
+    </box add_to_box(main_box, box2, START, FALSE, FALSE, 10, 0, 0, 0, 0)>
+
+</box>
