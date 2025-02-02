@@ -289,7 +289,6 @@ void menu_item_data_bases(NodeA *widget, FILE *file)
     menu_item = insert_end(menu_item, "widget", "menu_item", 1);
     menu_item = insert_end(menu_item, "label", "Click me", 1);
     menu_item = insert_end(menu_item, "type", "normal", 1);
-    menu_item = insert_end(menu_item, "submenu", "NULL", 1);
     menu_item = insert_end(menu_item, "callback", "NULL", 1);
     menu_item = insert_end(menu_item, "data", "NULL", 1);
 
@@ -328,7 +327,7 @@ void radio_button_data_bases(NodeA *widget, FILE *file)
     radio_button = insert_end(radio_button, "widget", "radio_button", 1);
     radio_button = insert_end(radio_button, "label", "Click me", 1);
     radio_button = insert_end(radio_button, "path_to_image", "NULL", 1);
-    radio_button = insert_end(radio_button, "radio_group_member", "NULL", 1);
+    radio_button = insert_end(radio_button, "radio_group_member", "NULL", 0);
     radio_button = insert_end(radio_button, "default_state", "FALSE", 0);
 
     write_to_file(widget, radio_button, file);

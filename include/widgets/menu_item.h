@@ -37,14 +37,13 @@ typedef struct
  * 
  * @param label The label of the menu item
  * @param type The type of the menu item
- * @param submenu The submenu of the menu item
  * @param callback The callback of the menu item
  * @param data The data of the menu item
  * 
  * @return GtkWidget pointer to the menu item
  */
 
-GtkWidget *create_menu_item(const gchar *label, const gchar *type, GtkWidget *submenu, GCallback callback, gpointer data);
+GtkWidget *create_menu_item(const gchar *label, const gchar *type, GCallback callback, gpointer data);
 
 /**
  * @brief This function sets the information in one structure and creates a menu item with this information
@@ -65,5 +64,7 @@ GtkWidget *set_properties_item(menuItemInfos *menuItemInformation);
  */
 
 menuItemInfos *get_properties_menuItem(GtkWidget *menuItem);
+
+void add_to_menu_item(GtkWidget *menuItem, GtkWidget *submenu);
 
 #endif

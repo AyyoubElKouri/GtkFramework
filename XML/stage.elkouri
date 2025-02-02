@@ -1,82 +1,118 @@
 <!-- Start Window -->
-<window id = "window" app = "app" title = "Window Principal" width = 900 height = "660" type = "GTK_WINDOW_TOPLEVEL" position = "GTK_WIN_POS_CENTER">
+<window id = "window" app = "app">
 
-    <!-- Start header bar -->
-    <header_bar id = "header_bar" title = "Ayyoub El Kouri" subtitle = "this is a subtitle" icon_path = "assets/ma.png" settings = TRUE>
+    <!-- Start Header Bar -->
+    <header_bar id = "header_bar" title = "Login Page" subtitle = "this is a login page">
 
         <!-- Start menu button -->
-        <menu_button id = "menu_button" label = "click me to see" path = NULL>
+        <menu_button id = "menu_button" label = "Menu" arrow = GTK_ARROW_DOWN>
 
-            <!-- Start Menu -->
-            <menu id = "menu" is_primary = TRUE label = "CLICK">
+            <!-- Start menu -->
+            <menu id = "menu" label = "Menu">
 
-                <!-- Start menu item1 -->
-                <menu_item id = "item1" type = "radio">
+                <!-- Start menu item -->
+                <menu_item id = "menu_item1" label = "Ayyoub">
 
-                </menu_item add_to_menu(menu, item1)>
-                <!-- End menu item1 -->
+                    <!-- Start menu -->
+                    <menu id = "submenu" label = "Submenu">
 
-                <!-- Start menu item2 -->
-                <menu_item id = "item2" type = "radio">
+                        <!-- Start submenu item -->
+                        <menu_item id = "Ayyoub" label = "Maroc">
 
-                </menu_item add_to_menu(menu, item2)>
-                <!-- End menu item2 -->
+                        </menu_item add_to_menu(submenu, Ayyoub)>
+                        <!-- End submenu item -->
 
-                <!-- Start item3 -->
-                <menu_item id = "item3" type = "radio">
+                        <!-- Start submenu item -->
+                        <menu_item id = "Yassine" label = "France">
 
-                </menu_item add_to_menu(menu, item3)>
-                <!-- End item3 -->
+                        </menu_item add_to_menu(submenu, Yassine)>
+                        <!-- End submenu item -->
+
+                    </menu add_to_menu_item(menu_item1, submenu)>
+                    <!-- End menu -->
+
+                </menu_item add_to_menu(menu, menu_item1)>
+                <!-- End menu item -->
+
+                <!-- Start menu item -->
+                <menu_item id = "menu_item2" label = "Yassine">
+
+                </menu_item add_to_menu(menu, menu_item2)>
+                <!-- End menu item -->
+
+                <!-- Start menu item -->
+                <menu_item id = "menu_item3" label = "Maryem">
+
+                </menu_item add_to_menu(menu, menu_item3)>
+                <!-- End menu item -->
+
+                <!-- Start menu item -->
+                <menu_item id = "menu_item4" label = "Imane">
+
+                </menu_item add_to_menu(menu, menu_item4)>
+                <!-- End menu item -->
 
             </menu add_to_menu_button(menu_button, menu)>
-            <!-- End Menu -->
+            <!-- End menu -->
 
-        </menu_button add_to_header_bar(header_bar, menu_button, LEFT)>
+        </menu_button add_to_header_bar(header_bar, menu_button, RIGHT)>
         <!-- End menu button -->
 
-        <!-- Start button -->
-        <button id = "button1" label = "click me">
-        </button add_to_header_bar(header_bar, button1, RIGHT)>
-        <!-- End button -->
-
     </header_bar add_header_bar_to_window(window, header_bar)>
-    <!-- End header bar -->
+    <!-- End Header Bar -->
 
-    <!-- Start box image -->
-    <box id = "image_box" position = GTK_POSITION_>
+    <!-- Start main box -->
+    <box id = "main_box" orientation = GTK_ORIENTATION_HORIZONTAL align = GTK_ALIGN_CENTER>
 
-        <!-- Start image -->
-        <image id = "image" path = "assets/ma.png">
-        </image add_to_box(image_box, image, START, FALSE, FALSE, 10, 0, 0, 0, 0)>
-        <!-- End Image -->
+        <!-- Start main box -->
+        <box id = "login_box" orientation = GTK_ORIENTATION_VERTICAL align = GTK_ALIGN_CENTER>
 
-        <!-- Start label -->
-        <label id = "label1" font = "consolas" size = "18" label = "hello">
-        </label add_to_box(image_box, label1, START, FALSE, FALSE, 10, 0, 0, 0, 0)>
-        <!-- End label -->
+            <!-- Start grid -->
+            <grid id = "main_grid" rows_spacing = 10 columns_spacing = 10 rows_homogeneous = FALSE columns_homogeneous = TRUE>
 
-    </box add_to_container(window, image_box)>
-    <!-- End box image -->
+                <!-- Start username entry -->
+                <entry id = "username_entry" indicator_text = "Username" visible = TRUE editable = TRUE max_length = 20 alignment = 0.5>
+                </entry add_to_grid(main_grid, username_entry, 0, 0, 1, 1)>
+                <!-- End username entry -->
 
+                <!-- Start password entry -->
+                <entry id = "password_entry" indicator_text = "Password" visible = FALSE editable = TRUE max_length = 20 alignment = 0.5>
+                </entry add_to_grid(main_grid, password_entry, 1, 0, 1, 1)>
+                <!-- End password entry -->
+
+                <!-- Start check box button -->
+                <check_button id = "check" label = "your are +18 ?" active = FALSE>
+
+                </check_button add_to_grid(main_grid, check, 2, 0, 1, 1)>
+                <!-- End check box button -->
+
+                <!-- Start rudio button 1 -->
+                <radio_button id = "radio1" label = "Men">
+
+                </radio_button add_to_grid(main_grid, radio1, 3, 0, 1, 1)>
+                <!-- End rudio button 1 -->
+
+                <!-- Start rudio button 2 -->
+                <radio_button id = "radio2" label = "Women" radio_group_member = radio1>
+
+                </radio_button add_to_grid(main_grid, radio2, 4, 0, 1, 1)>
+                <!-- End rudio button 2 -->
+
+                <!-- Start submit button -->
+                <button id = "submit_button" label = "Submit">
+
+                </button add_to_grid(main_grid, submit_button, 5, 0, 1, 1)>
+                <!-- End submit button -->
+
+
+            </grid add_to_box(login_box, main_grid, START, TRUE, FALSE, 0, 0, 0, 0, 0)>
+            <!-- End grid -->
+
+        </box add_to_box(main_box, login_box, START, TRUE, FALSE, 0, 0, 0, 0, 0)>
+        <!-- End main box -->
+        
+    </box add_to_container(window, main_box)>
+    <!-- End main box -->
 
 </window show_widget(window)>
 <!-- End Window -->
-
-
-<box id = "main_box">
-
-    <box id = "box1">
-
-        <image path_image = "assets/ma.png">
-        </image add_to_box(box1, image, START, FALSE, FALSE, 10, 0, 0, 0, 0)>
-
-    </box add_to_box(main_box, box1, START, FALSE, FALSE, 10, 0, 0, 0, 0)>
-
-    <box id = "box2">
-
-        <image path_image = "assets/fr.png">
-        </image add_to_box(box2, image, START, FALSE, FALSE, 10, 0, 0, 0, 0)>
-
-    </box add_to_box(main_box, box2, START, FALSE, FALSE, 10, 0, 0, 0, 0)>
-
-</box>

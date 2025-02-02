@@ -16,14 +16,13 @@
 static GCallback Gcallback;
 static gpointer Gdata;
 
-GtkWidget *create_menu_item(const gchar *label, const gchar *type, GtkWidget *submenu, GCallback callback, gpointer data)
+GtkWidget *create_menu_item(const gchar *label, const gchar *type, GCallback callback, gpointer data)
 {
     menuItemInfos *menuItemInformation = (menuItemInfos *)malloc(sizeof(menuItemInfos));
     if(!menuItemInformation) return NULL;
 
     menuItemInformation->label = g_strdup(label);
     menuItemInformation->type = g_strdup(type);
-    menuItemInformation->submenu = submenu;
     menuItemInformation->callback = callback;
     Gcallback = callback;
     menuItemInformation->data = data;
@@ -50,10 +49,6 @@ GtkWidget *set_properties_item(menuItemInfos *menuItemInformation)
         menuItem = gtk_radio_menu_item_new_with_label(NULL, menuItemInformation->label);
     else
         menuItem = NULL;
-
-    // set the submenu
-    if(menuItemInformation->submenu)
-        gtk_menu_item_set_submenu(GTK_MENU_ITEM(menuItem), menuItemInformation->submenu);
     
     // set the callback
     if(menuItemInformation->callback)
@@ -82,12 +77,14 @@ menuItemInfos *get_properties_menuItem(GtkWidget *menuItem)
     else
         menuItemInformation->type = NULL;
     
-    // get the submenu
-    menuItemInformation->submenu = gtk_menu_item_get_submenu(GTK_MENU_ITEM(menuItem));
-
     // get the callback
     menuItemInformation->callback = Gcallback;
     menuItemInformation->data = Gdata;
 
     return menuItemInformation;
+}
+
+void add_to_menu_item(GtkWidget *menuItem, GtkWidget *submenu)
+{
+    gtk_menu_item_set_submenu(GTK_MENU_ITEM(menuItem), submenu);
 }
