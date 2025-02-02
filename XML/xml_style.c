@@ -52,7 +52,7 @@ void use_xml_style_file(GtkApplication *app, arg *myarg)
     char car;
     
     do{
-    char line[200];
+    char line[2000];
     int index = 0;
 
 

@@ -1,8 +1,90 @@
-<window id = "hello" height = 200 app = "app" width = 900>
+<!-- Start Window -->
+<window id = "window" app = "app" height = "200" resizable = TRUE>
 
-    <header_bar id = "header_bar" title = "myApp" subtitle = "this is a subtitle" icon_path = "assets/ma.png" settings = TRUE>
+    <!-- Start Header Bar -->
+    <header_bar id = "header_bar" title = "Block" subtitle = "block of computer science" icon_path = "assets/data-science.png" settings = TRUE>
 
-    </header_bar add_header_bar_to_window(hello, header_bar)>
+    </header_bar add_header_bar_to_window(window, header_bar)>
+    <!-- End Header Bar -->
+
+        <!-- Start main box -->
+        <box id = "main_box" orientation = GTK_ORIENTATION_HORIZONTAL align = -1 spacing = 10>
+
+            <!-- Start box1 -->
+            <box id = "box1" orientation = GTK_ORIENTATION_VERTICAL align = -1 spacing = 10>
+            
+                <!-- Start maroc scrolled window -->
+                <scrolled_window id = "maroc_scrolled_window" horizontal = FALSE vertical = TRUE>
+
+                    <!-- Start maroc box -->
+                    <box id = "maroc_box" orientation = GTK_ORIENTATION_VERTICAL align = -1 spacing = 10>
+
+                        <!-- Start maroc image -->
+                        <image id = "maroc_image" path = "assets/w160/ma.png">
+
+                        </image add_to_box(maroc_box, maroc_image, START, TRUE, FALSE, 0, 0, 0, 0, 0)>
+                        <!-- End maroc image -->
+
+                        <!-- Start maroc label -->
+                        <label id = "maroc_label" text = "Maroc">
+
+                        </label add_to_box(maroc_box, maroc_label, START, TRUE, FALSE, 0, 0, 0, 0, 0)>
+                        <!-- End maroc label -->
+
+                        <!-- sTART maroc information -->
+                        <label id = "maroc_information" font = "consolas" color = "#FF33FF" size = 18 justify = GTK_JUSTIFY_LEFT GTK_ text = "Morocco,[d] officially the Kingdom of Morocco,[e] is a country in the Maghreb region of North Africa. It overlooks the Mediterranean Sea to the north and the Atlantic Ocean to the west, and has land borders with Algeria to the east, and the disputed territory of Western Sahara to the south. Morocco also claims the Spanish exclaves of Ceuta, Melilla and Peñón de Vélez de la Gomera, and several small Spanish-controlled islands off its coast.[17] It has a population of approximately 37 million. Islam is both the official and predominant religion, while Arabic and Berber are the official languages. Additionally, French and the Moroccan dialect of Arabic are widely spoken. The culture of Morocco is a mix of Arab, Berber, African and European cultures. Its capital is Rabat, while its largest city is Casablanca.[18]" wrap = TRUE>
+                        </label add_to_box(maroc_box, maroc_information, START, TRUE, FALSE, 0, 0, 0, 5, 0)>
+                        <!-- End maroc information -->
+
+                    </box add_to_scrolled_window(maroc_scrolled_window, maroc_box)>
+                    <!-- End maroc box -->
+                
+                </scrolled_window add_to_box(box1, maroc_scrolled_window, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
+                <!-- End maroc scrolled window -->
+
+            </box add_to_box(main_box, box1, START, TRUE, TRUE, 0, 0, 0, 5, 0)>
+            <!-- End box1 -->
 
 
-</window show_widget(hello)>
+            <!-- Start box1 -->
+            <box id = "box2" orientation = GTK_ORIENTATION_VERTICAL align = -1 spacing = 10>
+            
+                <!-- Start maroc scrolled window -->
+                <scrolled_window id = "maroc_scrolled_window2" horizontal = FALSE vertical = TRUE>
+
+                    <!-- Start maroc box -->
+                    <box id = "maroc_box2" orientation = GTK_ORIENTATION_VERTICAL align = -1 spacing = 10>
+
+                        <!-- Start maroc image -->
+                        <image id = "maroc_image2" path = "assets/w160/ma.png">
+
+                        </image add_to_box(maroc_box2, maroc_image2, START, TRUE, FALSE, 0, 0, 0, 0, 0)>
+                        <!-- End maroc image -->
+
+                        <!-- Start maroc label -->
+                        <label id = "maroc_label2" text = "Maroc">
+
+                        </label add_to_box(maroc_box2, maroc_label2, START, TRUE, FALSE, 0, 0, 0, 0, 0)>
+                        <!-- End maroc label -->
+
+                        <!-- sTART maroc information -->
+                        <label id = "maroc_information2" text = "Morocco,[d] officially the Kingdom of Morocco,[e] is a country in the Maghreb region of North Africa. It overlooks the Mediterranean Sea to the north and the Atlantic Ocean to the west, and has land borders with Algeria to the east, and the disputed territory of Western Sahara to the south. Morocco also claims the Spanish exclaves of Ceuta, Melilla and Peñón de Vélez de la Gomera, and several small Spanish-controlled islands off its coast.[17] It has a population of approximately 37 million. Islam is both the official and predominant religion, while Arabic and Berber are the official languages. Additionally, French and the Moroccan dialect of Arabic are widely spoken. The culture of Morocco is a mix of Arab, Berber, African and European cultures. Its capital is Rabat, while its largest city is Casablanca.[18]Morocco,[d] officially the Kingdom of Morocco,[e] is a country in the Maghreb region of North Africa. It overlooks the Mediterranean Sea to the north and the Atlantic Ocean to the west, and has land borders with Algeria to the east, and the disputed territory of Western Sahara to the south. Morocco also claims the Spanish exclaves of Ceuta, Melilla and Peñón de Vélez de la Gomera, and several small Spanish-controlled islands off its coast.[17] It has a population of approximately 37 million. Islam is both the official and predominant religion, while Arabic and Berber are the official languages. Additionally, French and the Moroccan dialect of Arabic are widely spoken. The culture of Morocco is a mix of Arab, Berber, African and European cultures. Its capital is Rabat, while its largest city is Casablanca.[18]" wrap = TRUE>
+                        </label add_to_box(maroc_box2, maroc_information2, START, TRUE, FALSE, 0, 0, 0, 5, 0)>
+                        <!-- End maroc information -->
+
+                    </box add_to_scrolled_window(maroc_scrolled_window2, maroc_box2)>
+                    <!-- End maroc box -->
+                
+                </scrolled_window add_to_box(box2, maroc_scrolled_window2, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
+                <!-- End maroc scrolled window -->
+
+            </box add_to_box(main_box, box2, START, TRUE, TRUE, 0, 0, 0, 5, 0)>
+            <!-- End box1 -->
+
+
+        </box add_to_container(window, main_box)>
+        <!-- End main box -->
+
+
+</window show_widget(window)>
+<!-- End Window -->
