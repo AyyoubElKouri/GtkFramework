@@ -15,7 +15,7 @@
 #ifndef XML_STYLE_H
 #define XML_STYLE_H
 
-#include "../include/GtkFramework/GtkFramework.h"
+#include "../../include/GtkFramework/GtkFramework.h"
 #include "widgets_data_bases.h"
 
 typedef struct

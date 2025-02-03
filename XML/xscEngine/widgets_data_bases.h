@@ -19,7 +19,8 @@
  * 
  * window:
  *      GtkWidget *create_window(GtkApplication *app, GtkWindowType type, const gchar *title, gint width, gint height, gboolean resizable, GtkWindowPosition position, gboolean decorate, GdkPixbuf *icon, double opacity, gboolean fullscrean)
- *      <window id = "id window" app = "app" type = "GTK_WINDOW_TOP_LEVEL"  title = "window title" width = "200" height = "400" resizable = "TRUE" position = "GTK_WIN_POS_CENTER" decorate = "TRUE" icon = "icon" opacity = "1" fusscreen = "TRUE">
+ *      <window id = "id wind
+ *      GtkWidgetow" app = "app" type = "GTK_WINDOW_TOPLEVEL"  title = "window title" width = "600" height = "800" resizable = "TRUE" position = "GTK_WIN_POS_CENTER" decorate = "TRUE" icon = "icon" opacity = "1" fusscreen = "FALSE">
  * 
  * header bar:
  *      GtkWidget *create_header_bar(const gchar *title, const gchar *subtitle, const gchar *icon_path, gboolean settings);
@@ -106,7 +107,7 @@
  * 
  * menu_item:
  *      GtkWidget *create_menu_item(const gchar *label, const gchar *type, GtkWidget *submenu, GCallback callback, gpointer data);
- *      <menu_item id = "menu item" label = "Click me" type = "normal" submenu = NULL callback = NULL data = NULL>
+ *      <menu_item id = "menu item" label = "Click me" type = "normal"" submenu = NULL callback = NULL data = NULL>
  * 
  * menu: 
  *      GtkWidget *create_menu(gboolean is_primary, const gchar *label);

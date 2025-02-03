@@ -154,8 +154,8 @@ void button_data_bases(NodeA *widget, FILE *file)
     button = insert_end(button, "label", "Click me", 1);
     button = insert_end(button, "use_underline", "FALSE", 0);
     button = insert_end(button, "path_to_image", "NULL", 1);
-    button = insert_end(button, "callback", "NULL", 1);
-    button = insert_end(button, "data", "NULL", 1);
+    button = insert_end(button, "callback", "NULL", 0);
+    button = insert_end(button, "data", "NULL", 0);
 
     write_to_file(widget, button, file);
     free_list(button);
