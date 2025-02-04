@@ -30,18 +30,7 @@ void use_xml_style_file(GtkApplication *app, arg *myarg)
     }
 
 
-    FILE *temp;
-
-    if(myarg->argc > 3)
-    {
-        char path[100];
-        sprintf(path, "../%s", myarg->argv[3]);
-        temp = fopen(path, "w");
-        if(!temp)
-            exit(1);
-    }
-    else    
-        temp = fopen("../temp.c", "w");
+    FILE *temp = fopen("gtk.c", "w");
     
     
     if(!analyse(file_to_read))
@@ -55,7 +44,7 @@ void use_xml_style_file(GtkApplication *app, arg *myarg)
     rewind(file_to_read);
 
     fprintf(temp, "#include <gtk/gtk.h>\n");
-    fprintf(temp, "#include \"include/GtkFramework/GtkFramework.h\"\n");
+    fprintf(temp, "#include \"../include/GtkFramework/GtkFramework.h\"\n");
     if(myarg->argc > 2)
     {
         FILE *signals = fopen(myarg->argv[2], "r");
@@ -186,7 +175,7 @@ void use_xml_style_file(GtkApplication *app, arg *myarg)
     // remove("temp.c");
 }
 
-
+    
 int main(int argc, char *argv[])
 {
     arg myarg;
@@ -194,61 +183,7 @@ int main(int argc, char *argv[])
     myarg.argv = argv;
     use_xml_style_file(NULL, &myarg);
 
-    // Code for Windows
-    #ifdef _WIN32
-        system("dir");
-
-    // Code for linux
-    #elif __linux__
-        
-        
-        
-        // change the name of the main executable to the name of the executable pass as argument
-        FILE *make = fopen("../Makefile", "r");
-        if(!make)
-        {
-            perror("No Makefile existe in the main project!");
-            exit(1);
-        }
-        
-
-        FILE *make2 = fopen("../makefile", "w");
-
-        // the algorithm here is simple
-        
-        
-        char car = fgetc(make);
-        char chaine[10];
-        int index = 0;
-
-        while(car != EOF)
-        {
-            if(car == 'm')
-                if(car = fgetc(make) == 'a')
-                    if(car = fgetc(make) == 'i')
-                    {
-                        fprintf(make2, "%s ", myarg.argv[3]);
-                        for(int ind = 0 ; ind < 5 ; ind++) car = fgetc(make);
-                    }
-            
-            fprintf(make2, "%c", car);
-            car = fgetc(make);
-        }
-
-        fclose(make);
-        fclose(make2);
-
-        system("rm ../Makefile");
-        system("mv ../makefile ../Makefile");
-
-        system("{ cd ../ ; make ; }");
-        system("../bin/application");
-
-    // OS not supported
-    #else
-        printf("OS not supported.\n");
-    #endif
-
-
+    system("make");
+    system("application");
     return 0;
 }

@@ -1,5 +1,10 @@
-<window id ="window" app = "app" title = "hello" width = "100" height = "100">
-    <header_bar id = "header" title = "yassine el barni uuuuuuu" icon_path = "../assets/w160/ma.png">
+<window id ="window" app = "app" title = "hi" width = "900" height = "800">
 
+    <header_bar id = "header" title = "Ayyoub el Kouri" subtitle = "hello is is is"> <!--dljd-->
+        <!-- sdlfjsdkl -->
     </header_bar add_header_bar_to_window(window, header)>
+    <button id = "Click" callback = G_CALLBACK(hhh)> <!--dljddddd-->
+
+    </button add_to_container(window, Click)>
+    
 </window show_widget(window)>

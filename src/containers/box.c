@@ -14,6 +14,7 @@
 
 static GtkOrientation Gorientation;
 
+
 GtkWidget *create_box(GtkOrientation orientation, GtkAlign align, gint spacing)
 {
     boxInfos *boxInformations = (boxInfos *)malloc(sizeof(boxInfos));
