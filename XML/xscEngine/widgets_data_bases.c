@@ -417,3 +417,19 @@ void text_view_data_bases(NodeA *widget, FILE *file)
     write_to_file(widget, text_view, file);
     free_list(text_view);
 }
+
+void call_database_function(NodeA *widget, FILE *file)
+{
+
+    for (int i = 0; widget_map[i].widget_name != NULL; i++)
+    {
+        if (strcmp(widget->val, widget_map[i].widget_name) == 0)
+        {
+            widget_map[i].data_base_function(widget, file);
+            return;
+        }
+    }
+    
+    fprintf(stderr, "widget %s not found in our database\n", widget->val);
+    exit(EXIT_FAILURE);
+}

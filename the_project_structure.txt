@@ -15,7 +15,8 @@
 .
 ├── assets
 │   ├── Application_icon
-│   │   └── apple.png
+│   │   └── apple.png
+│   ├── data-science.png
 │   ├── home.png
 │   ├── ma.png
 │   ├── smallHome.png
@@ -32,13 +33,19 @@
 ├── data_structures
 │   └── linked_list
 │       ├── linked_list.c
-│       └── linked_list.h
+│       ├── linked_list.h
+│       └── linked_list.o
 ├── DossierForTesting
-│   └── test_project_1
-│       ├── Countries.c
-│       ├── Countries.h
-│       ├── project_header.c
-│       └── project_header.h
+│   ├── test_project_1
+│   │   ├── Countries.c
+│   │   ├── Countries.h
+│   │   ├── Countries.o
+│   │   ├── project_header.c
+│   │   ├── project_header.h
+│   │   └── project_header.o
+│   └── test_project_2
+│       ├── project_header_2.c
+│       └── project_header_2.h
 ├── include
 │   ├── containers
 │   │   ├── box.h
@@ -87,47 +94,49 @@
 │   │   └── linked_list
 │   │       └── linked_list.o
 │   ├── DossierForTesting
-│   │   ├── Contry.o
-│   │   └── test_project_1
-│   │       ├── Countries.o
-│   │       └── project_header.o
-│   ├── main.o
-│   └── src
-│       ├── containers
-│       │   ├── box.o
-│       │   ├── fixed.o
-│       │   ├── frame.o
-│       │   ├── grid.o
-│       │   ├── paned.o
-│       │   ├── stack.o
-│       │   └── switcher.o
-│       ├── *.o
-│       ├── widgets
-│       │   ├── button.o
-│       │   ├── check_button.o
-│       │   ├── color_button.o
-│       │   ├── entry.o
-│       │   ├── font_button.o
-│       │   ├── image.o
-│       │   ├── label.o
-│       │   ├── level_bar.o
-│       │   ├── link_button.o
-│       │   ├── menu_button.o
-│       │   ├── menu_item.o
-│       │   ├── menu.o
-│       │   ├── progress_bar.o
-│       │   ├── radio_button.o
-│       │   ├── scale.o
-│       │   ├── separator.o
-│       │   ├── spin_button.o
-│       │   ├── spinner.o
-│       │   ├── switch_button.o
-│       │   └── text_view.o
-│       └── windows
-│           ├── dialog.o
-│           ├── header_bar.o
-│           ├── scrolled_window.o
-│           └── window.o
+│   │   ├── test_project_1
+│   │   │   ├── Countries.o
+│   │   │   └── project_header.o
+│   │   └── test_project_2
+│   ├── src
+│   │   ├── containers
+│   │   │   ├── box.o
+│   │   │   ├── fixed.o
+│   │   │   ├── frame.o
+│   │   │   ├── grid.o
+│   │   │   ├── paned.o
+│   │   │   ├── stack.o
+│   │   │   └── switcher.o
+│   │   ├── supp.o
+│   │   ├── widgets
+│   │   │   ├── button.o
+│   │   │   ├── check_button.o
+│   │   │   ├── color_button.o
+│   │   │   ├── entry.o
+│   │   │   ├── font_button.o
+│   │   │   ├── image.o
+│   │   │   ├── label.o
+│   │   │   ├── level_bar.o
+│   │   │   ├── link_button.o
+│   │   │   ├── menu_button.o
+│   │   │   ├── menu_item.o
+│   │   │   ├── menu.o
+│   │   │   ├── progress_bar.o
+│   │   │   ├── radio_button.o
+│   │   │   ├── scale.o
+│   │   │   ├── separator.o
+│   │   │   ├── spin_button.o
+│   │   │   ├── spinner.o
+│   │   │   ├── switch_button.o
+│   │   │   └── text_view.o
+│   │   └── windows
+│   │       ├── dialog.o
+│   │       ├── header_bar.o
+│   │       ├── scrolled_window.o
+│   │       └── window.o
+│   └── XML
+│       ├── gtk.o
+│       └── hi.o
 ├── src
 │   ├── containers
 │   │   ├── box.c
@@ -164,7 +173,21 @@
 │       ├── header_bar.c
 │       ├── scrolled_window.c
 │       └── window.c
-└── the_project_structure.txt
+├── the_project_structure.txt
+└── XML
+    ├── application
+    ├── gtk.c
+    ├── index.elkouri
+    ├── Makefile
+    ├── README.md
+    ├── signals.elkouri
+    ├── xsc
+    └── xscEngine
+        ├── analyzer.c
+        ├── analyzer.h
+        ├── widgets_data_bases.c
+        ├── widgets_data_bases.h
+        ├── xml_style.c
+        └── xml_style.h
 
-27 directories, 126 files
-
+32 directories, 147 files

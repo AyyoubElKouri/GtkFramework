@@ -15,13 +15,24 @@
 
 void use_xml_style_file(GtkApplication *app, arg *myarg)
 {
+    char line[MAX_LINE_SIZE]; // to store the line
+    int status; // to check the line (-1 for empty line, -2 for line with EOF, 0 for valid line)
+
+    // if the source file is not provided
     if(myarg->argc < 2)
     {
-        printf("file path is required\n");
+        perror("file path is required\n");
         exit(1);
     }
 
-    
+    // if the extension is not .elkouri
+    if(!valid_extension(myarg->argv[1]))
+    {
+        perror("invalid extension, must be end with .x\n");
+        exit(1);
+    }
+
+    // open the source file
     FILE *file_to_read = fopen(myarg->argv[1], "r");
     if(!file_to_read)
     {
@@ -29,24 +40,27 @@ void use_xml_style_file(GtkApplication *app, arg *myarg)
         exit(1);
     }
 
-
+    // open the output file
     FILE *temp = fopen("gtk.c", "w");
     
-    
-    if(!analyse(file_to_read))
+    // if the file is not valie
+    if(!valid_file(file_to_read))
     {
-        printf("file is not valid\n");
+        perror("file is not valid\n");
         exit(1);
     }
-    else
-        printf("file valide\n");
 
+    // rewind the file to the beginning
     rewind(file_to_read);
 
+    // write the headers 
     fprintf(temp, "#include <gtk/gtk.h>\n");
     fprintf(temp, "#include \"../include/GtkFramework/GtkFramework.h\"\n");
+
+    // check if the signals file is provided
     if(myarg->argc > 2)
     {
+        // if the signals file is provided but not exist
         FILE *signals = fopen(myarg->argv[2], "r");
         if(!signals)
         {
@@ -54,32 +68,13 @@ void use_xml_style_file(GtkApplication *app, arg *myarg)
             exit(1);
         }
 
-
-        char car1;
         do
         {
 
-        char line[2000];
-        int index = 0;
+        if((status = read_line(line, signals)) != -1)
+            fprintf(temp, "%s\n", line);
 
-
-        while((car1 = fgetc(signals)) == ' ');
-        if(car1 == '\n') continue;
-
-
-        while(car1 != '\n' && car1 != EOF)
-        {
-            line[index] = car1;
-            index++;
-            car1 = fgetc(signals);
-        }
-
-        line[index] = '\0';
-        index = 0;
-
-        fprintf(temp, "%s\n", line);
-
-        } while(car1 != EOF);
+        } while(status != -2);
 
         fclose(signals); 
     }
@@ -90,74 +85,32 @@ void use_xml_style_file(GtkApplication *app, arg *myarg)
 
     char car;
     
-    do{
-    char line[2000];
-    int index = 0;
-
-
-    while((car = fgetc(file_to_read)) == ' ');
-    if(car == '\n') continue;
-
-
-    while(car != '\n' && car != EOF)
+    do
     {
-        line[index] = car;
-        index++;
-        car = fgetc(file_to_read);
-    }
 
-    line[index] = '\0';
-    index = 0;
+    // read line and check if the line is empty (if it is empty, continue to the next line)
+    if((status = read_line(line, file_to_read)) == -1) continue;
 
+    // if the line is a comment, continue to the next line
     if(is_comment(line)) continue;
+
+    // if the line is a closing tag, write the closing tag function after extracting his name and his arguments in the output file
     if(is_close_tag(line))
     {
         fprintf(temp, "%s;\n", extraire_contenu(line));
         continue;
     }
 
+    // soo the line is a opening tag
+    // parse the line and extract the widget name and its arguments to a linked list
     NodeA *widget = parse_widget(line);
     
-    if(strcmp(widget->val, "window") == 0) window_data_bases(widget, temp);
-    else if(strcmp(widget->val, "header_bar") == 0) header_bar_data_bases(widget, temp);
-    else if(strcmp(widget->val, "scrolled_window") == 0) scrolled_window_data_bases(widget, temp);
-    else if(strcmp(widget->val, "box") == 0) box_data_bases(widget, temp);
-    else if(strcmp(widget->val, "fixed") == 0) fixed_data_bases(widget, temp);
-    else if(strcmp(widget->val, "frame") == 0) frame_data_bases(widget, temp);
-    else if(strcmp(widget->val, "grid") == 0) grid_data_bases(widget, temp);
-    else if(strcmp(widget->val, "paned") == 0) paned_data_bases(widget, temp);
-    else if(strcmp(widget->val, "stack") == 0) stack_data_bases(widget, temp);
-    else if(strcmp(widget->val, "switcher") == 0) switcher_data_bases(widget, temp);
-    else if(strcmp(widget->val, "button") == 0) button_data_bases(widget, temp);
-    else if(strcmp(widget->val, "check_button") == 0) check_button_data_bases(widget, temp);
-    else if(strcmp(widget->val, "color_button") == 0) color_button_data_bases(widget, temp);
-    else if(strcmp(widget->val, "entry") == 0) entry_data_bases(widget, temp);
-    else if(strcmp(widget->val, "font_button") == 0) font_button_data_bases(widget, temp);
-    else if(strcmp(widget->val, "image") == 0) image_data_bases(widget, temp);
-    else if(strcmp(widget->val, "label") == 0) label_data_bases(widget, temp);
-    else if(strcmp(widget->val, "level_bar") == 0) level_bar_data_bases(widget, temp);
-    else if(strcmp(widget->val, "link_button") == 0) link_button_data_bases(widget, temp);
-    else if(strcmp(widget->val, "menu_button") == 0) menu_button_data_bases(widget, temp);
-    else if(strcmp(widget->val, "menu_item") == 0) menu_item_data_bases(widget, temp);
-    else if(strcmp(widget->val, "menu") == 0) menu_data_bases(widget, temp);
-    else if(strcmp(widget->val, "progress_bar") == 0) progress_bar_data_bases(widget, temp);
-    else if(strcmp(widget->val, "radio_button") == 0) radio_button_data_bases(widget, temp);
-    else if(strcmp(widget->val, "scale") == 0) scale_data_bases(widget, temp);
-    else if(strcmp(widget->val, "separator") == 0) separator_data_bases(widget, temp);
-    else if(strcmp(widget->val, "spin_button") == 0) spin_button_data_bases(widget, temp);
-    else if(strcmp(widget->val, "spinner") == 0) spinner_data_bases(widget, temp);
-    else if(strcmp(widget->val, "switch_button") == 0) switch_button_data_bases(widget, temp);
-    else if(strcmp(widget->val, "text_view") == 0) text_view_data_bases(widget, temp);
-    else
-    {
-        printf("the widgets : %s not exist in our databases!\n", widget->val);
-        exit(-1);
-    }   
+    // call the database function corresponding to the widget name
+    call_database_function(widget, file_to_read);
     
-
     free_list(widget);
 
-    } while(car != EOF);
+    } while(status != -2);
 
     printf("ici\n");
     

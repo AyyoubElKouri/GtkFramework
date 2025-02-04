@@ -6,7 +6,7 @@
  * 
  * @author Ayyoub el Kouri
  * @date 26/01/2025
- * @version 2.0 (last update 01/02/2025)
+ * @version 3.0 (last update 04/02/2025)
  * 
  ****************************************************************************************************************************/
 
@@ -235,7 +235,7 @@ int est_vide(pileA *mapile)
     }
 }
 
-int analyse(FILE *file)
+int valid_file(FILE *file)
 {
     // read the file character by character
     char character;
@@ -420,7 +420,7 @@ char* my_strndup(const char* str, size_t n)
 }
 
 
-#include <stddef.h>
+
 
 size_t my_strnlen(const char* str, size_t maxlen)
 {
@@ -430,3 +430,36 @@ size_t my_strnlen(const char* str, size_t maxlen)
     }
     return len;
 }
+
+int valid_extension(const char* filename)
+{
+    size_t len = strlen(filename);
+    return len > 2 && strcmp(filename + len - 2, ".x") == 0;
+}
+
+int read_line(char *line, FILE *file)
+{
+    int index = 0;
+    char character;
+
+
+    while((character = fgetc(file)) == ' ');
+    if(character == '\n') return  -1;
+
+
+    while(character != '\n' && character != EOF)
+    {
+        line[index] = character;
+        index++;
+        character = fgetc(file);
+    }
+
+    line[index] = '\0';
+    index = 0;
+
+    if(character == EOF) return -2;
+
+    return 0;
+}
+
+

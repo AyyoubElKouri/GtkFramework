@@ -3,8 +3,8 @@
     <header_bar id = "header" title = "Ayyoub el Kouri" subtitle = "hello is is is"> <!--dljd-->
         <!-- sdlfjsdkl -->
     </header_bar add_header_bar_to_window(window, header)>
-    <button id = "Click" callback = G_CALLBACK(hhh)> <!--dljddddd-->
+    
+    <button id = "Click" label = "Hello Bro">
 
     </button add_to_container(window, Click)>
-    
 </window show_widget(window)>
