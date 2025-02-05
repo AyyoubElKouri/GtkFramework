@@ -1,4 +1,0 @@
-static void hhh(GtkWidget *widget , gpointer data)
-{
-    printf("hello world\n");
-}

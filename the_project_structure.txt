@@ -15,11 +15,10 @@
 .
 ├── assets
 │   ├── Application_icon
+│   │   ├── burger-bar.png
+│   │   └── close-icon.png
+│   ├── Header_bar_icon
 │   │   └── apple.png
-│   ├── data-science.png
-│   ├── home.png
-│   ├── ma.png
-│   ├── smallHome.png
 │   └── w160
 │       ├── ar.png
 │       ├── dz.png
@@ -65,6 +64,7 @@
 │   │   ├── button.h
 │   │   ├── check_button.h
 │   │   ├── color_button.h
+│   │   ├── combobox.h
 │   │   ├── entry.h
 │   │   ├── font_button.h
 │   │   ├── image.h
@@ -98,6 +98,8 @@
 │   │   │   ├── Countries.o
 │   │   │   └── project_header.o
 │   │   └── test_project_2
+│   │       └── project_header_2.o
+│   ├── main.o
 │   ├── src
 │   │   ├── containers
 │   │   │   ├── box.o
@@ -112,6 +114,7 @@
 │   │   │   ├── button.o
 │   │   │   ├── check_button.o
 │   │   │   ├── color_button.o
+│   │   │   ├── combobox.o
 │   │   │   ├── entry.o
 │   │   │   ├── font_button.o
 │   │   │   ├── image.o
@@ -151,6 +154,7 @@
 │   │   ├── button.c
 │   │   ├── check_button.c
 │   │   ├── color_button.c
+│   │   ├── combobox.c
 │   │   ├── entry.c
 │   │   ├── font_button.c
 │   │   ├── image.c
@@ -177,10 +181,10 @@
 └── XML
     ├── application
     ├── gtk.c
-    ├── index.elkouri
+    ├── index.x
     ├── Makefile
     ├── README.md
-    ├── signals.elkouri
+    ├── signals.c
     ├── xsc
     └── xscEngine
         ├── analyzer.c
@@ -190,4 +194,4 @@
         ├── xml_style.c
         └── xml_style.h
 
-32 directories, 147 files
+33 directories, 148 files

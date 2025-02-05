@@ -44,6 +44,11 @@ GtkWidget *set_properties_menuButton(menuButtonInfos *menuButtonInformation)
         {
             menuButton = gtk_menu_button_new();
             GtkWidget *image = gtk_image_new_from_file(menuButtonInformation->path_to_image);
+            if(!image)
+            {
+                fprintf(stderr, "image not found: %s\n", menuButtonInformation->path_to_image);
+                exit(EXIT_FAILURE);
+            }
             gtk_button_set_image(GTK_BUTTON(menuButton), image);
         }
     

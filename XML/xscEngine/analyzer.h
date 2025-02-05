@@ -6,10 +6,9 @@
  * 
  * @author Ayyoub el Kouri
  * @date 26/01/2025
- * @version 3.0 (last update 04/02/2025)
+ * @version 3.0 (last update 05/02/2025)
  * 
  ****************************************************************************************************************************/
-
 
 
 
@@ -35,7 +34,6 @@ typedef struct {
 } pileA;
 
 
-
 typedef struct NodeA {
     char *key;
     char *val;
@@ -44,14 +42,11 @@ typedef struct NodeA {
 } NodeA;
 
 
-
 NodeA *create_node(const char *key, const char *val, int is_string);
 
 void free_list(NodeA *head);
 
-NodeA *parse_widget(const char *input);
-
-void print_list(NodeA *head);
+NodeA *parse_widget_to_linked_list(const char *input);
 
 NodeA* insert_end(NodeA *head, const char *key, const char *val, int is_string);
 
@@ -81,5 +76,6 @@ int valid_extension(const char* filename);
 
 int read_line(char *line, FILE *file);
 
-
 #endif
+
+

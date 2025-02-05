@@ -17,8 +17,8 @@
 
 #include <gtk/gtk.h>
 #include "include/GtkFramework/GtkFramework.h"
-#include "DossierForTesting/test_project_1/project_header.h"
-// #include "DossierForTesting/test_project_2/project_header_2.h"
+// #include "DossierForTesting/test_project_1/project_header.h"
+#include "DossierForTesting/test_project_2/project_header_2.h"
 
 
 
@@ -34,12 +34,8 @@ static void activate(GtkApplication *app, gpointer data)
     // i hope you like it
     // Ayyoub el Kouri
  
-    project1(app);
-    // project2(app);
-    
-    // use_xml_style_file(app, (arg *)data);
-    
-
+    // project1(app);
+    project2(app);    
 }
 
 int main(int argc, char **argv)

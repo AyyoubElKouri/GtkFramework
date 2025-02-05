@@ -41,17 +41,17 @@ void project2(GtkApplication *app)
                 GtkWidget *menu = create_menu(TRUE, "Menu");
                 
                     /*---Start Menu Item---*/
-                    GtkWidget *menu_item = create_menu_item("Test1", "normal", NULL, NULL, NULL);
+                    GtkWidget *menu_item = create_menu_item("Test1", "normal", NULL, NULL);
                     add_to_menu(menu, menu_item);
                     /*---End Menu Item---*/
 
                     /*---Start Menu Item---*/
-                    GtkWidget *menu_item2 = create_menu_item("Test2", "normal", NULL, NULL, NULL);
+                    GtkWidget *menu_item2 = create_menu_item("Test2", "normal", NULL, NULL);
                     add_to_menu(menu, menu_item2);
                     /*---End Menu Item---*/
 
                     /*---Start Menu Item---*/
-                    GtkWidget *menu_item3 = create_menu_item("Test3", "normal", NULL, NULL, NULL);
+                    GtkWidget *menu_item3 = create_menu_item("Test3", "normal", NULL, NULL);
                     add_to_menu(menu, menu_item3);
                     /*---End Menu Item---*/
                 

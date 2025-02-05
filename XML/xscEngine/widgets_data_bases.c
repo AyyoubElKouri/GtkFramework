@@ -6,7 +6,7 @@
  * 
  * @author Ayyoub el Kouri
  * @date 26/01/2025
- * @version 2.0 (last update 01/02/2025)
+ * @version 2.0 (last update 05/02/2025)
  * 
  ****************************************************************************************************************************/
 
@@ -15,6 +15,7 @@
 
 void window_data_bases(NodeA *widget, FILE *file)
 {
+    printf("in window\n");
     // constructing data bases of the default values of a window
     NodeA *window = NULL;
     window = insert_end(window, "widget", "window", 1);
@@ -30,7 +31,9 @@ void window_data_bases(NodeA *widget, FILE *file)
     window = insert_end(window, "opacity", "1.0", 0);
     window = insert_end(window, "fullscreen", "FALSE", 0);
 
+    printf("before writing\n");
     write_to_file(widget, window, file);
+    printf("after writing\n");
 
     free_list(window);
 }
@@ -151,7 +154,7 @@ void button_data_bases(NodeA *widget, FILE *file)
     NodeA *button = NULL;
     button = insert_end(button, "widget", "button", 1);
     button = insert_end(button, "relief", "GTK_RELIEF_NORMAL", 0);
-    button = insert_end(button, "label", "Click me", 1);
+    button = insert_end(button, "label", "NULL", 1);
     button = insert_end(button, "use_underline", "FALSE", 0);
     button = insert_end(button, "path_to_image", "NULL", 1);
     button = insert_end(button, "callback", "NULL", 0);
@@ -275,7 +278,7 @@ void menu_button_data_bases(NodeA *widget, FILE *file)
 {
     NodeA *menu_button = NULL;
     menu_button = insert_end(menu_button, "widget", "menu_button", 1);
-    menu_button = insert_end(menu_button, "label", "Click me", 1);
+    menu_button = insert_end(menu_button, "label", "NULL", 1);
     menu_button = insert_end(menu_button, "path_to_image", "NULL", 1);
     menu_button = insert_end(menu_button, "arrow_type", "GTK_ARROW_DOWN", 0);
 
@@ -418,18 +421,3 @@ void text_view_data_bases(NodeA *widget, FILE *file)
     free_list(text_view);
 }
 
-void call_database_function(NodeA *widget, FILE *file)
-{
-
-    for (int i = 0; widget_map[i].widget_name != NULL; i++)
-    {
-        if (strcmp(widget->val, widget_map[i].widget_name) == 0)
-        {
-            widget_map[i].data_base_function(widget, file);
-            return;
-        }
-    }
-    
-    fprintf(stderr, "widget %s not found in our database\n", widget->val);
-    exit(EXIT_FAILURE);
-}

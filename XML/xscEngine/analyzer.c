@@ -6,7 +6,7 @@
  * 
  * @author Ayyoub el Kouri
  * @date 26/01/2025
- * @version 3.0 (last update 04/02/2025)
+ * @version 3.0 (last update 05/02/2025)
  * 
  ****************************************************************************************************************************/
 
@@ -40,7 +40,7 @@ void free_list(NodeA *head)
 }
 
 // Main parsing function
-NodeA *parse_widget(const char *input)
+NodeA *parse_widget_to_linked_list(const char *input)
 {
     if (!input || *input != '<') return NULL;
 
@@ -96,16 +96,6 @@ NodeA *parse_widget(const char *input)
     return head;
 }
 
-// Example usage
-void print_list(NodeA *head)
-{
-    while (head) {
-        printf("(%s, %s)", head->key, head->val);
-        if (head->next) printf(" -> ");
-        head = head->next;
-    }
-    printf(" -> NULL\n");
-}
 
 // Insert new NodeA at the end of the list
 NodeA* insert_end(NodeA *head, const char *key, const char *val, int is_string)
@@ -130,6 +120,7 @@ void write_to_file(NodeA *widget, NodeA *default_values, FILE *file)
     // write in the file "GtkWidget *id = create_widget("
     NodeA *id = widget->next;
     fprintf(file, "GtkWidget *%s = create_%s(", id->val, widget->val);
+    printf("after after in window\n");
 
     // skip the id of the default_values
     widget = widget->next->next;
@@ -237,80 +228,115 @@ int est_vide(pileA *mapile)
 
 int valid_file(FILE *file)
 {
-    // read the file character by character
+    // Variable to store the current character being read
     char character;
+
+    // Line counter to keep track of the line number in the file
     int ligne = 1;
+
+    // Temporary string to store tag names
     char chaine[20];
+
+    // Initialize a stack to keep track of opened tags
     pileA maPile = { .top = -1 };
 
-
+    // Read the file character by character until the end of the file
     while((character = fgetc(file)) != EOF)
     {
-        // increment the line counter if the character is a newline
+        // Increment the line counter if a newline character is encountered
         if(character == '\n')
         {
             ligne++;
-            continue;
+            continue; // Skip to the next iteration
         }
 
-        // check if the character is valid
+        // Check if the character is valid (only '<' or space are valid here)
         if(character != '<' && character != ' ')
         {
+            // If an invalid character is found, print an error and exit
             fprintf(stderr, "invalid character in line %d\n", ligne);
             exit(1);
         }
         else
         {
+            // Peek the next character in the file
             char temp = fgetc(file);
+
+            // If the current character is '<' and the next is not '/' or '!'
             if(character == '<' && temp != '/' && temp != '!')
             {
+                // Skip spaces until a meaningful character is found
                 while((character = fgetc(file)) == ' ');
+
+                // Store the initial part of the tag name
                 chaine[0] = temp;
                 chaine[1] = character;
                 int index = 2;
 
+                // Continue reading the tag name until a space or '>' is encountered
                 while((character = fgetc(file)) != ' ' && character != '>')
                 {
                     chaine[index] = character;
                     index++;
                 }
 
+                // Null-terminate the tag name string
                 chaine[index] = '\0';
+
+                // Push the tag name onto the stack
                 empiler(&maPile, chaine);
 
+                // If the tag is not immediately closed with '>', skip characters until '>' is found
                 if(character != '>')
                     while((character = fgetc(file)) != '>');
             }
+            // If the current character is '<' and the next is '/' (indicating a closing tag)
             else if(character == '<' && temp == '/' && temp != '!')
             {
+                // Skip spaces until a meaningful character is found
                 while((character = fgetc(file)) == ' ');
+
+                // Start reading the closing tag name
                 chaine[0] = character;
                 int index = 1;
 
+                // Continue reading the closing tag name until a space or '>' is encountered
                 while((character = fgetc(file)) != ' ' && character != '>')
                 {
                     chaine[index] = character;
                     index++;
                 }
 
+                // Null-terminate the closing tag name string
                 chaine[index] = '\0';
 
+                // Temporary string to store the tag name popped from the stack
                 char chaine2[20];
+
+                // Pop the top element from the stack
                 depiler(&maPile, chaine2);
 
+                // Check if the closing tag matches the last opened tag
                 if(strcmp(chaine, chaine2) != 0)
                 {
+                    // If the tags don't match, print an error and exit
                     fprintf(stderr, "Error in line %d\n", ligne);
                     exit(1);
                 }
+
+                // If the tag is not immediately closed with '>', skip characters until '>' is found
                 if(character != '>')
                     while((character = fgetc(file)) != '>');
             }
             else
+            {
+                // Skip to the end of the line or file if none of the above conditions are met
                 while((character = fgetc(file)) != '\n' && character != EOF);   
+            }
         }
     }
 
+    // At the end, check if the stack is empty (i.e., all tags are properly closed)
     return est_vide(&maPile) ? 1 : 0;
 }
 
@@ -421,7 +447,6 @@ char* my_strndup(const char* str, size_t n)
 
 
 
-
 size_t my_strnlen(const char* str, size_t maxlen)
 {
     size_t len = 0;
@@ -442,11 +467,11 @@ int read_line(char *line, FILE *file)
     int index = 0;
     char character;
 
-
+    // pass all the spaces
     while((character = fgetc(file)) == ' ');
     if(character == '\n') return  -1;
 
-
+    // read the line character by character
     while(character != '\n' && character != EOF)
     {
         line[index] = character;
@@ -457,9 +482,9 @@ int read_line(char *line, FILE *file)
     line[index] = '\0';
     index = 0;
 
+
+    // if the character is EOF
     if(character == EOF) return -2;
 
     return 0;
 }
-
-
