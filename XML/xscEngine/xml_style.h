@@ -62,6 +62,8 @@ WidgetMap widget_map[] = {
     {"spinner", spinner_data_bases},
     {"switch_button", switch_button_data_bases},
     {"text_view", text_view_data_bases},
+    {"combo_box", combo_box_data_bases},
+    {"combo_box_item", combo_box_item_data_bases},
     {NULL, NULL} // Marqueur de fin
 };
 

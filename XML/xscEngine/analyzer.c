@@ -117,10 +117,13 @@ NodeA* insert_end(NodeA *head, const char *key, const char *val, int is_string)
 
 void write_to_file(NodeA *widget, NodeA *default_values, FILE *file)
 {
+    // if the widget is a combo_box item
+    if(strcmp(widget->val, "combo_box_item") == 0)
+        return;
+
     // write in the file "GtkWidget *id = create_widget("
     NodeA *id = widget->next;
     fprintf(file, "GtkWidget *%s = create_%s(", id->val, widget->val);
-    printf("after after in window\n");
 
     // skip the id of the default_values
     widget = widget->next->next;
@@ -129,39 +132,10 @@ void write_to_file(NodeA *widget, NodeA *default_values, FILE *file)
     NodeA *widgetFirstValue = widget;
     int exist = 0;
 
-    // the first value
-    while(widget)
+    // id the widget has a default value
+    if(current)
     {
-        if(strcmp(current->key, widget->key) == 0)
-        {
-            exist = 1;
-            if(current->is_string)
-                if(strcmp(widget->val, "NULL") == 0)
-                    fprintf(file, "NULL");
-                else
-                    fprintf(file, "\"%s\"", widget->val);
-            else
-                fprintf(file, "%s", widget->val);
-        }
-        widget = widget->next;
-    }
-    widget = widgetFirstValue;
-
-    if(exist == 0)
-        if(current->is_string)
-            if(strcmp(current->val, "NULL") == 0)
-                fprintf(file, "NULL");
-            else
-                fprintf(file, "\"%s\"", current->val);
-        else
-            fprintf(file, "%s", current->val);
-    
-    exist = 0;
-    current = current->next;
-
-    // the rest of the values
-    while(current)
-    {
+        // the first value
         while(widget)
         {
             if(strcmp(current->key, widget->key) == 0)
@@ -169,28 +143,61 @@ void write_to_file(NodeA *widget, NodeA *default_values, FILE *file)
                 exist = 1;
                 if(current->is_string)
                     if(strcmp(widget->val, "NULL") == 0)
-                        fprintf(file, ", NULL");
+                        fprintf(file, "NULL");
                     else
-                        fprintf(file, ", \"%s\"", widget->val);
+                        fprintf(file, "\"%s\"", widget->val);
                 else
-                    fprintf(file, ", %s", widget->val);
+                    fprintf(file, "%s", widget->val);
             }
             widget = widget->next;
         }
         widget = widgetFirstValue;
-        
 
         if(exist == 0)
             if(current->is_string)
                 if(strcmp(current->val, "NULL") == 0)
-                    fprintf(file, ", NULL");
+                    fprintf(file, "NULL");
                 else
-                    fprintf(file, ", \"%s\"", current->val);
+                    fprintf(file, "\"%s\"", current->val);
             else
-                fprintf(file, ", %s", current->val);
+                fprintf(file, "%s", current->val);
         
         exist = 0;
         current = current->next;
+
+        // the rest of the values
+        while(current)
+        {
+            while(widget)
+            {
+                if(strcmp(current->key, widget->key) == 0)
+                {
+                    exist = 1;
+                    if(current->is_string)
+                        if(strcmp(widget->val, "NULL") == 0)
+                            fprintf(file, ", NULL");
+                        else
+                            fprintf(file, ", \"%s\"", widget->val);
+                    else
+                        fprintf(file, ", %s", widget->val);
+                }
+                widget = widget->next;
+            }
+            widget = widgetFirstValue;
+            
+
+            if(exist == 0)
+                if(current->is_string)
+                    if(strcmp(current->val, "NULL") == 0)
+                        fprintf(file, ", NULL");
+                    else
+                        fprintf(file, ", \"%s\"", current->val);
+                else
+                    fprintf(file, ", %s", current->val);
+            
+            exist = 0;
+            current = current->next;
+        }
     }
 
     // close the function

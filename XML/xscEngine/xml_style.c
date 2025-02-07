@@ -16,6 +16,8 @@
 void call_database_function(NodeA *widget_linked_list, FILE *file)
 {
 
+    if(strcmp(widget_linked_list->val, "combo_box") == 0)
+        printf("the widget is combo_box\n");
     for (int i = 0; widget_map[i].widget_name != NULL; i++)
     {
         if (strcmp(widget_linked_list->val, widget_map[i].widget_name) == 0)

@@ -3,7 +3,6 @@
 static void close_new(GtkWidget *widget, gpointer data)
 {
 g_application_quit(G_APPLICATION(data));
-// printf("hello\n");
 }
 
 static void activate(GtkApplication *app, gpointer data){
@@ -29,8 +28,12 @@ GtkWidget *username = create_entry(NULL, "Username", TRUE, TRUE, 20, 0.5);
 add_to_grid(grid, username, 0, 0, 1, 1);
 GtkWidget *password = create_entry(NULL, "Password", FALSE, TRUE, 20, 0.5);
 add_to_grid(grid, password, 1, 0, 1, 1);
+GtkWidget *combo_box = create_combo_box();
+add_to_combo_box(combo_box, "choice 1");
+add_to_combo_box(combo_box, "choice 2");
+add_to_grid(grid, combo_box, 2, 0, 1, 1);
 GtkWidget *login = create_button(GTK_RELIEF_NORMAL, "Login", FALSE, NULL, NULL, NULL);
-add_to_grid(grid, login, 2, 0, 1, 1);
+add_to_grid(grid, login, 3, 0, 1, 1);
 add_to_box(grid_box, grid, START, FALSE, FALSE, 0, 0, 0, 0, 0);
 add_to_box(main_box, grid_box, START, FALSE, FALSE, 0, 0, 0, 0, 0);
 add_to_container(window, main_box);
