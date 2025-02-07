@@ -79,4 +79,6 @@ boxInfos *get_properties_box(GtkWidget *box);
 
 void add_to_box(GtkWidget *box, GtkWidget *child, BoxPosition position , gboolean expand, gboolean fill, guint padding, gint margin_top, gint margin_buttom, gint margin_right, gint left);
 
+
+
 #endif // BOX_H

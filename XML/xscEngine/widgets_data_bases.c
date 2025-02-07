@@ -15,7 +15,6 @@
 
 void window_data_bases(NodeA *widget, FILE *file)
 {
-    printf("in window\n");
     // constructing data bases of the default values of a window
     NodeA *window = NULL;
     window = insert_end(window, "widget", "window", 1);
@@ -31,9 +30,7 @@ void window_data_bases(NodeA *widget, FILE *file)
     window = insert_end(window, "opacity", "1.0", 0);
     window = insert_end(window, "fullscreen", "FALSE", 0);
 
-    printf("before writing\n");
     write_to_file(widget, window, file);
-    printf("after writing\n");
 
     free_list(window);
 }
@@ -419,5 +416,24 @@ void text_view_data_bases(NodeA *widget, FILE *file)
 
     write_to_file(widget, text_view, file);
     free_list(text_view);
+}
+
+void combo_box_data_bases(NodeA *widget, FILE *file)
+{
+    NodeA *combo_box = NULL;
+    combo_box = insert_end(combo_box, "widget", "combo_box", 1);
+    
+    write_to_file(widget, combo_box, file);
+    free_list(combo_box);
+}
+
+void combo_box_item_data_bases(NodeA *widget, FILE *file)
+{
+    NodeA *combo_box_item = NULL;
+    combo_box_item = insert_end(combo_box_item, "widget", "combo_box_item", 1);
+    combo_box_item = insert_end(combo_box_item, "text", "Click me", 1);
+    
+    write_to_file(widget, combo_box_item, file);
+    free_list(combo_box_item);
 }
 

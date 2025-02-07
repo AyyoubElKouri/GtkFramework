@@ -210,8 +210,9 @@ void switch_button_data_bases(NodeA *widget, FILE *file);
 
 void text_view_data_bases(NodeA *widget, FILE *file);
 
+void combo_box_data_bases(NodeA *widget, FILE *file);
 
-
+void combo_box_item_data_bases(NodeA *widget, FILE *file);
 
 
 #endif

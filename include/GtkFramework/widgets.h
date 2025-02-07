@@ -34,5 +34,6 @@
 #include "../widgets/color_button.h"
 #include "../widgets/font_button.h"
 #include "../widgets/radio_button.h"
+#include "../widgets/combo_box.h"
 
 #endif // WIDGETS_H

@@ -1,6 +1,7 @@
 {
     "C_Cpp.errorSquiggles": "enabled",
     "files.associations": {
+        "*.x": "html",
         "*.txt": "html",
         "link_button.h": "c",
         "radio_button.h": "c",
@@ -8,6 +9,8 @@
         "project_header_2.h": "c",
         "widgets_data_bases.h": "c",
         "xml_style.h": "c",
-        "analyzer.h": "c"
+        "analyzer.h": "c",
+        "gtkframework.h": "c",
+        "string.h": "c"
     }
 }
