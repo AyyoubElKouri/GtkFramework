@@ -32,7 +32,7 @@ void project2(GtkApplication *app)
     GtkWidget *window = create_window(app, GTK_WINDOW_TOPLEVEL, "Widgets", 1100, 600, TRUE, GTK_WIN_POS_CENTER, TRUE, NULL, 1.0, FALSE);
 
         /*---Start Header Bar---*/
-        GtkWidget *header_bar = create_header_bar("Widgets", "Project 2", "assets/Application_icon/apple.png", TRUE);
+        GtkWidget *header_bar = create_header_bar("Widgets Catalog", "Project 2", NULL, TRUE);
             
         /*---Start Menu Button---*/
             GtkWidget *menu_button = create_menu_button("Menu",NULL, GTK_ARROW_DOWN);
