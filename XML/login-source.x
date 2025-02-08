@@ -48,7 +48,7 @@
                 <!-- End the hierarchy widgets box -->
 
                 <!-- Start the build space paned -->
-                <paned id = "build_space_paned" orientation = GTK_ORIENTATION_HORIZONTAL default_position = 860 show_handle = TRUE>
+                <paned id = "build_space_paned" orientation = GTK_ORIENTATION_HORIZONTAL default_position = 710 show_handle = TRUE>
 
                     <!-- Start the first space box -->
                     <box id = "first_space_box" orientation = GTK_ORIENTATION_VERTICAL align = -1 spacing = 0>
@@ -73,12 +73,20 @@
         
                                 <!-- Start the working space box content -->
                                 <box id = "working_space_box_content" orientation = GTK_ORIENTATION_VERTICAL align = -1 spacing = 0>
-        
-                                    <!-- Start the test button -->
-                                    <button id = "test_button3" label = "This space is reserved for\n the Working Space">
-        
-                                    </button add_to_box(working_space_box_content, test_button3, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
-                                    <!-- End the test button -->
+                                    
+                                    <!-- Start the working space content frame -->
+                                    <frame id = "working_space_frame" label = NULL>
+
+                                        <!-- Start the working space main box -->
+                                        <box id = "test_box" orientation = GTK_ORIENTATION_VERTICAL align = -1 spacing = 0>
+
+                                            <!-- ------------------------------------------------------------ -->
+
+                                        </box add_to_frame(working_space_frame, test_box, 5, 5, 5, 5)>
+                                        <!-- End the working space main box -->
+
+                                    </frame add_to_box(working_space_box_content, working_space_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
+                                    <!-- End the working space content frame -->
         
                                 </box add_to_box(working_space_box, working_space_box_content, START, TRUE, TRUE, 0, 7, 7, 0, 0)>
                                 <!-- End the working space box content -->
@@ -140,11 +148,35 @@
                         <!-- Widgets Catalog content -->
                         <box id = "widgets_catalog_box" orientation = GTK_ORIENTATION_VERTICAL align = -1 spacing = 0>
 
-                            <!-- Start the test button -->
-                            <button id = "test_button2" label = "This space is reserved for\n the Widgets Catalog">
+                            <!-- Start switcher Catalog -->
+                            <switcher id = "switcher_catalog" spacing = 2 buttons_same_size = TRUE>
+
+                            </switcher add_to_box(widgets_catalog_box, switcher_catalog, START, FALSE, FALSE, 0, 0, 0, 0, 0)>
+                            <!-- End switcher Catalog -->
+
+                            <!-- Start stack Catalog -->
+                            <stack id = "stack_catalog" switcher = "switcher_catalog" transition_type = GTK_STACK_TRANSITION_TYPE_SLIDE_LEFT_RIGHT transition_duration = 500>
+
+                                <!-- Start button 10 -->
+                                <button id = "Windows" label = "Windows">
     
-                            </button add_to_box(widgets_catalog_box, test_button2, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
-                            <!-- End the test button -->
+                                </button add_to_stack(stack_catalog, Windows, "Windows")>
+                                <!-- End button 10 -->
+
+                                <!-- Start button 11 -->
+                                <button id = "Containers" label = "Containers">
+    
+                                </button add_to_stack(stack_catalog, Containers, "Containers")>
+                                <!-- End button 11 -->
+
+                                <!-- Start button 12 -->
+                                <button id = "Widgets" label = "Widgets">
+    
+                                </button add_to_stack(stack_catalog, Widgets, "Widgets")>
+                                <!-- End button 12 -->
+
+                            </stack add_to_box(widgets_catalog_box, stack_catalog, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
+                            <!-- End stack Catalog -->
 
                         </box add_to_box(second_space_box, widgets_catalog_box, START, TRUE, TRUE, 0, 7, 0, 7, 0)>
                         <!-- End widgets catalog content -->
