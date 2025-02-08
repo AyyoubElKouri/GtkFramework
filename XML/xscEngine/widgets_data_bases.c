@@ -90,7 +90,7 @@ void frame_data_bases(NodeA *widget, FILE *file)
 {
     NodeA *frame = NULL;
     frame = insert_end(frame, "widget", "frame", 1);
-    frame = insert_end(frame, "title", "Default title", 1);
+    frame = insert_end(frame, "title", "NULL", 1);
     frame = insert_end(frame, "horizontal_placement", "0.5", 0);
     frame = insert_end(frame, "vertical_placement", "0.5", 0);
 
@@ -127,7 +127,7 @@ void stack_data_bases(NodeA *widget, FILE *file)
 {
     NodeA *stack = NULL;
     stack = insert_end(stack, "widget", "stack", 1);
-    stack = insert_end(stack, "switcher", "NULL", 1);
+    stack = insert_end(stack, "switcher", "NULL", 0);
     stack = insert_end(stack, "transition_type", "GTK_STACK_TRANSITION_TYPE_CROSSFADE", 0);
     stack = insert_end(stack, "transition_duration", "500", 0);
 
