@@ -12,8 +12,10 @@ GtkWidget *hierarchy_widgets_label_box = create_box(GTK_ORIENTATION_HORIZONTAL, 
 GtkWidget *hierarchy_widgets_label = create_label("Widgets Hierarchy", 14, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_RIGHT, FALSE, 0, 0, TRUE);
 add_to_box(hierarchy_widgets_label_box, hierarchy_widgets_label, START, TRUE, FALSE, 0, 0, 0, 0, 7);
 add_to_box(hierarchy_widgets_box, hierarchy_widgets_label_box, START, FALSE, FALSE, 0, 7, 0, 12, 7);
+GtkWidget *hierarchy_widgets_box_content = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
 GtkWidget *test_button = create_button(GTK_RELIEF_NORMAL, "This space is reserved for\n the Widgets Hierarchy", FALSE, NULL, NULL, NULL);
-add_to_box(hierarchy_widgets_box, test_button, START, TRUE, TRUE, 0, 7, 0, 0, 7);
+add_to_box(hierarchy_widgets_box_content, test_button, START, TRUE, TRUE, 0, 0, 0, 0, 0);
+add_to_box(hierarchy_widgets_box, hierarchy_widgets_box_content, START, TRUE, TRUE, 0, 7, 0, 0, 7);
 add_to_paned(main_paned, hierarchy_widgets_box, FIRST);
 GtkWidget *build_space_paned = create_paned(GTK_ORIENTATION_HORIZONTAL, 860, TRUE);
 GtkWidget *first_space_box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
@@ -23,8 +25,10 @@ GtkWidget *working_space_label_box = create_box(GTK_ORIENTATION_HORIZONTAL, GTK_
 GtkWidget *working_space_label = create_label("Working Space", 14, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_RIGHT, FALSE, 0, 0, TRUE);
 add_to_box(working_space_label_box, working_space_label, START, TRUE, FALSE, 0, 0, 0, 0, 7);
 add_to_box(working_space_box, working_space_label_box, START, FALSE, FALSE, 0, 0, 0, 12, 7);
-GtkWidget *test_button3 = create_button(GTK_RELIEF_NORMAL, "This space is reserved for the Working Space", FALSE, NULL, NULL, NULL);
-add_to_box(working_space_box, test_button3, START, TRUE, TRUE, 0, 7, 0, 0, 0);
+GtkWidget *working_space_box_content = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
+GtkWidget *test_button3 = create_button(GTK_RELIEF_NORMAL, "This space is reserved for\n the Working Space", FALSE, NULL, NULL, NULL);
+add_to_box(working_space_box_content, test_button3, START, TRUE, TRUE, 0, 0, 0, 0, 0);
+add_to_box(working_space_box, working_space_box_content, START, TRUE, TRUE, 0, 7, 7, 0, 0);
 add_to_paned(contents_space_paned, working_space_box, FIRST);
 GtkWidget *widgets_informations_space = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
 GtkWidget *widgets_informations_label_box = create_box(GTK_ORIENTATION_HORIZONTAL, GTK_ALIGN_START, 0);

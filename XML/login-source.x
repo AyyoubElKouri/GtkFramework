@@ -31,11 +31,18 @@
                     </box add_to_box(hierarchy_widgets_box, hierarchy_widgets_label_box, START, FALSE, FALSE, 0, 7, 0, 12, 7)>
                     <!-- End the hierarchy widgets label box -->
 
-                    <!-- Start the test button -->
-                    <button id = "test_button" label = "This space is reserved for\n the Widgets Hierarchy">
-    
-                    </button add_to_box(hierarchy_widgets_box, test_button, START, TRUE, TRUE, 0, 7, 0, 0, 7)>
-                    <!-- End the test button -->
+                    <!-- Start the hierarchy widgets box content -->
+                    <box id = "hierarchy_widgets_box_content" orientation = GTK_ORIENTATION_VERTICAL align = -1 spacing = 0>
+
+                        <!-- Start the test button -->
+                        <button id = "test_button" label = "This space is reserved for\n the Widgets Hierarchy">
+        
+                        </button add_to_box(hierarchy_widgets_box_content, test_button, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
+                        <!-- End the test button -->
+
+                    </box add_to_box(hierarchy_widgets_box, hierarchy_widgets_box_content, START, TRUE, TRUE, 0, 7, 0, 0, 7)>
+                    <!-- End the hierarchy widgets box content -->
+
 
                 </box add_to_paned(main_paned, hierarchy_widgets_box, FIRST)>
                 <!-- End the hierarchy widgets box -->
@@ -64,11 +71,17 @@
                                 </box add_to_box(working_space_box, working_space_label_box, START, FALSE, FALSE, 0, 0, 0, 12, 7)>
                                 <!-- End the working space label box -->
         
-                                <!-- Start the test button -->
-                                <button id = "test_button3" label = "This space is reserved for the Working Space">
+                                <!-- Start the working space box content -->
+                                <box id = "working_space_box_content" orientation = GTK_ORIENTATION_VERTICAL align = -1 spacing = 0>
         
-                                </button add_to_box(working_space_box, test_button3, START, TRUE, TRUE, 0, 7, 0, 0, 0)>
-                                <!-- End the test button -->
+                                    <!-- Start the test button -->
+                                    <button id = "test_button3" label = "This space is reserved for\n the Working Space">
+        
+                                    </button add_to_box(working_space_box_content, test_button3, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
+                                    <!-- End the test button -->
+        
+                                </box add_to_box(working_space_box, working_space_box_content, START, TRUE, TRUE, 0, 7, 7, 0, 0)>
+                                <!-- End the working space box content -->
 
                             </box add_to_paned(contents_space_paned, working_space_box, FIRST)>
                             <!-- End the working space box -->
