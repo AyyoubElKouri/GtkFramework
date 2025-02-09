@@ -931,6 +931,89 @@
                                         </box add_to_box(Containers_box, Paned_box, START, TRUE, TRUE, 0, 14, 0, 0, 10)>
                                         <!-- End paned box -->
 
+                                        <!-- Start stack box -->
+                                        <box id = "Stack_box" orientation = GTK_ORIENTATION_VERTICAL align = -1 spacing = 0>
+
+                                            <!-- Start Stack label -->
+                                            <label id = "Stack_label" text = "Stack" size = 14 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                            </label add_to_box(Stack_box, Stack_label, START, FALSE, FALSE, 0, 0, 7, 0, 0)>
+                                            <!-- End Stack label -->
+
+                                            <!-- Start Stack grid -->
+                                            <grid id = "Stack_grid" rows_spacing = 7 columns_spacing = 7 rows_homogeneous = TRUE columns_homogeneous = FALSE>
+
+                                                <!-- Start stack switcher-widget label -->
+                                                <label id = "stack_switcher_widget_label" text = "Switcher ID" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                </label add_to_grid(Stack_grid, stack_switcher_widget_label, 0, 0, 1, 1)>
+                                                <!-- End Stack switcher-widget label -->
+
+                                                <!-- Start stack switcher-widget entry value -->
+                                                <entry id = "stack_switcher_widget_entry" indicator_text = "The switcher ID">
+
+                                                </entry add_to_grid(Stack_grid, stack_switcher_widget_entry, 0, 1, 1, 1)>
+                                                <!-- End stack switcher-widget entry value -->
+
+                                                <!-- Start stack transition type label -->
+                                                <label id = "stack_transition_type_label" text = "Transition Type"  size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                </label add_to_grid(Stack_grid, stack_transition_type_label, 1, 0, 1, 1)>
+                                                <!-- End stack transition type label -->
+
+                                                <!-- Start stack transition type value combo box -->
+                                                <combo_box id = "stack_transition_type_value_combo_box">
+
+                                                    <!-- Start stack transition type value combo box item -->
+                                                    <combo_box_item id = "stack_transition_type_value_combo_box_item">
+
+                                                    </combo_box_item add_to_combo_box(stack_transition_type_value_combo_box, "GTK_STACK_TRANSITION_TYPE_CROSSFADE")>
+                                                    <!-- End stack transition type value combo box item -->
+
+                                                    <!-- Start stack transition type value combo box item -->
+                                                    <combo_box_item id = "stack_transition_type_value_combo_box_item">
+
+                                                    </combo_box_item add_to_combo_box(stack_transition_type_value_combo_box, "GTK_STACK_TRANSITION_TYPE_NONE")>
+                                                    <!-- End stack transition type value combo box item -->
+
+                                                    <!-- Start stack transition type value combo box item -->
+                                                    <combo_box_item id = "stack_transition_type_value_combo_box_item">
+
+                                                    </combo_box_item add_to_combo_box(stack_transition_type_value_combo_box, "GTK_STACK_TRANSITION_TYPE_SLIDE_LEFT")>
+                                                    <!-- End stack transition type value combo box item -->
+
+                                                    <!-- Start stack transition type value combo box item -->
+                                                    <combo_box_item id = "stack_transition_type_value_combo_box_item">
+
+                                                    </combo_box_item add_to_combo_box(stack_transition_type_value_combo_box, "GTK_STACK_TRANSITION_TYPE_SLIDE_RIGHT")>
+                                                    <!-- End stack transition type value combo box item -->
+
+                                                </combo_box add_to_grid(Stack_grid, stack_transition_type_value_combo_box, 1, 1, 1, 1)>
+                                                <!-- End stack transition type value combo box -->
+
+                                                <!-- Start stack duration label -->
+                                                <label id = "stack_duration_label" text = "Duration"  size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                </label add_to_grid(Stack_grid, stack_duration_label, 2, 0, 1, 1)>
+                                                <!-- End stack duration label -->
+
+                                                <!-- Start stack duration value spin button -->
+                                                <spin_button id = "stack_duration_value_spin_button" min = "0" max = "1000" step = "100" value = "500" digits = 0 numeric = TRUE>
+
+                                                </spin_button add_to_grid(Stack_grid, stack_duration_value_spin_button, 2, 1, 1, 1)>
+                                                <!-- End stack duration value spin button -->
+
+                                                <!-- Start stack informations add button -->
+                                                <button id = "stack_informations_add_button" label = "                                                        Add                                                 ">
+
+                                                </button add_to_grid(Stack_grid, stack_informations_add_button, 3, 0, 2, 1)>
+                                                <!-- End stack informations add button -->
+
+                                            </grid add_to_box(Stack_box, Stack_grid, START, FALSE, FALSE, 0, 0, 0, 0, 0)>
+                                            <!-- End Stack grid -->
+
+                                        </box add_to_box(Containers_box, Stack_box, START, TRUE, TRUE, 0, 14, 0, 0, 0)>
+                                        <!-- End stack box -->
 
                                         <!-- Start containers button -->
                                         <button id = "Containers" label = "Containers">
