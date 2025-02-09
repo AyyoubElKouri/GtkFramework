@@ -157,23 +157,116 @@
                             <!-- Start stack Catalog -->
                             <stack id = "stack_catalog" switcher = "switcher_catalog" transition_type = GTK_STACK_TRANSITION_TYPE_SLIDE_LEFT_RIGHT transition_duration = 500>
 
-                                <!-- Start button 10 -->
-                                <button id = "Windows" label = "Windows">
-    
-                                </button add_to_stack(stack_catalog, Windows, "Windows")>
-                                <!-- End button 10 -->
+                                
+                                <!-- Start Scrolled Windows window -->
+                                <scrolled_window id = "scrolled_windows_window" horizontal = FALSE vertical = TRUE>
 
-                                <!-- Start button 11 -->
-                                <button id = "Containers" label = "Containers">
-    
-                                </button add_to_stack(stack_catalog, Containers, "Containers")>
-                                <!-- End button 11 -->
+                                    <!-- Start Windows box -->
+                                    <box id = "Windows_box" orientation = GTK_ORIENTATION_VERTICAL align = -1 spacing = 0>
 
-                                <!-- Start button 12 -->
-                                <button id = "Widgets" label = "Widgets">
-    
-                                </button add_to_stack(stack_catalog, Widgets, "Widgets")>
-                                <!-- End button 12 -->
+                                        <!-- Start widnows button -->
+                                        <button id = "Windows" label = "Windows">
+            
+                                        </button add_to_box(Windows_box, Windows, START, TRUE, TRUE, 0, 7, 0, 0, 0)>
+                                        <!-- End Widnows button -->
+
+                                        <!-- Start Windows button -->
+                                        <button id = "Windows2" label = "Windows">
+
+                                        </button add_to_box(Windows_box, Windows2, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
+                                        <!-- End Windows button -->
+
+                                        <!-- Start Windows button -->
+                                        <button id = "Windows3" label = "Windows">
+
+                                        </button add_to_box(Windows_box, Windows3, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
+                                        <!-- End Windows button -->
+
+                                        <!-- Start Windows button -->
+                                        <button id = "Windows4" label = "Windows">
+
+                                        </button add_to_box(Windows_box, Windows4, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
+                                        <!-- End Windows button -->
+
+                                    </box add_to_scrolled_window(scrolled_windows_window, Windows_box)>
+                                    <!-- End Windows box -->
+
+                                </scrolled_window add_to_stack(stack_catalog, scrolled_windows_window, "Windows")>
+                                <!-- End Scrolled Windows window -->
+
+
+                                <!-- Start Scrolled Containers window -->
+                                <scrolled_window id = "scrolled_containers_window" horizontal = FALSE vertical = TRUE>
+
+                                    <!-- Start Containers box -->
+                                    <box id = "Containers_box" orientation = GTK_ORIENTATION_VERTICAL align = -1 spacing = 0>
+
+                                        <!-- Start containers button -->
+                                        <button id = "Containers" label = "Containers">
+            
+                                        </button add_to_box(Containers_box, Containers, START, TRUE, TRUE, 0, 7, 0, 0, 0)>
+                                        <!-- End Containers button -->
+
+                                        <!-- Start Containers2 button -->
+                                        <button id = "Containers2" label = "Containers">
+
+                                        </button add_to_box(Containers_box, Containers2, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
+                                        <!-- End Containers2 button -->
+
+                                        <!-- Start Containers3 button -->
+                                        <button id = "Containers3" label = "Containers">
+
+                                        </button add_to_box(Containers_box, Containers3, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
+                                        <!-- End Containers button -->
+
+                                        <!-- Start Containers4 button -->
+                                        <button id = "Containers4" label = "Containers">
+
+                                        </button add_to_box(Containers_box, Containers4, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
+                                        <!-- End Containers4 button -->
+
+                                    </box add_to_scrolled_window(scrolled_containers_window, Containers_box)>
+                                    <!-- End Windows box -->
+
+                                </scrolled_window add_to_stack(stack_catalog, scrolled_containers_window, "Containers")>
+                                <!-- End Scrolled Containers window -->
+
+
+                                <!-- Start Scrolled Widgets window -->
+                                <scrolled_window id = "scrolled_widgets_window" horizontal = FALSE vertical = TRUE>
+
+                                    <!-- Start Widgets box -->
+                                    <box id = "Widgets_box" orientation = GTK_ORIENTATION_VERTICAL align = -1 spacing = 0>
+
+                                        <!-- Start Widgets button -->
+                                        <button id = "Widgets" label = "Widgets">
+            
+                                        </button add_to_box(Widgets_box, Widgets, START, TRUE, TRUE, 0, 7, 0, 0, 0)>
+                                        <!-- End Widgets button -->
+
+                                        <!-- Start Widgets2 button -->
+                                        <button id = "Widgets2" label = "Widgets">
+
+                                        </button add_to_box(Widgets_box, Widgets2, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
+                                        <!-- End Widgets2 button -->
+
+                                        <!-- Start Widgets3 button -->
+                                        <button id = "Widgets3" label = "Widgets">
+
+                                        </button add_to_box(Widgets_box, Widgets3, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
+                                        <!-- End Widgets3 button -->
+
+                                        <!-- Start Widgets4 button -->
+                                        <button id = "Widgets4" label = "Widgets">
+
+                                        </button add_to_box(Widgets_box, Widgets4, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
+                                        <!-- End Widgets4 button -->
+
+                                    </box add_to_scrolled_window(scrolled_widgets_window, Widgets_box)>
+                                    <!-- End Widgets box -->
+
+                                </scrolled_window add_to_stack(stack_catalog, scrolled_widgets_window, "Widgets")>
+                                <!-- End Scrolled Widgets winodw -->
 
                             </stack add_to_box(widgets_catalog_box, stack_catalog, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
                             <!-- End stack Catalog -->

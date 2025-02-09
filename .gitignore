@@ -21,6 +21,8 @@ obj/
 *.tmp
 
 XML/application
+XML/UIBuilder/application
+XML/xsc
 
 
 .vscode/
