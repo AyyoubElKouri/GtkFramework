@@ -1015,6 +1015,66 @@
                                         </box add_to_box(Containers_box, Stack_box, START, TRUE, TRUE, 0, 14, 0, 0, 0)>
                                         <!-- End stack box -->
 
+                                        <!-- Start switcher box -->
+                                        <box id = "Switcher_box" orientation = GTK_ORIENTATION_VERTICAL align = -1 spacing = 10>
+
+                                            <!-- Start switcher label -->
+                                            <label id = "Switcher_label" text = "Switcher"  size = 14 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                            </label add_to_box(Switcher_box, Switcher_label, START, TRUE, TRUE, 0, 14, 10, 0, 0)>
+                                            <!-- End switcher label -->
+
+                                            <!-- Start Switcher grid -->
+                                            <grid id = "Switcher_grid" rows_spacing = 7 columns_spacing = 7 rows_homogeneous = TRUE columns_homogeneous = FALSE>
+
+                                                <!-- Start switcher spacing label -->
+                                                <label id = "switcher_spacing_label" text = "Spacing" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                </label add_to_grid(Switcher_grid, switcher_spacing_label, 0, 0, 1, 1)>
+                                                <!-- End switcher spacing label -->
+
+                                                <!-- Start switcher spacing value spin button -->
+                                                <spin_button id = "switcher_spacing_value_spin_button" min = 0 max = 100 step = 5 value = 5 digits = 0 numeric = TRUE>
+
+                                                </spin_button add_to_grid(Switcher_grid, switcher_spacing_value_spin_button, 0, 1, 1, 1)>
+                                                <!-- End switcher spacing value spin button -->
+
+                                                <!-- Start same size label -->
+                                                <label id = "same_size_label" text = "Same Size" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                </label add_to_grid(Switcher_grid, same_size_label, 1, 0, 1, 1)>
+                                                <!-- End same size label -->
+
+                                                <!-- Start same size value combo box -->
+                                                <combo_box id = "same_size_value_combo_box">
+
+                                                    <!-- Start same size value combo box item -->
+                                                    <combo_box_item id = "combo_box_item">
+
+                                                    </combo_box_item add_to_combo_box(same_size_value_combo_box, "TRUE")>
+                                                    <!-- End same size value combo box item -->
+
+                                                    <!-- Start same size value combo box item -->
+                                                    <combo_box_item id = "combo_box_item">
+
+                                                    </combo_box_item add_to_combo_box(same_size_value_combo_box, "FALSE")>
+                                                    <!-- End same size value combo box item -->
+
+                                                </combo_box add_to_grid(Switcher_grid, same_size_value_combo_box, 1, 1, 1, 1)>
+                                                <!-- End same size value combo box -->
+
+                                                <!-- Start switcher informations add button -->
+                                                <button id = "switcher_informations_add_button" label = "                                                        Add                                                 ">
+
+                                                </button add_to_grid(Switcher_grid, switcher_informations_add_button, 2, 0, 2, 1)>
+                                                <!-- End switcher informations add button -->
+
+                                            </grid add_to_box(Switcher_box, Switcher_grid, START, FALSE, FALSE, 0, 0, 0, 0, 0)>
+                                            <!-- End Switcher grid -->
+
+                                        </box add_to_box(Containers_box, Switcher_box, START, TRUE, TRUE, 0, 14, 0, 0, 0)>
+                                        <!-- End switcher box -->
+
                                         <!-- Start containers button -->
                                         <button id = "Containers" label = "Containers">
             
