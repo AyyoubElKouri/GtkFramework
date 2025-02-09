@@ -158,48 +158,410 @@
                             <stack id = "stack_catalog" switcher = "switcher_catalog" transition_type = GTK_STACK_TRANSITION_TYPE_SLIDE_LEFT_RIGHT transition_duration = 500>
 
                                 
-                                <!-- Start Scrolled Windows window -->
-                                <scrolled_window id = "scrolled_windows_window" horizontal = FALSE vertical = TRUE>
+                                <!-- Start scrolled window window -->
+                                <scrolled_window id = "scrolled_window_window" horizontal = FALSE vertical = TRUE>
 
                                     <!-- Start Windows box -->
-                                    <box id = "Windows_box" orientation = GTK_ORIENTATION_VERTICAL align = -1 spacing = 0>
+                                    <box id = "Windows_box" orientation = GTK_ORIENTATION_VERTICAL align = -1 spacing = 7>
 
-                                        <!-- Start widnows button -->
-                                        <button id = "Windows" label = "Windows">
-            
-                                        </button add_to_box(Windows_box, Windows, START, TRUE, TRUE, 0, 7, 0, 0, 0)>
-                                        <!-- End Widnows button -->
+                                        <!-- Start Window Case -->
+                                        <box id = "window_case" orientation = GTK_ORIENTATION_VERTICAL align = -1 spacing = 5>
 
-                                        <!-- Start Windows button -->
-                                        <button id = "Windows2" label = "Windows">
+                                            <!-- Start window label -->
+                                            <label id = "window_label" text = "Window" size = 14 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_RIGHT">
 
-                                        </button add_to_box(Windows_box, Windows2, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
-                                        <!-- End Windows button -->
+                                            </label add_to_box(window_case, window_label, START, FALSE, FALSE, 0, 5, 0, 0, 7)>
+                                            <!-- End window label -->
 
-                                        <!-- Start Windows button -->
-                                        <button id = "Windows3" label = "Windows">
+                                            <!-- Start window informations main box -->
+                                            <box id = "window_informations_main_box" orientation = GTK_ORIENTATION_HORIZONTAL align = GTK_ALIGN_START spacing = 0>
+                                                
+                                                <!-- Start window informations grid -->
+                                                <grid id = "window_informations_grid" rows_spacing = 7 columns_spacing = 7 rows_homogeneous = TRUE columns_homogeneous = FALSE>
+    
+                                                    <!-- Start window informations app label -->
+                                                    <label id = "window_informations_app_label" text = "Window" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+    
+                                                    </label add_to_grid(window_informations_grid, window_informations_app_label, 0, 0, 1, 1)>
+                                                    <!-- End window informations app -->
+                                                    
+                                                    <!-- Start window informations app value -->
+                                                    <entry id = "window_informations_app_value" default_text = "app" indicator_text = "Chose App for TOPLEVEL" visible = TRUE editable = TRUE max_lenght = 5 alignment = 0.5>
+    
+                                                    </entry add_to_grid(window_informations_grid, window_informations_app_value, 0, 1, 1, 1)>
+                                                    <!-- End window informations app value -->
+    
+                                                    <!-- Start window informations type label -->
+                                                    <label id = "window_informations_type_label" text = "Type" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+    
+                                                    </label add_to_grid(window_informations_grid, window_informations_type_label, 1, 0, 1, 1)>
+                                                    <!-- End window informations type label -->
 
-                                        </button add_to_box(Windows_box, Windows3, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
-                                        <!-- End Windows button -->
+                                                    <!-- Start window informations type value -->
+                                                    <entry id = "window_informations_type_value" default_text = "GTK_WINDOW_TOPLEVEL" indicator_text = "Chose Type of the window" visible = TRUE editable = TRUE max_lenght = 5 alignment = 0.5>
+    
+                                                    </entry add_to_grid(window_informations_grid, window_informations_type_value, 1, 1, 1, 1)>
+                                                    <!-- End window informations type value -->
 
-                                        <!-- Start Windows button -->
-                                        <button id = "Windows4" label = "Windows">
+                                                    <!-- Start window informations title label -->
+                                                    <label id = "window_informations_title_label" text = "Title" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+    
+                                                    </label add_to_grid(window_informations_grid, window_informations_title_label, 2, 0, 1, 1)>
+                                                    <!-- End window informations title label -->
+    
+                                                    <!-- Start window informations title value -->
+                                                    <entry id = "window_informations_title_value" default_text = "title" indicator_text = "Chose Title for TOPLEVEL" visible = TRUE editable = TRUE max_lenght = 5 alignment = 0.5>
+    
+                                                    </entry add_to_grid(window_informations_grid, window_informations_title_value, 2, 1, 1, 1)>
+                                                    <!-- End window informations title value -->
 
-                                        </button add_to_box(Windows_box, Windows4, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
-                                        <!-- End Windows button -->
+                                                    <!-- Start window informations width label -->
+                                                    <label id = "window_informations_width_label" text = "Width" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+    
+                                                    </label add_to_grid(window_informations_grid, window_informations_width_label, 3, 0, 1, 1)>
+                                                    <!-- End window informations width label -->
 
-                                    </box add_to_scrolled_window(scrolled_windows_window, Windows_box)>
+                                                    <!-- Start window informations width value -->
+                                                    <spin_button id = "window_informations_width_value" min = 0 max = 1000 step = 10 value = 800 digits = 0 numeric = TRUE>
+
+                                                    </spin_button add_to_grid(window_informations_grid, window_informations_width_value, 3, 1, 1, 1)>
+                                                    <!-- End window informations width value -->
+
+                                                    <!-- Start window informations height label -->
+                                                    <label id = "window_informations_height_label" text = "Height" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+    
+                                                    </label add_to_grid(window_informations_grid, window_informations_height_label, 4, 0, 1, 1)>
+                                                    <!-- End window informations height label -->
+
+                                                    <!-- Start window informations height value -->
+                                                    <spin_button id = "window_informations_height_value" min = 0 max = 1000 step = 10 value = 600 digits = 0 numeric = TRUE>
+
+                                                    </spin_button add_to_grid(window_informations_grid, window_informations_height_value, 4, 1, 1, 1)>
+                                                    <!-- End window informations height value -->
+
+                                                    <!-- Start window informations resizable label -->
+                                                    <label id = "window_informations_resizable_label" text = "Resizable" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+    
+                                                    </label add_to_grid(window_informations_grid, window_informations_resizable_label, 5, 0, 1, 1)>
+                                                    <!-- End window informations resizable label -->
+
+                                                    <!-- Start window informations resizable value combo box -->
+                                                    <combo_box id = "window_informations_resizable_value">
+
+                                                        <!-- Start window informations resizable value combo box item -->
+                                                        <combo_box_item id = "window_informations_resizable_value_item1" label = "TRUE">
+
+                                                        </combo_box_item add_to_combo_box(window_informations_resizable_value, "TRUE")>
+                                                        <!-- End window informations resizable value combo box item -->
+
+                                                        <!-- Start window informations resizable value combo box item -->
+                                                        <combo_box_item id = "window_informations_resizable_value_item2" label = "FALSE">
+
+                                                        </combo_box_item add_to_combo_box(window_informations_resizable_value, "FALSE")>
+                                                        <!-- End window informations resizable value combo box item -->
+
+                                                    </combo_box add_to_grid(window_informations_grid, window_informations_resizable_value, 5, 1, 1, 1)>
+                                                    <!-- End window informations resizable value combo box -->
+
+                                                    <!-- Start window informations position label -->
+                                                    <label id = "window_informations_position_label" text = "Position" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+    
+                                                    </label add_to_grid(window_informations_grid, window_informations_position_label, 6, 0, 1, 1)>
+                                                    <!-- End window informations position label -->
+
+                                                    <!-- Start window informations position value combo box -->
+                                                    <combo_box id = "window_informations_position_value">
+
+                                                        <!-- Start window informations position value combo box item -->
+                                                        <combo_box_item id = "window_informations_position_value_item1" label = "GTK_WIN_POS_CENTER">
+
+                                                        </combo_box_item add_to_combo_box(window_informations_position_value, "GTK_WIN_POS_CENTER")>
+                                                        <!-- End window informations position value combo box item -->
+
+                                                        <!-- Start window informations position value combo box item -->
+                                                        <combo_box_item id = "window_informations_position_value_item2" label = "GTK_WIN_POS_CENTER_ON_PARENT">
+
+                                                        </combo_box_item add_to_combo_box(window_informations_position_value, "GTK_WIN_POS_CENTER_ON_PARENT")>
+                                                        <!-- End window informations position value combo box item -->
+
+                                                        <!-- Start window informations position value combo box item -->
+                                                        <combo_box_item id = "window_informations_position_value_item3" label = "GTK_WIN_POS_MOUSE">
+
+                                                        </combo_box_item add_to_combo_box(window_informations_position_value, "GTK_WIN_POS_MOUSE")>
+                                                        <!-- End window informations position value combo box item -->
+
+                                                    </combo_box add_to_grid(window_informations_grid, window_informations_position_value, 6, 1, 1, 1)>
+                                                    <!-- End window informations position value combo box -->
+
+                                                    <!-- Start window informations decorate label -->
+                                                    <label id = "window_informations_decorate_label" text = "Decorate" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+    
+                                                    </label add_to_grid(window_informations_grid, window_informations_decorate_label, 7, 0, 1, 1)>
+                                                    <!-- End window informations decorate label -->
+
+                                                    <!-- Start window informations decorate value combo box -->
+                                                    <combo_box id = "window_informations_decorate_value">
+
+                                                        <!-- Start window informations decorate value combo box item -->
+                                                        <combo_box_item id = "window_informations_decorate_value_item1" label = "TRUE">
+
+                                                        </combo_box_item add_to_combo_box(window_informations_decorate_value, "TRUE")>
+                                                        <!-- End window informations decorate value combo box item -->
+
+                                                        <!-- Start window informations decorate value combo box item -->
+                                                        <combo_box_item id = "window_informations_decorate_value_item2" label = "FALSE">
+
+                                                        </combo_box_item add_to_combo_box(window_informations_decorate_value, "FALSE")>
+                                                        <!-- End window informations decorate value combo box item -->
+
+                                                    </combo_box add_to_grid(window_informations_grid, window_informations_decorate_value, 7, 1, 1, 1)>
+                                                    <!-- End window informations decorate value combo box -->
+
+                                                    <!-- Start window informations icon label -->
+                                                    <label id = "window_informations_icon_label" text = "Icon" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+    
+                                                    </label add_to_grid(window_informations_grid, window_informations_icon_label, 8, 0, 1, 1)>
+                                                    <!-- End window informations icon label -->
+
+                                                    <!-- Start window informations icon value -->
+                                                    <entry id = "window_informations_icon_value"  indicator_text = "icon path" visible = TRUE editable = TRUE max_length = 20 alignment = 0.5>
+
+                                                    </entry add_to_grid(window_informations_grid, window_informations_icon_value, 8, 1, 1, 1)>
+                                                    <!-- End window informations icon value -->
+
+                                                    <!-- Start window informations opacity label -->
+                                                    <label id = "window_informations_opacity_label" text = "Opacity" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+    
+                                                    </label add_to_grid(window_informations_grid, window_informations_opacity_label, 9, 0, 1, 1)>
+                                                    <!-- End window informations opacity label -->
+
+                                                    <!-- Start window informations opacity value -->
+                                                    <spin_button id = "window_informations_opacity_value" min = 0 max = 1 step = 0.1 value = 1 digits = 1 numeric = TRUE>
+
+                                                    </spin_button add_to_grid(window_informations_grid, window_informations_opacity_value, 9, 1, 1, 1)>
+                                                    <!-- End window informations opacity value -->
+
+                                                    <!-- Start window informations fullscreen label -->
+                                                    <label id = "window_informations_fullscreen_label" text = "Fullscreen" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+    
+                                                    </label add_to_grid(window_informations_grid, window_informations_fullscreen_label, 10, 0, 1, 1)>
+                                                    <!-- End window informations fullscreen label -->
+
+                                                    <!-- Start window informations fullscreen value combo box -->
+                                                    <combo_box id = "window_informations_fullscreen_value">
+
+                                                        <!-- Start window informations fullscreen value combo box item -->
+                                                        <combo_box_item id = "window_informations_fullscreen_value_item1" label = "TRUE">
+
+                                                        </combo_box_item add_to_combo_box(window_informations_fullscreen_value, "TRUE")>
+                                                        <!-- End window informations fullscreen value combo box item -->
+
+                                                        <!-- Start window informations fullscreen value combo box item -->
+                                                        <combo_box_item id = "window_informations_fullscreen_value_item2" label = "FALSE">
+
+                                                        </combo_box_item add_to_combo_box(window_informations_fullscreen_value, "FALSE")>
+                                                        <!-- End window informations fullscreen value combo box item -->
+
+                                                    </combo_box add_to_grid(window_informations_grid, window_informations_fullscreen_value, 10, 1, 1, 1)>
+                                                    <!-- End window informations fullscreen value combo box -->
+
+                                                    <!-- Start window informations add button -->
+                                                    <button id = "window_informations_add_button" label = "Add">
+
+                                                    </button add_to_grid(window_informations_grid, window_informations_add_button, 11, 0, 2, 1)>
+                                                    <!-- End window informations add button -->
+
+                                                </grid add_to_box(window_informations_main_box, window_informations_grid, START, TRUE, FALSE, 0, 0, 0, 0, 0)>
+                                                <!-- End window informations grid -->
+
+                                            </box add_to_box(window_case, window_informations_main_box, START, FALSE, FALSE, 0, 5, 0, 0, 7)>
+                                            <!-- End window informations main box -->
+
+                                        </box add_to_box(Windows_box, window_case, START, TRUE, TRUE, 0, 7, 0, 0, 0)>
+                                        <!-- End Window Case -->
+
+
+                                        <!-- Start Header Bar Case -->
+                                        <box id = "Header_bar_case" orientation = GTK_ORIENTATION_VERTICAL align = GTK_ALIGN_START spacing = 0>
+
+                                            <!-- Start header bar label -->
+                                            <label id = "header_bar_label" text = "Header Bar" size = 14 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                            </label add_to_box(Header_bar_case, header_bar_label, START, TRUE, FALSE, 0, 0, 0, 0, 7)>
+                                            <!-- End header bar label -->
+
+                                            <!-- Start header bar informations main box -->
+                                            <box id = "header_bar_informations_main_box" orientation = GTK_ORIENTATION_VERTICAL align = -1 spacing = 0>
+
+                                                <!-- Start header bar informations grid -->
+                                                <grid id = "header_bar_informations_grid" rows_spacing = 7 columns_spacing = 7 rows_homogeneous = TRUE columns_homogeneous = FALSE>
+
+                                                    <!-- Start header bar informations title label -->
+                                                    <label id = "header_bar_informations_title_label" text = "Title" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(header_bar_informations_grid, header_bar_informations_title_label, 0, 0, 1, 1)>
+                                                    <!-- End header bar informations title label -->
+
+                                                    <!-- Start header bar informations title value -->
+                                                    <entry id = "header_bar_informations_title_value"  indicator_text = "title" visible = TRUE editable = TRUE max_length = 20 alignment = 0.5>
+
+                                                    </entry add_to_grid(header_bar_informations_grid, header_bar_informations_title_value, 0, 1, 1, 1)>
+                                                    <!-- End header bar informations title value -->
+
+                                                    <!-- Start header bar informations subtitle label -->
+                                                    <label id = "header_bar_informations_subtitle_label" text = "Subtitle" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(header_bar_informations_grid, header_bar_informations_subtitle_label, 1, 0, 1, 1)>
+                                                    <!-- End header bar informations subtitle label -->
+
+                                                    <!-- Start header bar informations subtitle value -->
+                                                    <entry id = "header_bar_informations_subtitle_value"  indicator_text = "subtitle" visible = TRUE editable = TRUE max_length = 20 alignment = 0.5>
+
+                                                    </entry add_to_grid(header_bar_informations_grid, header_bar_informations_subtitle_value, 1, 1, 1, 1)>
+                                                    <!-- End header bar informations subtitle value -->
+
+                                                    <!-- Start header bar informations icon label -->
+                                                    <label id = "header_bar_informations_icon_label" text = "Icon" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(header_bar_informations_grid, header_bar_informations_icon_label, 2, 0, 1, 1)>
+                                                    <!-- End header bar informations icon label -->
+
+                                                    <!-- Start header bar informations icon value -->
+                                                    <entry id = "header_bar_informations_icon_value"  indicator_text = "icon path" visible = TRUE editable = TRUE max_length = 20 alignment = 0.5>
+
+                                                    </entry add_to_grid(header_bar_informations_grid, header_bar_informations_icon_value, 2, 1, 1, 1)>
+                                                    <!-- End header bar informations icon value -->
+
+                                                    <!-- Start header bar informations settings label -->
+                                                    <label id = "header_bar_informations_settings_label" text = "Settings" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(header_bar_informations_grid, header_bar_informations_settings_label, 3, 0, 1, 1)>
+                                                    <!-- End header bar informations settings label -->
+
+                                                    <!-- Start header bar informations settings value combo box -->
+                                                    <combo_box id = "header_bar_informations_settings_value">
+
+                                                        <!-- Start header bar informations settings value combo box item -->
+                                                        <combo_box_item id = "header_bar_informations_settings_value_item1" label = "TRUE">
+
+                                                        </combo_box_item add_to_combo_box(header_bar_informations_settings_value, "TRUE")>
+                                                        <!-- End header bar informations settings value combo box item -->
+
+                                                        <!-- Start header bar informations settings value combo box item -->
+                                                        <combo_box_item id = "header_bar_informations_settings_value_item2" label = "FALSE">
+
+                                                        </combo_box_item add_to_combo_box(header_bar_informations_settings_value, "FALSE")>
+                                                        <!-- End header bar informations settings value combo box item -->
+
+                                                    </combo_box add_to_grid(header_bar_informations_grid, header_bar_informations_settings_value, 3, 1, 1, 1)>
+                                                    <!-- End header bar informations settings value combo box -->
+                                                    
+                                                    <!-- Start header bar informations add button -->
+                                                    <button id = "header_bar_informations_add_button" label = "Add">
+
+                                                    </button add_to_grid(header_bar_informations_grid, header_bar_informations_add_button, 4, 0, 2, 1)>
+                                                    <!-- End header bar informations add button -->
+
+                                                </grid add_to_box(header_bar_informations_main_box, header_bar_informations_grid, START, TRUE, FALSE, 0, 14, 0, 0, 0)>
+                                                <!-- End header bar informations grid -->
+
+                                            </box add_to_box(Header_bar_case, header_bar_informations_main_box, START, FALSE, FALSE, 0, 5, 0, 0, 7)>
+                                            <!-- End header bar informations main box -->
+
+                                        </box add_to_box(Windows_box, Header_bar_case, START, TRUE, TRUE, 0, 25, 0, 0, 0)>
+                                        <!-- End Header Bar Case -->
+
+                                        <!-- Start scrolled window Case -->
+                                        <box id = "scrolled_window_case" orientation = GTK_ORIENTATION_VERTICAL align = GTK_ALIGN_START spacing = 0>
+
+                                            <!-- Start scrolled window label -->
+                                            <label id = "scrolled_window_label" text = "scrolled window" size = 14 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                            </label add_to_box(scrolled_window_case, scrolled_window_label, START, TRUE, FALSE, 0, 0, 0, 0, 7)>
+                                            <!-- End scrolled window label -->
+
+                                            <!-- Start scrolled window informations main box -->
+                                            <box id = "scrolled_window_informations_main_box" orientation = GTK_ORIENTATION_VERTICAL align = -1 spacing = 0>
+
+                                                <!-- Start scrolled window informations grid -->
+                                                <grid id = "scrolled_window_informations_grid" rows_spacing = 7 columns_spacing = 7 rows_homogeneous = TRUE columns_homogeneous = FALSE>
+
+                                                    <!-- Start scrolled window informations horizontal label -->
+                                                    <label id = "scrolled_window_informations_horizontal_label" text = "Horizontal" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(scrolled_window_informations_grid, scrolled_window_informations_horizontal_label, 0, 0, 1, 1)>
+                                                    <!-- End scrolled window informations horizontal label -->
+
+                                                    <!-- Start scrolled window informations horizontal value combo box -->
+                                                    <combo_box id = "scrolled_window_informations_horizontal_value">
+
+                                                        <!-- Start scrolled window informations horizontal value combo box item -->
+                                                        <combo_box_item id = "scrolled_window_informations_horizontal_value_item1" label = "TRUE">
+
+                                                        </combo_box_item add_to_combo_box(scrolled_window_informations_horizontal_value, "TRUE")>
+                                                        <!-- End scrolled window informations horizontal value combo box item -->
+
+                                                        <!-- Start scrolled window informations horizontal value combo box item -->
+                                                        <combo_box_item id = "scrolled_window_informations_horizontal_value_item2" label = "FALSE">
+
+                                                        </combo_box_item add_to_combo_box(scrolled_window_informations_horizontal_value, "FALSE")>
+                                                        <!-- End scrolled window informations horizontal value combo box item -->
+
+                                                    </combo_box add_to_grid(scrolled_window_informations_grid, scrolled_window_informations_horizontal_value, 0, 1, 1, 1)>
+                                                    <!-- End scrolled window informations horizontal value combo box -->
+
+                                                    <!-- Start scrolled window informations vertical label -->
+                                                    <label id = "scrolled_window_informations_vertical_label" text = "Vertical" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(scrolled_window_informations_grid, scrolled_window_informations_vertical_label, 1, 0, 1, 1)>
+                                                    <!-- End scrolled window informations vertical label -->
+
+                                                    <!-- Start scrolled window informations vertical value combo box -->
+                                                    <combo_box id = "scrolled_window_informations_vertical_value">
+
+                                                        <!-- Start scrolled window informations vertical value combo box item -->
+                                                        <combo_box_item id = "scrolled_window_informations_vertical_value_item1" label = "TRUE">
+
+                                                        </combo_box_item add_to_combo_box(scrolled_window_informations_vertical_value, "TRUE")>
+                                                        <!-- End scrolled window informations vertical value combo box item -->
+
+                                                        <!-- Start scrolled window informations vertical value combo box item -->
+                                                        <combo_box_item id = "scrolled_window_informations_vertical_value_item2" label = "FALSE">
+
+                                                        </combo_box_item add_to_combo_box(scrolled_window_informations_vertical_value, "FALSE")>
+                                                        <!-- End scrolled window informations vertical value combo box item -->
+
+                                                    </combo_box add_to_grid(scrolled_window_informations_grid, scrolled_window_informations_vertical_value, 1, 1, 1, 1)>
+                                                    <!-- End scrolled window informations vertical value combo box -->
+
+                                                    <!-- Start scrolled window informations add button -->
+                                                    <button id = "scrolled_window_informations_add_button" label = "Add">
+
+                                                    </button add_to_grid(scrolled_window_informations_grid, scrolled_window_informations_add_button, 2, 0, 2, 1)>
+                                                    <!-- End scrolled window informations add button -->
+
+                                                </grid add_to_box(scrolled_window_informations_main_box, scrolled_window_informations_grid, START, TRUE, FALSE, 0, 14, 0, 0, 0)>
+                                                <!-- End scrolled window informations grid -->
+
+                                            </box add_to_box(scrolled_window_case, scrolled_window_informations_main_box, START, FALSE, FALSE, 0, 5, 0, 0, 7)>
+                                            <!-- End scrolled window informations main box -->
+
+
+                                        </box add_to_box(Windows_box, scrolled_window_case, START, TRUE, TRUE, 0, 25, 0, 0, 0)>
+                                        <!-- End scrolled window Case -->
+
+                                    </box add_to_scrolled_window(scrolled_window_window, Windows_box)>
                                     <!-- End Windows box -->
 
-                                </scrolled_window add_to_stack(stack_catalog, scrolled_windows_window, "Windows")>
-                                <!-- End Scrolled Windows window -->
+                                </scrolled_window add_to_stack(stack_catalog, scrolled_window_window, "Windows")>
+                                <!-- End scrolled window window -->
 
 
                                 <!-- Start Scrolled Containers window -->
                                 <scrolled_window id = "scrolled_containers_window" horizontal = FALSE vertical = TRUE>
 
                                     <!-- Start Containers box -->
-                                    <box id = "Containers_box" orientation = GTK_ORIENTATION_VERTICAL align = -1 spacing = 0>
+                                    <box id = "Containers_box" orientation = GTK_ORIENTATION_VERTICAL align = -1 spacing = 7>
 
                                         <!-- Start containers button -->
                                         <button id = "Containers" label = "Containers">
@@ -236,7 +598,7 @@
                                 <scrolled_window id = "scrolled_widgets_window" horizontal = FALSE vertical = TRUE>
 
                                     <!-- Start Widgets box -->
-                                    <box id = "Widgets_box" orientation = GTK_ORIENTATION_VERTICAL align = -1 spacing = 0>
+                                    <box id = "Widgets_box" orientation = GTK_ORIENTATION_VERTICAL align = -1 spacing = 7>
 
                                         <!-- Start Widgets button -->
                                         <button id = "Widgets" label = "Widgets">
