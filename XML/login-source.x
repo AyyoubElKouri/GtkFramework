@@ -54,7 +54,7 @@
                     <box id = "first_space_box" orientation = GTK_ORIENTATION_VERTICAL align = -1 spacing = 0>
 
                         <!-- Start the contents space paned -->
-                        <paned id = "contents_space_paned" orientation = GTK_ORIENTATION_VERTICAL default_position = 500 show_handle = TRUE>
+                        <paned id = "contents_space_paned" orientation = GTK_ORIENTATION_VERTICAL default_position = 400 show_handle = TRUE>
 
                             <!-- Start the working space box -->
                             <box id = "working_space_box" orientation = GTK_ORIENTATION_VERTICAL align = -1 spacing = 0>
@@ -1213,6 +1213,258 @@
 
                                     <!-- Start Widgets box -->
                                     <box id = "Widgets_box" orientation = GTK_ORIENTATION_VERTICAL align = -1 spacing = 7>
+
+                                        <!-- Start the button box -->
+                                        <box id = "button_box" orientation = GTK_ORIENTATION_VERTICAL align = -1 spacing = 0>
+
+                                            <!-- Start button label frame -->
+                                            <frame id = "button_label_frame" label = "Button" size = 14 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                <!-- Start button label --> 
+                                                <label id = "button_label" text = "Button"  size = 14 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                </label add_to_frame(button_label_frame, button_label, 7, 7, 14, 0)>
+                                                <!-- End button label -->
+
+                                            </frame add_to_box(button_box, button_label_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0)>
+                                            <!-- End button label frame -->
+
+                                            <!-- Start button grid frame -->
+                                            <frame id = "button_grid_frame" size = 14 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                <!-- Start button grid -->
+                                                <grid id = "button_grid" rows_spacing = 7 columns_spacing = 7 rows_homogeneous = TRUE columns_homogeneous = FALSE>
+
+                                                    <!-- Start button relief label -->
+                                                    <label id = "button_relief_label" text = "Relief" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+    
+                                                    </label add_to_grid(button_grid, button_relief_label, 0, 0, 1, 1)>
+                                                    <!-- End button relief label -->
+    
+                                                    <!-- Start button relief combo box -->
+                                                    <combo_box id = "button_relief_combo_box">
+    
+                                                        <!-- Start button relief combo box item -->
+                                                        <combo_box_item id = "combo_box_item">
+    
+                                                        </combo_box_item add_to_combo_box(button_relief_combo_box, "GTK_RELIEF_NONE")>
+                                                        <!-- End button relief combo box item -->
+    
+                                                        <!-- Start button relief combo box item -->
+                                                        <combo_box_item id = "combo_box_item">
+    
+                                                        </combo_box_item add_to_combo_box(button_relief_combo_box, "GTK_RELIEF_NORMAL")>
+                                                        <!-- End button relief combo box item -->
+                                                    
+                                                    </combo_box add_to_grid(button_grid, button_relief_combo_box, 0, 1, 1, 1)>
+                                                    <!-- End button relief combo box -->
+
+                                                    <!-- Start button label label -->
+                                                    <label id = "button_label_label" text = "Label" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+    
+                                                    </label add_to_grid(button_grid, button_label_label, 1, 0, 1, 1)>
+                                                    <!-- End button label label -->
+
+                                                    <!-- Start button label entry -->
+                                                    <entry id = "button_label_entry" size = 14 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+    
+                                                    </entry add_to_grid(button_grid, button_label_entry, 1, 1, 1, 1)>
+                                                    <!-- End button label entry -->
+
+                                                    <!-- Start button use underline label -->
+                                                    <label id = "button_use_underline_label" text = "Use Underline" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+    
+                                                    </label add_to_grid(button_grid, button_use_underline_label, 2, 0, 1, 1)>
+                                                    <!-- End button use underline label -->
+
+                                                    <!-- Start button use underline combo box -->
+                                                    <combo_box id = "button_use_underline_combo_box">
+    
+                                                        <!-- Start button use underline combo box item -->
+                                                        <combo_box_item id = "combo_box_item">
+    
+                                                        </combo_box_item add_to_combo_box(button_use_underline_combo_box, "TRUE")>
+                                                        <!-- End button use underline combo box item -->
+    
+                                                        <!-- Start button use underline combo box item -->
+                                                        <combo_box_item id = "combo_box_item">
+    
+                                                        </combo_box_item add_to_combo_box(button_use_underline_combo_box, "FALSE")>
+                                                        <!-- End button use underline combo box item -->
+                                                    
+                                                    </combo_box add_to_grid(button_grid, button_use_underline_combo_box, 2, 1, 1, 1)>
+                                                    <!-- End button use underline combo box -->
+
+                                                    <!-- Start button path to image label -->
+                                                    <label id = "button_path_to_image_label" text = "Path to Image" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+    
+                                                    </label add_to_grid(button_grid, button_path_to_image_label, 3, 0, 1, 1)>
+                                                    <!-- End button path to image label -->
+
+                                                    <!-- Start button path to image entry -->
+                                                    <entry id = "button_path_to_image_entry" size = 14 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+    
+                                                    </entry add_to_grid(button_grid, button_path_to_image_entry, 3, 1, 1, 1)>
+                                                    <!-- End button path to image entry -->
+
+                                                    <!-- Start button callback label -->
+                                                    <label id = "button_callback_label" text = "Callback" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+    
+                                                    </label add_to_grid(button_grid, button_callback_label, 4, 0, 1, 1)>
+                                                    <!-- End button callback label -->
+
+                                                    <!-- Start button callback entry -->
+                                                    <entry id = "button_callback_entry" size = 14 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+    
+                                                    </entry add_to_grid(button_grid, button_callback_entry, 4, 1, 1, 1)>
+                                                    <!-- End button callback entry -->
+
+                                                    <!-- Start button data label -->
+                                                    <label id = "button_data_label" text = "Data" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+    
+                                                    </label add_to_grid(button_grid, button_data_label, 5, 0, 1, 1)>
+                                                    <!-- End button data label -->
+
+                                                    <!-- Start button data entry -->
+                                                    <entry id = "button_data_entry" size = 14 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+    
+                                                    </entry add_to_grid(button_grid, button_data_entry, 5, 1, 1, 1)>
+                                                    <!-- End button data entry -->
+
+                                                    <!-- Start button add button -->
+                                                    <button id = "button_add" label = "                                                               Add                                                               ">
+
+                                                    </button add_to_grid(button_grid, button_add, 6, 0, 2, 1)>
+                                                    <!-- End button add button -->
+
+                                                </grid add_to_frame(button_grid_frame, button_grid, 14, 14, 14, 14)>
+                                                <!-- End button grid -->
+
+                                            </frame add_to_box(button_box, button_grid_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0)>
+                                            <!-- End button grid frame -->
+
+                                        </box add_to_box(Widgets_box, button_box, START, FALSE, FALSE, 0, 7, 0, 0, 0)>
+                                        <!-- End the button box -->
+
+                                        <!-- Start the check button box -->
+                                        <box id = "check_button_box" orientation = GTK_ORIENTATION_VERTICAL align = -1 spacing = 0>
+
+                                            <!-- Start the check button label frame -->
+                                            <frame id = "check_button_label_frame" label = NULL>
+
+                                                <!-- Start the check button label -->
+                                                <label id = "check_button_label" text = "Check Button" size = 14 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                </label add_to_frame(check_button_label_frame, check_button_label, 7, 7, 14, 14)>
+                                                <!-- End the check button label -->
+
+                                            </frame add_to_box(check_button_box, check_button_label_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0)>
+                                            <!-- End the check button label frame -->
+
+                                            <!-- Start check button grid frame -->
+                                            <frame id = "check_button_grid_frame" label = NULL>
+
+                                                <!-- Start check button grid -->
+                                                <grid id = "check_button_grid" rows_spacing = 7 column_spacing = 7 row_homogeneous = TRUE column_homogeneous = FALSE>
+
+                                                    <!-- Start check button label label -->
+                                                    <label id = "check_button_label_label" text = "Label" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(check_button_grid, check_button_label_label, 0, 0, 1, 1)>
+                                                    <!-- End check button label label -->
+
+                                                    <!-- Start check button label entry -->
+                                                    <entry id = "check_button_label_entry" size = 14 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+    
+                                                    </entry add_to_grid(check_button_grid, check_button_label_entry, 0, 1, 1, 1)>
+                                                    <!-- End check button label entry -->
+
+                                                    <!-- Start check button active label -->
+                                                    <label id = "check_button_active_label" text = "Active" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(check_button_grid, check_button_active_label, 1, 0, 1, 1)>
+                                                    <!-- End check button active label -->
+
+                                                    <!-- Start check button active combo box -->
+                                                    <combo_box id = "check_button_active_combo_box" size = 14 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                        <!-- Start check button active combo box item -->
+                                                        <combo_box_item id = "combo_box_item">
+    
+                                                        </combo_box_item add_to_combo_box(check_button_active_combo_box, "TRUE")>
+                                                        <!-- End check button active combo box item -->
+
+                                                        <!-- Start check button active combo box item -->
+                                                        <combo_box_item id = "combo_box_item">
+    
+                                                        </combo_box_item add_to_combo_box(check_button_active_combo_box, "FALSE")>
+                                                        <!-- End check button active combo box item -->
+
+                                                    </combo_box add_to_grid(check_button_grid, check_button_active_combo_box, 1, 1, 1, 1)>
+                                                    <!-- End check button active combo box -->
+
+                                                    <!-- Start check button use underline label -->
+                                                    <label id = "check_button_use_underline_label" text = "Use Underline" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(check_button_grid, check_button_use_underline_label, 2, 0, 1, 1)>
+                                                    <!-- End check button use underline label -->
+
+                                                    <!-- Start check button use underline combo box -->
+                                                    <combo_box id = "check_button_use_underline_combo_box" size = 14 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                        <!-- Start check button use underline combo box item -->
+                                                        <combo_box_item id = "combo_box_item">
+    
+                                                        </combo_box_item add_to_combo_box(check_button_use_underline_combo_box, "TRUE")>
+                                                        <!-- End check button use underline combo box item -->
+
+                                                        <!-- Start check button use underline combo box item -->
+                                                        <combo_box_item id = "combo_box_item">
+    
+                                                        </combo_box_item add_to_combo_box(check_button_use_underline_combo_box, "FALSE")>
+                                                        <!-- End check button use underline combo box item -->
+
+                                                    </combo_box add_to_grid(check_button_grid, check_button_use_underline_combo_box, 2, 1, 1, 1)>
+                                                    <!-- End check button use underline combo box -->
+
+                                                    <!-- Start check button callback label -->
+                                                    <label id = "check_button_callback_label" text = "Callback" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(check_button_grid, check_button_callback_label, 3, 0, 1, 1)>
+                                                    <!-- End check button callback label -->
+
+                                                    <!-- Start check button callback entry -->
+                                                    <entry id = "check_button_callback_entry" size = 14 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+    
+                                                    </entry add_to_grid(check_button_grid, check_button_callback_entry, 3, 1, 1, 1)>
+                                                    <!-- End check button callback entry -->
+
+                                                    <!-- Start check button data label -->
+                                                    <label id = "check_button_data_label" text = "Data" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(check_button_grid, check_button_data_label, 4, 0, 1, 1)>
+                                                    <!-- End check button data label -->
+
+                                                    <!-- Start check button data entry -->
+                                                    <entry id = "check_button_data_entry" size = 14 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+    
+                                                    </entry add_to_grid(check_button_grid, check_button_data_entry, 4, 1, 1, 1)>
+                                                    <!-- End check button data entry -->
+
+                                                    <!-- Start check button add button -->
+                                                    <button id = "check_button_add_button" label = "                                                               Add                                                               ">
+
+                                                    </button add_to_grid(check_button_grid, check_button_add_button, 5, 0, 2, 1)>
+                                                    <!-- End check button add button -->
+
+                                                </grid add_to_frame(check_button_grid_frame, check_button_grid, 14, 14, 14, 14)>
+                                                <!-- End check button grid -->
+
+                                            </frame add_to_box(check_button_box, check_button_grid_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0)>
+                                            <!-- End check button grid frame -->
+
+                                        </box add_to_box(Widgets_box, check_button_box, START, FALSE, FALSE, 0, 0, 0, 0, 0)>
+                                        <!-- End the check button box -->
 
                                         <!-- Start Widgets button -->
                                         <button id = "Widgets" label = "Widgets">
