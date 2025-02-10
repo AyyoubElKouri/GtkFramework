@@ -48,7 +48,7 @@
                 <!-- End the hierarchy widgets box -->
 
                 <!-- Start the build space paned -->
-                <paned id = "build_space_paned" orientation = GTK_ORIENTATION_HORIZONTAL default_position = 710 show_handle = TRUE>
+                <paned id = "build_space_paned" orientation = GTK_ORIENTATION_HORIZONTAL default_position = 625 show_handle = TRUE>
 
                     <!-- Start the first space box -->
                     <box id = "first_space_box" orientation = GTK_ORIENTATION_VERTICAL align = -1 spacing = 0>
@@ -376,7 +376,7 @@
                                                         <!-- End window informations fullscreen value combo box -->
     
                                                         <!-- Start window informations add button -->
-                                                        <button id = "window_informations_add_button" label = "                                                        Add                                                 ">
+                                                        <button id = "window_informations_add_button" label = "                                                               Add                                                               ">
     
                                                         </button add_to_grid(window_informations_grid, window_informations_add_button, 11, 0, 2, 1)>
                                                         <!-- End window informations add button -->
@@ -480,12 +480,12 @@
                                                         <!-- End header bar informations settings value combo box -->
                                                         
                                                         <!-- Start header bar informations add button -->
-                                                        <button id = "header_bar_informations_add_button" label = "                                                        Add                                                 ">
+                                                        <button id = "header_bar_informations_add_button" label = "                                                               Add                                                               ">
     
                                                         </button add_to_grid(header_bar_informations_grid, header_bar_informations_add_button, 4, 0, 2, 1)>
                                                         <!-- End header bar informations add button -->
     
-                                                    </grid add_to_box(header_bar_informations_main_box, header_bar_informations_grid, START, TRUE, FALSE, 0, 14, 0, 21, 21)>
+                                                    </grid add_to_box(header_bar_informations_main_box, header_bar_informations_grid, START, TRUE, FALSE, 0, 14, 0, 14, 0)>
                                                     <!-- End header bar informations grid -->
     
                                                 </box add_to_frame(header_bar_informations_main_box_frame, header_bar_informations_main_box, 0, 18, 0, 0)>
@@ -571,7 +571,7 @@
                                                         <!-- End scrolled window informations vertical value combo box -->
     
                                                         <!-- Start scrolled window informations add button -->
-                                                        <button id = "scrolled_window_informations_add_button" label = "                                                        Add                                                 ">
+                                                        <button id = "scrolled_window_informations_add_button" label = "                                                               Add                                                               ">
     
                                                         </button add_to_grid(scrolled_window_informations_grid, scrolled_window_informations_add_button, 2, 0, 2, 1)>
                                                         <!-- End scrolled window informations add button -->
@@ -579,13 +579,11 @@
                                                     </grid add_to_box(scrolled_window_informations_main_box, scrolled_window_informations_grid, START, TRUE, FALSE, 0, 14, 0, 0, 0)>
                                                     <!-- End scrolled window informations grid -->
     
-                                                </box add_to_frame(scrolled_window_informations_main_box_frame, scrolled_window_informations_main_box, 0, 18, 21, 0)>
+                                                </box add_to_frame(scrolled_window_informations_main_box_frame, scrolled_window_informations_main_box, 0, 18, 14, 0)>
                                                 <!-- End scrolled window informations main box -->
 
                                             </frame add_to_box(scrolled_window_case, scrolled_window_informations_main_box_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
                                             <!-- End scrolled window informations main box frame -->
-
-
 
                                         </box add_to_box(Windows_box, scrolled_window_case, START, TRUE, TRUE, 0, 25, 0, 0, 0)>
                                         <!-- End scrolled window Case -->
@@ -700,7 +698,7 @@
                                                         <!-- End box case informations spacing value spin button -->
     
                                                         <!-- Start box case informations add button -->
-                                                        <button id = "Box_case_informations_add" label = "                                                        Add                                                 ">
+                                                        <button id = "Box_case_informations_add" label = "                                                               Add                                                               ">
     
                                                         </button add_to_grid(Box_case_informations_grid, Box_case_informations_add, 3, 0, 2, 1)>
                                                         <!-- End box case informations add button -->
@@ -708,7 +706,7 @@
                                                     </grid add_to_box(Box_case_informations_main_box, Box_case_informations_grid, START, TRUE, FALSE, 0, 14, 0, 0, 0)>
                                                     <!-- End box case informations grid -->
     
-                                                </box add_to_frame(Box_case_informations_main_box_frame, Box_case_informations_main_box, 5, 18, 18, 0)>
+                                                </box add_to_frame(Box_case_informations_main_box_frame, Box_case_informations_main_box, 5, 18, 14, 0)>
                                                 <!-- End box case informations main box -->
 
                                             </frame add_to_box(Box_case, Box_case_informations_main_box_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
@@ -740,7 +738,7 @@
                                                 <grid id = "Fixed_grid" rows_spacing = 7 columns_spacing = 7 rows_homogeneous = TRUE columns_homogeneous = FALSE>
     
                                                     <!-- Start fixed add button  -->
-                                                    <button id = "Fixed_add" label = "                                                        Add                                                 ">
+                                                    <button id = "Fixed_add" label = "                                                               Add                                                               ">
     
                                                     </button add_to_grid(Fixed_grid, Fixed_add, 0, 0, 2, 1)>
                                                     <!-- End fixed add button  -->
@@ -814,7 +812,7 @@
     
     
                                                     <!-- Start frame add button  -->
-                                                    <button id = "Frame_add" label = "                                                        Add                                                 ">
+                                                    <button id = "Frame_add" label = "                                                               Add                                                               ">
     
                                                     </button add_to_grid(Frame_grid, Frame_add, 3, 0, 2, 1)>
                                                     <!-- End frame add button  -->
@@ -922,7 +920,7 @@
                                                     <!-- End grid columns homogeneous value combo box  -->
     
                                                     <!-- Start grid add button  -->
-                                                    <button id = "Grid_add" label = "                                                        Add                                                 ">
+                                                    <button id = "Grid_add" label = "                                                               Add                                                               ">
     
                                                     </button add_to_grid(Grid_grid, Grid_add, 4, 0, 2, 1)>
                                                     <!-- End fixed add button  -->
@@ -1019,7 +1017,7 @@
                                                     <!-- End paned show handle combo box -->
     
                                                     <!-- Start paned add button  -->
-                                                    <button id = "Paned_add" label = "                                                        Add                                                 ">
+                                                    <button id = "Paned_add" label = "                                                               Add                                                               ">
     
                                                     </button add_to_grid(Paned_grid, Paned_add, 3, 0, 2, 1)>
                                                     <!-- End fixed add button  -->
@@ -1115,12 +1113,12 @@
                                                     <!-- End stack duration value spin button -->
     
                                                     <!-- Start stack informations add button -->
-                                                    <button id = "stack_informations_add_button" label = "                                                        Add                                                 ">
+                                                    <button id = "stack_informations_add_button" label = "                                                               Add                                                               ">
     
                                                     </button add_to_grid(Stack_grid, stack_informations_add_button, 3, 0, 2, 1)>
                                                     <!-- End stack informations add button -->
     
-                                                </grid add_to_frame(Stack_grid_frame, Stack_grid, 14, 14, 14, 0)>
+                                                </grid add_to_frame(Stack_grid_frame, Stack_grid, 14, 14, 14, 14)>
                                                 <!-- End Stack grid -->
 
                                             </frame add_to_box(Stack_box, Stack_grid_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0)>
@@ -1131,7 +1129,7 @@
                                         <!-- End stack box -->
 
                                         <!-- Start switcher box -->
-                                        <box id = "Switcher_box" orientation = GTK_ORIENTATION_VERTICAL align = -1 spacing = 10>
+                                        <box id = "Switcher_box" orientation = GTK_ORIENTATION_VERTICAL align = -1 spacing = 0>
 
                                             <!-- Start switcher label frame -->
                                             <frame id = "Switcher_label_frame" label = "Switcher" size = 14 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
@@ -1188,12 +1186,12 @@
                                                     <!-- End same size value combo box -->
     
                                                     <!-- Start switcher informations add button -->
-                                                    <button id = "switcher_informations_add_button" label = "                                                        Add                                                 ">
+                                                    <button id = "switcher_informations_add_button" label = "                                                               Add                                                               ">
     
                                                     </button add_to_grid(Switcher_grid, switcher_informations_add_button, 2, 0, 2, 1)>
                                                     <!-- End switcher informations add button -->
     
-                                                </grid add_to_frame(Switcher_grid_frame, Switcher_grid, 14, 14, 14, 0)>
+                                                </grid add_to_frame(Switcher_grid_frame, Switcher_grid, 14, 14, 14, 14)>
                                                 <!-- End Switcher grid -->
 
                                             </frame add_to_box(Switcher_box, Switcher_grid_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0)>
