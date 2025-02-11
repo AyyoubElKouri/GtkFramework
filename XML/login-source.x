@@ -2066,6 +2066,434 @@
                                         </box add_to_box(Widgets_box, font_button_box, START, TRUE, TRUE, 0, 7, 0, 0, 0)>
                                         <!-- End font button box -->
 
+                                        <!-- Start image box -->
+                                        <box id = "image_box" orientation = GTK_ORIENTATION_VERTICAL spacing = 0>
+
+                                            <!-- Start image label frame -->
+                                            <frame id = "image_label_frame" label = NULL>
+
+                                                <!-- Start image label -->
+                                                <label id = "image_label" text = "Image" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                </label add_to_frame(image_label_frame, image_label, 7, 7, 14, 14)>
+                                                <!-- End image label -->
+
+                                            </frame add_to_box(image_box, image_label_frame, START, TRUE, TRUE, 0, 7, 0, 0, 0)>
+                                            <!-- End image label frame -->
+
+                                            <!-- Start image grid frame -->
+                                            <frame id = "image_grid_frame" label = NULL>
+
+                                                <!-- Start image grid -->
+                                                <grid id = "image_grid" rows_spacing = 7 columns_spacing = 7 rows_homogeneous = TRUE columns_homogeneous = FALSE>
+
+                                                    <!-- Start image id label -->
+                                                    <label id = "image_id_label" text = "Widget ID" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(image_grid, image_id_label, 0, 0, 1, 1)>
+                                                    <!-- End image id label -->
+
+                                                    <!-- Start image id entry -->
+                                                    <entry id = "image_id_entry" default_text = NULL indicator_text = "must be unique and no space" visible = TRUE editable = TRUE max_lenght = 5 alignment = 0.5>
+
+                                                    </entry add_to_grid(image_grid, image_id_entry, 0, 1, 1, 1)>
+                                                    <!-- End image id entry -->
+
+                                                    <!-- Start image path label -->
+                                                    <label id = "image_path_label" text = "Path" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(image_grid, image_path_label, 1, 0, 1, 1)>
+                                                    <!-- End image path label -->
+
+                                                    <!-- Start image path entry -->
+                                                    <entry id = "image_path_entry" default_text = NULL indicator_text = NULL visible = TRUE editable = TRUE max_lenght = 100 alignment = 0.5>
+
+                                                    </entry add_to_grid(image_grid, image_path_entry, 1, 1, 1, 1)>
+                                                    <!-- End image path entry -->
+
+                                                    <!-- Start image add button -->
+                                                    <button id = "image_add_button" label = "                                                               Add                                                               ">
+
+                                                    </button add_to_grid(image_grid, image_add_button, 2, 0, 2, 1)>
+                                                    <!-- End image add button -->
+
+                                                </grid add_to_frame(image_grid_frame, image_grid, 14, 14, 14, 14)>
+                                                <!-- End image grid -->
+
+                                            </frame add_to_box(image_box, image_grid_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
+                                            <!-- End image grid frame -->
+
+                                        </box add_to_box(Widgets_box, image_box, START, TRUE, TRUE, 0, 7, 0, 0, 0)>
+                                        <!-- End image box -->
+
+                                        <!-- Start Label box -->
+                                        <box id = "label_box" orientation = GTK_ORIENTATION_VERTICAL spacing = 0>
+
+                                            <!-- Start Label label frame -->
+                                            <frame id = "label_label_frame" label = NULL>
+
+                                                <!-- Start Label label -->
+                                                <label id = "label_label" text = "Label" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                </label add_to_frame(label_label_frame, label_label, 7, 7, 14, 14)>
+                                                <!-- End Label label -->
+
+                                            </frame add_to_box(label_box, label_label_frame, START, TRUE, TRUE, 0, 7, 0, 0, 0)>
+                                            <!-- End Label label frame -->
+
+                                            <!-- Start label grid frame -->
+                                            <frame id = "label_grid_frame" label = NULL>
+
+                                                <!-- Start label grid  -->
+                                                <grid id = "label_grid" rows_spacing = 7 columns_spacing = 7 rows_homogeneous = TRUE columns_homogeneous = FALSE>
+
+                                                    <!-- Start label id label -->
+                                                    <label id = "label_id_label" text = "Widget ID" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(label_grid, label_id_label, 0, 0, 1, 1)>
+                                                    <!-- End label id label -->
+
+                                                    <!-- Start label id entry -->
+                                                    <entry id = "label_id_entry" default_text = NULL indicator_text = "must be unique and no space" visible = TRUE editable = TRUE max_lenght = 5 alignment = 0.5>
+
+                                                    </entry add_to_grid(label_grid, label_id_entry, 0, 1, 1, 1)>
+                                                    <!-- End label id entry -->
+
+                                                    <!-- Start label text label -->
+                                                    <label id = "label_text_label" text = "Text" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(label_grid, label_text_label, 1, 0, 1, 1)>
+                                                    <!-- End label text label -->
+
+                                                    <!-- Start label text entry -->
+                                                    <entry id = "label_text_entry" default_text = NULL indicator_text = NULL visible = TRUE editable = TRUE max_lenght = 100 alignment = 0.5>
+
+                                                    </entry add_to_grid(label_grid, label_text_entry, 1, 1, 1, 1)>
+                                                    <!-- End label text entry -->
+
+                                                    <!-- Start label size label -->
+                                                    <label id = "label_size_label" text = "Size" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(label_grid, label_size_label, 2, 0, 1, 1)>
+                                                    <!-- End label size label -->
+
+                                                    <!-- Start label size spin button -->
+                                                    <spin_button id = "label_size_spin_button" min = 0 max = 100 step = 5 value = 0>
+
+                                                    </spin_button add_to_grid(label_grid, label_size_spin_button, 2, 1, 1, 1)>
+                                                    <!-- End label size spin button -->
+
+                                                    <!-- Start label font label -->
+                                                    <label id = "label_font_label" text = "Font" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(label_grid, label_font_label, 3, 0, 1, 1)>
+                                                    <!-- End label font label -->
+
+                                                    <!-- Start label font font button -->
+                                                    <font_button id = "label_font_font_button" default_font_name = "Arial" title = "font" show_size = TRUE show_style = TRUE use_size = FALSE use_font = FALSE>
+
+                                                    </font_button add_to_grid(label_grid, label_font_font_button, 3, 1, 1, 1)>
+                                                    <!-- End label font font button -->
+
+                                                    <!-- Start label color label -->
+                                                    <label id = "label_color_label" text = "Color" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(label_grid, label_color_label, 4, 0, 1, 1)>
+                                                    <!-- End label color label -->
+
+                                                    <!-- Start label color color button -->
+                                                    <color_button id = "label_color_color_button" default_color = "#FFFFFF" title = "coloring" use_alpha = TRUE>
+
+                                                    </color_button add_to_grid(label_grid, label_color_color_button, 4, 1, 1, 1)>
+                                                    <!-- End label color color button -->
+
+                                                    <!-- Start label background label -->
+                                                    <label id = "label_background_label" text = "Background" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(label_grid, label_background_label, 5, 0, 1, 1)>
+                                                    <!-- End label background label -->
+
+                                                    <!-- Start label background color button -->
+                                                    <color_button id = "label_background_color_button" default_color = "#000000" title = "coloring" use_alpha = TRUE>
+
+                                                    </color_button add_to_grid(label_grid, label_background_color_button, 5, 1, 1, 1)>
+                                                    <!-- End label background color button -->
+
+                                                    <!-- Start label justify label -->
+                                                    <label id = "label_justify_label" text = "Justify" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(label_grid, label_justify_label, 6, 0, 1, 1)>
+                                                    <!-- End label justify label -->
+
+                                                    <!-- Start label justify combo box -->
+                                                    <combo_box id = "label_justify_combo_box" visible = TRUE>
+
+                                                        <!-- Start label justify combo box item -->
+                                                        <combo_box_item id = "label_justify_combo_box_item">
+                                                        
+                                                        </combo_box_item add_to_combo_box(label_justify_combo_box, "GTK_JUSTIFY_CENTER")>
+                                                        <!-- End label justify combo box -->
+
+                                                        <!-- Start label justify combo box item -->
+                                                        <combo_box_item id = "label_justify_combo_box_item">
+                                                        
+                                                        </combo_box_item add_to_combo_box(label_justify_combo_box, "GTK_JUSTIFY_LEFT")>
+                                                        <!-- End label justify combo box -->
+
+                                                        <!-- Start label justify combo box item -->
+                                                        <combo_box_item id = "label_justify_combo_box_item">
+                                                        
+                                                        </combo_box_item add_to_combo_box(label_justify_combo_box, "GTK_JUSTIFY_RIGHT")>
+                                                        <!-- End label justify combo box -->
+                                                        
+                                                    </combo_box add_to_grid(label_grid, label_justify_combo_box, 6, 1, 1, 1)>
+                                                    <!-- End label justify combo box -->
+
+                                                    <!-- Start label use underline label -->
+                                                    <label id = "label_use_underline_label" text = "Use Underline" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(label_grid, label_use_underline_label, 7, 0, 1, 1)>
+                                                    <!-- End label use underline label -->
+
+                                                    <!-- Start label use underline combo box -->
+                                                    <combo_box id = "label_use_underline_combo_box" visible = TRUE>
+
+                                                        <!-- Start label use underline combo box item -->
+                                                        <combo_box_item id = "label_use_underline_combo_box_item">
+                                                        
+                                                        </combo_box_item add_to_combo_box(label_use_underline_combo_box, "TRUE")>
+                                                        <!-- End label use underline combo box -->
+
+                                                        <!-- Start label use underline combo box item -->
+                                                        <combo_box_item id = "label_use_underline_combo_box_item">
+                                                        
+                                                        </combo_box_item add_to_combo_box(label_use_underline_combo_box, "FALSE")>
+                                                        <!-- End label use underline combo box -->
+
+                                                    </combo_box add_to_grid(label_grid, label_use_underline_combo_box, 7, 1, 1, 1)>
+                                                    <!-- End label use underline combo box -->
+
+                                                    <!-- Start label pango weight label -->
+                                                    <label id = "label_pango_weight_label" text = "Pango Weight" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(label_grid, label_pango_weight_label, 8, 0, 1, 1)>
+                                                    <!-- End label pango weight label -->
+
+                                                    <!-- Start label pango weight combo box -->
+                                                    <combo_box id = "label_pango_weight_combo_box" visible = TRUE>
+
+                                                        <!-- Start label pango weight combo box item -->
+                                                        <combo_box_item id = "label_pango_weight_combo_box_item">
+                                                        
+                                                        </combo_box_item add_to_combo_box(label_pango_weight_combo_box, "PANGO_WEIGHT_NORMAL")>
+                                                        <!-- End label pango weight combo box -->
+
+                                                        <!-- Start label pango weight combo box item -->
+                                                        <combo_box_item id = "label_pango_weight_combo_box_item">
+                                                        
+                                                        </combo_box_item add_to_combo_box(label_pango_weight_combo_box, "PANGO_WEIGHT_BOLD")>
+                                                        <!-- End label pango weight combo box -->
+
+                                                    </combo_box add_to_grid(label_grid, label_pango_weight_combo_box, 8, 1, 1, 1)>
+                                                    <!-- End label pango weight combo box -->
+
+                                                    <!-- Start label pango style label -->
+                                                    <label id = "label_pango_style_label" text = "Pango Style" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(label_grid, label_pango_style_label, 9, 0, 1, 1)>
+                                                    <!-- End label pango style label -->
+
+                                                    <!-- Start label pango style combo box -->
+                                                    <combo_box id = "label_pango_style_combo_box">
+
+                                                        <!-- Start label pango style combo box item -->
+                                                        <combo_box_item id = "label_pango_style_combo_box_item">
+                                                        
+                                                        </combo_box_item add_to_combo_box(label_pango_style_combo_box, "PANGO_STYLE_NORMAL")>
+                                                        <!-- End label pango style combo box -->
+
+                                                        <!-- Start label pango style combo box item -->
+                                                        <combo_box_item id = "label_pango_style_combo_box_item">
+                                                        
+                                                        </combo_box_item add_to_combo_box(label_pango_style_combo_box, "PANGO_STYLE_ITALIC")>
+                                                        <!-- End label pango style combo box -->
+
+                                                    </combo_box add_to_grid(label_grid, label_pango_style_combo_box, 9, 1, 1, 1)>
+                                                    <!-- End label pango style combo box -->
+
+                                                    <!-- Start label wrap label -->
+                                                    <label id = "label_wrap_label" text = "Wrap" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(label_grid, label_wrap_label, 10, 0, 1, 1)>
+                                                    <!-- End label wrap label -->
+
+                                                    <!-- Start label wrap combo box -->
+                                                    <combo_box id = "label_wrap_combo_box">
+
+                                                        <!-- Start label wrap combo box item -->
+                                                        <combo_box_item id = "label_wrap_combo_box_item">
+                                                        
+                                                        </combo_box_item add_to_combo_box(label_wrap_combo_box, "TRUE")>
+                                                        <!-- End label wrap combo box -->
+
+                                                        <!-- Start label wrap combo box item -->
+                                                        <combo_box_item id = "label_wrap_combo_box_item">
+                                                        
+                                                        </combo_box_item add_to_combo_box(label_wrap_combo_box, "FALSE")>
+                                                        <!-- End label wrap combo box -->
+
+                                                    </combo_box add_to_grid(label_grid, label_wrap_combo_box, 10, 1, 1, 1)>
+                                                    <!-- End label wrap combo box -->
+
+                                                    <!-- Start label button add -->
+                                                    <button id = "label_button_add" label = "                                                               Add                                                               ">
+
+                                                    </button add_to_grid(label_grid, label_button_add, 11, 0, 2, 1)>
+                                                    <!-- End label button add -->
+
+                                                </grid add_to_frame(label_grid_frame, label_grid, 14, 14, 14, 14)>
+                                                <!-- End label grid -->
+
+                                            </frame add_to_box(label_box, label_grid_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
+                                            <!-- End label grid frame -->
+
+                                        </box add_to_box(Widgets_box, label_box, START, TRUE, TRUE, 0, 7, 0, 0, 0)>
+                                        <!-- End Label box -->
+
+                                        <!-- Start level_bar box -->
+                                        <box id = "level_bar_box" orientation = GTK_ORIENTATION_VERTICAL align = -1 spacing = 0>
+
+                                            <!-- Start level_bar label frame -->
+                                            <frame id = "level_bar_label_frame" label = NULL>
+
+                                                <!-- Start level_bar label -->
+                                                <label id = "level_bar_label" text = "Level Bar" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+                                                    
+                                                </label add_to_frame(level_bar_label_frame, level_bar_label, 7, 7, 14, 0)>
+                                                <!-- End level_bar label -->
+
+                                            </frame add_to_box(level_bar_box, level_bar_label_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
+                                            <!-- End level_bar label frame -->
+
+                                            <!-- Start level_bar grid frame -->
+                                            <frame id = "level_bar_grid_frame" label = NULL>
+
+                                                <!-- Start level_bar grid -->
+                                                <grid id = "level_bar_grid" visible = TRUE rows_spacing = 7 columns_spacing = 7 rows_homogeneous = TRUE columns_homogeneous = FALSE>
+
+                                                    <!-- Start level_bar id label -->
+                                                    <label id = "level_bar_id_label" text = "Widget ID" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(level_bar_grid, level_bar_id_label, 0, 0, 1, 1)>
+                                                    <!-- End level_bar id label -->
+
+                                                    <!-- Start level_bar id entry -->
+                                                    <entry id = "level_bar_id_entry">
+
+                                                    </entry add_to_grid(level_bar_grid, level_bar_id_entry, 0, 1, 1, 1)>
+                                                    <!-- End level_bar id entry -->
+
+                                                    <!-- Start level bar min value label -->
+                                                    <label id = "level_bar_min_value_label" text = "Min Value" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(level_bar_grid, level_bar_min_value_label, 1, 0, 1, 1)>
+                                                    <!-- End level bar min value label -->
+
+                                                    <!-- Start level bar min value spin button -->
+                                                    <spin_button id = "level_bar_min_value_spin_button" min = 0 max = 100 step = 1 value = 0 digits = 0 numeric = FALSE>
+
+                                                    </spin_button add_to_grid(level_bar_grid, level_bar_min_value_spin_button, 1, 1, 1, 1)>
+                                                    <!-- End level bar min value spin button -->
+
+                                                    <!-- Start level bar max value label -->
+                                                    <label id = "level_bar_max_value_label" text = "Max Value" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(level_bar_grid, level_bar_max_value_label, 2, 0, 1, 1)>
+                                                    <!-- End level bar max value label -->
+
+                                                    <!-- Start level bar max value spin button -->
+                                                    <spin_button id = "level_bar_max_value_spin_button" min = 0 max = 100 step = 1 value = 10 digits = 0 numeric = FALSE>
+
+                                                    </spin_button add_to_grid(level_bar_grid, level_bar_max_value_spin_button, 2, 1, 1, 1)>
+                                                    <!-- End level bar max value spin button -->
+
+                                                    <!-- Start level_bar default value label -->
+                                                    <label id = "level_bar_default_value_label" text = "Default Value" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(level_bar_grid, level_bar_default_value_label, 3, 0, 1, 1)>
+                                                    <!-- End level_bar default value label -->
+
+                                                    <!-- Start level_bar default value spin button -->
+                                                    <spin_button id = "level_bar_default_value_spin_button" min = 0 max = 100 step = 1 value = 50 digits = 0 numeric = FALSE>
+
+                                                    </spin_button add_to_grid(level_bar_grid, level_bar_default_value_spin_button, 3, 1, 1, 1)>
+                                                    <!-- End level_bar default value spin button -->
+
+                                                    <!-- Start level bar mode label -->
+                                                    <label id = "level_bar_mode_label" text = "Mode" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(level_bar_grid, level_bar_mode_label, 4, 0, 1, 1)>
+                                                    <!-- End level bar mode label -->
+
+                                                    <!-- Start level bar mode combo box -->
+                                                    <combo_box id = "level_bar_mode_combo_box">
+
+                                                        <!-- Start level bar mode combo box item -->
+                                                        <combo_box_item id = "level_bar_mode_combo_box_item">
+                                                        
+                                                        </combo_box_item add_to_combo_box(level_bar_mode_combo_box, "GTK_LEVEL_BAR_MODE_CONTINUOUS")>
+                                                        <!-- End level bar mode combo box -->
+
+                                                        <!-- Start level bar mode combo box item -->
+                                                        <combo_box_item id = "level_bar_mode_combo_box_item">
+                                                        
+                                                        </combo_box_item add_to_combo_box(level_bar_mode_combo_box, "GTK_LEVEL_BAR_MODE_DISCRETE")>
+                                                        <!-- End level bar mode combo box -->
+
+                                                    </combo_box add_to_grid(level_bar_grid, level_bar_mode_combo_box, 4, 1, 1, 1)>
+                                                    <!-- End level bar mode combo box -->
+
+                                                    <!-- Start level_bar reversed label -->
+                                                    <label id = "level_bar_reversed_label" text = "Reversed" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(level_bar_grid, level_bar_reversed_label, 5, 0, 1, 1)>
+                                                    <!-- End level_bar reversed label -->
+
+                                                    <!-- Start level_bar reversed combo box -->
+                                                    <combo_box id = "level_bar_reversed_combo_box">
+
+                                                        <!-- Start level_bar reversed combo box item -->
+                                                        <combo_box_item id = "level_bar_reversed_combo_box_item">
+                                                        
+                                                        </combo_box_item add_to_combo_box(level_bar_reversed_combo_box, "FALSE")>
+                                                        <!-- End level_bar reversed combo box -->
+
+                                                        <!-- Start level_bar reversed combo box item -->
+                                                        <combo_box_item id = "level_bar_reversed_combo_box_item">
+                                                        
+                                                        </combo_box_item add_to_combo_box(level_bar_reversed_combo_box, "TRUE")>
+                                                        <!-- End level_bar reversed combo box -->
+
+                                                    </combo_box add_to_grid(level_bar_grid, level_bar_reversed_combo_box, 5, 1, 1, 1)>
+                                                    <!-- End level_bar reversed combo box -->
+
+                                                    <!-- Start level_bar add button -->
+                                                    <button id = "level_bar_add_button" label = "                                                               Add                                                               ">
+
+                                                    </button add_to_grid(level_bar_grid, level_bar_add_button, 6, 0, 2, 1)>
+                                                    <!-- End level_bar add button -->
+
+                                                </grid add_to_frame(level_bar_grid_frame, level_bar_grid, 14, 14, 14, 14)>
+                                                <!-- End level_bar grid -->
+
+                                            </frame add_to_box(level_bar_box, level_bar_grid_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
+                                            <!-- End level_bar grid frame -->
+
+                                        </box add_to_box(Widgets_box, level_bar_box, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
+                                        <!-- End level_bar box -->
+
+                                        
+
                                         <!-- Start Widgets button -->
                                         <button id = "Widgets" label = "Widgets">
             
