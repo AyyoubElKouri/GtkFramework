@@ -2388,7 +2388,7 @@
                                                     <!-- End level_bar id label -->
 
                                                     <!-- Start level_bar id entry -->
-                                                    <entry id = "level_bar_id_entry">
+                                                    <entry id = "level_bar_id_entry" default_text = NULL indicator_text = "must be unique and no space" visible = TRUE editable = TRUE max_lenght = 5 alignment = 0.5>
 
                                                     </entry add_to_grid(level_bar_grid, level_bar_id_entry, 0, 1, 1, 1)>
                                                     <!-- End level_bar id entry -->
@@ -2492,7 +2492,184 @@
                                         </box add_to_box(Widgets_box, level_bar_box, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
                                         <!-- End level_bar box -->
 
-                                        
+                                        <!-- Start Link button box -->
+                                        <box id = "Link_button_box" orientation = GTK_ORIENTATION_VERTICAL spacing = 0>
+
+                                            <!-- Start Link button label frame -->
+                                            <frame id = "Link_button_label_frame" label = NULL>
+
+                                                <!-- Start Link button label -->
+                                                <label id = "Link_button_label" text = "Link Button" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                </label add_to_frame(Link_button_label_frame, Link_button_label, 7, 7, 14, 1)>
+                                                <!-- End Link button label -->
+
+                                            </frame add_to_box(Link_button_box, Link_button_label_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
+                                            <!-- End Link button label frame -->
+
+                                            <!-- Start Link button grid frame -->
+                                            <frame id = "Link_button_grid_frame" label = NULL>
+
+                                                <!-- Start Link button grid -->
+                                                <grid id = "Link_button_grid" rows_spacing = 7 columns_spacing = 7 rows_homogeneous = TRUE columns_homogeneous = FALSE>
+
+                                                    <!-- Start Link button id label -->
+                                                    <label id = "Link_button_id_label" text = "Widget ID" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(Link_button_grid, Link_button_id_label, 0, 0, 1, 1)>
+                                                    <!-- End Link button id label -->
+
+                                                    <!-- Start Link button id entry -->
+                                                    <entry id = "Link_button_id_entry" default_text = NULL indicator_text = "must be unique and no space" visible = TRUE editable = TRUE max_lenght = 5 alignment = 0.5>
+
+                                                    </entry add_to_grid(Link_button_grid, Link_button_id_entry, 0, 1, 1, 1)>
+                                                    <!-- End Link button id entry -->
+
+                                                    <!-- Start Link button url label -->
+                                                    <label id = "Link_button_url_label" text = "URL" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(Link_button_grid, Link_button_url_label, 1, 0, 1, 1)>
+                                                    <!-- End Link button url label -->
+
+                                                    <!-- Start Link button url entry -->
+                                                    <entry id = "Link_button_url_entry">
+
+                                                    </entry add_to_grid(Link_button_grid, Link_button_url_entry, 1, 1, 1, 1)>
+                                                    <!-- End Link button url entry -->
+
+                                                    <!-- Start Link button label label -->
+                                                    <label id = "Link_button_label_label" text = "Label" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(Link_button_grid, Link_button_label_label, 2, 0, 1, 1)>
+                                                    <!-- End Link button label label -->
+
+                                                    <!-- Start Link button label entry -->
+                                                    <entry id = "Link_button_label_entry">
+
+                                                    </entry add_to_grid(Link_button_grid, Link_button_label_entry, 2, 1, 1, 1)>
+                                                    <!-- End Link button label entry -->
+
+                                                    <!-- Start Link button add button -->
+                                                    <button id = "Link_button_add_button" label = "                                                               Add                                                               ">
+
+                                                    </button add_to_grid(Link_button_grid, Link_button_add_button, 3, 0, 2, 1)>
+                                                    <!-- End Link button add button -->
+
+                                                </grid add_to_frame(Link_button_grid_frame, Link_button_grid, 14, 14, 14, 14)>
+                                                <!-- End Link button grid -->
+
+                                            </frame add_to_box(Link_button_box, Link_button_grid_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
+                                            <!-- End Link button grid frame -->
+
+                                        </box add_to_box(Widgets_box, Link_button_box, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
+                                        <!-- End Link button box -->
+
+                                        <!-- Start menu button box -->
+                                        <box id = "menu_button_box" orientation = GTK_ORIENTATION_VERTICAL spacing = 0>
+
+                                            <!-- Start menu_button label frame -->
+                                            <frame id = "menu_button_label_frame" label = NULL>
+
+                                                <!-- Start menu_button label -->
+                                                <label id = "menu_button_label" text = "Menu Button" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                </label add_to_frame(menu_button_label_frame, menu_button_label, 7, 7, 14, 1)>
+                                                <!-- End menu_button label -->
+
+                                            </frame add_to_box(menu_button_box, menu_button_label_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
+                                            <!-- End menu_button label frame -->
+
+                                            <!-- Start menu button grid frame -->
+                                            <frame id = "menu_button_grid_frame" label = NULL>
+
+                                                <!-- Start menu button grid -->
+                                                <grid id = "menu_button_grid" rows_spacing = 7 columns_spacing = 7 rows_homogeneous = TRUE columns_homogeneous = FALSE>
+
+                                                    <!-- Start menu button id label -->
+                                                    <label id = "menu_button_id_label" text = "Widget ID" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(menu_button_grid, menu_button_id_label, 0, 0, 1, 1)>
+                                                    <!-- End menu button id label -->
+
+                                                    <!-- Start menu button id entry -->
+                                                    <entry id = "menu_button_id_entry" default_text = NULL indicator_text = "must be unique and no space" visible = TRUE editable = TRUE max_lenght = 5 alignment = 0.5>
+
+                                                    </entry add_to_grid(menu_button_grid, menu_button_id_entry, 0, 1, 1, 1)>
+                                                    <!-- End menu button id entry -->
+
+                                                    <!-- Start menu button label label -->
+                                                    <label id = "menu_button_label_label" text = "Label" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(menu_button_grid, menu_button_label_label, 1, 0, 1, 1)>
+                                                    <!-- End menu button label label -->
+
+                                                    <!-- Start menu button label entry -->
+                                                    <entry id = "menu_button_label_entry">
+
+                                                    </entry add_to_grid(menu_button_grid, menu_button_label_entry, 1, 1, 1, 1)>
+                                                    <!-- End menu button label entry -->
+
+                                                    <!-- Start menu button path to image label -->
+                                                    <label id = "menu_button_path_to_image_label" text = "Path to image" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(menu_button_grid, menu_button_path_to_image_label, 2, 0, 1, 1)>
+
+                                                    <!-- Start menu button path to image entry -->
+                                                    <entry id = "menu_button_path_to_image_entry" indicator_text = "Chose image or lable">
+
+                                                    </entry add_to_grid(menu_button_grid, menu_button_path_to_image_entry, 2, 1, 1, 1)>
+                                                    <!-- End menu button path to image entry -->
+
+                                                    <!-- Start menu button arrow type label -->
+                                                    <label id = "menu_button_arrow_type_label" text = "Arrow type" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(menu_button_grid, menu_button_arrow_type_label, 3, 0, 1, 1)>
+                                                    <!-- End menu button arrow type label -->
+
+                                                    <!-- Start menu button arrow type combo box -->
+                                                    <combo_box id = "menu_button_arrow_type_combo_box">
+
+                                                        <!-- Start menu button arrow type combo box item -->
+                                                        <combo_box_item id = "menu_button_arrow_type_combo_box_item" label = "Down">
+
+                                                        </combo_box_item add_to_combo_box(menu_button_arrow_type_combo_box, "GTK_ARROW_DOWN")>
+                                                        <!-- End menu button arrow type combo box item -->
+
+                                                        <!-- Start menu button arrow type combo box item -->
+                                                        <combo_box_item id = "menu_button_arrow_type_combo_box_item" label = "Up">
+
+                                                        </combo_box_item add_to_combo_box(menu_button_arrow_type_combo_box, "GTK_ARROW_UP")>
+                                                        <!-- End menu button arrow type combo box item -->
+
+                                                        <!-- Start menu button arrow type combo box item -->
+                                                        <combo_box_item id = "menu_button_arrow_type_combo_box_item" label = "Left">
+
+                                                        </combo_box_item add_to_combo_box(menu_button_arrow_type_combo_box, "GTK_ARROW_LEFT")>
+                                                        <!-- End menu button arrow type combo box item -->
+
+                                                        <!-- Start menu button arrow type combo box item -->
+                                                        <combo_box_item id = "menu_button_arrow_type_combo_box_item" label = "Right">
+
+                                                        </combo_box_item add_to_combo_box(menu_button_arrow_type_combo_box, "GTK_ARROW_RIGHT")>
+                                                        <!-- End menu button arrow type combo box item -->
+
+                                                    </combo_box add_to_grid(menu_button_grid, menu_button_arrow_type_combo_box, 3, 1, 1, 1)>
+                                                    <!-- End menu button arrow type combo box -->
+
+                                                    <!-- Start menu button add button -->
+                                                    <button id = "menu_button_add_button" label = "                                                               Add                                                               ">
+
+                                                    </button add_to_grid(menu_button_grid, menu_button_add_button, 4, 0, 2, 1)>
+                                                    <!-- End menu button add button -->
+
+                                                </grid add_to_frame(menu_button_grid_frame, menu_button_grid, 14, 14, 14, 14)>
+                                                <!-- End menu button grid -->
+
+                                            </frame add_to_box(menu_button_box, menu_button_grid_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
+                                            <!-- End menu button grid frame -->
+
+                                        </box add_to_box(Widgets_box, menu_button_box, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
+                                        <!-- End menu button box -->
 
                                         <!-- Start Widgets button -->
                                         <button id = "Widgets" label = "Widgets">
