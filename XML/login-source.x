@@ -2671,6 +2671,354 @@
                                         </box add_to_box(Widgets_box, menu_button_box, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
                                         <!-- End menu button box -->
 
+                                        <!-- Start menu item box -->
+                                        <box id = "menu_item_box" orientation = GTK_ORIENTATION_VERTICAL spacing = 0>
+
+                                            <!-- Start menu_item label frame -->
+                                            <frame id = "menu_item_label_frame" label = NULL>
+
+                                                <!-- Start menu_item label -->
+                                                <label id = "menu_item_label" text = "Menu Item" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                </label add_to_frame(menu_item_label_frame, menu_item_label, 7, 7, 14, 1)>
+                                                <!-- End menu_item label -->
+
+                                            </frame add_to_box(menu_item_box, menu_item_label_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
+                                            <!-- End menu_item label frame -->
+
+                                            <!-- Start menu_item grid frame -->
+                                            <frame id = "menu_item_grid_frame" label = NULL>
+
+                                                <!-- Start menu_item grid -->
+                                                <grid id = "menu_item_grid" rows_spacing = 7 columns_spacing = 7 rows_homogeneous = TRUE columns_homogeneous = FALSE>
+
+                                                    <!-- Start menu item id lebel -->
+                                                    <label id = "menu_item_id_label" text = "Widget ID" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(menu_item_grid, menu_item_id_label, 0, 0, 1, 1)>
+                                                    <!-- End menu item id lebel -->
+
+                                                    <!-- Start menu item id entry -->
+                                                    <entry id = "menu_item_id_entry" default_text = NULL indicator_text = "must be unique and no space" visible = TRUE editable = TRUE max_lenght = 5 alignment = 0.5>
+
+                                                    </entry add_to_grid(menu_item_grid, menu_item_id_entry, 0, 1, 1, 1)>
+                                                    <!-- End menu item id entry -->
+
+                                                    <!-- Start menu item label label -->
+                                                    <label id = "menu_item_label_label" text = "Label" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(menu_item_grid, menu_item_label_label, 1, 0, 1, 1)>
+                                                    <!-- End menu item label label -->
+
+                                                    <!-- Start menu item label entry -->
+                                                    <entry id = "menu_item_label_entry">
+
+                                                    </entry add_to_grid(menu_item_grid, menu_item_label_entry, 1, 1, 1, 1)>
+                                                    <!-- End menu item label entry -->
+
+                                                    <!-- Start menu item type label -->
+                                                    <label id = "menu_item_type_label" text = "Type" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(menu_item_grid, menu_item_type_label, 2, 0, 1, 1)>
+                                                    <!-- End menu item type label -->
+
+                                                    <!-- Start menu item type combo box -->
+                                                    <combo_box id = "menu_item_type_combo_box">
+
+                                                        <!-- Start menu item type combo box item -->
+                                                        <combo_box_item id = "menu_item_type_combo_box_item" label = "normal">
+
+                                                        </combo_box_item add_to_combo_box(menu_item_type_combo_box, "normal")>
+                                                        <!-- End menu item type combo box item -->
+
+                                                        <!-- Start menu item type combo box item -->
+                                                        <combo_box_item id = "menu_item_type_combo_box_item" label = "separator">
+
+                                                        </combo_box_item add_to_combo_box(menu_item_type_combo_box, "separator")>
+                                                        <!-- End menu item type combo box item -->
+
+                                                        <!-- Start menu item type combo box item -->
+                                                        <combo_box_item id = "menu_item_type_combo_box_item" label = "check">
+
+                                                        </combo_box_item add_to_combo_box(menu_item_type_combo_box, "check")>
+                                                        <!-- End menu item type combo box item -->
+
+                                                        <!-- Start menu item type combo box item -->
+                                                        <combo_box_item id = "menu_item_type_combo_box_item" label = "radio">
+
+                                                        </combo_box_item add_to_combo_box(menu_item_type_combo_box, "radio")>
+                                                        <!-- End menu item type combo box item -->
+
+                                                    </combo_box add_to_grid(menu_item_grid, menu_item_type_combo_box, 2, 1, 1, 1)>
+                                                    <!-- End menu item type combo box -->
+
+                                                    <!-- Start menu item callback label -->
+                                                    <label id = "menu_item_callback_label" text = "Callback" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(menu_item_grid, menu_item_callback_label, 3, 0, 1, 1)>
+                                                    <!-- End menu item callback label -->
+
+                                                    <!-- Start menu item callback entry -->
+                                                    <entry id = "menu_item_callback_entry">
+
+                                                    </entry add_to_grid(menu_item_grid, menu_item_callback_entry, 3, 1, 1, 1)>
+                                                    <!-- End menu item callback entry -->
+
+                                                    <!-- Start menu item data label -->
+                                                    <label id = "menu_item_data_label" text = "Data" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(menu_item_grid, menu_item_data_label, 4, 0, 1, 1)>
+                                                    <!-- End menu item data label -->
+
+                                                    <!-- Start menu item data entry -->
+                                                    <entry id = "menu_item_data_entry">
+
+                                                    </entry add_to_grid(menu_item_grid, menu_item_data_entry, 4, 1, 1, 1)>
+                                                    <!-- End menu item data entry -->
+
+                                                    <!-- Start menu_item add button -->
+                                                    <button id = "menu_item_add_button" label = "                                                               Add                                                              ">
+
+                                                    </button add_to_grid(menu_item_grid, menu_item_add_button, 5, 0, 2, 1)>
+                                                    <!-- End menu_item add button -->
+
+                                                </grid add_to_frame(menu_item_grid_frame, menu_item_grid, 14, 14, 14, 14)>
+                                                <!-- End menu_item grid -->
+
+                                            </frame add_to_box(menu_item_box, menu_item_grid_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
+                                            <!-- End menu_item grid frame -->
+
+                                        </box add_to_box(Widgets_box, menu_item_box, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
+                                        <!-- End menu item box -->
+
+                                        <!-- Start menu box -->
+                                        <box id = "menu_box" orientation = GTK_ORIENTATION_VERTICAL align = -1 spacing = 0>
+
+                                            <!-- Start menu label frame -->
+                                            <frame id = "menu_label_frame" label = NULL>
+
+                                                <!-- Start menu label -->
+                                                <label id = "menu_label" text = "Menu" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                </label add_to_frame(menu_label_frame, menu_label, 7, 7, 14, 1)>
+                                                <!-- End menu label -->
+
+                                            </frame add_to_box(menu_box, menu_label_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
+                                            <!-- End menu label frame -->
+
+                                            <!-- Start menu grid frame -->
+                                            <frame id = "menu_grid_frame" label = NULL>
+
+                                                <!-- Start menu grid -->
+                                                <grid id = "menu_grid" rows_spacing = 7 columns_spacing = 7 rows_homogeneous = TRUE columns_homogeneous = FALSE>
+
+                                                    <!-- Start menu id label -->
+                                                    <label id = "menu_id_label" text = "Widget Id" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(menu_grid, menu_id_label, 0, 0, 1, 1)>
+                                                    <!-- End menu id label -->
+
+                                                    <!-- Start menu id entry -->
+                                                    <entry id = "menu_id_entry" default_text = NULL indicator_text = "must be unique and no space" visible = TRUE editable = TRUE max_lenght = 5 alignment = 0.5>
+
+                                                    </entry add_to_grid(menu_grid, menu_id_entry, 0, 1, 1, 1)>
+                                                    <!-- End menu id entry -->
+
+                                                    <!-- Start menu is primary label -->
+                                                    <label id = "menu_is_primary_label" text = "Is Primary" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(menu_grid, menu_is_primary_label, 1, 0, 1, 1)>
+                                                    <!-- End menu is primary label -->
+
+                                                    <!-- Start menu is primary combo box -->
+                                                    <combo_box id = "menu_is_primary_combo_box">
+
+                                                        <!-- Start menu is primary combo box item -->
+                                                        <combo_box_item id = "menu_is_primary_combo_box_item" label = "TRUE">
+
+                                                        </combo_box_item add_to_combo_box(menu_is_primary_combo_box, "TRUE")>
+                                                        <!-- End menu is primary combo box item -->
+
+                                                        <!-- Start menu is primary combo box item -->
+                                                        <combo_box_item id = "menu_is_primary_combo_box_item" label = "FALSE">
+
+                                                        </combo_box_item add_to_combo_box(menu_is_primary_combo_box, "FALSE")>
+                                                        <!-- End menu is primary combo box item -->
+
+                                                    </combo_box add_to_grid(menu_grid, menu_is_primary_combo_box, 1, 1, 1, 1)>
+                                                    <!-- End menu is primary combo box -->
+
+                                                    <!-- Start menu label label -->
+                                                    <label id = "menu_label_label" text = "Label" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(menu_grid, menu_label_label, 2, 0, 1, 1)>
+                                                    <!-- End menu label label -->
+
+                                                    <!-- Start menu label entry -->
+                                                    <entry id = "menu_label_entry">
+
+                                                    </entry add_to_grid(menu_grid, menu_label_entry, 2, 1, 1, 1)>
+                                                    <!-- End menu label entry -->
+
+                                                    <!-- Start menu add button -->
+                                                    <button id = "menu_add_button" label = "                                                               Add                                                              ">
+
+                                                    </button add_to_grid(menu_grid, menu_add_button, 3, 0, 2, 1)>
+                                                    <!-- End menu add button -->
+
+                                                </grid add_to_frame(menu_grid_frame, menu_grid, 14, 14, 14, 14)>
+                                                <!-- End menu grid -->
+
+                                            </frame add_to_box(menu_box, menu_grid_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
+                                            <!-- End menu grid frame -->
+
+                                        </box add_to_box(Widgets_box, menu_box, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
+                                        <!-- End menu box -->
+
+                                        <!-- Start progress bar box -->
+                                        <box id = "progress_bar_box" orientation = GTK_ORIENTATION_VERTICAL align = -1 spacing = 0>
+
+                                            <!-- Start progress bar label frame -->
+                                            <frame id = "progress_bar_label_frame" label = NULL>
+
+                                                <!-- Start progress bar label -->
+                                                <label id = "progress_bar_label" text = "Progress Bar" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                </label add_to_frame(progress_bar_label_frame, progress_bar_label, 7, 7, 14, 1)>
+                                                <!-- End progress bar label -->
+
+                                            </frame add_to_box(progress_bar_box, progress_bar_label_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
+                                            <!-- End progress bar label frame -->
+
+                                            <!-- Start progress bar grid frame -->
+                                            <frame id = "progress_bar_grid_frame" label = NULL>
+
+                                                <!-- Start progress bar grid -->
+                                                <grid id = "progress_bar_grid" rows_spacing = 7 columns_spacing = 7 rows_homogeneous = TRUE columns_homogeneous = FALSE>
+
+                                                    <!-- Start progress bar id label -->
+                                                    <label id = "progress_bar_id_label" text = "Widget Id" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(progress_bar_grid, progress_bar_id_label, 0, 0, 1, 1)>
+                                                    <!-- End progress bar id label -->
+
+                                                    <!-- Start progress bar id entry -->
+                                                    <entry id = "progress_bar_id_entry" default_text = NULL indicator_text = "must be unique and no space" visible = TRUE editable = TRUE max_lenght = 5 alignment = 0.5>
+
+                                                    </entry add_to_grid(progress_bar_grid, progress_bar_id_entry, 0, 1, 1, 1)>
+                                                    <!-- End progress bar id entry -->
+
+                                                    <!-- Start progress bar text label -->
+                                                    <label id = "progress_bar_text_label" text = "Text" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(progress_bar_grid, progress_bar_text_label, 1, 0, 1, 1)>
+                                                    <!-- End progress bar text label -->
+
+                                                    <!-- Start progress bar text entry -->
+                                                    <entry id = "progress_bar_text_entry">
+
+                                                    </entry add_to_grid(progress_bar_grid, progress_bar_text_entry, 1, 1, 1, 1)>
+                                                    <!-- End progress bar text entry -->
+
+                                                    <!-- Start progress bar fraction label -->
+                                                    <label id = "progress_bar_fraction_label" text = "Fraction" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(progress_bar_grid, progress_bar_fraction_label, 2, 0, 1, 1)>
+                                                    <!-- End progress bar fraction label -->
+
+                                                    <!-- Start progress bar fraction spin_button -->
+                                                    <spin_button id = "progress_bar_fraction_spin_button" min = 0 max = 1 step = 0.1 digits = 1 value = 0.0>
+
+                                                    </spin_button add_to_grid(progress_bar_grid, progress_bar_fraction_spin_button, 2, 1, 1, 1)>
+                                                    <!-- End progress bar fraction spin_button -->
+
+                                                    <!-- Start level bar show text label -->
+                                                    <label id = "level_bar_show_text_label" text = "Show Text" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(progress_bar_grid, level_bar_show_text_label, 3, 0, 1, 1)>
+                                                    <!-- End level bar show text label -->
+
+                                                    <!-- Start level bar show text combo box -->
+                                                    <combo_box id = "level_bar_show_text_combo_box">
+
+                                                        <!-- Start level bar show text combo box item -->
+                                                        <combo_box_item id = "level_bar_show_text_combo_box_item" label = "TRUE">
+
+                                                        </combo_box_item add_to_combo_box(level_bar_show_text_combo_box, "TRUE")>
+                                                        <!-- End level bar show text combo box item -->
+
+                                                        <!-- Start level bar show text combo box item -->
+                                                        <combo_box_item id = "level_bar_show_text_combo_box_item" label = "FALSE">
+
+                                                        </combo_box_item add_to_combo_box(level_bar_show_text_combo_box, "FALSE")>
+                                                        <!-- End level bar show text combo box item -->
+
+                                                    </combo_box add_to_grid(progress_bar_grid, level_bar_show_text_combo_box, 3, 1, 1, 1)>
+                                                    <!-- End level bar show text combo box -->
+
+                                                    <!-- Start progress bar pulse label -->
+                                                    <label id = "progress_bar_pulse_label" text = "Pulse" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(progress_bar_grid, progress_bar_pulse_label, 4, 0, 1, 1)>
+                                                    <!-- End progress bar pulse label -->
+
+                                                    <!-- Start progress bar pulse combo box -->
+                                                    <combo_box id = "progress_bar_pulse_combo_box">
+
+                                                        <!-- Start progress bar pulse combo box item --> 
+                                                        <combo_box_item id = "progress_bar_pulse_combo_box_item" label = "TRUE">
+
+                                                        </combo_box_item add_to_combo_box(progress_bar_pulse_combo_box, "TRUE")>
+                                                        <!-- End progress bar pulse combo box item -->
+
+                                                        <!-- Start progress bar pulse combo box item -->
+                                                        <combo_box_item id = "progress_bar_pulse_combo_box_item" label = "FALSE">
+
+                                                        </combo_box_item add_to_combo_box(progress_bar_pulse_combo_box, "FALSE")>
+                                                        <!-- End progress bar pulse combo box item -->
+
+                                                    </combo_box add_to_grid(progress_bar_grid, progress_bar_pulse_combo_box, 4, 1, 1, 1)>
+                                                    <!-- End progress bar pulse combo box -->
+
+                                                    <!-- Start progress bar inverted label -->
+                                                    <label id = "progress_bar_inverted_label" text = "Inverted" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(progress_bar_grid, progress_bar_inverted_label, 5, 0, 1, 1)>
+                                                    <!-- End progress bar inverted label -->
+                                                     
+                                                    <!-- Start progress bar inverted combo box -->
+                                                    <combo_box id = "progress_bar_inverted_combo_box">
+
+                                                        <!-- Start progress bar inverted combo box item -->
+                                                        <combo_box_item id = "progress_bar_inverted_combo_box_item" label = "TRUE">
+
+                                                        </combo_box_item add_to_combo_box(progress_bar_inverted_combo_box, "TRUE")>
+                                                        <!-- End progress bar inverted combo box item -->
+
+                                                        <!-- Start progress bar inverted combo box item -->
+                                                        <combo_box_item id = "progress_bar_inverted_combo_box_item" label = "FALSE">
+
+                                                        </combo_box_item add_to_combo_box(progress_bar_inverted_combo_box, "FALSE")>
+                                                        <!-- End progress bar inverted combo box item -->
+
+                                                    </combo_box add_to_grid(progress_bar_grid, progress_bar_inverted_combo_box, 5, 1, 1, 1)>
+                                                    <!-- End progress bar inverted combo box -->
+
+                                                    <!-- Start progress bar add button -->
+                                                    <button id = "progress_bar_add_button" label = "                                                               Add                                                             ">
+
+                                                    </button add_to_grid(progress_bar_grid, progress_bar_add_button, 6, 0, 2, 1)>
+                                                    <!-- End progress bar add button -->
+
+                                                </grid add_to_frame(progress_bar_grid_frame, progress_bar_grid, 14, 14, 14, 14)>
+                                                <!-- End progress bar grid -->
+
+                                            </frame add_to_box(progress_bar_box, progress_bar_grid_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
+                                            <!-- End progress bar grid frame -->
+
+                                        </box add_to_box(Widgets_box, progress_bar_box, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
+                                        <!-- End progress bar box -->
+
                                         <!-- Start Widgets button -->
                                         <button id = "Widgets" label = "Widgets">
             
