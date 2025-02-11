@@ -189,70 +189,82 @@
                                                     <!-- Start window informations grid -->
                                                     <grid id = "window_informations_grid" rows_spacing = 7 columns_spacing = 7 rows_homogeneous = TRUE columns_homogeneous = FALSE>
         
+                                                        <!-- Start window id label -->
+                                                        <label id = "window_informations_id_label" text = "Widget ID" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                        </label add_to_grid(window_informations_grid, window_informations_id_label, 0, 0, 1, 1)>
+                                                        <!-- End window id label -->
+
+                                                        <!-- Start window id entry -->
+                                                        <entry id = "window_informations_id_value" default_text = NULL indicator_text = "must be unique and no space" visible = TRUE editable = TRUE max_lenght = 5 alignment = 0.5>
+
+                                                        </entry add_to_grid(window_informations_grid, window_informations_id_value, 0, 1, 1, 1)>
+                                                        <!-- End window id entry -->
+
                                                         <!-- Start window informations app label -->
                                                         <label id = "window_informations_app_label" text = "Window" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
         
-                                                        </label add_to_grid(window_informations_grid, window_informations_app_label, 0, 0, 1, 1)>
+                                                        </label add_to_grid(window_informations_grid, window_informations_app_label, 1, 0, 1, 1)>
                                                         <!-- End window informations app -->
                                                         
                                                         <!-- Start window informations app value -->
                                                         <entry id = "window_informations_app_value" default_text = "app" indicator_text = "Chose App for TOPLEVEL" visible = TRUE editable = TRUE max_lenght = 5 alignment = 0.5>
         
-                                                        </entry add_to_grid(window_informations_grid, window_informations_app_value, 0, 1, 1, 1)>
+                                                        </entry add_to_grid(window_informations_grid, window_informations_app_value, 1, 1, 1, 1)>
                                                         <!-- End window informations app value -->
         
                                                         <!-- Start window informations type label -->
                                                         <label id = "window_informations_type_label" text = "Type" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
         
-                                                        </label add_to_grid(window_informations_grid, window_informations_type_label, 1, 0, 1, 1)>
+                                                        </label add_to_grid(window_informations_grid, window_informations_type_label, 2, 0, 1, 1)>
                                                         <!-- End window informations type label -->
     
                                                         <!-- Start window informations type value -->
                                                         <entry id = "window_informations_type_value" default_text = "GTK_WINDOW_TOPLEVEL" indicator_text = "Chose Type of the window" visible = TRUE editable = TRUE max_lenght = 5 alignment = 0.5>
         
-                                                        </entry add_to_grid(window_informations_grid, window_informations_type_value, 1, 1, 1, 1)>
+                                                        </entry add_to_grid(window_informations_grid, window_informations_type_value, 2, 1, 1, 1)>
                                                         <!-- End window informations type value -->
     
                                                         <!-- Start window informations title label -->
                                                         <label id = "window_informations_title_label" text = "Title" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
         
-                                                        </label add_to_grid(window_informations_grid, window_informations_title_label, 2, 0, 1, 1)>
+                                                        </label add_to_grid(window_informations_grid, window_informations_title_label, 3, 0, 1, 1)>
                                                         <!-- End window informations title label -->
         
                                                         <!-- Start window informations title value -->
                                                         <entry id = "window_informations_title_value" default_text = "title" indicator_text = "Chose Title for TOPLEVEL" visible = TRUE editable = TRUE max_lenght = 5 alignment = 0.5>
         
-                                                        </entry add_to_grid(window_informations_grid, window_informations_title_value, 2, 1, 1, 1)>
+                                                        </entry add_to_grid(window_informations_grid, window_informations_title_value, 3, 1, 1, 1)>
                                                         <!-- End window informations title value -->
     
                                                         <!-- Start window informations width label -->
                                                         <label id = "window_informations_width_label" text = "Width" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
         
-                                                        </label add_to_grid(window_informations_grid, window_informations_width_label, 3, 0, 1, 1)>
+                                                        </label add_to_grid(window_informations_grid, window_informations_width_label, 4, 0, 1, 1)>
                                                         <!-- End window informations width label -->
     
                                                         <!-- Start window informations width value -->
                                                         <spin_button id = "window_informations_width_value" min = 0 max = 1000 step = 10 value = 800 digits = 0 numeric = TRUE>
     
-                                                        </spin_button add_to_grid(window_informations_grid, window_informations_width_value, 3, 1, 1, 1)>
+                                                        </spin_button add_to_grid(window_informations_grid, window_informations_width_value, 4, 1, 1, 1)>
                                                         <!-- End window informations width value -->
     
                                                         <!-- Start window informations height label -->
                                                         <label id = "window_informations_height_label" text = "Height" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
         
-                                                        </label add_to_grid(window_informations_grid, window_informations_height_label, 4, 0, 1, 1)>
+                                                        </label add_to_grid(window_informations_grid, window_informations_height_label, 5, 0, 1, 1)>
                                                         <!-- End window informations height label -->
     
                                                         <!-- Start window informations height value -->
                                                         <spin_button id = "window_informations_height_value" min = 0 max = 1000 step = 10 value = 600 digits = 0 numeric = TRUE>
     
-                                                        </spin_button add_to_grid(window_informations_grid, window_informations_height_value, 4, 1, 1, 1)>
+                                                        </spin_button add_to_grid(window_informations_grid, window_informations_height_value, 5, 1, 1, 1)>
                                                         <!-- End window informations height value -->
     
                                                         <!-- Start window informations resizable label -->
                                                         <label id = "window_informations_resizable_label" text = "Resizable" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
         
-                                                        </label add_to_grid(window_informations_grid, window_informations_resizable_label, 5, 0, 1, 1)>
+                                                        </label add_to_grid(window_informations_grid, window_informations_resizable_label, 6, 0, 1, 1)>
                                                         <!-- End window informations resizable label -->
     
                                                         <!-- Start window informations resizable value combo box -->
@@ -270,13 +282,13 @@
                                                             </combo_box_item add_to_combo_box(window_informations_resizable_value, "FALSE")>
                                                             <!-- End window informations resizable value combo box item -->
     
-                                                        </combo_box add_to_grid(window_informations_grid, window_informations_resizable_value, 5, 1, 1, 1)>
+                                                        </combo_box add_to_grid(window_informations_grid, window_informations_resizable_value, 6, 1, 1, 1)>
                                                         <!-- End window informations resizable value combo box -->
     
                                                         <!-- Start window informations position label -->
                                                         <label id = "window_informations_position_label" text = "Position" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
         
-                                                        </label add_to_grid(window_informations_grid, window_informations_position_label, 6, 0, 1, 1)>
+                                                        </label add_to_grid(window_informations_grid, window_informations_position_label, 7, 0, 1, 1)>
                                                         <!-- End window informations position label -->
     
                                                         <!-- Start window informations position value combo box -->
@@ -300,13 +312,13 @@
                                                             </combo_box_item add_to_combo_box(window_informations_position_value, "GTK_WIN_POS_MOUSE")>
                                                             <!-- End window informations position value combo box item -->
     
-                                                        </combo_box add_to_grid(window_informations_grid, window_informations_position_value, 6, 1, 1, 1)>
+                                                        </combo_box add_to_grid(window_informations_grid, window_informations_position_value, 7, 1, 1, 1)>
                                                         <!-- End window informations position value combo box -->
     
                                                         <!-- Start window informations decorate label -->
                                                         <label id = "window_informations_decorate_label" text = "Decorate" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
         
-                                                        </label add_to_grid(window_informations_grid, window_informations_decorate_label, 7, 0, 1, 1)>
+                                                        </label add_to_grid(window_informations_grid, window_informations_decorate_label, 8, 0, 1, 1)>
                                                         <!-- End window informations decorate label -->
     
                                                         <!-- Start window informations decorate value combo box -->
@@ -324,37 +336,37 @@
                                                             </combo_box_item add_to_combo_box(window_informations_decorate_value, "FALSE")>
                                                             <!-- End window informations decorate value combo box item -->
     
-                                                        </combo_box add_to_grid(window_informations_grid, window_informations_decorate_value, 7, 1, 1, 1)>
+                                                        </combo_box add_to_grid(window_informations_grid, window_informations_decorate_value, 8, 1, 1, 1)>
                                                         <!-- End window informations decorate value combo box -->
     
                                                         <!-- Start window informations icon label -->
                                                         <label id = "window_informations_icon_label" text = "Icon" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
         
-                                                        </label add_to_grid(window_informations_grid, window_informations_icon_label, 8, 0, 1, 1)>
+                                                        </label add_to_grid(window_informations_grid, window_informations_icon_label, 9, 0, 1, 1)>
                                                         <!-- End window informations icon label -->
     
                                                         <!-- Start window informations icon value -->
                                                         <entry id = "window_informations_icon_value"  indicator_text = "icon path" visible = TRUE editable = TRUE max_length = 20 alignment = 0.5>
     
-                                                        </entry add_to_grid(window_informations_grid, window_informations_icon_value, 8, 1, 1, 1)>
+                                                        </entry add_to_grid(window_informations_grid, window_informations_icon_value, 9, 1, 1, 1)>
                                                         <!-- End window informations icon value -->
     
                                                         <!-- Start window informations opacity label -->
                                                         <label id = "window_informations_opacity_label" text = "Opacity" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
         
-                                                        </label add_to_grid(window_informations_grid, window_informations_opacity_label, 9, 0, 1, 1)>
+                                                        </label add_to_grid(window_informations_grid, window_informations_opacity_label, 10, 0, 1, 1)>
                                                         <!-- End window informations opacity label -->
     
                                                         <!-- Start window informations opacity value -->
                                                         <spin_button id = "window_informations_opacity_value" min = 0 max = 1 step = 0.1 value = 1 digits = 1 numeric = TRUE>
     
-                                                        </spin_button add_to_grid(window_informations_grid, window_informations_opacity_value, 9, 1, 1, 1)>
+                                                        </spin_button add_to_grid(window_informations_grid, window_informations_opacity_value, 10, 1, 1, 1)>
                                                         <!-- End window informations opacity value -->
     
                                                         <!-- Start window informations fullscreen label -->
                                                         <label id = "window_informations_fullscreen_label" text = "Fullscreen" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
         
-                                                        </label add_to_grid(window_informations_grid, window_informations_fullscreen_label, 10, 0, 1, 1)>
+                                                        </label add_to_grid(window_informations_grid, window_informations_fullscreen_label, 11, 0, 1, 1)>
                                                         <!-- End window informations fullscreen label -->
     
                                                         <!-- Start window informations fullscreen value combo box -->
@@ -372,13 +384,13 @@
                                                             </combo_box_item add_to_combo_box(window_informations_fullscreen_value, "FALSE")>
                                                             <!-- End window informations fullscreen value combo box item -->
     
-                                                        </combo_box add_to_grid(window_informations_grid, window_informations_fullscreen_value, 10, 1, 1, 1)>
+                                                        </combo_box add_to_grid(window_informations_grid, window_informations_fullscreen_value, 11, 1, 1, 1)>
                                                         <!-- End window informations fullscreen value combo box -->
     
                                                         <!-- Start window informations add button -->
                                                         <button id = "window_informations_add_button" label = "                                                               Add                                                               ">
     
-                                                        </button add_to_grid(window_informations_grid, window_informations_add_button, 11, 0, 2, 1)>
+                                                        </button add_to_grid(window_informations_grid, window_informations_add_button, 12, 0, 2, 1)>
                                                         <!-- End window informations add button -->
     
                                                     </grid add_to_box(window_informations_main_box, window_informations_grid, START, TRUE, FALSE, 0, 21, 21, 0, 0)>
@@ -418,47 +430,59 @@
     
                                                     <!-- Start header bar informations grid -->
                                                     <grid id = "header_bar_informations_grid" rows_spacing = 7 columns_spacing = 7 rows_homogeneous = TRUE columns_homogeneous = FALSE>
+                                                        
+                                                        <!-- Start header bar id label -->
+                                                        <label id = "header_bar_id_label" text = "Widget ID" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                        </label add_to_grid(header_bar_informations_grid, header_bar_id_label, 0, 0, 1, 1)>
+                                                        <!-- End header bar id label -->
     
+                                                        <!-- Start header bar id entry -->
+                                                        <entry id = "header_bar_id_value"  default_text = NULL indicator_text = "must be unique and no space" visible = TRUE editable = TRUE max_lenght = 5 alignment = 0.5>
+
+                                                        </entry add_to_grid(header_bar_informations_grid, header_bar_id_value, 0, 1, 1, 1)>
+                                                        <!-- End header bar id entry -->
+
                                                         <!-- Start header bar informations title label -->
                                                         <label id = "header_bar_informations_title_label" text = "Title" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
     
-                                                        </label add_to_grid(header_bar_informations_grid, header_bar_informations_title_label, 0, 0, 1, 1)>
+                                                        </label add_to_grid(header_bar_informations_grid, header_bar_informations_title_label, 1, 0, 1, 1)>
                                                         <!-- End header bar informations title label -->
     
                                                         <!-- Start header bar informations title value -->
                                                         <entry id = "header_bar_informations_title_value"  indicator_text = "title" visible = TRUE editable = TRUE max_length = 20 alignment = 0.5>
     
-                                                        </entry add_to_grid(header_bar_informations_grid, header_bar_informations_title_value, 0, 1, 1, 1)>
+                                                        </entry add_to_grid(header_bar_informations_grid, header_bar_informations_title_value, 1, 1, 1, 1)>
                                                         <!-- End header bar informations title value -->
     
                                                         <!-- Start header bar informations subtitle label -->
                                                         <label id = "header_bar_informations_subtitle_label" text = "Subtitle" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
     
-                                                        </label add_to_grid(header_bar_informations_grid, header_bar_informations_subtitle_label, 1, 0, 1, 1)>
+                                                        </label add_to_grid(header_bar_informations_grid, header_bar_informations_subtitle_label, 2, 0, 1, 1)>
                                                         <!-- End header bar informations subtitle label -->
     
                                                         <!-- Start header bar informations subtitle value -->
                                                         <entry id = "header_bar_informations_subtitle_value"  indicator_text = "subtitle" visible = TRUE editable = TRUE max_length = 20 alignment = 0.5>
     
-                                                        </entry add_to_grid(header_bar_informations_grid, header_bar_informations_subtitle_value, 1, 1, 1, 1)>
+                                                        </entry add_to_grid(header_bar_informations_grid, header_bar_informations_subtitle_value, 2, 1, 1, 1)>
                                                         <!-- End header bar informations subtitle value -->
     
                                                         <!-- Start header bar informations icon label -->
                                                         <label id = "header_bar_informations_icon_label" text = "Icon" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
     
-                                                        </label add_to_grid(header_bar_informations_grid, header_bar_informations_icon_label, 2, 0, 1, 1)>
+                                                        </label add_to_grid(header_bar_informations_grid, header_bar_informations_icon_label, 3, 0, 1, 1)>
                                                         <!-- End header bar informations icon label -->
     
                                                         <!-- Start header bar informations icon value -->
                                                         <entry id = "header_bar_informations_icon_value"  indicator_text = "icon path" visible = TRUE editable = TRUE max_length = 20 alignment = 0.5>
     
-                                                        </entry add_to_grid(header_bar_informations_grid, header_bar_informations_icon_value, 2, 1, 1, 1)>
+                                                        </entry add_to_grid(header_bar_informations_grid, header_bar_informations_icon_value, 3, 1, 1, 1)>
                                                         <!-- End header bar informations icon value -->
     
                                                         <!-- Start header bar informations settings label -->
                                                         <label id = "header_bar_informations_settings_label" text = "Settings" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
     
-                                                        </label add_to_grid(header_bar_informations_grid, header_bar_informations_settings_label, 3, 0, 1, 1)>
+                                                        </label add_to_grid(header_bar_informations_grid, header_bar_informations_settings_label, 4, 0, 1, 1)>
                                                         <!-- End header bar informations settings label -->
     
                                                         <!-- Start header bar informations settings value combo box -->
@@ -476,13 +500,13 @@
                                                             </combo_box_item add_to_combo_box(header_bar_informations_settings_value, "FALSE")>
                                                             <!-- End header bar informations settings value combo box item -->
     
-                                                        </combo_box add_to_grid(header_bar_informations_grid, header_bar_informations_settings_value, 3, 1, 1, 1)>
+                                                        </combo_box add_to_grid(header_bar_informations_grid, header_bar_informations_settings_value, 4, 1, 1, 1)>
                                                         <!-- End header bar informations settings value combo box -->
                                                         
                                                         <!-- Start header bar informations add button -->
                                                         <button id = "header_bar_informations_add_button" label = "                                                               Add                                                               ">
     
-                                                        </button add_to_grid(header_bar_informations_grid, header_bar_informations_add_button, 4, 0, 2, 1)>
+                                                        </button add_to_grid(header_bar_informations_grid, header_bar_informations_add_button, 5, 0, 2, 1)>
                                                         <!-- End header bar informations add button -->
     
                                                     </grid add_to_box(header_bar_informations_main_box, header_bar_informations_grid, START, TRUE, FALSE, 0, 14, 0, 14, 0)>
@@ -522,10 +546,22 @@
                                                     <!-- Start scrolled window informations grid -->
                                                     <grid id = "scrolled_window_informations_grid" rows_spacing = 7 columns_spacing = 7 rows_homogeneous = TRUE columns_homogeneous = FALSE>
     
+                                                        <!-- Start scrolled window informations id label -->
+                                                        <label id = "scrolled_window_informations_id_label" text = "Widget ID" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+    
+                                                        </label add_to_grid(scrolled_window_informations_grid, scrolled_window_informations_id_label, 0, 0, 1, 1)>
+                                                        <!-- End scrolled window informations id label -->
+
+                                                        <!-- Start scrolled window informations id entry -->
+                                                        <entry id = "scrolled_window_informations_id_value"  default_text = NULL indicator_text = "must be unique and no space" visible = TRUE editable = TRUE max_lenght = 5 alignment = 0.5>
+
+                                                        </entry add_to_grid(scrolled_window_informations_grid, scrolled_window_informations_id_value, 0, 1, 1, 1)>
+                                                        <!-- End scrolled window informations id entry -->
+
                                                         <!-- Start scrolled window informations horizontal label -->
                                                         <label id = "scrolled_window_informations_horizontal_label" text = "Horizontal" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
     
-                                                        </label add_to_grid(scrolled_window_informations_grid, scrolled_window_informations_horizontal_label, 0, 0, 1, 1)>
+                                                        </label add_to_grid(scrolled_window_informations_grid, scrolled_window_informations_horizontal_label, 1, 0, 1, 1)>
                                                         <!-- End scrolled window informations horizontal label -->
     
                                                         <!-- Start scrolled window informations horizontal value combo box -->
@@ -543,13 +579,13 @@
                                                             </combo_box_item add_to_combo_box(scrolled_window_informations_horizontal_value, "FALSE")>
                                                             <!-- End scrolled window informations horizontal value combo box item -->
     
-                                                        </combo_box add_to_grid(scrolled_window_informations_grid, scrolled_window_informations_horizontal_value, 0, 1, 1, 1)>
+                                                        </combo_box add_to_grid(scrolled_window_informations_grid, scrolled_window_informations_horizontal_value, 1, 1, 1, 1)>
                                                         <!-- End scrolled window informations horizontal value combo box -->
     
                                                         <!-- Start scrolled window informations vertical label -->
                                                         <label id = "scrolled_window_informations_vertical_label" text = "Vertical" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
     
-                                                        </label add_to_grid(scrolled_window_informations_grid, scrolled_window_informations_vertical_label, 1, 0, 1, 1)>
+                                                        </label add_to_grid(scrolled_window_informations_grid, scrolled_window_informations_vertical_label, 2, 0, 1, 1)>
                                                         <!-- End scrolled window informations vertical label -->
     
                                                         <!-- Start scrolled window informations vertical value combo box -->
@@ -567,13 +603,13 @@
                                                             </combo_box_item add_to_combo_box(scrolled_window_informations_vertical_value, "FALSE")>
                                                             <!-- End scrolled window informations vertical value combo box item -->
     
-                                                        </combo_box add_to_grid(scrolled_window_informations_grid, scrolled_window_informations_vertical_value, 1, 1, 1, 1)>
+                                                        </combo_box add_to_grid(scrolled_window_informations_grid, scrolled_window_informations_vertical_value, 2, 1, 1, 1)>
                                                         <!-- End scrolled window informations vertical value combo box -->
     
                                                         <!-- Start scrolled window informations add button -->
                                                         <button id = "scrolled_window_informations_add_button" label = "                                                               Add                                                               ">
     
-                                                        </button add_to_grid(scrolled_window_informations_grid, scrolled_window_informations_add_button, 2, 0, 2, 1)>
+                                                        </button add_to_grid(scrolled_window_informations_grid, scrolled_window_informations_add_button, 3, 0, 2, 1)>
                                                         <!-- End scrolled window informations add button -->
     
                                                     </grid add_to_box(scrolled_window_informations_main_box, scrolled_window_informations_grid, START, TRUE, FALSE, 0, 14, 0, 0, 0)>
@@ -625,10 +661,22 @@
                                                     <!-- Start box case informations grid -->
                                                     <grid id = "Box_case_informations_grid" rows_spacing = 7 columns_spacing = 7 rows_homogeneous = TRUE columns_homogeneous = FALSE>
     
+                                                        <!-- Start box id label -->
+                                                        <label id = "Box_case_informations_id_label" text = "Widget ID" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                        </label add_to_grid(Box_case_informations_grid, Box_case_informations_id_label, 0, 0, 1, 1)>
+                                                        <!-- End box id label -->
+    
+                                                        <!-- Start box id entry -->
+                                                        <entry id = "Box_case_informations_id_entry" default_text = NULL indicator_text = "must be unique and no space" visible = TRUE editable = TRUE max_lenght = 5 alignment = 0.5>
+
+                                                        </entry add_to_grid(Box_case_informations_grid, Box_case_informations_id_entry, 0, 1, 1, 1)>
+                                                        <!-- End box id entry -->
+
                                                         <!-- Start box case informations orientation label -->
                                                         <label id = "Box_case_informations_orientation_label" text = "Orientation" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
     
-                                                        </label add_to_grid(Box_case_informations_grid, Box_case_informations_orientation_label, 0, 0, 1, 1)>
+                                                        </label add_to_grid(Box_case_informations_grid, Box_case_informations_orientation_label, 1, 0, 1, 1)>
                                                         <!-- End box case informations orientation label -->
     
                                                         <!-- Start box case informations orientation value combo box -->
@@ -646,13 +694,13 @@
                                                             </combo_box_item add_to_combo_box(Box_case_informations_orientation_value, "GTK_ORIENTATION_VERTICAL")>
                                                             <!-- End box case informations orientation value combo box item -->
     
-                                                        </combo_box add_to_grid(Box_case_informations_grid, Box_case_informations_orientation_value, 0, 1, 1, 1)>
+                                                        </combo_box add_to_grid(Box_case_informations_grid, Box_case_informations_orientation_value, 1, 1, 1, 1)>
                                                         <!-- End box case informations orientation value combo box -->
     
                                                         <!-- Start box case informations align label -->
                                                         <label id = "Box_case_informations_align_label" text = "Align" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
     
-                                                        </label add_to_grid(Box_case_informations_grid, Box_case_informations_align_label, 1, 0, 1, 1)>
+                                                        </label add_to_grid(Box_case_informations_grid, Box_case_informations_align_label, 2, 0, 1, 1)>
                                                         <!-- End box case informations align label -->
     
                                                         <!-- Start box case informations align value combo box -->
@@ -682,25 +730,25 @@
                                                             </combo_box_item add_to_combo_box(Box_case_informations_align_value, "-1")>
                                                             <!-- End box case informations align value combo box item -->
     
-                                                        </combo_box add_to_grid(Box_case_informations_grid, Box_case_informations_align_value, 1, 1, 1, 1)>
+                                                        </combo_box add_to_grid(Box_case_informations_grid, Box_case_informations_align_value, 2, 1, 1, 1)>
                                                         <!-- End box case informations align value combo box -->
     
                                                         <!-- Start box case informations spacing label -->
                                                         <label id = "Box_case_informations_spacing_label" text = "Spacing" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
     
-                                                        </label add_to_grid(Box_case_informations_grid, Box_case_informations_spacing_label, 2, 0, 1, 1)>
+                                                        </label add_to_grid(Box_case_informations_grid, Box_case_informations_spacing_label, 3, 0, 1, 1)>
                                                         <!-- End box case informations spacing label -->
     
                                                         <!-- Start box case informations spacing value spin button -->
                                                         <spin_button id = "Box_case_informations_spacing_value" min = "0" max = "100" step = "5" value = "0" digits = "0"" numeric = TRUE>
     
-                                                        </spin_button add_to_grid(Box_case_informations_grid, Box_case_informations_spacing_value, 2, 1, 1, 1)>
+                                                        </spin_button add_to_grid(Box_case_informations_grid, Box_case_informations_spacing_value, 3, 1, 1, 1)>
                                                         <!-- End box case informations spacing value spin button -->
     
                                                         <!-- Start box case informations add button -->
                                                         <button id = "Box_case_informations_add" label = "                                                               Add                                                               ">
     
-                                                        </button add_to_grid(Box_case_informations_grid, Box_case_informations_add, 3, 0, 2, 1)>
+                                                        </button add_to_grid(Box_case_informations_grid, Box_case_informations_add, 4, 0, 2, 1)>
                                                         <!-- End box case informations add button -->
     
                                                     </grid add_to_box(Box_case_informations_main_box, Box_case_informations_grid, START, TRUE, FALSE, 0, 14, 0, 0, 0)>
@@ -737,10 +785,22 @@
                                                 <!-- Start fixed grid -->
                                                 <grid id = "Fixed_grid" rows_spacing = 7 columns_spacing = 7 rows_homogeneous = TRUE columns_homogeneous = FALSE>
     
+                                                    <!-- Start fixed id label -->
+                                                    <label id = "Fixed_id_label" text = "Widget ID" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+    
+                                                    </label add_to_grid(Fixed_grid, Fixed_id_label, 0, 0, 1, 1)>
+                                                    <!-- End fixed id label -->
+
+                                                    <!-- Start fixed id entry -->
+                                                    <entry id = "Fixed_id_entry" default_text = NULL indicator_text = "must be unique and no space" visible = TRUE editable = TRUE max_lenght = 5 alignment = 0.5>
+    
+                                                    </entry add_to_grid(Fixed_grid, Fixed_id_entry, 0, 1, 1, 1)>
+                                                    <!-- End fixed id entry -->
+
                                                     <!-- Start fixed add button  -->
                                                     <button id = "Fixed_add" label = "                                                               Add                                                               ">
     
-                                                    </button add_to_grid(Fixed_grid, Fixed_add, 0, 0, 2, 1)>
+                                                    </button add_to_grid(Fixed_grid, Fixed_add, 1, 0, 2, 1)>
                                                     <!-- End fixed add button  -->
     
                                                 </grid add_to_frame(Fixed_grid_frame, Fixed_grid, 14, 14, 14, 0)>
@@ -774,47 +834,59 @@
                                                 <!-- Start frame grid -->
                                                 <grid id = "Frame_grid" rows_spacing = 7 columns_spacing = 7 rows_homogeneous = TRUE columns_homogeneous = FALSE>
     
+                                                    <!-- Start frame id label -->
+                                                    <label id = "Frame_id_label" text = "Widget ID" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+    
+                                                    </label add_to_grid(Frame_grid, Frame_id_label, 0, 0, 1, 1)>
+                                                    <!-- End frame id label -->
+
+                                                    <!-- Start frame id entry -->
+                                                    <entry id = "Frame_id_entry" default_text = NULL indicator_text = "must be unique and no space" visible = TRUE editable = TRUE max_lenght = 5 alignment = 0.5>
+    
+                                                    </entry add_to_grid(Frame_grid, Frame_id_entry, 0, 1, 1, 1)>
+                                                    <!-- End frame id entry -->
+                                                    
                                                     <!-- Start frame title label -->
                                                     <label id = "Frame_title_label" text = "Title" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
     
-                                                    </label add_to_grid(Frame_grid, Frame_title_label, 0, 0, 1, 1)>
+                                                    </label add_to_grid(Frame_grid, Frame_title_label, 1, 0, 1, 1)>
                                                     <!-- End frame title label -->
     
                                                     <!-- Start frame title value entry -->
                                                     <entry id = "Frame_title_value" max_length = "20" editable = TRUE>
     
-                                                    </entry add_to_grid(Frame_grid, Frame_title_value, 0, 1, 1, 1)>
+                                                    </entry add_to_grid(Frame_grid, Frame_title_value, 1, 1, 1, 1)>
                                                     <!-- End frame title value entry -->
     
                                                     <!-- Start frame horizontal placement label -->
                                                     <label id = "Frame_horizontal_placement_label" text = "Horizontal placement" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
     
-                                                    </label add_to_grid(Frame_grid, Frame_horizontal_placement_label, 1, 0, 1, 1)>
+                                                    </label add_to_grid(Frame_grid, Frame_horizontal_placement_label, 2, 0, 1, 1)>
                                                     <!-- End frame horizontal placement label -->
     
                                                     <!-- Start frame horizontal placement value spin button -->
                                                     <spin_button id = "Frame_horizontal_placement_value" min = "0" max = "1" step = "0.5" value = "0.5" digits = "1" numeric = TRUE>
     
-                                                    </spin_button add_to_grid(Frame_grid, Frame_horizontal_placement_value, 1, 1, 1, 1)>
+                                                    </spin_button add_to_grid(Frame_grid, Frame_horizontal_placement_value, 2, 1, 1, 1)>
                                                     <!-- End frame horizontal placement value spin button -->
     
                                                     <!-- Start frame vertical placement label -->
                                                     <label id = "Frame_vertical_placement_label" text = "Vertical placement" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
     
-                                                    </label add_to_grid(Frame_grid, Frame_vertical_placement_label, 2, 0, 1, 1)>
+                                                    </label add_to_grid(Frame_grid, Frame_vertical_placement_label, 3, 0, 1, 1)>
                                                     <!-- End frame vertical placement label -->
     
                                                     <!-- Start frame vertical placement value spin button -->
                                                     <spin_button id = "Frame_vertical_placement_value" min = "0" max = "1" step = "0.5" value = "0.5" digits = "1" numeric = TRUE>
     
-                                                    </spin_button add_to_grid(Frame_grid, Frame_vertical_placement_value, 2, 1, 1, 1)>
+                                                    </spin_button add_to_grid(Frame_grid, Frame_vertical_placement_value, 3, 1, 1, 1)>
                                                     <!-- End frame vertical placement value spin button -->
     
     
                                                     <!-- Start frame add button  -->
                                                     <button id = "Frame_add" label = "                                                               Add                                                               ">
     
-                                                    </button add_to_grid(Frame_grid, Frame_add, 3, 0, 2, 1)>
+                                                    </button add_to_grid(Frame_grid, Frame_add, 4, 0, 2, 1)>
                                                     <!-- End frame add button  -->
     
                                                 </grid add_to_frame(Frame_grid_frame, Frame_grid, 14, 14, 14, 0)>
@@ -847,34 +919,46 @@
                                                 <!-- Start grid grid -->
                                                 <grid id = "Grid_grid" rows_spacing = 7 columns_spacing = 7 rows_homogeneous = TRUE columns_homogeneous = FALSE>
     
+                                                    <!-- Start grid id label -->
+                                                    <label id = "Grid_id_label" text = "Widget ID" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+    
+                                                    </label add_to_grid(Grid_grid, Grid_id_label, 0, 0, 1, 1)>
+                                                    <!-- End grid id label -->
+
+                                                    <!-- Start grid id entry -->
+                                                    <entry id = "Grid_id_entry" default_text = NULL indicator_text = "must be unique and no space" visible = TRUE editable = TRUE max_lenght = 5 alignment = 0.5>
+    
+                                                    </entry add_to_grid(Grid_grid, Grid_id_entry, 0, 1, 1, 1)>
+                                                    <!-- End grid id entry -->
+
                                                     <!-- Start grid rows spacing label  -->
                                                     <label id = "Grid_rows_spacing_label" text = "Rows spacing" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
     
-                                                    </label add_to_grid(Grid_grid, Grid_rows_spacing_label, 0, 0, 1, 1)>
+                                                    </label add_to_grid(Grid_grid, Grid_rows_spacing_label, 1, 0, 1, 1)>
                                                     <!-- End grid rows spacing label  -->
     
                                                     <!-- Start grid rows spacing value spin button  -->
                                                     <spin_button id = "Grid_rows_spacing_value" min = "0" max = "100" step = "5" value = "0" digits = 0 numeric = TRUE>
     
-                                                    </spin_button add_to_grid(Grid_grid, Grid_rows_spacing_value, 0, 1, 1, 1)>
+                                                    </spin_button add_to_grid(Grid_grid, Grid_rows_spacing_value, 1, 1, 1, 1)>
                                                     <!-- End grid rows spacing value spin button  -->
     
                                                     <!-- Start grid columns spacing label  -->
                                                     <label id = "Grid_columns_spacing_label" text = "Columns spacing" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
     
-                                                    </label add_to_grid(Grid_grid, Grid_columns_spacing_label, 1, 0, 1, 1)>
+                                                    </label add_to_grid(Grid_grid, Grid_columns_spacing_label, 2, 0, 1, 1)>
                                                     <!-- End grid columns spacing label  -->
     
                                                     <!-- Start grid columns spacing value spin button  -->
                                                     <spin_button id = "Grid_columns_spacing_value" min = "0" max = "100" step = "5" value = "0" digits = 0 numeric = TRUE>
     
-                                                    </spin_button add_to_grid(Grid_grid, Grid_columns_spacing_value, 1, 1, 1, 1)>
+                                                    </spin_button add_to_grid(Grid_grid, Grid_columns_spacing_value, 2, 1, 1, 1)>
                                                     <!-- End grid columns spacing value spin button  -->
     
                                                     <!-- Start grid rows homogeneous label  -->
                                                     <label id = "Grid_rows_homogeneous_label" text = "Rows homogeneous" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
     
-                                                    </label add_to_grid(Grid_grid, Grid_rows_homogeneous_label, 2, 0, 1, 1)>
+                                                    </label add_to_grid(Grid_grid, Grid_rows_homogeneous_label, 3, 0, 1, 1)>
                                                     <!-- End grid rows homogeneous label  -->
     
                                                     <!-- Start grid rows homogeneous value combo box  -->
@@ -892,13 +976,13 @@
                                                         </combo_box_item add_to_combo_box(Grid_rows_homogeneous_value, "FALSE")>
                                                         <!-- End grid rows homogeneous value combo box item  -->
     
-                                                    </combo_box add_to_grid(Grid_grid, Grid_rows_homogeneous_value, 2, 1, 1, 1)>
+                                                    </combo_box add_to_grid(Grid_grid, Grid_rows_homogeneous_value, 3, 1, 1, 1)>
                                                     <!-- End grid rows homogeneous value combo box  -->
     
                                                     <!-- Start grid columns homogeneous label  -->
                                                     <label id = "Grid_columns_homogeneous_label" text = "Columns homogeneous" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
     
-                                                    </label add_to_grid(Grid_grid, Grid_columns_homogeneous_label, 3, 0, 1, 1)>
+                                                    </label add_to_grid(Grid_grid, Grid_columns_homogeneous_label, 4, 0, 1, 1)>
                                                     <!-- End grid columns homogeneous label  -->
     
                                                     <!-- Start grid columns homogeneous value combo box  -->
@@ -916,13 +1000,13 @@
                                                         </combo_box_item add_to_combo_box(Grid_columns_homogeneous_value, "FALSE")>
                                                         <!-- End grid columns homogeneous value combo box item  -->
     
-                                                    </combo_box add_to_grid(Grid_grid, Grid_columns_homogeneous_value, 3, 1, 1, 1)>
+                                                    </combo_box add_to_grid(Grid_grid, Grid_columns_homogeneous_value, 4, 1, 1, 1)>
                                                     <!-- End grid columns homogeneous value combo box  -->
     
                                                     <!-- Start grid add button  -->
                                                     <button id = "Grid_add" label = "                                                               Add                                                               ">
     
-                                                    </button add_to_grid(Grid_grid, Grid_add, 4, 0, 2, 1)>
+                                                    </button add_to_grid(Grid_grid, Grid_add, 5, 0, 2, 1)>
                                                     <!-- End fixed add button  -->
     
                                                 </grid add_to_frame(Grid_grid_frame, Grid_grid, 14, 14, 14, 0)>
@@ -956,10 +1040,22 @@
                                                 <!-- Start grid paned -->
                                                 <grid id = "Paned_grid" rows_spacing = 7 columns_spacing = 7 rows_homogeneous = TRUE columns_homogeneous = FALSE>
     
+                                                    <!-- Start paned id label -->
+                                                    <label id = "Paned_id_label" text = "ID" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(Paned_grid, Paned_id_label, 0, 0, 1, 1)>
+                                                    <!-- End paned id label -->
+
+                                                    <!-- Start paned id value entry  -->
+                                                    <entry id = "Paned_id_value" default_text = NULL indicator_text = "must be unique and no space" visible = TRUE editable = TRUE max_lenght = 5 alignment = 0.5>
+
+                                                    </entry add_to_grid(Paned_grid, Paned_id_value, 0, 1, 1, 1)>
+                                                    <!-- End paned id value entry  -->
+
                                                     <!-- Start paned orientation label  -->
                                                     <label id = "Paned_orientation_label" text = "Orientation" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
     
-                                                    </label add_to_grid(Paned_grid, Paned_orientation_label, 0, 0, 1, 1)>
+                                                    </label add_to_grid(Paned_grid, Paned_orientation_label, 1, 0, 1, 1)>
                                                     <!-- End paned orientation label  -->
     
                                                     <!-- Start paned orientation value combo box  -->
@@ -977,25 +1073,25 @@
                                                         </combo_box_item add_to_combo_box(Paned_orientation_value, "GTK_ORIENTATION_VERTICAL")>
                                                         <!-- End paned orientation value combo box item  -->
     
-                                                    </combo_box add_to_grid(Paned_grid, Paned_orientation_value, 0, 1, 1, 1)>
+                                                    </combo_box add_to_grid(Paned_grid, Paned_orientation_value, 1, 1, 1, 1)>
                                                     <!-- End paned orientation value combo box  -->
     
                                                     <!-- Start paned default position label  -->
                                                     <label id = "Paned_default_position_label" text = "Default position" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
     
-                                                    </label add_to_grid(Paned_grid, Paned_default_position_label, 1, 0, 1, 1)>
+                                                    </label add_to_grid(Paned_grid, Paned_default_position_label, 2, 0, 1, 1)>
                                                     <!-- End paned default position label  -->
     
                                                     <!-- Start paned default position value spin button  -->
                                                     <spin_button id = "Paned_default_position_value" min = "0" max = "1000" step = "100" value = "500" digits = 0 numeric = TRUE>
     
-                                                    </spin_button add_to_grid(Paned_grid, Paned_default_position_value, 1, 1, 1, 1)>
+                                                    </spin_button add_to_grid(Paned_grid, Paned_default_position_value, 2, 1, 1, 1)>
                                                     <!-- End paned default position value spin button  -->
     
                                                     <!-- Start paned show handle label -->
                                                     <label id = "Paned_show_handle_label" text = "Show Handle" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
     
-                                                    </label add_to_grid(Paned_grid, Paned_show_handle_label, 2, 0, 1, 1)>
+                                                    </label add_to_grid(Paned_grid, Paned_show_handle_label, 3, 0, 1, 1)>
                                                     <!-- End paned show handle label -->
     
                                                     <!-- Start paned show handle combo box -->
@@ -1013,13 +1109,13 @@
                                                         </combo_box_item add_to_combo_box(Paned_show_handle_combo_box, "FALSE")>
                                                         <!-- End paned show handle combo box item -->
     
-                                                    </combo_box add_to_grid(Paned_grid, Paned_show_handle_combo_box, 2, 1, 1, 1)>
+                                                    </combo_box add_to_grid(Paned_grid, Paned_show_handle_combo_box, 3, 1, 1, 1)>
                                                     <!-- End paned show handle combo box -->
     
                                                     <!-- Start paned add button  -->
                                                     <button id = "Paned_add" label = "                                                               Add                                                               ">
     
-                                                    </button add_to_grid(Paned_grid, Paned_add, 3, 0, 2, 1)>
+                                                    </button add_to_grid(Paned_grid, Paned_add, 4, 0, 2, 1)>
                                                     <!-- End fixed add button  -->
                                                     
                                                 </grid add_to_frame(Paned_grid_frame, Paned_grid, 14, 14, 14, 0)>
@@ -1053,13 +1149,13 @@
                                                 <grid id = "Stack_grid" rows_spacing = 7 columns_spacing = 7 rows_homogeneous = TRUE columns_homogeneous = FALSE>
     
                                                     <!-- Start stack switcher-widget label -->
-                                                    <label id = "stack_switcher_widget_label" text = "Switcher ID" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+                                                    <label id = "stack_switcher_widget_label" text = "Widget ID" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
     
                                                     </label add_to_grid(Stack_grid, stack_switcher_widget_label, 0, 0, 1, 1)>
                                                     <!-- End Stack switcher-widget label -->
     
                                                     <!-- Start stack switcher-widget entry value -->
-                                                    <entry id = "stack_switcher_widget_entry" indicator_text = "The switcher ID">
+                                                    <entry id = "stack_switcher_widget_entry" default_text = NULL indicator_text = "must be unique and no space" visible = TRUE editable = TRUE max_lenght = 5 alignment = 0.5>
     
                                                     </entry add_to_grid(Stack_grid, stack_switcher_widget_entry, 0, 1, 1, 1)>
                                                     <!-- End stack switcher-widget entry value -->
@@ -1149,22 +1245,34 @@
                                                 <!-- Start Switcher grid -->
                                                 <grid id = "Switcher_grid" rows_spacing = 7 columns_spacing = 7 rows_homogeneous = TRUE columns_homogeneous = FALSE>
     
+                                                    <!-- Start switcher id label -->
+                                                    <label id = "switcher_id_label" text = "Widget ID" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+    
+                                                    </label add_to_grid(Switcher_grid, switcher_id_label, 0, 0, 1, 1)>
+                                                    <!-- End switcher id label -->
+
+                                                    <!-- Start switcher id entry value -->
+                                                    <entry id = "switcher_id_entry" default_text = NULL indicator_text = "must be unique and no space" visible = TRUE editable = TRUE max_lenght = 5 alignment = 0.5>
+    
+                                                    </entry add_to_grid(Switcher_grid, switcher_id_entry, 0, 1, 1, 1)>
+                                                    <!-- End switcher id entry value -->
+
                                                     <!-- Start switcher spacing label -->
                                                     <label id = "switcher_spacing_label" text = "Spacing" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
     
-                                                    </label add_to_grid(Switcher_grid, switcher_spacing_label, 0, 0, 1, 1)>
+                                                    </label add_to_grid(Switcher_grid, switcher_spacing_label, 1, 0, 1, 1)>
                                                     <!-- End switcher spacing label -->
     
                                                     <!-- Start switcher spacing value spin button -->
                                                     <spin_button id = "switcher_spacing_value_spin_button" min = 0 max = 100 step = 5 value = 5 digits = 0 numeric = TRUE>
     
-                                                    </spin_button add_to_grid(Switcher_grid, switcher_spacing_value_spin_button, 0, 1, 1, 1)>
+                                                    </spin_button add_to_grid(Switcher_grid, switcher_spacing_value_spin_button, 1, 1, 1, 1)>
                                                     <!-- End switcher spacing value spin button -->
     
                                                     <!-- Start same size label -->
                                                     <label id = "same_size_label" text = "Same Size" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
     
-                                                    </label add_to_grid(Switcher_grid, same_size_label, 1, 0, 1, 1)>
+                                                    </label add_to_grid(Switcher_grid, same_size_label, 2, 0, 1, 1)>
                                                     <!-- End same size label -->
     
                                                     <!-- Start same size value combo box -->
@@ -1182,13 +1290,13 @@
                                                         </combo_box_item add_to_combo_box(same_size_value_combo_box, "FALSE")>
                                                         <!-- End same size value combo box item -->
     
-                                                    </combo_box add_to_grid(Switcher_grid, same_size_value_combo_box, 1, 1, 1, 1)>
+                                                    </combo_box add_to_grid(Switcher_grid, same_size_value_combo_box, 2, 1, 1, 1)>
                                                     <!-- End same size value combo box -->
     
                                                     <!-- Start switcher informations add button -->
                                                     <button id = "switcher_informations_add_button" label = "                                                               Add                                                               ">
     
-                                                    </button add_to_grid(Switcher_grid, switcher_informations_add_button, 2, 0, 2, 1)>
+                                                    </button add_to_grid(Switcher_grid, switcher_informations_add_button, 3, 0, 2, 1)>
                                                     <!-- End switcher informations add button -->
     
                                                 </grid add_to_frame(Switcher_grid_frame, Switcher_grid, 14, 14, 14, 14)>
@@ -1235,10 +1343,23 @@
                                                 <!-- Start button grid -->
                                                 <grid id = "button_grid" rows_spacing = 7 columns_spacing = 7 rows_homogeneous = TRUE columns_homogeneous = FALSE>
 
+                                                    <!-- Start button id label -->
+                                                    <label id = "button_id_label" text = "Widget ID" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(button_grid, button_id_label, 0, 0, 1, 1)>
+                                                    <!-- End button id label -->
+
+                                                    <!-- Start button id entry value -->
+                                                    <entry id = "button_id_entry" default_text = NULL indicator_text = "must be unique and no space" visible = TRUE editable = TRUE max_lenght = 5 alignment = 0.5>
+
+                                                    </entry add_to_grid(button_grid, button_id_entry, 0, 1, 1, 1)>
+                                                    <!-- End button id entry value -->
+
+
                                                     <!-- Start button relief label -->
                                                     <label id = "button_relief_label" text = "Relief" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
     
-                                                    </label add_to_grid(button_grid, button_relief_label, 0, 0, 1, 1)>
+                                                    </label add_to_grid(button_grid, button_relief_label, 1, 0, 1, 1)>
                                                     <!-- End button relief label -->
     
                                                     <!-- Start button relief combo box -->
@@ -1256,25 +1377,25 @@
                                                         </combo_box_item add_to_combo_box(button_relief_combo_box, "GTK_RELIEF_NORMAL")>
                                                         <!-- End button relief combo box item -->
                                                     
-                                                    </combo_box add_to_grid(button_grid, button_relief_combo_box, 0, 1, 1, 1)>
+                                                    </combo_box add_to_grid(button_grid, button_relief_combo_box, 1, 1, 1, 1)>
                                                     <!-- End button relief combo box -->
 
                                                     <!-- Start button label label -->
                                                     <label id = "button_label_label" text = "Label" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
     
-                                                    </label add_to_grid(button_grid, button_label_label, 1, 0, 1, 1)>
+                                                    </label add_to_grid(button_grid, button_label_label, 2, 0, 1, 1)>
                                                     <!-- End button label label -->
 
                                                     <!-- Start button label entry -->
                                                     <entry id = "button_label_entry" size = 14 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
     
-                                                    </entry add_to_grid(button_grid, button_label_entry, 1, 1, 1, 1)>
+                                                    </entry add_to_grid(button_grid, button_label_entry, 2, 1, 1, 1)>
                                                     <!-- End button label entry -->
 
                                                     <!-- Start button use underline label -->
                                                     <label id = "button_use_underline_label" text = "Use Underline" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
     
-                                                    </label add_to_grid(button_grid, button_use_underline_label, 2, 0, 1, 1)>
+                                                    </label add_to_grid(button_grid, button_use_underline_label, 3, 0, 1, 1)>
                                                     <!-- End button use underline label -->
 
                                                     <!-- Start button use underline combo box -->
@@ -1292,49 +1413,49 @@
                                                         </combo_box_item add_to_combo_box(button_use_underline_combo_box, "FALSE")>
                                                         <!-- End button use underline combo box item -->
                                                     
-                                                    </combo_box add_to_grid(button_grid, button_use_underline_combo_box, 2, 1, 1, 1)>
+                                                    </combo_box add_to_grid(button_grid, button_use_underline_combo_box, 3, 1, 1, 1)>
                                                     <!-- End button use underline combo box -->
 
                                                     <!-- Start button path to image label -->
                                                     <label id = "button_path_to_image_label" text = "Path to Image" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
     
-                                                    </label add_to_grid(button_grid, button_path_to_image_label, 3, 0, 1, 1)>
+                                                    </label add_to_grid(button_grid, button_path_to_image_label, 4, 0, 1, 1)>
                                                     <!-- End button path to image label -->
 
                                                     <!-- Start button path to image entry -->
                                                     <entry id = "button_path_to_image_entry" size = 14 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
     
-                                                    </entry add_to_grid(button_grid, button_path_to_image_entry, 3, 1, 1, 1)>
+                                                    </entry add_to_grid(button_grid, button_path_to_image_entry, 4, 1, 1, 1)>
                                                     <!-- End button path to image entry -->
 
                                                     <!-- Start button callback label -->
                                                     <label id = "button_callback_label" text = "Callback" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
     
-                                                    </label add_to_grid(button_grid, button_callback_label, 4, 0, 1, 1)>
+                                                    </label add_to_grid(button_grid, button_callback_label, 5, 0, 1, 1)>
                                                     <!-- End button callback label -->
 
                                                     <!-- Start button callback entry -->
                                                     <entry id = "button_callback_entry" size = 14 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
     
-                                                    </entry add_to_grid(button_grid, button_callback_entry, 4, 1, 1, 1)>
+                                                    </entry add_to_grid(button_grid, button_callback_entry, 5, 1, 1, 1)>
                                                     <!-- End button callback entry -->
 
                                                     <!-- Start button data label -->
                                                     <label id = "button_data_label" text = "Data" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
     
-                                                    </label add_to_grid(button_grid, button_data_label, 5, 0, 1, 1)>
+                                                    </label add_to_grid(button_grid, button_data_label, 6, 0, 1, 1)>
                                                     <!-- End button data label -->
 
                                                     <!-- Start button data entry -->
                                                     <entry id = "button_data_entry" size = 14 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
     
-                                                    </entry add_to_grid(button_grid, button_data_entry, 5, 1, 1, 1)>
+                                                    </entry add_to_grid(button_grid, button_data_entry, 6, 1, 1, 1)>
                                                     <!-- End button data entry -->
 
                                                     <!-- Start button add button -->
                                                     <button id = "button_add" label = "                                                               Add                                                               ">
 
-                                                    </button add_to_grid(button_grid, button_add, 6, 0, 2, 1)>
+                                                    </button add_to_grid(button_grid, button_add, 7, 0, 2, 1)>
                                                     <!-- End button add button -->
 
                                                 </grid add_to_frame(button_grid_frame, button_grid, 14, 14, 14, 14)>
@@ -1367,22 +1488,34 @@
                                                 <!-- Start check button grid -->
                                                 <grid id = "check_button_grid" rows_spacing = 7 column_spacing = 7 row_homogeneous = TRUE column_homogeneous = FALSE>
 
+                                                    <!-- Start check button id label -->
+                                                    <label id = "check_button_id_label" text = "Widget ID" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(check_button_grid, check_button_id_label, 0, 0, 1, 1)>
+                                                    <!-- End check button id label -->
+
+                                                    <!-- Start check button id entry -->
+                                                    <entry id = "check_button_id_entry" default_text = NULL indicator_text = "must be unique and no space" visible = TRUE editable = TRUE max_lenght = 5 alignment = 0.5>
+    
+                                                    </entry add_to_grid(check_button_grid, check_button_id_entry, 0, 1, 1, 1)>
+                                                    <!-- End check button id entry -->
+
                                                     <!-- Start check button label label -->
                                                     <label id = "check_button_label_label" text = "Label" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
 
-                                                    </label add_to_grid(check_button_grid, check_button_label_label, 0, 0, 1, 1)>
+                                                    </label add_to_grid(check_button_grid, check_button_label_label, 1, 0, 1, 1)>
                                                     <!-- End check button label label -->
 
                                                     <!-- Start check button label entry -->
                                                     <entry id = "check_button_label_entry" size = 14 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
     
-                                                    </entry add_to_grid(check_button_grid, check_button_label_entry, 0, 1, 1, 1)>
+                                                    </entry add_to_grid(check_button_grid, check_button_label_entry, 1, 1, 1, 1)>
                                                     <!-- End check button label entry -->
 
                                                     <!-- Start check button active label -->
                                                     <label id = "check_button_active_label" text = "Active" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
 
-                                                    </label add_to_grid(check_button_grid, check_button_active_label, 1, 0, 1, 1)>
+                                                    </label add_to_grid(check_button_grid, check_button_active_label, 2, 0, 1, 1)>
                                                     <!-- End check button active label -->
 
                                                     <!-- Start check button active combo box -->
@@ -1400,13 +1533,13 @@
                                                         </combo_box_item add_to_combo_box(check_button_active_combo_box, "FALSE")>
                                                         <!-- End check button active combo box item -->
 
-                                                    </combo_box add_to_grid(check_button_grid, check_button_active_combo_box, 1, 1, 1, 1)>
+                                                    </combo_box add_to_grid(check_button_grid, check_button_active_combo_box, 2, 1, 1, 1)>
                                                     <!-- End check button active combo box -->
 
                                                     <!-- Start check button use underline label -->
                                                     <label id = "check_button_use_underline_label" text = "Use Underline" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
 
-                                                    </label add_to_grid(check_button_grid, check_button_use_underline_label, 2, 0, 1, 1)>
+                                                    </label add_to_grid(check_button_grid, check_button_use_underline_label, 3, 0, 1, 1)>
                                                     <!-- End check button use underline label -->
 
                                                     <!-- Start check button use underline combo box -->
@@ -1424,37 +1557,37 @@
                                                         </combo_box_item add_to_combo_box(check_button_use_underline_combo_box, "FALSE")>
                                                         <!-- End check button use underline combo box item -->
 
-                                                    </combo_box add_to_grid(check_button_grid, check_button_use_underline_combo_box, 2, 1, 1, 1)>
+                                                    </combo_box add_to_grid(check_button_grid, check_button_use_underline_combo_box, 3, 1, 1, 1)>
                                                     <!-- End check button use underline combo box -->
 
                                                     <!-- Start check button callback label -->
                                                     <label id = "check_button_callback_label" text = "Callback" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
 
-                                                    </label add_to_grid(check_button_grid, check_button_callback_label, 3, 0, 1, 1)>
+                                                    </label add_to_grid(check_button_grid, check_button_callback_label, 4, 0, 1, 1)>
                                                     <!-- End check button callback label -->
 
                                                     <!-- Start check button callback entry -->
                                                     <entry id = "check_button_callback_entry" size = 14 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
     
-                                                    </entry add_to_grid(check_button_grid, check_button_callback_entry, 3, 1, 1, 1)>
+                                                    </entry add_to_grid(check_button_grid, check_button_callback_entry, 4, 1, 1, 1)>
                                                     <!-- End check button callback entry -->
 
                                                     <!-- Start check button data label -->
                                                     <label id = "check_button_data_label" text = "Data" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
 
-                                                    </label add_to_grid(check_button_grid, check_button_data_label, 4, 0, 1, 1)>
+                                                    </label add_to_grid(check_button_grid, check_button_data_label, 5, 0, 1, 1)>
                                                     <!-- End check button data label -->
 
                                                     <!-- Start check button data entry -->
                                                     <entry id = "check_button_data_entry" size = 14 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
     
-                                                    </entry add_to_grid(check_button_grid, check_button_data_entry, 4, 1, 1, 1)>
+                                                    </entry add_to_grid(check_button_grid, check_button_data_entry, 5, 1, 1, 1)>
                                                     <!-- End check button data entry -->
 
                                                     <!-- Start check button add button -->
                                                     <button id = "check_button_add_button" label = "                                                               Add                                                               ">
 
-                                                    </button add_to_grid(check_button_grid, check_button_add_button, 5, 0, 2, 1)>
+                                                    </button add_to_grid(check_button_grid, check_button_add_button, 6, 0, 2, 1)>
                                                     <!-- End check button add button -->
 
                                                 </grid add_to_frame(check_button_grid_frame, check_button_grid, 14, 14, 14, 14)>
@@ -1487,34 +1620,46 @@
                                                 <!-- Start color button grid -->
                                                 <grid id = "color_button_grid" rows_spacing = 7 columns_spacing = 7 rows_homogeneous = TRUE columns_homogeneous = FALSE>
 
+                                                    <!-- Start color button id label -->
+                                                    <label id = "color_button_id_label" text = "Widget ID" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(color_button_grid, color_button_id_label, 0, 0, 1, 1)>
+                                                    <!-- End color button id label -->
+
+                                                    <!-- Start color button id entry -->
+                                                    <entry id = "color_button_id_entry" default_text = NULL indicator_text = "must be unique and no space" visible = TRUE editable = TRUE max_lenght = 5 alignment = 0.5>
+    
+                                                    </entry add_to_grid(color_button_grid, color_button_id_entry, 0, 1, 1, 1)>
+                                                    <!-- End color button id entry -->
+
                                                     <!-- Start color button default color label -->
                                                     <label id = "color_button_default_color_label" text = "Default Color" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
 
-                                                    </label add_to_grid(color_button_grid, color_button_default_color_label, 0, 0, 1, 1)>
+                                                    </label add_to_grid(color_button_grid, color_button_default_color_label, 1, 0, 1, 1)>
                                                     <!-- End color button default color label -->
 
                                                     <!-- Start color button default color color button -->
                                                     <color_button id = "color_button_default_color_color_button">
 
-                                                    </color_button add_to_grid(color_button_grid, color_button_default_color_color_button, 0, 1, 1, 1)>
+                                                    </color_button add_to_grid(color_button_grid, color_button_default_color_color_button, 1, 1, 1, 1)>
                                                     <!-- End color button default color color button -->
 
                                                     <!-- Start color button title label -->
                                                     <label id = "color_button_title_label" text = "Title" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
 
-                                                    </label add_to_grid(color_button_grid, color_button_title_label, 1, 0, 1, 1)>
+                                                    </label add_to_grid(color_button_grid, color_button_title_label, 2, 0, 1, 1)>
                                                     <!-- End color button title label -->
 
                                                     <!-- Start color button label entry -->
                                                     <entry id = "color_button_label_entry" size = 14 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
     
-                                                    </entry add_to_grid(color_button_grid, color_button_label_entry, 1, 1, 1, 1)>
+                                                    </entry add_to_grid(color_button_grid, color_button_label_entry, 2, 1, 1, 1)>
                                                     <!-- End color button label entry -->
 
                                                     <!-- Start color button use alpha label -->
                                                     <label id = "color_button_use_alpha_label" text = "Use Alpha" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
 
-                                                    </label add_to_grid(color_button_grid, color_button_use_alpha_label, 2, 0, 1, 1)>
+                                                    </label add_to_grid(color_button_grid, color_button_use_alpha_label, 3, 0, 1, 1)>
                                                     <!-- End color button use alpha label -->
 
                                                     <!-- Start color button use alpha combo box -->
@@ -1532,13 +1677,13 @@
                                                         </combo_box_item add_to_combo_box(color_button_use_alpha_combo_box, "FALSE")>
                                                         <!-- End color button use alpha combo box item -->               
                                                         
-                                                    </combo_box add_to_grid(color_button_grid, color_button_use_alpha_combo_box, 2, 1, 1, 1)>
+                                                    </combo_box add_to_grid(color_button_grid, color_button_use_alpha_combo_box, 3, 1, 1, 1)>
                                                     <!-- End color button use alpha combo box -->
 
                                                     <!-- Start color button add button -->
                                                     <button id = "color_button_add_button" label = "                                                               Add                                                               ">
 
-                                                    </button add_to_grid(color_button_grid, color_button_add_button, 3, 0, 2, 1)>
+                                                    </button add_to_grid(color_button_grid, color_button_add_button, 4, 0, 2, 1)>
                                                     <!-- End color button add button -->
         
                                                 </grid add_to_frame(color_button_grid_frame, color_button_grid, 14, 14, 14, 14)>
@@ -1571,46 +1716,58 @@
                                                 <!-- Start combo box grid -->
                                                 <grid id = "combo_box_grid" rows_spacing = 7 columns_spacing = 7 rows_homogeneous = TRUE columns_homogeneous = FALSE>
 
+                                                    <!-- Start combo box id label -->
+                                                    <label id = "combo_box_id_label" text = "Widget ID" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(combo_box_grid, combo_box_id_label, 0, 0, 1, 1)>
+                                                    <!-- End combo box id label -->
+
+                                                    <!-- Start combo box id entry -->
+                                                    <entry id = "combo_box_id_entry" default_text = NULL indicator_text = "must be unique and no space" visible = TRUE editable = TRUE max_lenght = 5 alignment = 0.5>
+    
+                                                    </entry add_to_grid(combo_box_grid, combo_box_id_entry, 0, 1, 1, 1)>
+                                                    <!-- End combo box id entry -->
+
                                                     <!-- Start combo box item1 label -->
                                                     <label id = "combo_box_item1_label" text = "Item 1" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
 
-                                                    </label add_to_grid(combo_box_grid, combo_box_item1_label, 0, 0, 1, 1)>
+                                                    </label add_to_grid(combo_box_grid, combo_box_item1_label, 1, 0, 1, 1)>
                                                     <!-- End combo box item1 label -->
 
                                                     <!-- Start combo box item1 entry -->
                                                     <entry id = "combo_box_item1_entry" default_text = "NULL" >
     
-                                                    </entry add_to_grid(combo_box_grid, combo_box_item1_entry, 0, 1, 1, 1)>
+                                                    </entry add_to_grid(combo_box_grid, combo_box_item1_entry, 1, 1, 1, 1)>
                                                     <!-- End combo box item1 entry -->
 
                                                     <!-- Start combo box item2 label -->
                                                     <label id = "combo_box_item2_label" text = "Item 2" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
 
-                                                    </label add_to_grid(combo_box_grid, combo_box_item2_label, 1, 0, 1, 1)>
+                                                    </label add_to_grid(combo_box_grid, combo_box_item2_label, 2, 0, 1, 1)>
                                                     <!-- End combo box item2 label -->
 
                                                     <!-- Start combo box item2 entry -->
                                                     <entry id = "combo_box_item2_entry" default_text = "NULL">
     
-                                                    </entry add_to_grid(combo_box_grid, combo_box_item2_entry, 1, 1, 1, 1)>
+                                                    </entry add_to_grid(combo_box_grid, combo_box_item2_entry, 2, 1, 1, 1)>
                                                     <!-- End combo box item2 entry -->
 
                                                     <!-- Start combo box item3 label -->
                                                     <label id = "combo_box_item3_label" text = "Item 3" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
 
-                                                    </label add_to_grid(combo_box_grid, combo_box_item3_label, 2, 0, 1, 1)>
+                                                    </label add_to_grid(combo_box_grid, combo_box_item3_label, 3, 0, 1, 1)>
                                                     <!-- End combo box item3 label -->
 
                                                     <!-- Start combo box item3 entry -->
                                                     <entry id = "combo_box_item3_entry" default_text = "NULL">
     
-                                                    </entry add_to_grid(combo_box_grid, combo_box_item3_entry, 2, 1, 1, 1)>
+                                                    </entry add_to_grid(combo_box_grid, combo_box_item3_entry, 3, 1, 1, 1)>
                                                     <!-- End combo box item3 entry -->
 
                                                     <!-- Start combo box add button -->
                                                     <button id = "combo_box_add_button" label = "                                                               Add                                                               ">
 
-                                                    </button add_to_grid(combo_box_grid, combo_box_add_button, 3, 0, 2, 1)>
+                                                    </button add_to_grid(combo_box_grid, combo_box_add_button, 4, 0, 2, 1)>
                                                     <!-- End combo box add button -->
 
                                                 </grid add_to_frame(combo_box_grid_frame, combo_box_grid, 14, 14, 14, 14)>
@@ -1643,34 +1800,46 @@
                                                 <!-- Start entry box grid -->
                                                 <grid id = "entry_box_grid" rows_spacing = 7 columns_spacing = 7 rows_homogeneous = TRUE columns_homogeneous = FALSE>
 
+                                                    <!-- Start entry id label -->
+                                                    <label id = "entry_id_label" text = "Widget ID" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(entry_box_grid, entry_id_label, 0, 0, 1, 1)>
+                                                    <!-- End entry id label -->
+
+                                                    <!-- Start entry id entry -->
+                                                    <entry id = "entry_id_entry" default_text = NULL indicator_text = "must be unique and no space" visible = TRUE editable = TRUE max_lenght = 5 alignment = 0.5>
+    
+                                                    </entry add_to_grid(entry_box_grid, entry_id_entry, 0, 1, 1, 1)>
+                                                    <!-- End entry id entry -->
+
                                                     <!-- Start entry default text label -->
                                                     <label id = "entry_default_text_label" text = "Default Text" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
 
-                                                    </label add_to_grid(entry_box_grid, entry_default_text_label, 0, 0, 1, 1)>
+                                                    </label add_to_grid(entry_box_grid, entry_default_text_label, 1, 0, 1, 1)>
                                                     <!-- End entry default text label -->
 
                                                     <!-- Start entry default text entry -->
                                                     <entry id = "entry_default_text_entry" default_text = "NULL">
     
-                                                    </entry add_to_grid(entry_box_grid, entry_default_text_entry, 0, 1, 1, 1)>
+                                                    </entry add_to_grid(entry_box_grid, entry_default_text_entry, 1, 1, 1, 1)>
                                                     <!-- End entry default text entry -->
 
                                                     <!-- Start entry indicator text label -->
                                                     <label id = "entry_indicator_text_label" text = "Indicator Text" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
 
-                                                    </label add_to_grid(entry_box_grid, entry_indicator_text_label, 1, 0, 1, 1)>
+                                                    </label add_to_grid(entry_box_grid, entry_indicator_text_label, 2, 0, 1, 1)>
                                                     <!-- End entry indicator text label -->
 
                                                     <!-- Start entry indicator text entry -->
                                                     <entry id = "entry_indicator_text_entry" default_text = "NULL">
     
-                                                    </entry add_to_grid(entry_box_grid, entry_indicator_text_entry, 1, 1, 1, 1)>
+                                                    </entry add_to_grid(entry_box_grid, entry_indicator_text_entry, 2, 1, 1, 1)>
                                                     <!-- End entry indicator text entry -->
 
                                                     <!-- Start entry visibility label -->
                                                     <label id = "entry_visibility_label" text = "Visibility" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
 
-                                                    </label add_to_grid(entry_box_grid, entry_visibility_label, 2, 0, 1, 1)>
+                                                    </label add_to_grid(entry_box_grid, entry_visibility_label, 3, 0, 1, 1)>
                                                     <!-- End entry visibility label -->
 
                                                     <!-- Start entry visibility combo box -->
@@ -1688,13 +1857,13 @@
                                                         </combo_box_item add_to_combo_box(entry_visibility_combo_box, "FALSE")>
                                                         <!-- End entry visibility combo box item2 -->
 
-                                                    </combo_box add_to_grid(entry_box_grid, entry_visibility_combo_box, 2, 1, 1, 1)>
+                                                    </combo_box add_to_grid(entry_box_grid, entry_visibility_combo_box, 3, 1, 1, 1)>
                                                     <!-- End entry visibility combo box -->
 
                                                     <!-- Start entry editable label -->
                                                     <label id = "entry_editable_label" text = "Editable" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
 
-                                                    </label add_to_grid(entry_box_grid, entry_editable_label, 3, 0, 1, 1)>
+                                                    </label add_to_grid(entry_box_grid, entry_editable_label, 4, 0, 1, 1)>
                                                     <!-- End entry editable label -->
 
                                                     <!-- Start entry editable combo box -->
@@ -1712,37 +1881,37 @@
                                                         </combo_box_item add_to_combo_box(entry_editable_combo_box, "FALSE")>
                                                         <!-- End entry editable combo box item2 -->
 
-                                                    </combo_box add_to_grid(entry_box_grid, entry_editable_combo_box, 3, 1, 1, 1)>
+                                                    </combo_box add_to_grid(entry_box_grid, entry_editable_combo_box, 4, 1, 1, 1)>
                                                     <!-- End entry editable combo box -->
 
                                                     <!-- Start entry max length label -->
                                                     <label id = "entry_max_length_label" text = "Max Length" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
 
-                                                    </label add_to_grid(entry_box_grid, entry_max_length_label, 4, 0, 1, 1)>
+                                                    </label add_to_grid(entry_box_grid, entry_max_length_label, 5, 0, 1, 1)>
                                                     <!-- End entry max length label -->
 
                                                     <!-- Start entry max length spin button -->
                                                     <spin_button id = "entry_max_length_spin_button" min = 0 max = 100 value = 20 step = 5 size = 12">
 
-                                                    </spin_button add_to_grid(entry_box_grid, entry_max_length_spin_button, 4, 1, 1, 1)>
+                                                    </spin_button add_to_grid(entry_box_grid, entry_max_length_spin_button, 5, 1, 1, 1)>
                                                     <!-- End entry max length spin button -->
 
                                                     <!-- Start entry alignment label -->
                                                     <label id = "entry_alignment_label" text = "Alignment" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
 
-                                                    </label add_to_grid(entry_box_grid, entry_alignment_label, 5, 0, 1, 1)>
+                                                    </label add_to_grid(entry_box_grid, entry_alignment_label, 6, 0, 1, 1)>
                                                     <!-- End entry alignment label -->
 
                                                     <!-- Start entry alignment spin button -->
                                                     <spin_button id = "entry_alignment_spin_button" min = 0 max = 1 value = 0 digits = 1 step = 0.5>
 
-                                                    </spin_button add_to_grid(entry_box_grid, entry_alignment_spin_button, 5, 1, 1, 1)>
+                                                    </spin_button add_to_grid(entry_box_grid, entry_alignment_spin_button, 6, 1, 1, 1)>
                                                     <!-- End entry alignment spin button -->
 
                                                     <!-- Start entry add button -->
                                                     <button id = "entry_add_button" label = "                                                               Add                                                               ">
 
-                                                    </button add_to_grid(entry_box_grid, entry_add_button, 6, 0, 2, 1)>
+                                                    </button add_to_grid(entry_box_grid, entry_add_button, 7, 0, 2, 1)>
                                                     <!-- End entry add button -->
 
                                                 </grid add_to_frame(entry_box_grid_frame, entry_box_grid, 14, 14, 14, 14)>
@@ -1774,34 +1943,46 @@
                                                 <!-- Start font button grid -->
                                                 <grid id = "font_button_grid" rows_spacing = 7 columns_spacing = 7 rows_homogeneous = TRUE columns_homogeneous = FALSE>
 
+                                                    <!-- Start font button id label -->
+                                                    <label id = "font_button_id_label" text = "Widget ID" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(font_button_grid, font_button_id_label, 0, 0, 1, 1)>
+                                                    <!-- End font button id label -->
+
+                                                    <!-- Start font button id entry -->
+                                                    <entry id = "font_button_id_entry" default_text = NULL indicator_text = "must be unique and no space" visible = TRUE editable = TRUE max_lenght = 5 alignment = 0.5>
+
+                                                    </entry add_to_grid(font_button_grid, font_button_id_entry, 0, 1, 1, 1)>
+                                                    <!-- End font button id entry -->
+
                                                     <!-- Start font button default font name label -->
                                                     <label id = "font_button_default_font_name_label" text = "Default Font Name" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
 
-                                                    </label add_to_grid(font_button_grid, font_button_default_font_name_label, 0, 0, 1, 1)>
+                                                    </label add_to_grid(font_button_grid, font_button_default_font_name_label, 1, 0, 1, 1)>
                                                     <!-- End font button default font name label -->
 
                                                     <!-- Start font button default font name entry -->
                                                     <entry id = "font_button_default_font_name_entry" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
 
-                                                    </entry add_to_grid(font_button_grid, font_button_default_font_name_entry, 0, 1, 1, 1)>
+                                                    </entry add_to_grid(font_button_grid, font_button_default_font_name_entry, 1, 1, 1, 1)>
                                                     <!-- End font button default font name entry -->
 
                                                     <!-- Start font button title label -->
                                                     <label id = "font_button_title_label" text = "Title" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
 
-                                                    </label add_to_grid(font_button_grid, font_button_title_label, 1, 0, 1, 1)>
+                                                    </label add_to_grid(font_button_grid, font_button_title_label, 2, 0, 1, 1)>
                                                     <!-- End font button title label -->
 
                                                     <!-- Start font button title entry -->
                                                     <entry id = "font_button_title_entry" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
 
-                                                    </entry add_to_grid(font_button_grid, font_button_title_entry, 1, 1, 1, 1)>
+                                                    </entry add_to_grid(font_button_grid, font_button_title_entry, 2, 1, 1, 1)>
                                                     <!-- End font button title entry -->
 
                                                     <!-- Start font button show size label -->
                                                     <label id = "font_button_show_size_label" text = "Show Size" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
 
-                                                    </label add_to_grid(font_button_grid, font_button_show_size_label, 2, 0, 1, 1)>
+                                                    </label add_to_grid(font_button_grid, font_button_show_size_label, 3, 0, 1, 1)>
                                                     <!-- End font button show size label -->
 
                                                     <!-- Start font button show size combo box -->
@@ -1819,13 +2000,13 @@
                                                         </combo_box_item add_to_combo_box(font_button_show_size_combo_box, "FALSE")>
                                                         <!-- End font button show size combo box item2 -->
 
-                                                    </combo_box add_to_grid(font_button_grid, font_button_show_size_combo_box, 2, 1, 1, 1)>
+                                                    </combo_box add_to_grid(font_button_grid, font_button_show_size_combo_box, 3, 1, 1, 1)>
                                                     <!-- End font button show size combo box -->
 
                                                     <!-- Start font button use size label -->
                                                     <label id = "font_button_use_size_label" text = "Use Size" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
 
-                                                    </label add_to_grid(font_button_grid, font_button_use_size_label, 3, 0, 1, 1)>
+                                                    </label add_to_grid(font_button_grid, font_button_use_size_label, 4, 0, 1, 1)>
                                                     <!-- End font button use size label -->
 
                                                     <!-- Start font button use size combo box -->
@@ -1843,13 +2024,13 @@
                                                         </combo_box_item add_to_combo_box(font_button_use_size_combo_box, "FALSE")>
                                                         <!-- End font button use size combo box item2 -->
 
-                                                    </combo_box add_to_grid(font_button_grid, font_button_use_size_combo_box, 3, 1, 1, 1)>
+                                                    </combo_box add_to_grid(font_button_grid, font_button_use_size_combo_box, 4, 1, 1, 1)>
                                                     <!-- End font button use size combo box -->
 
                                                     <!-- Start font button use font label -->
                                                     <label id ="font_button_use_font_label" text = "Use Font" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
 
-                                                    </label add_to_grid(font_button_grid, font_button_use_font_label, 4, 0, 1, 1)>
+                                                    </label add_to_grid(font_button_grid, font_button_use_font_label, 5, 0, 1, 1)>
                                                     <!-- End font button use font label -->
 
                                                     <!-- Start font button use font combo box -->
@@ -1867,13 +2048,13 @@
                                                         </combo_box_item add_to_combo_box(font_button_use_font_combo_box, "FALSE")>
                                                         <!-- End font button use font combo box item2 -->
 
-                                                    </combo_box add_to_grid(font_button_grid, font_button_use_font_combo_box, 4, 1, 1, 1)>
+                                                    </combo_box add_to_grid(font_button_grid, font_button_use_font_combo_box, 5, 1, 1, 1)>
                                                     <!-- End font button use font combo box -->
 
                                                     <!-- Start font button add button -->
                                                     <button id = "font_button_add_button" label = "                                                               Add                                                               ">
 
-                                                    </button add_to_grid(font_button_grid, font_button_add_button, 5, 0, 2, 1)>
+                                                    </button add_to_grid(font_button_grid, font_button_add_button, 6, 0, 2, 1)>
                                                     <!-- End font button add button -->
                                                     
                                                 </grid add_to_frame(font_button_grid_frame, font_button_grid, 14, 14, 14, 14)>
