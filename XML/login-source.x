@@ -1466,6 +1466,164 @@
                                         </box add_to_box(Widgets_box, check_button_box, START, FALSE, FALSE, 0, 0, 0, 0, 0)>
                                         <!-- End the check button box -->
 
+                                        <!-- Start color button box -->
+                                        <box id = "color_button_box" orientation = GTK_ORIENTATION_VERTICAL align = -1 spacing = 0>
+
+                                            <!-- Start color button label frame -->
+                                            <frame id = "color_button_label_frame">
+
+                                                <!-- Start color button label label -->
+                                                <label id = "color_button_label_label" text = "Color Button" size = 14 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                </label add_to_frame(color_button_label_frame, color_button_label_label, 7, 7, 14, 0)>
+                                                <!-- End color button label label -->
+
+                                            </frame add_to_box(color_button_box, color_button_label_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0)>
+                                            <!-- End color button label frame -->
+
+                                            <!-- Start color button grid frame -->
+                                            <frame id = "color_button_grid_frame" label = NULL>
+
+                                                <!-- Start color button grid -->
+                                                <grid id = "color_button_grid" rows_spacing = 7 columns_spacing = 7 rows_homogeneous = TRUE columns_homogeneous = FALSE>
+
+                                                    <!-- Start color button default color label -->
+                                                    <label id = "color_button_default_color_label" text = "Default Color" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(color_button_grid, color_button_default_color_label, 0, 0, 1, 1)>
+                                                    <!-- End color button default color label -->
+
+                                                    <!-- Start color button default color color button -->
+                                                    <color_button id = "color_button_default_color_color_button">
+
+                                                    </color_button add_to_grid(color_button_grid, color_button_default_color_color_button, 0, 1, 1, 1)>
+                                                    <!-- End color button default color color button -->
+
+                                                    <!-- Start color button title label -->
+                                                    <label id = "color_button_title_label" text = "Title" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(color_button_grid, color_button_title_label, 1, 0, 1, 1)>
+                                                    <!-- End color button title label -->
+
+                                                    <!-- Start color button label entry -->
+                                                    <entry id = "color_button_label_entry" size = 14 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+    
+                                                    </entry add_to_grid(color_button_grid, color_button_label_entry, 1, 1, 1, 1)>
+                                                    <!-- End color button label entry -->
+
+                                                    <!-- Start color button use alpha label -->
+                                                    <label id = "color_button_use_alpha_label" text = "Use Alpha" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(color_button_grid, color_button_use_alpha_label, 2, 0, 1, 1)>
+                                                    <!-- End color button use alpha label -->
+
+                                                    <!-- Start color button use alpha combo box -->
+                                                    <combo_box id = "color_button_use_alpha_combo_box">
+    
+                                                        <!-- Start color button use alpha combo box item -->
+                                                        <combo_box_item id = "combo_box_item">
+        
+                                                        </combo_box_item add_to_combo_box(color_button_use_alpha_combo_box, "TRUE")>
+                                                        <!-- End color button use alpha combo box item -->
+    
+                                                        <!-- Start color button use alpha combo box item -->
+                                                        <combo_box_item id = "combo_box_item">
+        
+                                                        </combo_box_item add_to_combo_box(color_button_use_alpha_combo_box, "FALSE")>
+                                                        <!-- End color button use alpha combo box item -->               
+                                                        
+                                                    </combo_box add_to_grid(color_button_grid, color_button_use_alpha_combo_box, 2, 1, 1, 1)>
+                                                    <!-- End color button use alpha combo box -->
+
+                                                    <!-- Start color button add button -->
+                                                    <button id = "color_button_add_button" label = "                                                               Add                                                               ">
+
+                                                    </button add_to_grid(color_button_grid, color_button_add_button, 3, 0, 2, 1)>
+                                                    <!-- End color button add button -->
+        
+                                                </grid add_to_frame(color_button_grid_frame, color_button_grid, 14, 14, 14, 14)>
+                                                <!-- End color button grid -->
+
+                                            </frame add_to_box(color_button_box, color_button_grid_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0)>
+                                            <!-- End color button grid frame -->
+
+                                        </box add_to_box(Widgets_box, color_button_box, START, FALSE, FALSE, 0, 0, 0, 0, 0)>
+                                        <!-- End color button box -->
+
+                                        <!-- Start combo box box -->
+                                        <box id = "combo_box_box" orientation = GTK_ORIENTATION_VERTICAL align = -1 spacing = 0>
+
+                                            <!-- Start combo box label frame -->
+                                            <frame id = "combo_box_label_frame">
+
+                                                <!-- Start combo box label label -->
+                                                <label id = "combo_box_label_label" text = "Combo Box" size = 14 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                </label add_to_frame(combo_box_label_frame, combo_box_label_label, 7, 7, 14, 0)>
+                                                <!-- End combo box label label -->
+
+                                            </frame add_to_box(combo_box_box, combo_box_label_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0)>
+                                            <!-- End combo box label frame -->
+
+                                            <!-- Start combox box grid frame -->
+                                            <frame id = "combo_box_grid_frame" label = NULL>
+
+                                                <!-- Start combo box grid -->
+                                                <grid id = "combo_box_grid" rows_spacing = 7 columns_spacing = 7 rows_homogeneous = TRUE columns_homogeneous = FALSE>
+
+                                                    <!-- Start combo box item1 label -->
+                                                    <label id = "combo_box_item1_label" text = "Item 1" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(combo_box_grid, combo_box_item1_label, 0, 0, 1, 1)>
+                                                    <!-- End combo box item1 label -->
+
+                                                    <!-- Start combo box item1 entry -->
+                                                    <entry id = "combo_box_item1_entry" default_text = "NULL" >
+    
+                                                    </entry add_to_grid(combo_box_grid, combo_box_item1_entry, 0, 1, 1, 1)>
+                                                    <!-- End combo box item1 entry -->
+
+                                                    <!-- Start combo box item2 label -->
+                                                    <label id = "combo_box_item2_label" text = "Item 2" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(combo_box_grid, combo_box_item2_label, 1, 0, 1, 1)>
+                                                    <!-- End combo box item2 label -->
+
+                                                    <!-- Start combo box item2 entry -->
+                                                    <entry id = "combo_box_item2_entry" default_text = "NULL">
+    
+                                                    </entry add_to_grid(combo_box_grid, combo_box_item2_entry, 1, 1, 1, 1)>
+                                                    <!-- End combo box item2 entry -->
+
+                                                    <!-- Start combo box item3 label -->
+                                                    <label id = "combo_box_item3_label" text = "Item 3" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(combo_box_grid, combo_box_item3_label, 2, 0, 1, 1)>
+                                                    <!-- End combo box item3 label -->
+
+                                                    <!-- Start combo box item3 entry -->
+                                                    <entry id = "combo_box_item3_entry" default_text = "NULL">
+    
+                                                    </entry add_to_grid(combo_box_grid, combo_box_item3_entry, 2, 1, 1, 1)>
+                                                    <!-- End combo box item3 entry -->
+
+                                                    <!-- Start combo box add button -->
+                                                    <button id = "combo_box_add_button" label = "                                                               Add                                                               ">
+
+                                                    </button add_to_grid(combo_box_grid, combo_box_add_button, 3, 0, 2, 1)>
+                                                    <!-- End combo box add button -->
+
+                                                </grid add_to_frame(combo_box_grid_frame, combo_box_grid, 14, 14, 14, 14)>
+                                                <!-- End combo box grid -->
+
+                                            </frame add_to_box(combo_box_box, combo_box_grid_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0)>
+                                            <!-- End combox box grid frame -->
+
+                                        </box add_to_box(Widgets_box, combo_box_box, START, FALSE, FALSE, 0, 0, 0, 0, 0)>
+                                        <!-- End combo box box -->
+
+                                    
+
                                         <!-- Start Widgets button -->
                                         <button id = "Widgets" label = "Widgets">
             
