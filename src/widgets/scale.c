@@ -16,14 +16,9 @@ GtkOrientation Gorientation;
 gdouble Gmin_value;
 gdouble Gmax_value;
 gdouble Gstep;
-gdouble Gmark_value;
-GtkPositionType Gmark_position;
-const gchar *Gtext;
-gint Gdigits;
-GtkPositionType Gvalue_pos;
 
 
-GtkWidget *create_scale(GtkOrientation orientation, gdouble min_value, gdouble max_value, gdouble step, gdouble mark_value, GtkPositionType mark_position, const gchar *text, gint digits, GtkPositionType value_pos)
+GtkWidget *create_scale(GtkOrientation orientation, gdouble min_value, gdouble max_value, gdouble step)
 {
     scaleInfos *scaleInformation = (scaleInfos *)malloc(sizeof(scaleInfos));
     if(!scaleInformation) return NULL;
@@ -36,22 +31,6 @@ GtkWidget *create_scale(GtkOrientation orientation, gdouble min_value, gdouble m
     Gmax_value = max_value;
     scaleInformation->step = step;
     Gstep = step;
-    scaleInformation->mark_value = mark_value;
-    Gmark_value = mark_value;
-    scaleInformation->mark_position = mark_position;
-    Gmark_position = mark_position;
-    scaleInformation->text = g_strdup(text);
-    if(!scaleInformation->text)
-    {
-        free(scaleInformation);
-        return NULL;
-    }
-    Gtext = g_strdup(text);
-
-    scaleInformation->digits = digits;
-    Gdigits = digits;
-    scaleInformation->value_pos = value_pos;
-    Gvalue_pos = value_pos;
 
     GtkWidget *scale = set_properties_scale(scaleInformation);
     free(scaleInformation);
@@ -63,16 +42,6 @@ GtkWidget *set_properties_scale(scaleInfos *scaleInformation)
 {
     // create the scale
     GtkWidget *scale = gtk_scale_new_with_range(scaleInformation->orientation, scaleInformation->min_value, scaleInformation->max_value, scaleInformation->step);
-
-    // set the mark value
-    if(scaleInformation->mark_value != 0)
-        gtk_scale_add_mark(GTK_SCALE(scale), scaleInformation->mark_value, scaleInformation->mark_position, scaleInformation->text);
-
-    // set the position of the scale
-    gtk_scale_set_value_pos(GTK_SCALE(scale), scaleInformation->value_pos);
-
-    // set the digits
-    gtk_scale_set_digits(GTK_SCALE(scale), scaleInformation->digits);
 
     return scale;
 }
@@ -93,21 +62,6 @@ scaleInfos *get_properties_scale(GtkWidget *scale)
 
     // get the step
     scaleInformation->step = Gstep;
-
-    // get the mark value
-    scaleInformation->mark_value = Gmark_value;
-
-    // get the mark position
-    scaleInformation->mark_position = Gmark_position;
-
-    // get the text
-    scaleInformation->text = Gtext;
-
-    // get the digits
-    scaleInformation->digits = Gdigits;
-
-    // get the value position
-    scaleInformation->value_pos = Gvalue_pos;
 
     return scaleInformation;
 }

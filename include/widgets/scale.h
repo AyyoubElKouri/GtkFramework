@@ -28,11 +28,6 @@ typedef struct
     gdouble min_value;
     gdouble max_value;
     gdouble step;
-    gdouble mark_value;
-    GtkPositionType mark_position;
-    const gchar *text;
-    gint digits;
-    GtkPositionType value_pos;
 }scaleInfos;
 
 /**
@@ -42,16 +37,11 @@ typedef struct
  * @param min_value The minimum value of the scale.
  * @param max_value The maximum value of the scale.
  * @param step The step of the scale.
- * @param mark_value The mark value of the scale.
- * @param mark_position The position of the mark.
- * @param text The text of the scale.
- * @param digits The digits of the scale.
- * @param value_pos The value position of the scale.
  * 
  * @return GtkWidget* A pointer to the created scale.
  */
 
-GtkWidget *create_scale(GtkOrientation orientation, gdouble min_value, gdouble max_value, gdouble step, gdouble mark_value, GtkPositionType mark_position, const gchar *text, gint digits, GtkPositionType value_pos);
+GtkWidget *create_scale(GtkOrientation orientation, gdouble min_value, gdouble max_value, gdouble step);
 
 /**
  * @brief set the properties of the scale
