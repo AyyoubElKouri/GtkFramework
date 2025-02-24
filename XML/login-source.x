@@ -3307,6 +3307,150 @@
                                         </box add_to_box(Widgets_box, separator_box, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
                                         <!-- End separator box -->
 
+                                        <!-- Start spin button box -->
+                                        <box id = "spin_button_box" orientation = GTK_ORIENTATION_VERTICAL align = -1 spacing = 0>
+
+                                            <!-- Start spin button label frame -->
+                                            <frame id = "spin_button_label_frame" label = NULL>
+
+                                                <!-- Start spin button label -->
+                                                <label id = "spin_button_label" text = "Spin Button" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                </label add_to_frame(spin_button_label_frame, spin_button_label, 7, 7, 14, 1)>
+                                                <!-- End spin button label -->
+
+                                            </frame add_to_box(spin_button_box, spin_button_label_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0)>
+                                            <!-- End spin button label frame -->
+
+                                            <!-- Start spin button grid frame -->
+                                            <frame id = "spin_button_grid_frame" label = NULL>
+
+                                                <!-- Start spin button grid -->
+                                                <grid id = "spin_button_grid" rows_spacing = 7 columns_spacing = 7 rows_homogeneous = TRUE columns_homogeneous = FALSE>
+
+                                                    <!-- Start spin button widget id label -->
+                                                    <label id = "spin_button_widget_id_label" text = "Widget ID" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(spin_button_grid, spin_button_widget_id_label, 0, 0, 1, 1)>
+                                                    <!-- End spin button widget id label -->
+
+                                                    <!-- Start spin button widget id entry -->
+                                                    <entry id = "spin_button_widget_id_entry" text = "must be unique" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </entry add_to_grid(spin_button_grid, spin_button_widget_id_entry, 0, 1, 1, 1)>
+                                                    <!-- End spin button widget id entry -->
+
+                                                    <!-- Start spin button min value label -->
+                                                    <label id = "spin_button_min_value_label" text = "Min Value" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(spin_button_grid, spin_button_min_value_label, 1, 0, 1, 1)>
+                                                    <!-- End spin button min value label -->
+
+                                                    <!-- Start spin button min value spin_button -->
+                                                    <spin_button id = "spin_button_min_value_spin_button" value = 0 min = 0 max = 100 step = 10>
+
+                                                    </spin_button add_to_grid(spin_button_grid, spin_button_min_value_spin_button, 1, 1, 1, 1)>
+                                                    <!-- End spin button min value spin_button -->
+
+                                                    <!-- Start spin button max value label -->
+                                                    <label id = "spin_button_max_value_label" text = "Max Value" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(spin_button_grid, spin_button_max_value_label, 2, 0, 1, 1)>
+                                                    <!-- End spin button max value label -->
+
+                                                    <!-- Start spin button max value spin_button -->
+                                                    <spin_button id = "spin_button_max_value_spin_button" value = 100 min = 0 max = 100 step = 10>
+
+                                                    </spin_button add_to_grid(spin_button_grid, spin_button_max_value_spin_button, 2, 1, 1, 1)>
+                                                    <!-- End spin button max value spin_button -->
+
+                                                    <!-- Start spin button Default Value label -->
+                                                    <label id = "spin_button_Default_Value_label" text = "Default Value" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(spin_button_grid, spin_button_Default_Value_label, 3, 0, 1, 1)>
+                                                    <!-- End spin button Default Value label -->
+
+                                                    <!-- Start spin button Default Value spin_button -->
+                                                    <spin_button id = "spin_button_Default_Value_spin_button" value = 50 min = 0 max = 100 step = 10>
+
+                                                    </spin_button add_to_grid(spin_button_grid, spin_button_Default_Value_spin_button, 3, 1, 1, 1)>
+                                                    <!-- End spin button Default Value spin_button -->
+
+                                                    <!-- Start spin button digits label -->
+                                                    <label id = "spin_button_digits_label" text = "Digits" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(spin_button_grid, spin_button_digits_label, 4, 0, 1, 1)>
+                                                    <!-- End spin button digits label -->
+
+                                                    <!-- Start spin button digits spin_button -->
+                                                    <spin_button id = "spin_button_digits_spin_button" value = 0 min = 0 max = 5 step = 1>
+
+                                                    </spin_button add_to_grid(spin_button_grid, spin_button_digits_spin_button, 4, 1, 1, 1)>
+                                                    <!-- End spin button digits spin_button -->
+
+                                                    <!-- Start spin button wrap label -->
+                                                    <label id = "spin_button_wrap_label" text = "Wrap" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(spin_button_grid, spin_button_wrap_label, 5, 0, 1, 1)>
+                                                    <!-- End spin button wrap label -->
+
+                                                    <!-- Start spin button wrap combo_box -->
+                                                    <combo_box id = "spin_button_wrap_combo_box">
+
+                                                        <!-- Start combo box item -->
+                                                        <combo_box_item id = "spin_button_combo_box_item_1" label = "TRUE">
+
+                                                        </combo_box_item add_to_combo_box(spin_button_wrap_combo_box, "TRUE")>
+                                                        <!-- End combo box item -->
+
+                                                        <!-- Start combo box item -->
+                                                        <combo_box_item id = "spin_button_combo_box_item_2" label = "FALSE">
+
+                                                        </combo_box_item add_to_combo_box(spin_button_wrap_combo_box, "FALSE")>
+                                                        <!-- End combo box item -->
+
+                                                    </combo_box add_to_grid(spin_button_grid, spin_button_wrap_combo_box, 5, 1, 1, 1)>
+                                                    <!-- End spin button wrap combo_box -->
+
+                                                    <!-- Start spin button numeric label -->
+                                                    <label id = "spin_button_numeric_label" text = "Numeric" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(spin_button_grid, spin_button_numeric_label, 6, 0, 1, 1)>
+                                                    <!-- End spin button numeric label -->
+
+                                                    <!-- Start spin button numeric combo_box -->
+                                                    <combo_box id = "spin_button_numeric_combo_box">
+
+                                                        <!-- Start combo box item -->
+                                                        <combo_box_item id = "spin_button_combo_box_item_3" label = "TRUE">
+
+                                                        </combo_box_item add_to_combo_box(spin_button_numeric_combo_box, "TRUE")>
+                                                        <!-- End combo box item -->
+
+                                                        <!-- Start combo box item -->
+                                                        <combo_box_item id = "spin_button_combo_box_item_4" label = "FALSE">
+
+                                                        </combo_box_item add_to_combo_box(spin_button_numeric_combo_box, "FALSE")>
+                                                        <!-- End combo box item -->
+
+                                                    </combo_box add_to_grid(spin_button_grid, spin_button_numeric_combo_box, 6, 1, 1, 1)>
+                                                    <!-- End spin button numeric combo_box -->
+
+                                                    <!-- Start spin button add button -->
+                                                    <button id = "spin_button_add_button" label = "                                                               Add                                                             ">
+
+                                                    </button add_to_grid(spin_button_grid, spin_button_add_button, 7, 0, 2, 1)>
+                                                    <!-- End spin button add button -->
+
+                                                </grid add_to_frame(spin_button_grid_frame, spin_button_grid, 14, 14, 14, 14)>
+                                                <!-- End spin button grid -->
+
+                                            </frame add_to_box(spin_button_box, spin_button_grid_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0)>
+                                            <!-- End spin button grid frame -->
+
+                                        </box add_to_box(Widgets_box, spin_button_box, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
+                                        <!-- End spin button box -->
+
                                         <!-- Start Widgets button -->
                                         <button id = "Widgets" label = "Widgets">
             
