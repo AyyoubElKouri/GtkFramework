@@ -3523,6 +3523,102 @@
                                         </box add_to_box(Widgets_box, spinner_box, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
                                         <!-- End spinner box -->
 
+                                        <!-- Start switch button box -->
+                                        <box id = "switch_button_box" orientation = GTK_ORIENTATION_VERTICAL align = -1 spacing = 0>
+
+                                            <!-- Start switch button label frame -->
+                                            <frame id = "switch_button_label_frame" label = NULL>
+
+                                                <!-- Start switch button label -->
+                                                <label id = "switch_button_label" text = "Switch Button" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                </label add_to_frame(switch_button_label_frame, switch_button_label, 7, 7, 14, 1)>
+                                                <!-- End switch button label -->
+
+                                            </frame add_to_box(switch_button_box, switch_button_label_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0)>
+                                            <!-- End switch button label frame -->
+
+                                            <!-- Start switch button grid frame -->
+                                            <frame id = "switch_button_grid_frame" label = NULL>
+
+                                                <!-- Start switch button grid -->
+                                                <grid id = "switch_button_grid" rows_spacing = 7 columns_spacing = 7 rows_homogeneous = TRUE columns_homogeneous = FALSE>
+
+                                                    <!-- Start switch button widget id label -->
+                                                    <label id = "switch_button_widget_id_label" text = "Widget ID" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(switch_button_grid, switch_button_widget_id_label, 0, 0, 1, 1)>
+                                                    <!-- End switch button widget id label -->
+
+                                                    <!-- Start switch button widget id entry -->
+                                                    <entry id = "switch_button_widget_id_entry" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </entry add_to_grid(switch_button_grid, switch_button_widget_id_entry, 0, 1, 1, 1)>
+                                                    <!-- End switch button widget id entry -->
+
+                                                    <!-- Start switch button default state label -->
+                                                    <label id = "switch_button_default_state_label" text = "Default State" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(switch_button_grid, switch_button_default_state_label, 1, 0, 1, 1)>
+                                                    <!-- End switch button default state label -->
+
+                                                    <!-- Start switch button default state combo_box -->
+                                                    <combo_box id = "switch_button_default_state_combo_box">
+
+                                                        <!-- Start combo box item -->
+                                                        <combo_box_item id = "switch_button_default_state_combo_box_item_1" label = "TRUE">
+
+                                                        </combo_box_item add_to_combo_box(switch_button_default_state_combo_box, "TRUE")>
+                                                        <!-- End combo box item -->
+
+                                                        <!-- Start combo box item -->
+                                                        <combo_box_item id = "switch_button_default_state_combo_box_item_2" label = "FALSE">
+
+                                                        </combo_box_item add_to_combo_box(switch_button_default_state_combo_box, "FALSE")>
+                                                        <!-- End combo box item -->
+
+                                                    </combo_box add_to_grid(switch_button_grid, switch_button_default_state_combo_box, 1, 1, 1, 1)>
+                                                    <!-- End switch button default state combo_box -->
+
+                                                    <!-- Start switch button callback label -->
+                                                    <label id = "switch_button_callback_label" text = "Callback" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(switch_button_grid, switch_button_callback_label, 2, 0, 1, 1)>
+                                                    <!-- End switch button callback label -->
+
+                                                    <!-- Start switch button callback entry -->
+                                                    <entry id = "switch_button_callback_entry" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </entry add_to_grid(switch_button_grid, switch_button_callback_entry, 2, 1, 1, 1)>
+                                                    <!-- End switch button callback entry -->
+
+                                                    <!-- Start switch button data label -->
+                                                    <label id = "switch_button_data_label" text = "Data" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(switch_button_grid, switch_button_data_label, 3, 0, 1, 1)>
+                                                    <!-- End switch button data label -->
+
+                                                    <!-- Start switch button data entry -->
+                                                    <entry id = "switch_button_data_entry" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </entry add_to_grid(switch_button_grid, switch_button_data_entry, 3, 1, 1, 1)>
+                                                    <!-- End switch button data entry -->
+
+                                                    <!-- Start switch button add button -->
+                                                    <button id = "switch_button_add_button" label = "                                                               Add                                                             ">
+
+                                                    </button add_to_grid(switch_button_grid, switch_button_add_button, 4, 0, 2, 1)>
+                                                    <!-- End switch button add button -->
+
+                                                </grid add_to_frame(switch_button_grid_frame, switch_button_grid, 14, 14, 14, 14)>
+                                                <!-- End switch button grid -->
+
+                                            </frame add_to_box(switch_button_box, switch_button_grid_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0)>
+                                            <!-- End switch button grid frame -->
+
+                                        </box add_to_box(Widgets_box, switch_button_box, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
+                                        <!-- End switch button box -->
+
                                         <!-- Start Widgets button -->
                                         <button id = "Widgets" label = "Widgets">
             

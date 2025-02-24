@@ -2152,6 +2152,66 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_box(Widgets_box, spinner_box, START, TRUE, TRUE, 0, 0, 0, 0, 0);
 
+	GtkWidget *switch_button_box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
+
+	GtkWidget *switch_button_label_frame = create_frame(NULL, 0.5, 0.5);
+
+	GtkWidget *switch_button_label = create_label("Switch Button", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_frame(switch_button_label_frame, switch_button_label, 7, 7, 14, 1);
+
+	add_to_box(switch_button_box, switch_button_label_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
+
+	GtkWidget *switch_button_grid_frame = create_frame(NULL, 0.5, 0.5);
+
+	GtkWidget *switch_button_grid = create_grid(7, 7, TRUE, FALSE);
+
+	GtkWidget *switch_button_widget_id_label = create_label("Widget ID", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(switch_button_grid, switch_button_widget_id_label, 0, 0, 1, 1);
+
+	GtkWidget *switch_button_widget_id_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+
+	add_to_grid(switch_button_grid, switch_button_widget_id_entry, 0, 1, 1, 1);
+
+	GtkWidget *switch_button_default_state_label = create_label("Default State", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(switch_button_grid, switch_button_default_state_label, 1, 0, 1, 1);
+
+	GtkWidget *switch_button_default_state_combo_box = create_combo_box();
+
+	add_to_combo_box(switch_button_default_state_combo_box, "TRUE");
+
+	add_to_combo_box(switch_button_default_state_combo_box, "FALSE");
+
+	add_to_grid(switch_button_grid, switch_button_default_state_combo_box, 1, 1, 1, 1);
+
+	GtkWidget *switch_button_callback_label = create_label("Callback", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(switch_button_grid, switch_button_callback_label, 2, 0, 1, 1);
+
+	GtkWidget *switch_button_callback_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+
+	add_to_grid(switch_button_grid, switch_button_callback_entry, 2, 1, 1, 1);
+
+	GtkWidget *switch_button_data_label = create_label("Data", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(switch_button_grid, switch_button_data_label, 3, 0, 1, 1);
+
+	GtkWidget *switch_button_data_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+
+	add_to_grid(switch_button_grid, switch_button_data_entry, 3, 1, 1, 1);
+
+	GtkWidget *switch_button_add_button = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                             ", FALSE, NULL, NULL, NULL);
+
+	add_to_grid(switch_button_grid, switch_button_add_button, 4, 0, 2, 1);
+
+	add_to_frame(switch_button_grid_frame, switch_button_grid, 14, 14, 14, 14);
+
+	add_to_box(switch_button_box, switch_button_grid_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
+
+	add_to_box(Widgets_box, switch_button_box, START, TRUE, TRUE, 0, 0, 0, 0, 0);
+
 	GtkWidget *Widgets = create_button(GTK_RELIEF_NORMAL, "Widgets", FALSE, NULL, NULL, NULL);
 
 	add_to_box(Widgets_box, Widgets, START, TRUE, TRUE, 0, 7, 0, 0, 0);
