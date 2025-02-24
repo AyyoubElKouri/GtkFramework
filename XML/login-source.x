@@ -3019,6 +3019,114 @@
                                         </box add_to_box(Widgets_box, progress_bar_box, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
                                         <!-- End progress bar box -->
 
+                                        <!-- Start radio_button box -->
+                                        <box id = "radio_button_box" orientation = GTK_ORIENTATION_VERTICAL align = -1 spacing = 0>
+
+                                            <!-- Start radio_button label frame -->
+                                            <frame id = "radio_button_label_frame" label = NULL>
+
+                                                <!-- Start radio_button label -->
+                                                <label id = "radio_button_label" text = "Radio Button" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                </label add_to_frame(radio_button_label_frame, radio_button_label, 7, 7, 14, 1)>
+                                                <!-- End radio_button label -->
+                                            
+                                            </frame add_to_box(radio_button_box, radio_button_label_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
+                                            <!-- End radio_button label frame -->
+
+                                            <!-- Start radio_button grid frame -->
+                                            <frame id = "radio_button_grid_frame" label = NULL>
+
+                                                <!-- Start radio_button grid -->
+                                                <grid id = "radio_button_grid" rows_spacing = 7 columns_spacing = 7 rows_homogeneous = TRUE columns_homogeneous = FALSE>
+
+                                                    <!-- Start radio_button id label -->
+                                                    <label id = "radio_button_id_label" text = "Widget Id" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(radio_button_grid, radio_button_id_label, 0, 0, 1, 1)>
+                                                    <!-- End radio_button id label -->
+
+                                                    <!-- Start radio_button id entry -->
+                                                    <entry id = "radio_button_id_entry" default_text = NULL indicator_text = "must be unique and no space" visible = TRUE editable = TRUE max_lenght = 5 alignment = 0.5>
+
+                                                    </entry add_to_grid(radio_button_grid, radio_button_id_entry, 0, 1, 1, 1)>
+                                                    <!-- End radio_button id entry -->
+
+                                                    <!-- Start radio_button label label -->
+                                                    <label id = "radio_button_label_label" text = "Label" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(radio_button_grid, radio_button_label_label, 1, 0, 1, 1)>
+                                                    <!-- End radio_button label label -->
+
+                                                    <!-- Start radio_button label entry -->
+                                                    <entry id = "radio_button_label_entry" default_text = NULL indicator_text = NULL visible = TRUE editable = TRUE max_lenght = 5 alignment = 0.5>
+
+                                                    </entry add_to_grid(radio_button_grid, radio_button_label_entry, 1, 1, 1, 1)>
+                                                    <!-- End radio_button label entry -->
+
+                                                    <!-- Start radio_button path image label -->
+                                                    <label id = "radio_button_path_image_label" text = "Path Image" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(radio_button_grid, radio_button_path_image_label, 2, 0, 1, 1)>
+                                                    <!-- End radio_button path image label -->
+
+                                                    <!-- Start radio_button path image entry -->
+                                                    <entry id = "radio_button_path_image_entry" default_text = NULL indicator_text = "if you chose label let this NULL" visible = TRUE editable = TRUE max_lenght = 5 alignment = 0.5>
+
+                                                    </entry add_to_grid(radio_button_grid, radio_button_path_image_entry, 2, 1, 1, 1)>
+                                                    <!-- End radio_button path image entry -->
+
+                                                    <!-- Start radio_button id radio group member label -->
+                                                    <label id = "radio_button_id_radio_group_member_label" text = "Id Radio Group Member" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(radio_button_grid, radio_button_id_radio_group_member_label, 3, 0, 1, 1)>
+                                                    <!-- End radio_button id radio group member label -->
+
+                                                    <!-- Start radio_button id radio group member entry -->
+                                                    <entry id = "radio_button_id_radio_group_member_entry" default_text = NULL indicator_text = NULL visible = TRUE editable = TRUE max_lenght = 5 alignment = 0.5>
+
+                                                    </entry add_to_grid(radio_button_grid, radio_button_id_radio_group_member_entry, 3, 1, 1, 1)>
+                                                    <!-- End radio_button id radio group member entry -->
+
+                                                    <!-- Start radio_button default state label -->
+                                                    <label id = "radio_button_default_state_label" text = "Default State" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(radio_button_grid, radio_button_default_state_label, 4, 0, 1, 1)>
+                                                    <!-- End radio_button default state label -->
+
+                                                    <!-- Start radio_button default state combo box -->
+                                                    <combo_box id = "radio_button_default_state_combo_box" visible = TRUE editable = TRUE max_lenght = 5 alignment = 0.5>
+
+                                                        <!-- Start radio_button default state combo box item -->
+                                                        <combo_box_item id = "radio_button_default_state_combo_box_item_1" label = "True">
+        
+                                                        </combo_box_item add_to_combo_box(radio_button_default_state_combo_box, "FALSE")>
+                                                        <!-- End radio_button default state combo box item -->
+
+                                                        <!-- Start radio_button default state combo box item -->
+                                                        <combo_box_item id = "radio_button_default_state_combo_box_item_2" label = "False">
+        
+                                                        </combo_box_item add_to_combo_box(radio_button_default_state_combo_box, "TRUE")>
+                                                        <!-- End radio_button default state combo box item -->
+
+                                                    </combo_box add_to_grid(radio_button_grid, radio_button_default_state_combo_box, 4, 1, 1, 1)>
+                                                    <!-- End radio_button default state combo box -->
+
+                                                    <!-- Start radio_button add button -->
+                                                    <button id = "radio_button_add_button" label = "                                                               Add                                                             ">
+
+                                                    </button add_to_grid(radio_button_grid, radio_button_add_button, 5, 0, 2, 1)>
+                                                    <!-- End radio_button add button -->
+                                                    
+                                                </grid add_to_frame(radio_button_grid_frame, radio_button_grid, 14, 14, 14, 14)>
+                                                <!-- End radio_button grid -->
+
+                                            </frame add_to_box(radio_button_box, radio_button_grid_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
+                                            <!-- End radio_button grid frame -->
+
+                                        </box add_to_box(Widgets_box, radio_button_box, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
+                                        <!-- End radio_button box -->
+
                                         <!-- Start Widgets button -->
                                         <button id = "Widgets" label = "Widgets">
             
