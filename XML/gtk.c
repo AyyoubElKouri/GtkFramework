@@ -2108,6 +2108,50 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_box(Widgets_box, spin_button_box, START, TRUE, TRUE, 0, 0, 0, 0, 0);
 
+	GtkWidget *spinner_box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
+
+	GtkWidget *spinner_label_frame = create_frame(NULL, 0.5, 0.5);
+
+	GtkWidget *spinner_label = create_label("Spinner", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_frame(spinner_label_frame, spinner_label, 7, 7, 14, 1);
+
+	add_to_box(spinner_box, spinner_label_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
+
+	GtkWidget *spinner_grid_frame = create_frame(NULL, 0.5, 0.5);
+
+	GtkWidget *spinner_grid = create_grid(7, 7, TRUE, FALSE);
+
+	GtkWidget *spinner_widget_id_label = create_label("Widget ID", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(spinner_grid, spinner_widget_id_label, 0, 0, 1, 1);
+
+	GtkWidget *spinner_widget_id_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+
+	add_to_grid(spinner_grid, spinner_widget_id_entry, 0, 1, 1, 1);
+
+	GtkWidget *spinner_active_label = create_label("Active", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(spinner_grid, spinner_active_label, 1, 0, 1, 1);
+
+	GtkWidget *spinner_active_combo_box = create_combo_box();
+
+	add_to_combo_box(spinner_active_combo_box, "TRUE");
+
+	add_to_combo_box(spinner_active_combo_box, "FALSE");
+
+	add_to_grid(spinner_grid, spinner_active_combo_box, 1, 1, 1, 1);
+
+	GtkWidget *spinner_add_button = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                             ", FALSE, NULL, NULL, NULL);
+
+	add_to_grid(spinner_grid, spinner_add_button, 2, 0, 2, 1);
+
+	add_to_frame(spinner_grid_frame, spinner_grid, 14, 14, 14, 14);
+
+	add_to_box(spinner_box, spinner_grid_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
+
+	add_to_box(Widgets_box, spinner_box, START, TRUE, TRUE, 0, 0, 0, 0, 0);
+
 	GtkWidget *Widgets = create_button(GTK_RELIEF_NORMAL, "Widgets", FALSE, NULL, NULL, NULL);
 
 	add_to_box(Widgets_box, Widgets, START, TRUE, TRUE, 0, 7, 0, 0, 0);

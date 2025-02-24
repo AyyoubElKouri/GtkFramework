@@ -3451,6 +3451,78 @@
                                         </box add_to_box(Widgets_box, spin_button_box, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
                                         <!-- End spin button box -->
 
+                                        <!-- Start spinner box -->
+                                        <box id = "spinner_box" orientation = GTK_ORIENTATION_VERTICAL align = -1 spacing = 0>
+
+                                            <!-- Start spinner label frame -->
+                                            <frame id = "spinner_label_frame" label = NULL>
+
+                                                <!-- Start spinner label -->
+                                                <label id = "spinner_label" text = "Spinner" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                </label add_to_frame(spinner_label_frame, spinner_label, 7, 7, 14, 1)>
+                                                <!-- End spinner label -->
+
+                                            </frame add_to_box(spinner_box, spinner_label_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0)>
+                                            <!-- End spinner label frame -->
+
+                                            <!-- Start spinner grid frame -->
+                                            <frame id = "spinner_grid_frame" label = NULL>
+
+                                                <!-- Start spinner grid -->
+                                                <grid id = "spinner_grid" rows_spacing = 7 columns_spacing = 7 rows_homogeneous = TRUE columns_homogeneous = FALSE>
+
+                                                    <!-- Start spinner widget id label -->
+                                                    <label id = "spinner_widget_id_label" text = "Widget ID" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(spinner_grid, spinner_widget_id_label, 0, 0, 1, 1)>
+                                                    <!-- End spinner widget id label -->
+
+                                                    <!-- Start spinner widget id entry -->
+                                                    <entry id = "spinner_widget_id_entry" text = "" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </entry add_to_grid(spinner_grid, spinner_widget_id_entry, 0, 1, 1, 1)>
+                                                    <!-- End spinner widget id entry -->
+
+                                                    <!-- Start spinner active label -->
+                                                    <label id = "spinner_active_label" text = "Active" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">$
+
+                                                    </label add_to_grid(spinner_grid, spinner_active_label, 1, 0, 1, 1)>
+                                                    <!-- End spinner active label -->
+
+                                                    <!-- Start spinner active combo_box -->
+                                                    <combo_box id = "spinner_active_combo_box">
+
+                                                        <!-- Start combo box item -->
+                                                        <combo_box_item id = "spinner_active_combo_box_item_1" label = "TRUE">
+
+                                                        </combo_box_item add_to_combo_box(spinner_active_combo_box, "TRUE")>
+                                                        <!-- End combo box item -->
+
+                                                        <!-- Start combo box item -->
+                                                        <combo_box_item id = "spinner_active_combo_box_item_2" label = "FALSE">
+
+                                                        </combo_box_item add_to_combo_box(spinner_active_combo_box, "FALSE")>
+                                                        <!-- End combo box item -->
+
+                                                    </combo_box add_to_grid(spinner_grid, spinner_active_combo_box, 1, 1, 1, 1)>
+                                                    <!-- End spinner active combo_box -->
+
+                                                    <!-- Start spinner add button -->
+                                                    <button id = "spinner_add_button" label = "                                                               Add                                                             ">
+
+                                                    </button add_to_grid(spinner_grid, spinner_add_button, 2, 0, 2, 1)>
+                                                    <!-- End spinner add button -->
+
+                                                </grid add_to_frame(spinner_grid_frame, spinner_grid, 14, 14, 14, 14)>
+                                                <!-- End spinner grid -->
+
+                                            </frame add_to_box(spinner_box, spinner_grid_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0)>
+                                            <!-- End spinner grid frame -->
+
+                                        </box add_to_box(Widgets_box, spinner_box, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
+                                        <!-- End spinner box -->
+
                                         <!-- Start Widgets button -->
                                         <button id = "Widgets" label = "Widgets">
             
