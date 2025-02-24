@@ -16,8 +16,6 @@
 void call_database_function(NodeA *widget_linked_list, FILE *file)
 {
 
-    if(strcmp(widget_linked_list->val, "combo_box") == 0)
-        printf("the widget is combo_box\n");
     for (int i = 0; widget_map[i].widget_name != NULL; i++)
     {
         if (strcmp(widget_linked_list->val, widget_map[i].widget_name) == 0)
@@ -99,7 +97,7 @@ void use_xml_style_file(GtkApplication *app, arg *myarg)
     }
 
     // start the activate function
-    fprintf(file_to_write, "static void activate(GtkApplication *app, gpointer data){\n");
+    fprintf(file_to_write, "\n\nstatic void activate(GtkApplication *app, gpointer data)\n{\n");
 
     // read the source file line by line and do the corresponding actions
     do
@@ -113,7 +111,7 @@ void use_xml_style_file(GtkApplication *app, arg *myarg)
         // if the line is a closing tag, write the closing tag function after extracting his name and his arguments in the output file
         if(is_close_tag(line))
         {
-            fprintf(file_to_write, "%s;\n", extraire_contenu(line));
+            fprintf(file_to_write, "\t%s;\n\n", extraire_contenu(line));
             continue;
         }
 
@@ -134,7 +132,7 @@ void use_xml_style_file(GtkApplication *app, arg *myarg)
     fprintf(file_to_write, "}\n");
 
     // the main function
-    fprintf(file_to_write, "int main(int argc, char *argv[]){\n");
+    fprintf(file_to_write, "\n\nint main(int argc, char *argv[]){\n");
     fprintf(file_to_write, "    GtkApplication *app = gtk_application_new(\"org.example.app\", G_APPLICATION_DEFAULT_FLAGS);\n");
     fprintf(file_to_write, "    g_signal_connect(app, \"activate\", G_CALLBACK(activate), NULL);\n");
     fprintf(file_to_write, "    int status = g_application_run(G_APPLICATION(app), argc, argv);\n");

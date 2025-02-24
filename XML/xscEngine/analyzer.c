@@ -123,7 +123,7 @@ void write_to_file(NodeA *widget, NodeA *default_values, FILE *file)
 
     // write in the file "GtkWidget *id = create_widget("
     NodeA *id = widget->next;
-    fprintf(file, "GtkWidget *%s = create_%s(", id->val, widget->val);
+    fprintf(file, "\tGtkWidget *%s = create_%s(", id->val, widget->val);
 
     // skip the id of the default_values
     widget = widget->next->next;
@@ -201,7 +201,7 @@ void write_to_file(NodeA *widget, NodeA *default_values, FILE *file)
     }
 
     // close the function
-    fprintf(file, ");\n");
+    fprintf(file, ");\n\n");
 }
 
 void empiler(pileA *mapile, char *string_to_empiler) 
