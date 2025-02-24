@@ -3127,6 +3127,115 @@
                                         </box add_to_box(Widgets_box, radio_button_box, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
                                         <!-- End radio_button box -->
 
+                                        <!-- Start scale box -->
+                                        <box id = "scale_box" orientation = GTK_ORIENTATION_VERTICAL align = -1 spacing = 0>
+
+                                            <!-- Start scale label frame -->
+                                            <frame id = "scale_label_frame" label = NULL>
+
+                                                <!-- Start scale label -->
+                                                <label id = "scale_label" text = "Scale" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+        
+                                                </label add_to_frame(scale_label_frame, scale_label, 7, 7, 14, 1)>
+                                                <!-- End scale label -->
+
+                                            </frame add_to_box(scale_box, scale_label_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
+                                            <!-- End scale label frame -->
+
+                                            <!-- Start scale grid frame -->
+                                            <frame id = "scale_grid_frame" label = NULL>
+
+                                                <!-- Start scale grid -->
+                                                <grid id = "scale_grid" rows_spacing = 7 columns_spacing = 7 rows_homogeneous = TRUE columns_homogeneous = FALSE>
+
+                                                    <!-- Start scale id label -->
+                                                    <label id = "scale_id_label" text = "Widget Id" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+        
+                                                    </label add_to_grid(scale_grid, scale_id_label, 0, 0, 1, 1)>
+                                                    <!-- End scale id label -->
+
+                                                    <!-- Start scale id entry -->
+                                                    <entry id = "scale_id_entry" visible = TRUE editable = TRUE max_lenght = 5 alignment = 0.5>
+
+                                                    </entry add_to_grid(scale_grid, scale_id_entry, 0, 1, 1, 1)>
+                                                    <!-- End scale id entry -->
+
+                                                    <!-- Start scale orientation label -->
+                                                    <label id = "scale_orientation_label" text = "Orientation" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+        
+                                                    </label add_to_grid(scale_grid, scale_orientation_label, 1, 0, 1, 1)>
+                                                    <!-- End scale orientation label -->
+
+                                                    <!-- Start scale orientation combo box -->
+                                                    <combo_box id = "scale_oreintation_combo_box">
+
+                                                        <!-- Start item -->
+                                                        <combo_box id = "combo_box_item1">
+
+                                                        </combo_box add_to_combo_box(scale_oreintation_combo_box, "GTK_ORIENTATION_HORIZONTAL")>
+                                                        <!-- End item -->
+
+                                                        <!-- Start item -->
+                                                        <combo_box id = "combo_box_item2">
+
+                                                        </combo_box add_to_combo_box(scale_oreintation_combo_box, "GTK_ORIENTATION_VERTICAL")>
+                                                        <!-- End item -->
+
+                                                    </combo_box add_to_grid(scale_grid, scale_oreintation_combo_box, 1, 1, 1, 1)>
+                                                    <!-- End scale orientation combo box -->
+
+                                                    <!-- Start scale min value label -->
+                                                    <label id = "scale_min_value_label" text = "Min Value" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(scale_grid, scale_min_value_label, 2, 0, 1, 1)>
+                                                    <!-- End scale min value label -->
+
+                                                    <!-- Start scale min value spin button -->
+                                                    <spin_button id = "scale_min_value_spin_button" value = 0 min = 0 max = 100 step = 10 >
+
+                                                    </spin_button add_to_grid(scale_grid, scale_min_value_spin_button, 2, 1, 1, 1)>
+                                                    <!-- End scale min value spin button -->
+
+                                                    <!-- Start scale max value label -->
+                                                    <label id = "scale_max_value_label" text = "Max Value" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(scale_grid, scale_max_value_label, 3, 0, 1, 1)>
+                                                    <!-- End scale max value label -->
+
+                                                    <!-- Start scale max value spin button -->
+                                                    <spin_button id = "scale_max_value_spin_button" value = 100 min = 0 max = 100 step = 10>
+
+                                                    </spin_button add_to_grid(scale_grid, scale_max_value_spin_button, 3, 1, 1, 1)>
+                                                    <!-- End scale max value spin button -->
+
+                                                    <!-- Start scale step label -->
+                                                    <label id = "scale_step_label" text = "Step" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(scale_grid, scale_step_label, 4, 0, 1, 1)>
+                                                    <!-- End scale step label -->
+
+                                                    <!-- Start scale step spin button -->
+                                                    <spin_button id = "scale_step_spin_button" value = 10 min = 0 max = 50 step = 2>
+
+                                                    </spin_button add_to_grid(scale_grid, scale_step_spin_button, 4, 1, 1, 1)>
+                                                    <!-- End scale step spin button -->
+
+                                                    <!-- Start scale add button -->
+                                                    <button id = "scale_add_button" label = "                                                               Add                                                             ">
+
+                                                    </button add_to_grid(scale_grid, scale_add_button, 5, 0, 2, 1)>
+                                                    <!-- End scale add button -->
+                                    
+
+                                                </grid add_to_frame(scale_grid_frame, scale_grid, 14, 14, 14, 14)>
+                                                <!-- End scale grid -->
+
+                                            </frame add_to_box(scale_box, scale_grid_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
+                                            <!-- End scale grid frame -->
+
+                                        </box add_to_box(Widgets_box, scale_box, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
+                                        <!-- End scale box -->
+
                                         <!-- Start Widgets button -->
                                         <button id = "Widgets" label = "Widgets">
             

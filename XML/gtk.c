@@ -1904,6 +1904,78 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_box(Widgets_box, radio_button_box, START, TRUE, TRUE, 0, 0, 0, 0, 0);
 
+	GtkWidget *scale_box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
+
+	GtkWidget *scale_label_frame = create_frame(NULL, 0.5, 0.5);
+
+	GtkWidget *scale_label = create_label("Scale", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_frame(scale_label_frame, scale_label, 7, 7, 14, 1);
+
+	add_to_box(scale_box, scale_label_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0);
+
+	GtkWidget *scale_grid_frame = create_frame(NULL, 0.5, 0.5);
+
+	GtkWidget *scale_grid = create_grid(7, 7, TRUE, FALSE);
+
+	GtkWidget *scale_id_label = create_label("Widget Id", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(scale_grid, scale_id_label, 0, 0, 1, 1);
+
+	GtkWidget *scale_id_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+
+	add_to_grid(scale_grid, scale_id_entry, 0, 1, 1, 1);
+
+	GtkWidget *scale_orientation_label = create_label("Orientation", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(scale_grid, scale_orientation_label, 1, 0, 1, 1);
+
+	GtkWidget *scale_oreintation_combo_box = create_combo_box();
+
+	GtkWidget *combo_box_item1 = create_combo_box();
+
+	add_to_combo_box(scale_oreintation_combo_box, "GTK_ORIENTATION_HORIZONTAL");
+
+	GtkWidget *combo_box_item2 = create_combo_box();
+
+	add_to_combo_box(scale_oreintation_combo_box, "GTK_ORIENTATION_VERTICAL");
+
+	add_to_grid(scale_grid, scale_oreintation_combo_box, 1, 1, 1, 1);
+
+	GtkWidget *scale_min_value_label = create_label("Min Value", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(scale_grid, scale_min_value_label, 2, 0, 1, 1);
+
+	GtkWidget *scale_min_value_spin_button = create_spin_button(0, 100, 10, 0, 0, FALSE, FALSE);
+
+	add_to_grid(scale_grid, scale_min_value_spin_button, 2, 1, 1, 1);
+
+	GtkWidget *scale_max_value_label = create_label("Max Value", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(scale_grid, scale_max_value_label, 3, 0, 1, 1);
+
+	GtkWidget *scale_max_value_spin_button = create_spin_button(0, 100, 10, 100, 0, FALSE, FALSE);
+
+	add_to_grid(scale_grid, scale_max_value_spin_button, 3, 1, 1, 1);
+
+	GtkWidget *scale_step_label = create_label("Step", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(scale_grid, scale_step_label, 4, 0, 1, 1);
+
+	GtkWidget *scale_step_spin_button = create_spin_button(0, 50, 2, 10, 0, FALSE, FALSE);
+
+	add_to_grid(scale_grid, scale_step_spin_button, 4, 1, 1, 1);
+
+	GtkWidget *scale_add_button = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                             ", FALSE, NULL, NULL, NULL);
+
+	add_to_grid(scale_grid, scale_add_button, 5, 0, 2, 1);
+
+	add_to_frame(scale_grid_frame, scale_grid, 14, 14, 14, 14);
+
+	add_to_box(scale_box, scale_grid_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0);
+
+	add_to_box(Widgets_box, scale_box, START, TRUE, TRUE, 0, 0, 0, 0, 0);
+
 	GtkWidget *Widgets = create_button(GTK_RELIEF_NORMAL, "Widgets", FALSE, NULL, NULL, NULL);
 
 	add_to_box(Widgets_box, Widgets, START, TRUE, TRUE, 0, 7, 0, 0, 0);
