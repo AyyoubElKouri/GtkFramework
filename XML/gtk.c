@@ -1976,6 +1976,50 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_box(Widgets_box, scale_box, START, TRUE, TRUE, 0, 0, 0, 0, 0);
 
+	GtkWidget *separator_box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
+
+	GtkWidget *separator_label_frame = create_frame(NULL, 0.5, 0.5);
+
+	GtkWidget *separator_label = create_label("Separator", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_frame(separator_label_frame, separator_label, 7, 7, 14, 1);
+
+	add_to_box(separator_box, separator_label_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
+
+	GtkWidget *separator_grid_frame = create_frame(NULL, 0.5, 0.5);
+
+	GtkWidget *separator_grid = create_grid(7, 7, TRUE, FALSE);
+
+	GtkWidget *separator_widget_id_label = create_label("Widget ID", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(separator_grid, separator_widget_id_label, 0, 0, 1, 1);
+
+	GtkWidget *separator_widget_id_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+
+	add_to_grid(separator_grid, separator_widget_id_entry, 0, 1, 1, 1);
+
+	GtkWidget *separator_orientation_label = create_label("Orientation", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(separator_grid, separator_orientation_label, 1, 0, 1, 1);
+
+	GtkWidget *separator_orientation_combobox = create_combo_box();
+
+	add_to_combo_box(separator_orientation_combobox, "GTK_ORIENTATION_HORIZONTAL");
+
+	add_to_combo_box(separator_orientation_combobox, "GTK_ORIENTATION_VERTICAL");
+
+	add_to_grid(separator_grid, separator_orientation_combobox, 1, 1, 1, 1);
+
+	GtkWidget *separator_add_button = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                             ", FALSE, NULL, NULL, NULL);
+
+	add_to_grid(separator_grid, separator_add_button, 2, 0, 2, 1);
+
+	add_to_frame(separator_grid_frame, separator_grid, 14, 14, 14, 14);
+
+	add_to_box(separator_box, separator_grid_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
+
+	add_to_box(Widgets_box, separator_box, START, TRUE, TRUE, 0, 0, 0, 0, 0);
+
 	GtkWidget *Widgets = create_button(GTK_RELIEF_NORMAL, "Widgets", FALSE, NULL, NULL, NULL);
 
 	add_to_box(Widgets_box, Widgets, START, TRUE, TRUE, 0, 7, 0, 0, 0);

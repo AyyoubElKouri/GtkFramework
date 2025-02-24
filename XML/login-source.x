@@ -675,7 +675,7 @@
 
                                                         <!-- Start box case informations orientation label -->
                                                         <label id = "Box_case_informations_orientation_label" text = "Orientation" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
-    
+                                        
                                                         </label add_to_grid(Box_case_informations_grid, Box_case_informations_orientation_label, 1, 0, 1, 1)>
                                                         <!-- End box case informations orientation label -->
     
@@ -3117,12 +3117,12 @@
 
                                                     </button add_to_grid(radio_button_grid, radio_button_add_button, 5, 0, 2, 1)>
                                                     <!-- End radio_button add button -->
-                                                    
+
                                                 </grid add_to_frame(radio_button_grid_frame, radio_button_grid, 14, 14, 14, 14)>
                                                 <!-- End radio_button grid -->
 
                                             </frame add_to_box(radio_button_box, radio_button_grid_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
-                                            <!-- End radio_button grid frame -->
+                                            <!-- End radio_button frame -->
 
                                         </box add_to_box(Widgets_box, radio_button_box, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
                                         <!-- End radio_button box -->
@@ -3225,7 +3225,6 @@
 
                                                     </button add_to_grid(scale_grid, scale_add_button, 5, 0, 2, 1)>
                                                     <!-- End scale add button -->
-                                    
 
                                                 </grid add_to_frame(scale_grid_frame, scale_grid, 14, 14, 14, 14)>
                                                 <!-- End scale grid -->
@@ -3235,6 +3234,78 @@
 
                                         </box add_to_box(Widgets_box, scale_box, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
                                         <!-- End scale box -->
+
+                                        <!-- Start separator box -->
+                                        <box id = "separator_box" orientation = GTK_ORIENTATION_VERTICAL align = -1 spacing = 0>
+
+                                            <!-- Start separator label frame -->
+                                            <frame id ="separator_label_frame" label = NULL>
+
+                                                <!-- Start separator label -->
+                                                <label id = "separator_label" text = "Separator" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                </label add_to_frame(separator_label_frame, separator_label, 7, 7, 14, 1)>
+                                                <!-- End separator label -->
+
+                                            </frame add_to_box(separator_box, separator_label_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0)>
+                                            <!-- End separator label frame -->
+
+                                            <!-- Start separator grid frame -->
+                                            <frame id = "separator_grid_frame" label = NULL>
+
+                                                <!-- Start separator grid -->
+                                                <grid id = "separator_grid" rows_spacing = 7 columns_spacing = 7 rows_homogeneous = TRUE columns_homogeneous = FALSE>
+
+                                                    <!-- Start separator widget id label -->
+                                                    <label id = "separator_widget_id_label" text = "Widget ID" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(separator_grid, separator_widget_id_label, 0, 0, 1, 1)>
+                                                    <!-- End separator widget id label -->
+
+                                                    <!-- Start separator widget id entry -->
+                                                    <entry id = "separator_widget_id_entry" text = "" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </entry add_to_grid(separator_grid, separator_widget_id_entry, 0, 1, 1, 1)>
+                                                    <!-- End separator widget id entry -->
+
+                                                    <!-- Start separator orientation label -->
+                                                    <label id = "separator_orientation_label" text = "Orientation" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                    </label add_to_grid(separator_grid, separator_orientation_label, 1, 0, 1, 1)>
+                                                    <!-- End separator orientation label -->
+
+                                                    <!-- Start separator orientation combobox -->
+                                                    <combo_box id = "separator_orientation_combobox" size = 12 font = "Arial" color = "#000000" background = "#f6f5f4" justify = "GTK_JUSTIFY_LEFT">
+
+                                                        <!-- Start separator orientation combobox item1 -->
+                                                        <combo_box_item id = "separator_orientation_combobox_item1" label = "Horizontal">
+
+                                                        </combo_box_item add_to_combo_box(separator_orientation_combobox, "GTK_ORIENTATION_HORIZONTAL")>
+                                                        <!-- End separator orientation combobox item1 -->
+
+                                                        <!-- Start separator orientation combobox item2 -->
+                                                        <combo_box_item id = "separator_orientation_combobox_item2" label = "Vertical">
+
+                                                        </combo_box_item add_to_combo_box(separator_orientation_combobox, "GTK_ORIENTATION_VERTICAL")>
+                                                        <!-- End separator orientation combobox item2 -->
+
+                                                    </combo_box add_to_grid(separator_grid, separator_orientation_combobox, 1, 1, 1, 1)>
+                                                    <!-- End separator orientation combobox -->
+
+                                                    <!-- Start separator add button -->
+                                                    <button id = "separator_add_button" label = "                                                               Add                                                             ">
+
+                                                    </button add_to_grid(separator_grid, separator_add_button, 2, 0, 2, 1)>
+                                                    <!-- End separator add button -->
+
+                                                </grid add_to_frame(separator_grid_frame, separator_grid, 14, 14, 14, 14)>
+                                                <!-- End separator grid -->
+
+                                            </frame add_to_box(separator_box, separator_grid_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0)>
+                                            <!-- End separator grid frame -->
+
+                                        </box add_to_box(Widgets_box, separator_box, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
+                                        <!-- End separator box -->
 
                                         <!-- Start Widgets button -->
                                         <button id = "Widgets" label = "Widgets">
