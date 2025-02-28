@@ -2477,6 +2477,7 @@
                                                     </combo_box add_to_grid(level_bar_grid, level_bar_reversed_combo_box, 5, 1, 1, 1)>
                                                     <!-- End level_bar reversed combo box -->
 
+
                                                     <!-- Start level_bar add button -->
                                                     <button id = "level_bar_add_button" label = "                                                               Add                                                               ">
 
@@ -3618,30 +3619,6 @@
 
                                         </box add_to_box(Widgets_box, switch_button_box, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
                                         <!-- End switch button box -->
-
-                                        <!-- Start Widgets button -->
-                                        <button id = "Widgets" label = "Widgets">
-            
-                                        </button add_to_box(Widgets_box, Widgets, START, TRUE, TRUE, 0, 7, 0, 0, 0)>
-                                        <!-- End Widgets button -->
-
-                                        <!-- Start Widgets2 button -->
-                                        <button id = "Widgets2" label = "Widgets">
-
-                                        </button add_to_box(Widgets_box, Widgets2, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
-                                        <!-- End Widgets2 button -->
-
-                                        <!-- Start Widgets3 button -->
-                                        <button id = "Widgets3" label = "Widgets">
-
-                                        </button add_to_box(Widgets_box, Widgets3, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
-                                        <!-- End Widgets3 button -->
-
-                                        <!-- Start Widgets4 button -->
-                                        <button id = "Widgets4" label = "Widgets">
-
-                                        </button add_to_box(Widgets_box, Widgets4, START, TRUE, TRUE, 0, 0, 0, 0, 0)>
-                                        <!-- End Widgets4 button -->
 
                                     </box add_to_scrolled_window(scrolled_widgets_window, Widgets_box)>
                                     <!-- End Widgets box -->

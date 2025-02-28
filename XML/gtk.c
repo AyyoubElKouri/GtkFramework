@@ -2212,22 +2212,6 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_box(Widgets_box, switch_button_box, START, TRUE, TRUE, 0, 0, 0, 0, 0);
 
-	GtkWidget *Widgets = create_button(GTK_RELIEF_NORMAL, "Widgets", FALSE, NULL, NULL, NULL);
-
-	add_to_box(Widgets_box, Widgets, START, TRUE, TRUE, 0, 7, 0, 0, 0);
-
-	GtkWidget *Widgets2 = create_button(GTK_RELIEF_NORMAL, "Widgets", FALSE, NULL, NULL, NULL);
-
-	add_to_box(Widgets_box, Widgets2, START, TRUE, TRUE, 0, 0, 0, 0, 0);
-
-	GtkWidget *Widgets3 = create_button(GTK_RELIEF_NORMAL, "Widgets", FALSE, NULL, NULL, NULL);
-
-	add_to_box(Widgets_box, Widgets3, START, TRUE, TRUE, 0, 0, 0, 0, 0);
-
-	GtkWidget *Widgets4 = create_button(GTK_RELIEF_NORMAL, "Widgets", FALSE, NULL, NULL, NULL);
-
-	add_to_box(Widgets_box, Widgets4, START, TRUE, TRUE, 0, 0, 0, 0, 0);
-
 	add_to_scrolled_window(scrolled_widgets_window, Widgets_box);
 
 	add_to_stack(stack_catalog, scrolled_widgets_window, "Widgets");

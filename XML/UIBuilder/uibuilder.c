@@ -20,6 +20,8 @@ static void activate(GtkApplication *app, gpointer data)
     GtkWidget *window = create_window(app, GTK_WINDOW_TOPLEVEL, "Title", 1000, 650, FALSE, GTK_WIN_POS_CENTER, TRUE, NULL, 1, FALSE);
     GtkWidget *header_bar = create_header_bar("UIBuilder", "Build your app", NULL, TRUE);
 
+
+
     show_widget(window);
 }
 
