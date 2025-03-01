@@ -84,3 +84,8 @@ entryInfos *get_properties_entry(GtkWidget *entry)
 
     return entryInformations;
 }
+
+char *get_text(GtkWidget *entry){
+    char *text = gtk_entry_get_text(GTK_ENTRY(entry));
+    return text;
+}

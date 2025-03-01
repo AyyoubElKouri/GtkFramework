@@ -69,5 +69,7 @@ GtkWidget *set_properties_entry(entryInfos *entryInformation);
 
 entryInfos *get_properties_entry(GtkWidget *entry);
 
+char *get_text(GtkWidget *entry);
+
 
 #endif // ENTRY_H

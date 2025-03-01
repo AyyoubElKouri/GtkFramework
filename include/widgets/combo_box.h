@@ -36,5 +36,5 @@ GtkWidget *create_combo_box();
 
 void add_to_combo_box(GtkWidget *combo_box, const gchar *item);
 
-
+char *get_selecter_item(GtkWidget *combo_box);
 #endif // COMBO_BOX_H

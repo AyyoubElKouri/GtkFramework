@@ -79,3 +79,11 @@ colorButtonInfos *get_properties_color_button(GtkWidget *colorButton)
 
     return colorButtonInformations;
 }
+
+char *get_color(GtkWidget* colorButton){
+    GdkColor gdk_color;
+    gtk_color_button_get_color(GTK_COLOR_BUTTON(colorButton), &gdk_color);
+    char *hex_color = (char *)malloc(8);
+    snprintf(hex_color, 8, "#%02x%02x%02x", gdk_color.red>>8, gdk_color.green>>8, gdk_color.blue>>8);
+    return hex_color;
+}

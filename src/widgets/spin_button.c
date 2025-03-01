@@ -70,3 +70,7 @@ spinButtonInfos *get_properties_spin_button(GtkWidget *spinButton)
 
     return spinButtonInformation;
 }
+
+double get_value_spin_button(GtkWidget *spinButton){
+    return gtk_spin_button_get_value(GTK_SPIN_BUTTON(spinButton));
+}

@@ -60,4 +60,6 @@ GtkWidget *set_properties_color_button(colorButtonInfos *colorButtonInformation)
 
 colorButtonInfos *get_properties_color_button(GtkWidget *colorButton);
 
+char *get_color(GtkWidget* colorButton);
+
 #endif // COLOR_BUTTON_H
