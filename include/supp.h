@@ -17,10 +17,17 @@
 
 #include <gtk/gtk.h>
 
+typedef struct{
+    char* id_widget;
+    gpointer data;
+} data_widget;
+
+
 void add_to_container(GtkWidget *container, GtkWidget *widget);
 
 void show_widget(GtkWidget *widget);
 
 gint run_dialog(GtkWidget *dialog);
 
+void destroy_widget(GtkWidget *widget);
 #endif // SUPP_H

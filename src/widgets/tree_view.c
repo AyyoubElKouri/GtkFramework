@@ -61,13 +61,15 @@ static void on_tree_view_realize(GtkWidget *widget, gpointer data) {
 }
 
 GtkWidget* create_tree_view() {
-    // Crée le modèle avec 4 colonnes : info, widget, callback, données
-    GtkTreeStore *store = gtk_tree_store_new(4, 
-        G_TYPE_STRING,    // Information textuelle
-        GTK_TYPE_WIDGET,  // Widget associé
-        G_TYPE_POINTER,   // Fonction callback
-        G_TYPE_POINTER    // Données utilisateur
+
+    GtkTreeStore *store = gtk_tree_store_new(5, 
+        G_TYPE_STRING,    // 0: Information textuelle
+        GTK_TYPE_WIDGET,  // 1: Widget associé
+        G_TYPE_POINTER,   // 2: Fonction callback
+        G_TYPE_POINTER,   // 3: Données pour le callback
+        G_TYPE_POINTER    // 4: NOUVEAU: Données personnalisées du widget
     );
+
     
     GtkWidget *tree_view = gtk_tree_view_new_with_model(GTK_TREE_MODEL(store));
     g_object_unref(store);
@@ -89,7 +91,8 @@ GtkWidget* create_tree_view() {
     return tree_view;
 }
 
-GtkWidget* add_to_tree(GtkWidget* tree_view, const char* id_parent, const char* information, GtkWidget* widget, void (*callback)(gpointer), gpointer data) {
+GtkWidget* add_to_tree( GtkWidget* tree_view, const char* id_parent, const char* information, GtkWidget* widget, void (*callback)(gpointer), gpointer callback_data, gpointer widget_data )
+{
     GtkTreeView *tv = GTK_TREE_VIEW(tree_view);
     GtkTreeStore *store = GTK_TREE_STORE(gtk_tree_view_get_model(tv));
     GtkTreeIter parent_iter;
@@ -103,12 +106,14 @@ GtkWidget* add_to_tree(GtkWidget* tree_view, const char* id_parent, const char* 
 
     GtkTreeIter new_iter;
     gtk_tree_store_append(store, &new_iter, parent_found ? &parent_iter : NULL);
+    // Ajout du widget_data dans la colonne 4
     gtk_tree_store_set(store, &new_iter,
-                       0, information,      // Texte affiché
-                       1, widget,          // Widget associé (peut être NULL)
-                       2, callback,        // Callback stocké
-                       3, data,            // Données utilisateur
-                       -1);
+        0, information,
+        1, widget,
+        2, callback,
+        3, callback_data,
+        4, widget_data,  // Stockage des données personnalisées
+        -1);
 
     return tree_view;
 }
@@ -174,21 +179,15 @@ TreeNodeIterator* tree_dfs_next(TreeNodeIterator *iterator) {
 }
 
 // Récupère les données du nœud courant
-TreeNodeData* tree_node_get_data(TreeNodeIterator *iterator) {
-    if (g_queue_is_empty(iterator->stack)) return NULL;
-    
-    GtkTreeIter *current = g_queue_peek_head(iterator->stack);
+TreeNodeData* tree_node_get_data(GtkTreeModel *model, GtkTreeIter *iter) {
     TreeNodeData *data = g_new(TreeNodeData, 1);
     
-    gchar *info = NULL;
-    GtkWidget *widget = NULL;
-    gtk_tree_model_get(iterator->model, current,
-                       0, &info,
-                       1, &widget,
+    gtk_tree_model_get(model, iter,
+                       0, &(data->information),
+                       1, &(data->widget),
+                       4, &(data->widget_data),
                        -1);
     
-    data->information = info;
-    data->widget = widget;
     return data;
 }
 
@@ -198,4 +197,55 @@ void tree_dfs_end(TreeNodeIterator *iterator) {
     
     g_queue_free_full(iterator->stack, (GDestroyNotify)g_free);
     g_free(iterator);
+}
+
+// Fonction helper récursive interne
+static void recursive_traverse_node(GtkTreeModel *model, GtkTreeIter *parent, TreeTraversalCallback callback, gpointer user_data) {
+    GtkTreeIter child;
+    gboolean has_child = gtk_tree_model_iter_children(model, &child, parent);
+
+    // Traiter le noeud avant les enfants (ouverture de balise)
+    callback(parent, user_data, TRUE);
+
+    while (has_child) {
+        // Appel récursif pour chaque enfant
+        recursive_traverse_node(model, &child, callback, user_data);
+        has_child = gtk_tree_model_iter_next(model, &child);
+    }
+
+    // Traiter le noeud après les enfants (fermeture de balise)
+    callback(parent, user_data, FALSE);
+}
+
+// Fonction d'initiation du parcours
+void tree_recursive_traverse(GtkWidget *tree_view, TreeTraversalCallback callback, gpointer user_data) {
+    GtkTreeModel *model = gtk_tree_view_get_model(GTK_TREE_VIEW(tree_view));
+    GtkTreeIter iter;
+
+    if (gtk_tree_model_get_iter_first(model, &iter)) {
+        do {
+            recursive_traverse_node(model, &iter, callback, user_data);
+        } while (gtk_tree_model_iter_next(model, &iter));
+    }
+}
+
+// Helper pour créer un itérateur temporaire depuis un GtkTreeIter
+static TreeNodeIterator* create_temp_iterator(GtkTreeModel *model, GtkTreeIter *iter) {
+    TreeNodeIterator *temp_it = g_new(TreeNodeIterator, 1);
+    temp_it->model = model;
+    temp_it->stack = g_queue_new();
+    
+    GtkTreeIter *copy = g_new(GtkTreeIter, 1);
+    *copy = *iter;
+    g_queue_push_head(temp_it->stack, copy);
+    
+    return temp_it;
+}
+
+int tree_empty(GtkWidget *tree_view) {
+    GtkTreeModel *model = gtk_tree_view_get_model(GTK_TREE_VIEW(tree_view));
+    if (!model) return 1;
+    
+    GtkTreeIter iter;
+    return !gtk_tree_model_get_iter_first(model, &iter);
 }

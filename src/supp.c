@@ -12,6 +12,8 @@
 
 #include "../include/supp.h"
 
+
+
 void add_to_container(GtkWidget *container, GtkWidget *widget)
 {
     gtk_container_add(GTK_CONTAINER(container), widget);
@@ -25,4 +27,8 @@ void show_widget(GtkWidget *widget)
 gint run_dialog(GtkWidget *dialog)
 {
     return gtk_dialog_run(GTK_DIALOG(dialog));
+}
+
+void destroy_widget(GtkWidget *widget){
+    gtk_widget_destroy(widget);
 }

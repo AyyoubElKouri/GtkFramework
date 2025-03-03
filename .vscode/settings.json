@@ -11,6 +11,10 @@
         "xml_style.h": "c",
         "analyzer.h": "c",
         "gtkframework.h": "c",
-        "string.h": "c"
+        "string.h": "c",
+        "windows.h": "c",
+        "widgets.h": "c",
+        "tree_view.h": "c",
+        "limits": "cpp"
     }
 }
