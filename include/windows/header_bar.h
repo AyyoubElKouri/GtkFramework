@@ -32,8 +32,6 @@ typedef struct
     const gchar *subtitle;
     const gchar *icon_path;
     gboolean settings;
-    LinkedList *start_widgets_liste;
-    LinkedList *end_widgets_liste;
 }headerBarInfos;
 
 typedef enum

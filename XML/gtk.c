@@ -1,6 +1,5 @@
 #include <gtk/gtk.h>
 #include "../include/GtkFramework/GtkFramework.h"
-#include "XML/xscEngine/widgets_structures.h"
 
 
 static void activate(GtkApplication *app, gpointer data)
@@ -144,8 +143,6 @@ static void activate(GtkApplication *app, gpointer data)
 	GtkWidget *window_informations_app_value = create_entry("app", "Chose App for TOPLEVEL", TRUE, TRUE, 20, 0.5);
 
 	add_to_grid(window_informations_grid, window_informations_app_value, 1, 1, 1, 1);
-
-	
 
 	GtkWidget *window_informations_type_label = create_label("Type", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
 

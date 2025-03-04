@@ -19,6 +19,7 @@
 
 typedef struct{
     char* id_widget;
+    char *widget_name;
     gpointer data;
 } data_widget;
 

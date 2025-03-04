@@ -249,3 +249,4 @@ int tree_empty(GtkWidget *tree_view) {
     GtkTreeIter iter;
     return !gtk_tree_model_get_iter_first(model, &iter);
 }
+

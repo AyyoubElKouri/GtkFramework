@@ -15,6 +15,7 @@
         "windows.h": "c",
         "widgets.h": "c",
         "tree_view.h": "c",
-        "limits": "cpp"
+        "limits": "cpp",
+        "widgets_structures.h": "c"
     }
 }

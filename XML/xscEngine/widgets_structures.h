@@ -31,5 +31,13 @@ typedef struct
     GtkWidget *window_informations_fullscreen_value;
 } windowI;
 
+typedef struct 
+{
+    GtkWidget *header_bar_id_value;
+    GtkWidget *header_bar_informations_title_value;
+    GtkWidget *header_bar_informations_subtitle_value;
+    GtkWidget *header_bar_informations_icon_value;
+    GtkWidget *header_bar_informations_settings_value;
+} headerBarI;
 
 #endif //WIDGETS_STRUCTURES_H
