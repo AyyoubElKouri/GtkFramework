@@ -12,7 +12,7 @@
 
 #include "../../include/widgets/tree_view.h"
 #include <string.h>
-
+#include "../../include/GtkFramework/GtkFramework.h"
 
 struct FindParentData {
     const char *id_parent;
@@ -250,3 +250,25 @@ int tree_empty(GtkWidget *tree_view) {
     return !gtk_tree_model_get_iter_first(model, &iter);
 }
 
+TreeNodeData *search_tree(GtkWidget *tree_view, char* id) {
+    TreeNodeIterator *it = tree_dfs_begin(tree_view);
+    
+    while (it && !g_queue_is_empty(it->stack)) {
+        // Récupérer les données du nœud courant
+        GtkTreeIter *current_iter = g_queue_peek_head(it->stack);
+        TreeNodeData *node_data = tree_node_get_data(it->model, current_iter);
+        
+        // Afficher l'information (colonne 0) et l'ID (colonne 4 si utilisé)
+        if(strcmp(node_data->information, id) == 0) {
+            return node_data;
+        }
+
+        // Libérer les données du nœud
+        g_free(node_data->information);
+        g_free(node_data);
+
+        // Passer au nœud suivant
+        it = tree_dfs_next(it);
+    }
+    tree_dfs_end(it); // Nettoyer
+}

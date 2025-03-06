@@ -14,7 +14,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-GtkWidget *create_window(GtkApplication *app, GtkWindowType type, const gchar *title, gint width, gint height, gboolean resizable, GtkWindowPosition position, gboolean decorate, GdkPixbuf *icon, double opacity, gboolean fullscrean)
+GtkWidget *create_window(GtkApplication *app, GtkWindowType type, gchar *title, gint width, gint height, gboolean resizable, GtkWindowPosition position, gboolean decorate, GdkPixbuf *icon, double opacity, gboolean fullscrean)
 {
     // The structure of the window
     windowInfos *windowInformations = (windowInfos *)malloc(sizeof(windowInfos));

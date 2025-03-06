@@ -70,5 +70,6 @@ spinButtonInfos *get_properties_spin_button(GtkWidget *spinButton);
 
 double get_value_spin_button(GtkWidget *spinButton);
 
+void set_value_spin_button(GtkWidget *spinButton, double value);
 
 #endif // SPIN_BUTTON_H

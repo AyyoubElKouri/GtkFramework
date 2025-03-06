@@ -11,6 +11,7 @@
  ****************************************************************************************************************************/
 
 #include "../../include/widgets/combo_box.h"
+#include "../../include/widgets/tree_view.h"
 
 GtkWidget *create_combo_box()
 {
@@ -26,4 +27,8 @@ void add_to_combo_box(GtkWidget *combo_box, const gchar *item)
 char *get_selecter_item(GtkWidget *combo_box){
     char* text = gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(combo_box));
     return text;
+}
+
+void set_active_item(GtkWidget *combo_box, gint index){
+    gtk_combo_box_set_active(GTK_COMBO_BOX(combo_box), index);
 }

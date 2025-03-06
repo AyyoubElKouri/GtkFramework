@@ -89,3 +89,7 @@ char *get_text(GtkWidget *entry){
     char *text = gtk_entry_get_text(GTK_ENTRY(entry));
     return text;
 }
+
+void set_text(GtkWidget *entry, char *text){
+    gtk_entry_set_text(GTK_ENTRY(entry), text);
+}

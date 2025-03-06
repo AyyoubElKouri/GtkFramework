@@ -71,5 +71,6 @@ entryInfos *get_properties_entry(GtkWidget *entry);
 
 char *get_text(GtkWidget *entry);
 
+void set_text(GtkWidget *entry, char *text);
 
 #endif // ENTRY_H

@@ -26,7 +26,7 @@ typedef struct
 {
     GtkApplication *app;
     GtkWindowType type;
-    const gchar *title;
+    gchar *title;
     gint width;
     gint height;
     gboolean resizable;
@@ -55,7 +55,7 @@ typedef struct
  * @return GtkWidget pointer (you need to create a GtkWidget pointer to receive it) or NULL if no memory space is available for the window
  */
 
-GtkWidget *create_window(GtkApplication *app, GtkWindowType type, const gchar *title, gint width, gint height, gboolean resizable, GtkWindowPosition position, gboolean decorate, GdkPixbuf *icon, double opacity, gboolean fullscreen);
+GtkWidget *create_window(GtkApplication *app, GtkWindowType type, gchar *title, gint width, gint height, gboolean resizable, GtkWindowPosition position, gboolean decorate, GdkPixbuf *icon, double opacity, gboolean fullscreen);
 
 /**
  * @brief This function creates the window and sets its properties.

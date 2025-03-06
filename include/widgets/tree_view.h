@@ -55,4 +55,6 @@ static TreeNodeIterator* create_temp_iterator(GtkTreeModel *model, GtkTreeIter *
 
 int tree_empty(GtkWidget *tree_view);
 
+TreeNodeData *search_tree(GtkWidget *tree_view, char* id);
+
 #endif
