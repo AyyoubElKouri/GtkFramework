@@ -12,8 +12,6 @@
 
 #include "../include/supp.h"
 
-
-
 void add_to_container(GtkWidget *container, GtkWidget *widget)
 {
     gtk_container_add(GTK_CONTAINER(container), widget);
