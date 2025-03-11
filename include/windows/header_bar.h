@@ -28,9 +28,9 @@
 
 typedef struct
 {
-    const gchar *title;
-    const gchar *subtitle;
-    const gchar *icon_path;
+    gchar *title;
+    gchar *subtitle;
+    gchar *icon_path;
     gboolean settings;
 }headerBarInfos;
 
@@ -48,7 +48,7 @@ typedef enum
  * @return a header bar
  */
 
-GtkWidget *create_header_bar(const gchar *title, const gchar *subtitle, const gchar *icon_path, gboolean settings);
+GtkWidget *create_header_bar(gchar *title, gchar *subtitle, gchar *icon_path, gboolean settings);
 
 /**
  * @brief set the properties of the header bar
@@ -67,6 +67,8 @@ GtkWidget *set_properties_header_bar(headerBarInfos *headerBarInformations);
  */
 
 headerBarInfos *get_properties_header_bar(GtkWidget *headerBar);
+
+void modify_header_bar(GtkWidget *header_bar, headerBarInfos *headerBarInformations);
 
 void add_to_header_bar(GtkWidget *header_bar, GtkWidget *widget, HeaderBarPosition LEFT_OR_RIGHT);
 

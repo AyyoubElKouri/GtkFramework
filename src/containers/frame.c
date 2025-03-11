@@ -12,7 +12,7 @@
 
 #include "../../include/containers/frame.h"
 
-GtkWidget *create_frame(const gchar *title, gfloat horizontal_placement, gfloat vertical_placement)
+GtkWidget *create_frame(gchar *title, gfloat horizontal_placement, gfloat vertical_placement)
 {
     frameInfos *frameInformations = (frameInfos *)malloc(sizeof(frameInfos));
     if(!frameInformations) return NULL;
@@ -48,6 +48,11 @@ frameInfos *get_properties_frame(GtkWidget *frame)
     GList *children = gtk_container_get_children(GTK_CONTAINER(frame));
 
     return frameInformations;
+}
+
+void modify_frame(GtkWidget *frame, frameInfos *frameInformations){
+    gtk_frame_set_label(GTK_FRAME(frame), frameInformations->title);
+    gtk_frame_set_label_align(GTK_FRAME(frame), frameInformations->horizontal_placement, frameInformations->vertical_placement);
 }
 
 void add_to_frame(GtkWidget *frame, GtkWidget *widget, gint top, gint bottom, gint left, gint right)

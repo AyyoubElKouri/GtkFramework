@@ -63,6 +63,14 @@ boxInfos *get_properties_box(GtkWidget *box)
     return boxInformations;
 }
 
+void modify_box(GtkWidget *box, boxInfos *boxInformations){
+    gtk_box_set_spacing(GTK_BOX(box), boxInformations->spacing);
+    if(boxInformations->orientation == GTK_ORIENTATION_HORIZONTAL)
+        gtk_widget_set_halign(box, boxInformations->align);
+    else
+        gtk_widget_set_valign(box, boxInformations->align);
+}
+
 void add_to_box(GtkWidget *box, GtkWidget *child, BoxPosition position , gboolean expand, gboolean fill, guint padding, gint margin_top, gint margin_buttom, gint margin_right, gint margin_left)
 {
     // check the position

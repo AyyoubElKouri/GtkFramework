@@ -23,7 +23,7 @@
 
 typedef struct
 {
-    const gchar *title;
+    gchar *title;
     gfloat horizontal_placement;
     gfloat vertical_placement;
 } frameInfos;
@@ -38,7 +38,7 @@ typedef struct
  * @return GtkWidget pointer to the frame
  */
 
-GtkWidget *create_frame(const gchar *title, gfloat horizontal_placement, gfloat vertical_placement);
+GtkWidget *create_frame(gchar *title, gfloat horizontal_placement, gfloat vertical_placement);
 
 /**
  * @brief This function sets the properties of the frame
@@ -67,6 +67,8 @@ frameInfos *get_properties_frame(GtkWidget *frame);
  * @param widget The widget to add
  */
 
-void add_to_frame(GtkWidget *frame, GtkWidget *widget, gint top, gint bottom, gint left, gint right);
+ void modify_frame(GtkWidget *frame, frameInfos *frameInformations);
+
+ void add_to_frame(GtkWidget *frame, GtkWidget *widget, gint top, gint bottom, gint left, gint right);
 
 #endif // FRAME_H
