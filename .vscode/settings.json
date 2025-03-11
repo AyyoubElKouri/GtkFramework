@@ -16,6 +16,8 @@
         "widgets.h": "c",
         "tree_view.h": "c",
         "limits": "cpp",
-        "widgets_structures.h": "c"
+        "widgets_structures.h": "c",
+        "supp.h": "c",
+        "xml_generate.h": "c"
     }
 }

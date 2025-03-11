@@ -21,7 +21,9 @@ typedef struct TreeNodeIterator TreeNodeIterator;
 typedef struct {
 const gchar *information;  // Texte affiché dans l'arbre
 GtkWidget *widget;         // Widget associé au nœud
-gpointer widget_data;      // Données personnalisées du widget
+gpointer widget_data;
+char *closing_tag;  
+char *widget_name;    // Données personnalisées du widget
 } TreeNodeData;
 
 struct TreeNodeIterator {
@@ -37,15 +39,19 @@ const char* information,
 GtkWidget* widget, 
 void (*callback)(gpointer), 
 gpointer callback_data,
-gpointer widget_data); 
+gpointer widget_data,
+char* closing_tag,
+char *widget_name);
 
 
 // Fonctions d'itération DFS
 TreeNodeIterator* tree_dfs_begin(GtkWidget *tree_view);
-TreeNodeIterator* tree_dfs_next(TreeNodeIterator *iterator);
-TreeNodeData* tree_node_get_data(GtkTreeModel *model, GtkTreeIter *iter);
-void tree_dfs_end(TreeNodeIterator *iterator);
 
+TreeNodeIterator* tree_dfs_next(TreeNodeIterator *iterator);
+
+TreeNodeData* tree_node_get_data(GtkTreeModel *model, GtkTreeIter *iter);
+
+void tree_dfs_end(TreeNodeIterator *iterator);
 
 typedef void (*TreeTraversalCallback)(GtkTreeIter *iter, gpointer user_data, gboolean is_opening);
 
@@ -56,5 +62,15 @@ static TreeNodeIterator* create_temp_iterator(GtkTreeModel *model, GtkTreeIter *
 int tree_empty(GtkWidget *tree_view);
 
 TreeNodeData *search_tree(GtkWidget *tree_view, char* id);
+
+char* get_selected_node_id(GtkTreeView *tree_view);
+
+TreeNodeData* get_tree_root(GtkWidget *tree_view);
+
+TreeNodeData *get_selected_parent_node_data(GtkTreeView *tree_view);
+
+int is_child(GtkWidget *tree_view);
+
+void delete_selected_element(GtkWidget *tree_view);
 
 #endif

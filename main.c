@@ -1,459 +1,13 @@
 #include <gtk/gtk.h>
 #include "include/GtkFramework/GtkFramework.h"
 #include "XML/xscEngine/widgets_structures.h"
-#include "XML/xscEngine/widgets_tree.h"
+#include "t/widget_callbacks.h"
+#include "t/xml_generate.h"
 
-GtkWidget *test_box = NULL;
-GtkWidget *global_tree;
-data_widget* global_widget_data_pointer = NULL;
+extern GtkWidget *test_box;
+extern GtkWidget *global_tree;
+extern data_widget* global_widget_data_pointer;
 
-static void traitementHeaderBar(GtkWidget *widget, gpointer data){
-	headerBarI *myheaderBar = (headerBarI*)data;
-
-	headerBarInfos *infos = malloc(sizeof(headerBarInfos));
-	if(!infos) exit(EXIT_FAILURE);
-
-	infos->title = get_text(myheaderBar->header_bar_informations_title_value);
-	infos->icon_path = get_text(myheaderBar->header_bar_informations_icon_value);
-	if(strcmp(infos->icon_path, "") == 0)
-		infos->icon_path = NULL;
-	infos->subtitle = get_text(myheaderBar->header_bar_informations_subtitle_value);
-	if(strcmp(get_selecter_item(myheaderBar->header_bar_informations_settings_value),"TRUE") == 0)
-		infos->settings = TRUE;
-	else
-		infos->settings = FALSE;
-
-	data_widget *widget_data = malloc(sizeof(data_widget));
-	if(!widget_data) exit(EXIT_FAILURE);	
-
-	widget_data->id_widget = get_text(myheaderBar->header_bar_id_value);
-	widget_data->data = infos;
-	widget_data->widget_name = "headerBar";
-
-	global_widget_data_pointer = widget_data;
-}
-
-static void on_click_window(gpointer data){
-	if(global_widget_data_pointer){
-		if(strcmp(global_widget_data_pointer->widget_name, "headerBar") == 0){
-
-			GtkWidget *headerBar = set_properties_header_bar((headerBarInfos *)global_widget_data_pointer->data);
-			add_to_box(test_box, headerBar, START, FALSE, FALSE, 0, 0, 0, 0, 0);
-			show_widget(headerBar);
-		}
-		add_to_tree(global_tree,  (char *)data, global_widget_data_pointer->id_widget, NULL, NULL, NULL, global_widget_data_pointer->data);
-		global_widget_data_pointer = NULL;
-	}
-	else
-	{
-		GtkWidget *box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
-		GtkWidget *window_informations_grid = create_grid(7, 7, TRUE, FALSE);
-
-		TreeNodeData *dataWidget = search_tree(global_tree, (char *)data);
-
-	GtkWidget *window_informations_id_label = create_label("Widget ID", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
-
-	add_to_grid(window_informations_grid, window_informations_id_label, 0, 0, 1, 1);
-
-	GtkWidget *window_informations_id_value = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 20, 0.5);
-
-	set_text(window_informations_id_value, (char *)data);
-
-	add_to_grid(window_informations_grid, window_informations_id_value, 0, 1, 1, 1);
-
-	GtkWidget *window_informations_app_label = create_label("Window", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
-
-	add_to_grid(window_informations_grid, window_informations_app_label, 1, 0, 1, 1);
-
-	GtkWidget *window_informations_app_value = create_entry("app", "Chose App for TOPLEVEL", TRUE, TRUE, 20, 0.5);
-
-	add_to_grid(window_informations_grid, window_informations_app_value, 1, 1, 1, 1);
-
-	GtkWidget *window_informations_type_label = create_label("Type", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
-
-	add_to_grid(window_informations_grid, window_informations_type_label, 2, 0, 1, 1);
-
-	GtkWidget *window_informations_type_value = create_entry("GTK_WINDOW_TOPLEVEL", "Chose Type of the window", TRUE, TRUE, 20, 0.5);
-
-	add_to_grid(window_informations_grid, window_informations_type_value, 2, 1, 1, 1);
-
-	GtkWidget *window_informations_title_label = create_label("Title", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
-
-	add_to_grid(window_informations_grid, window_informations_title_label, 3, 0, 1, 1);
-
-	GtkWidget *window_informations_title_value = create_entry("title", "Chose Title for TOPLEVEL", TRUE, TRUE, 20, 0.5);
-
-	set_text(window_informations_title_value, ((windowInfos *)(dataWidget->widget_data))->title);
-
-	add_to_grid(window_informations_grid, window_informations_title_value, 3, 1, 1, 1);
-
-	GtkWidget *window_informations_width_label = create_label("Width", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
-
-	
-	add_to_grid(window_informations_grid, window_informations_width_label, 4, 0, 1, 1);
-	
-	GtkWidget *window_informations_width_value = create_spin_button(0, 1000, 10, 800, 0, FALSE, TRUE);
-	
-	set_value_spin_button(window_informations_width_value, ((windowInfos *)(dataWidget->widget_data))->width);
-
-	add_to_grid(window_informations_grid, window_informations_width_value, 4, 1, 1, 1);
-
-	GtkWidget *window_informations_height_label = create_label("Height", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
-
-	add_to_grid(window_informations_grid, window_informations_height_label, 5, 0, 1, 1);
-
-	GtkWidget *window_informations_height_value = create_spin_button(0, 1000, 10, 600, 0, FALSE, TRUE);
-
-	set_value_spin_button(window_informations_height_value, ((windowInfos *)(dataWidget->widget_data))->height);
-
-	add_to_grid(window_informations_grid, window_informations_height_value, 5, 1, 1, 1);
-
-	GtkWidget *window_informations_resizable_label = create_label("Resizable", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
-
-	add_to_grid(window_informations_grid, window_informations_resizable_label, 6, 0, 1, 1);
-
-	GtkWidget *window_informations_resizable_value = create_combo_box();
-
-	add_to_combo_box(window_informations_resizable_value, "TRUE");
-
-	add_to_combo_box(window_informations_resizable_value, "FALSE");
-
-	if(((windowInfos *)(dataWidget->widget_data))->resizable == TRUE){
-		set_active_item(window_informations_resizable_value, 0);
-	} else {
-		set_active_item(window_informations_resizable_value, 1);
-	}
-
-	add_to_grid(window_informations_grid, window_informations_resizable_value, 6, 1, 1, 1);
-
-	GtkWidget *window_informations_position_label = create_label("Position", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
-
-	add_to_grid(window_informations_grid, window_informations_position_label, 7, 0, 1, 1);
-
-	GtkWidget *window_informations_position_value = create_combo_box();
-
-	add_to_combo_box(window_informations_position_value, "GTK_WIN_POS_CENTER");
-
-	add_to_combo_box(window_informations_position_value, "GTK_WIN_POS_CENTER_ON_PARENT");
-
-	add_to_combo_box(window_informations_position_value, "GTK_WIN_POS_MOUSE");
-
-	if(((windowInfos *)(dataWidget->widget_data))->position == GTK_WIN_POS_CENTER){
-		set_active_item(window_informations_position_value, 0);
-	} else if(((windowInfos *)(dataWidget->widget_data))->position == GTK_WIN_POS_CENTER_ON_PARENT){
-		set_active_item(window_informations_position_value, 1);
-	} else {
-		set_active_item(window_informations_position_value, 2);
-	}
-	
-	add_to_grid(window_informations_grid, window_informations_position_value, 7, 1, 1, 1);
-
-	GtkWidget *window_informations_decorate_label = create_label("Decorate", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
-
-	add_to_grid(window_informations_grid, window_informations_decorate_label, 8, 0, 1, 1);
-	
-	GtkWidget *window_informations_decorate_value = create_combo_box();
-	
-	add_to_combo_box(window_informations_decorate_value, "TRUE");
-
-	add_to_combo_box(window_informations_decorate_value, "FALSE");
-
-	if(((windowInfos *)(dataWidget->widget_data))->decorate == TRUE){
-		set_active_item(window_informations_decorate_value, 0);
-	} else {
-		set_active_item(window_informations_decorate_value, 1);
-	}
-
-	add_to_grid(window_informations_grid, window_informations_decorate_value, 8, 1, 1, 1);
-
-	GtkWidget *window_informations_icon_label = create_label("Icon", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
-
-	add_to_grid(window_informations_grid, window_informations_icon_label, 9, 0, 1, 1);
-
-	GtkWidget *window_informations_icon_value = create_entry(NULL, "icon path", TRUE, TRUE, 20, 0.5);
-
-	add_to_grid(window_informations_grid, window_informations_icon_value, 9, 1, 1, 1);
-
-	GtkWidget *window_informations_opacity_label = create_label("Opacity", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
-
-	add_to_grid(window_informations_grid, window_informations_opacity_label, 10, 0, 1, 1);
-
-	GtkWidget *window_informations_opacity_value = create_spin_button(0, 1, 0.1, 1, 1, FALSE, TRUE);
-
-	set_value_spin_button(window_informations_opacity_value, ((windowInfos *)(dataWidget->widget_data))->opacity);
-
-	add_to_grid(window_informations_grid, window_informations_opacity_value, 10, 1, 1, 1);
-
-	GtkWidget *window_informations_fullscreen_label = create_label("Fullscreen", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
-
-	add_to_grid(window_informations_grid, window_informations_fullscreen_label, 11, 0, 1, 1);
-
-	GtkWidget *window_informations_fullscreen_value = create_combo_box();
-	
-	add_to_combo_box(window_informations_fullscreen_value, "TRUE");
-
-	add_to_combo_box(window_informations_fullscreen_value, "FALSE");
-
-	if(((windowInfos *)(dataWidget->widget_data))->fullscreen == TRUE){
-		set_active_item(window_informations_fullscreen_value, 0);
-	} else {
-		set_active_item(window_informations_fullscreen_value, 1);
-	}
-	
-	add_to_grid(window_informations_grid, window_informations_fullscreen_value, 11, 1, 1, 1);
-
-	add_to_box(box, window_informations_grid, START, TRUE, TRUE, 0, 0, 0, 0, 0);
-
-	GtkWidget *dialog = create_dialog("Window Information", NULL, GTK_DIALOG_MODAL, 300, 300, 1, box, "OK", GTK_RESPONSE_OK, "Annuler", GTK_RESPONSE_CANCEL, NULL, GTK_RESPONSE_CANCEL);
-	gint reponse = run_dialog(dialog);
-	if(reponse == GTK_RESPONSE_OK){
-
-		windowInfos *infos = malloc(sizeof(windowInfos));
-		if(!infos) exit(EXIT_FAILURE);
-
-		if(get_text(window_informations_app_value)){
-			GtkApplication *app = gtk_application_new("ici.id.ta", G_APPLICATION_DEFAULT_FLAGS);
-			infos->app = app;
-		}
-		else{
-			infos->app = NULL;
-		}
-
-		infos->title = get_text(window_informations_title_value);
-
-		char *decorate = get_selecter_item(window_informations_decorate_value);
-
-		if(!decorate){
-			infos->decorate = TRUE;
-		}
-		else{
-			if(strcmp(decorate, "TRUE") == 0)
-				infos->decorate = TRUE;
-			else
-				infos->decorate = FALSE;
-		}
-
-		char *fullscreen = get_selecter_item(window_informations_fullscreen_value);
-
-		if(!fullscreen){
-			infos->fullscreen = TRUE;
-		}
-		else{
-			if(strcmp(fullscreen, "TRUE") == 0)
-				infos->fullscreen = TRUE;
-			else
-				infos->fullscreen = FALSE;
-		}
-
-		char *resizable = get_selecter_item(window_informations_resizable_value);
-
-		if(!resizable){
-			infos->resizable = TRUE;
-		}
-		else{
-			if(strcmp(resizable, "TRUE") == 0)
-				infos->resizable = TRUE;
-			else
-				infos->resizable = FALSE;
-		}
-
-		if(strcmp(get_text(window_informations_icon_value), "") != 0){
-			GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file(get_text(window_informations_icon_value), NULL);
-			if(!pixbuf){
-				perror("Failed to load icon\n");
-			} else {
-			GdkPixbuf *scaled_pixbuf = gdk_pixbuf_scale_simple(pixbuf, 32, 32, GDK_INTERP_BILINEAR);
-			infos->icon = scaled_pixbuf;
-			g_object_unref(pixbuf);
-			}
-		}
-
-		char *position = get_selecter_item(window_informations_position_value);
-		if(strcmp(position, "GTK_WIN_POS_CENTER") == 0)
-			infos->position = GTK_WIN_POS_CENTER;
-		else if(strcmp(position, "GTK_WIN_POS_CENTER_ON_PARENT") == 0)
-			infos->position = GTK_WIN_POS_CENTER_ON_PARENT;
-		else
-			infos->position = GTK_WIN_POS_MOUSE;
-
-
-		infos->opacity = get_value_spin_button(window_informations_opacity_value);
-		infos->width = get_value_spin_button(window_informations_width_value);
-		infos->height = get_value_spin_button(window_informations_height_value);
-		
-		
-		infos->type = GTK_WINDOW_TOPLEVEL; // TOUJOURS TOPLEVEL
-
-		((windowInfos *)(dataWidget->widget_data))->app = infos->app;
-		strcpy(((windowInfos *)(dataWidget->widget_data))->title,infos->title);
-		((windowInfos *)(dataWidget->widget_data))->decorate = infos->decorate;
-		((windowInfos *)(dataWidget->widget_data))->fullscreen = infos->fullscreen;
-		((windowInfos *)(dataWidget->widget_data))->resizable = infos->resizable;
-		((windowInfos *)(dataWidget->widget_data))->icon = infos->icon;
-		((windowInfos *)(dataWidget->widget_data))->opacity = infos->opacity;
-		((windowInfos *)(dataWidget->widget_data))->width = infos->width;
-		((windowInfos *)(dataWidget->widget_data))->height = infos->height;
-		((windowInfos *)(dataWidget->widget_data))->position = infos->position;
-		
-	}
-	destroy_widget(dialog);
-	}
-}
-
-
-static void traitementWindow(GtkWidget *widget, gpointer data) {
-	windowInfos* infos = malloc(sizeof(windowInfos));
-	if(!infos) exit(EXIT_FAILURE);
-
-	windowI *mywindow = (windowI*)data;
-
-	if(get_text(mywindow->window_informations_app_value)){
-        GtkApplication *app = gtk_application_new("ici.id.ta", G_APPLICATION_DEFAULT_FLAGS);
-        infos->app = app;
-    }
-    else{
-        infos->app = NULL;
-    }
-
-	infos->title = get_text(mywindow->window_informations_title_value);
-
-    char *decorate = get_selecter_item(mywindow->window_informations_decorate_value);
-    
-    if(!decorate){
-        infos->decorate = TRUE;
-    }
-    else{
-        if(strcmp(decorate, "TRUE") == 0)
-            infos->decorate = TRUE;
-        else
-            infos->decorate = FALSE;
-    }
-
-    char *fullscreen = get_selecter_item(mywindow->window_informations_fullscreen_value);
-	
-    if(!fullscreen){
-        infos->fullscreen = TRUE;
-    }
-    else{
-		if(strcmp(fullscreen, "TRUE") == 0)
-		infos->fullscreen = TRUE;
-        else
-		infos->fullscreen = FALSE;
-    }
-    
-	
-    infos->height = get_value_spin_button(mywindow->window_informations_height_value);
-    infos->width = get_value_spin_button(mywindow->window_informations_width_value);
-
-    char * icon = get_text(mywindow->window_informations_icon_value);
-
-    if(icon){
-        GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file(icon, NULL);
-        infos->icon = pixbuf;
-    }
-    else{
-        infos->icon = NULL;
-    }
-
-    infos->opacity = get_value_spin_button(mywindow->window_informations_opacity_value);
-
-    char *position = get_selecter_item(mywindow->window_informations_position_value);
-	
-    if(!position){
-		infos->position = GTK_WIN_POS_CENTER;
-    }
-    else{
-		if(strcmp(position, "GTK_WIN_POS_CENTER") == 0)
-		infos->position = GTK_WIN_POS_CENTER;
-        else if(strcmp(position, "GTK_WIN_POS_CENTER_ON_PARENT") == 0)
-		infos->position = GTK_WIN_POS_CENTER_ON_PARENT;
-        else
-		infos->position = GTK_WIN_POS_MOUSE;
-    }
-	
-	
-    char *resizable = get_selecter_item(mywindow->window_informations_resizable_value);
-	
-    if(!resizable){
-		infos->resizable = TRUE;
-    }
-    else{
-        if(strcmp(resizable, "TRUE") == 0)
-		infos->resizable = TRUE;
-        else
-            infos->resizable = FALSE;
-    }
-
-    if(get_text(mywindow->window_informations_type_value) == "GTK_WINDOW_TOPLEVEL"){
-        infos->type = GTK_WINDOW_TOPLEVEL;
-    }
-
-	data_widget *widget_data = malloc(sizeof(data_widget));
-
-	widget_data->id_widget = get_text(mywindow->window_informations_id_value);
-	widget_data->data = infos;
-	widget_data->widget_name = "window";
-
-	GtkWidget *dialog;
-
-	if(tree_empty(global_tree))
-    	add_to_tree(global_tree, NULL, widget_data->id_widget, NULL, on_click_window, widget_data->id_widget, widget_data->data);
-	else{
-		dialog = create_dialog("Erreur", NULL, GTK_DIALOG_MODAL, 300, 300, 1, NULL, "OK", GTK_RESPONSE_OK, NULL, GTK_RESPONSE_OK, NULL, GTK_RESPONSE_CANCEL);
-		run_dialog(dialog);
-		destroy_widget(dialog);
-	}
-}
-
-static void hello(GtkWidget *widget, gpointer data) {
-	
-	printf("La widget id est : %s\n", global_widget_data_pointer->id_widget);
-	
-	if(((windowInfos *)global_widget_data_pointer->data)->app)
-	printf("L'application est app\n");
-	else
-		printf("L'application est non app\n");
-
-	printf("Le titre est : %s\n", ((windowInfos *)global_widget_data_pointer->data)->title);
-
-	if(((windowInfos *)global_widget_data_pointer->data)->decorate)
-		printf("decorate TRUE \n");
-	else
-		printf("decorate FALSE\n");
-
-	if(((windowInfos *)global_widget_data_pointer->data)->fullscreen)
-		printf("fullscreen TRUE\n");
-	else
-		printf("fullscreen FALSE\n");
-
-    printf("height : %d\n", ((windowInfos *)global_widget_data_pointer->data)->height);
-    printf("width : %d\n", ((windowInfos *)global_widget_data_pointer->data)->width);
-    printf("Opacity : %f\n", ((windowInfos *)global_widget_data_pointer->data)->opacity);
-
-	if(((windowInfos *)global_widget_data_pointer->data)->icon)
-		printf("icon chosie\n");
-	else
-		printf("icon non choisi\n");
-	
-	if(((windowInfos *)global_widget_data_pointer->data)->position == GTK_WIN_POS_CENTER)
-		printf("c'est : GTK_WIN_POS_CENTER\n");
-	else if(((windowInfos *)global_widget_data_pointer->data)->position == GTK_WIN_POS_CENTER_ON_PARENT)
-		printf("c'est : GTK_WIN_POS_CENTER_ON_PARENT\n");
-	else
-		printf("c'est : GTK_WIN_POS_MOUSE\n");
-
-
-	if(((windowInfos *)global_widget_data_pointer->data)->resizable == TRUE)
-		printf("resizable is : TRUE\n");
-	else
-		printf("resizable is FALSE");
-
-	if(((windowInfos *)global_widget_data_pointer->data)->type == GTK_WINDOW_TOPLEVEL)
-		printf("c'est GTK_WINDOW_TOP_LEVEL\n");
-	else
-		printf("c'est autre Type\n");
-	
-}
 
 static void activate(GtkApplication *app, gpointer data)
 {
@@ -933,7 +487,15 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(Box_case_informations_grid, Box_case_informations_spacing_value, 3, 1, 1, 1);
 
-	GtkWidget *Box_case_informations_add = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                               ", FALSE, NULL, NULL, NULL);
+	boxI* mybox = malloc(sizeof(boxI));
+	if(!mybox) exit(EXIT_FAILURE);
+
+	mybox->Box_case_informations_id_entry = Box_case_informations_id_entry;
+	mybox->Box_case_informations_orientation_value = Box_case_informations_orientation_value;
+	mybox->Box_case_informations_align_value = Box_case_informations_align_value;
+	mybox->Box_case_informations_spacing_value = Box_case_informations_spacing_value;
+
+	GtkWidget *Box_case_informations_add = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                               ", FALSE, NULL, G_CALLBACK(traitementBox), mybox);
 
 	add_to_grid(Box_case_informations_grid, Box_case_informations_add, 4, 0, 2, 1);
 
@@ -967,7 +529,11 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(Fixed_grid, Fixed_id_entry, 0, 1, 1, 1);
 
-	GtkWidget *Fixed_add = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                               ", FALSE, NULL, NULL, NULL);
+	fixedI *myfixed = malloc(sizeof(fixedI));
+	if(!myfixed) exit(EXIT_FAILURE);
+	myfixed->Fixed_id_entry = Fixed_id_entry;
+
+	GtkWidget *Fixed_add = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                               ", FALSE, NULL, G_CALLBACK(traitement_fixed), myfixed);
 
 	add_to_grid(Fixed_grid, Fixed_add, 1, 0, 2, 1);
 
@@ -1023,7 +589,15 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(Frame_grid, Frame_vertical_placement_value, 3, 1, 1, 1);
 
-	GtkWidget *Frame_add = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                               ", FALSE, NULL, NULL, NULL);
+	frameI *myframe = malloc(sizeof(frameI));
+	if(!myframe) return;
+
+	myframe->Frame_id_entry = Frame_id_entry;
+	myframe->Frame_title_value = Frame_title_value;
+	myframe->Frame_vertical_placement_value = Frame_vertical_placement_value;
+	myframe->Frame_horizontal_placement_value = Frame_horizontal_placement_value;
+	
+	GtkWidget *Frame_add = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                               ", FALSE, NULL, G_CALLBACK(traitement_frame), myframe);
 
 	add_to_grid(Frame_grid, Frame_add, 4, 0, 2, 1);
 
@@ -1036,7 +610,7 @@ static void activate(GtkApplication *app, gpointer data)
 	GtkWidget *Grid_box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
 
 	GtkWidget *Grid_label_frame = create_frame(NULL, 0.5, 0.5);
-
+	
 	GtkWidget *Grid_label = create_label("Grid", 14, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
 
 	add_to_frame(Grid_label_frame, Grid_label, 5, 5, 0, 0);
@@ -1048,13 +622,13 @@ static void activate(GtkApplication *app, gpointer data)
 	GtkWidget *Grid_grid = create_grid(7, 7, TRUE, FALSE);
 
 	GtkWidget *Grid_id_label = create_label("Widget ID", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
-
+	
 	add_to_grid(Grid_grid, Grid_id_label, 0, 0, 1, 1);
 
 	GtkWidget *Grid_id_entry = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 20, 0.5);
 
 	add_to_grid(Grid_grid, Grid_id_entry, 0, 1, 1, 1);
-
+	
 	GtkWidget *Grid_rows_spacing_label = create_label("Rows spacing", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
 
 	add_to_grid(Grid_grid, Grid_rows_spacing_label, 1, 0, 1, 1);
@@ -1062,7 +636,7 @@ static void activate(GtkApplication *app, gpointer data)
 	GtkWidget *Grid_rows_spacing_value = create_spin_button(0, 100, 5, 0, 0, FALSE, TRUE);
 
 	add_to_grid(Grid_grid, Grid_rows_spacing_value, 1, 1, 1, 1);
-
+	
 	GtkWidget *Grid_columns_spacing_label = create_label("Columns spacing", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
 
 	add_to_grid(Grid_grid, Grid_columns_spacing_label, 2, 0, 1, 1);
@@ -2709,7 +2283,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	GtkWidget *control_box = create_box(GTK_ORIENTATION_HORIZONTAL, -1, 0);
 
-	GtkWidget *generate_button = create_button(GTK_RELIEF_NORMAL, "Generate", FALSE, NULL, NULL, NULL);
+	GtkWidget *generate_button = create_button(GTK_RELIEF_NORMAL, "Generate", FALSE, NULL, G_CALLBACK(start_generate), NULL);
 
 	add_to_box(control_box, generate_button, START, FALSE, FALSE, 0, 0, 0, 0, 7);
 

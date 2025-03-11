@@ -40,4 +40,25 @@ typedef struct
     GtkWidget *header_bar_informations_settings_value;
 } headerBarI;
 
+typedef struct
+{
+    GtkWidget *Box_case_informations_id_entry;
+    GtkWidget *Box_case_informations_orientation_value;
+    GtkWidget *Box_case_informations_align_value;
+    GtkWidget *Box_case_informations_spacing_value;
+} boxI;
+
+typedef struct
+{
+    GtkWidget *Fixed_id_entry;
+} fixedI;
+
+typedef struct
+{
+    GtkWidget *Frame_id_entry;
+    GtkWidget *Frame_title_value;
+    GtkWidget *Frame_horizontal_placement_value;
+    GtkWidget *Frame_vertical_placement_value;
+} frameI;
+
 #endif //WIDGETS_STRUCTURES_H
