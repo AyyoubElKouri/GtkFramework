@@ -352,7 +352,7 @@ void project2(GtkApplication *app)
                                 GtkWidget *scale_box = create_box(GTK_ORIENTATION_VERTICAL, GTK_ALIGN_CENTER, 0);
 
                                     /*---Start Scale---*/
-                                    GtkWidget *scale = create_scale(GTK_ORIENTATION_HORIZONTAL, 0, 100, 1, 50, GTK_POS_TOP, "HELLO", 0, GTK_POS_TOP);
+                                    GtkWidget *scale = create_scale(GTK_ORIENTATION_HORIZONTAL, 0, 100, 10);
                                     add_to_box(scale_box, scale, START, FALSE, FALSE, 0, 0, 0, 0, 0);
                                     /*---End Scale---*/
 
