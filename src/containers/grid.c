@@ -65,6 +65,21 @@ gridInfos *get_properties_grid(GtkWidget *grid)
     return gridInformations;
 }
 
+void modify_grid(GtkWidget *grid, gridInfos *gridInformations){
+    
+    // set the row spacing
+    gtk_grid_set_row_spacing(GTK_GRID(grid), gridInformations->rows_spacing);
+
+    // set the column spacing
+    gtk_grid_set_column_spacing(GTK_GRID(grid), gridInformations->columns_spacing);
+
+    // set the row homogeneous
+    gtk_grid_set_row_homogeneous(GTK_GRID(grid), gridInformations->rows_homogeneous);
+
+    // set the column homogeneous
+    gtk_grid_set_column_homogeneous(GTK_GRID(grid), gridInformations->columns_homogeneous);
+}
+
 void add_to_grid(GtkWidget *grid, GtkWidget *child, guint row, guint column, guint row_span, guint column_span)
 {
     gtk_grid_attach(GTK_GRID(grid), child, column, row, row_span, column_span);

@@ -58,6 +58,15 @@ panedInfos *get_properties_paned(GtkWidget *paned)
     return panedInformations;
 }
 
+void modify_paned(GtkWidget *paned, panedInfos *panedInformations){
+    // set the default position
+    if(panedInformations->default_position != -1)
+        gtk_paned_set_position(GTK_PANED(paned), panedInformations->default_position);
+
+    // set the show handle
+    gtk_paned_set_wide_handle(GTK_PANED(paned), panedInformations->show_handle);
+}
+
 void add_to_paned(GtkWidget *paned, GtkWidget *widget, FIRST_OR_SECOND first_or_second)
 {
     if(first_or_second == FIRST)

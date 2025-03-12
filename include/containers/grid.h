@@ -62,6 +62,7 @@ GtkWidget *set_properties_grid(gridInfos *gridInformations);
 
 gridInfos *get_properties_grid(GtkWidget *grid);
 
+void modify_grid(GtkWidget *grid, gridInfos *gridInformations);
 
 void add_to_grid(GtkWidget *grid, GtkWidget *child, guint row, guint column, guint row_span, guint column_span);
 

@@ -70,6 +70,7 @@ GtkWidget *set_properties_paned(panedInfos *panedInformation);
 
 panedInfos *get_properties_paned(GtkWidget *paned);
 
+void modify_paned(GtkWidget *paned, panedInfos *panedInformations);
 
 void add_to_paned(GtkWidget *paned, GtkWidget *widget, FIRST_OR_SECOND first_or_second);
 
