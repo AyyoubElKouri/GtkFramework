@@ -52,9 +52,11 @@ void traitement_fixed(GtkWidget *widget, gpointer data);
 
 void traitement_frame(GtkWidget *widget, gpointer data);
 
-void on_click_grid(gpointer data);
+void traitement_grid(GtkWidget *widget, gpointer data);
 
-void on_click_paned(gpointer data);
+void traitement_paned(GtkWidget *widget, gpointer data);
+
+
 
 void on_click_stack(gpointer data);
 

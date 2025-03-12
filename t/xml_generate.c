@@ -31,6 +31,10 @@ static void xml_generation_callback(GtkTreeIter *iter, gpointer user_data, gbool
             write_header_bar(((headerBarInfos *)(node_data->widget_data)), xml_file);
         } else if (strcmp(node_data->widget_name, "frame") == 0){
             write_frame(((frameInfos *)(node_data->widget_data)), xml_file);
+        } else if(strcmp(node_data->widget_name, "grid") == 0){
+            write_grid(((gridInfos *)(node_data->widget_data)), xml_file);
+        } else if (strcmp(node_data->widget_name, "paned") == 0){
+            write_paned(((panedInfos *)(node_data->widget_data)), xml_file);
         }
         fprintf(xml_file, ">\n");
     } else {
@@ -131,4 +135,24 @@ void write_frame(frameInfos *frameInformations, FILE *file){
     fprintf(file, "horizontal_placement = %.0f ",frameInformations->horizontal_placement);
 
     fprintf(file, "vertical_placement = %.0f", frameInformations->vertical_placement);
+}
+
+ void write_grid(gridInfos *gridInformations, FILE *file){
+
+    fprintf(file, "rows_spacing = %d ", gridInformations->rows_spacing);
+
+    fprintf(file, "columns_spacing = %d ", gridInformations->columns_spacing);
+
+    fprintf(file, "rows_homogeneous = %s ", (gridInformations->rows_homogeneous == TRUE) ? "TRUE" : "FALSE");
+
+    fprintf(file, "columns_homogeneous = %s", (gridInformations->columns_homogeneous == TRUE) ? "TRUE" : "FALSE");
+}
+
+void write_paned(panedInfos *panedInformations, FILE *file){
+
+    fprintf(file, "orientation = %s ", (panedInformations->orientation == GTK_ORIENTATION_HORIZONTAL) ? "GTK_ORIENTATION_HORIZONTAL" : "GTK_ORIENTATION_VERTICAL");
+
+    fprintf(file, "default_position = %d ", panedInformations->default_position);
+
+    fprintf(file, "show_handle = %s", (panedInformations->show_handle) ? "TRUE" : "FALSE");
 }

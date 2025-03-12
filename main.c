@@ -669,7 +669,17 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(Grid_grid, Grid_columns_homogeneous_value, 4, 1, 1, 1);
 
-	GtkWidget *Grid_add = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                               ", FALSE, NULL, NULL, NULL);
+	gridI *mygrid = malloc(sizeof(gridI));
+	if(!mygrid){
+		exit(EXIT_FAILURE);
+	}
+	mygrid->Grid_id_entry = Grid_id_entry;
+	mygrid->Grid_rows_spacing_value = Grid_rows_spacing_value;
+	mygrid->Grid_columns_spacing_value = Grid_columns_spacing_value;
+	mygrid->Grid_rows_homogeneous_value = Grid_rows_homogeneous_value;
+	mygrid->Grid_columns_homogeneous_value = Grid_columns_homogeneous_value;
+
+	GtkWidget *Grid_add = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                               ", FALSE, NULL, G_CALLBACK(traitement_grid), mygrid);
 
 	add_to_grid(Grid_grid, Grid_add, 5, 0, 2, 1);
 
@@ -690,6 +700,8 @@ static void activate(GtkApplication *app, gpointer data)
 	add_to_box(Paned_box, Paned_label_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
 
 	GtkWidget *Paned_grid_frame = create_frame(NULL, 0.5, 0.5);
+
+	// fffffffffffffffffffffffffffffffff
 
 	GtkWidget *Paned_grid = create_grid(7, 7, TRUE, FALSE);
 
@@ -733,7 +745,19 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(Paned_grid, Paned_show_handle_combo_box, 3, 1, 1, 1);
 
-	GtkWidget *Paned_add = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                               ", FALSE, NULL, NULL, NULL);
+	panedI *mypaned = malloc(sizeof(panedI));
+	if(!mypaned) {
+		exit(EXIT_FAILURE);
+	}
+
+	mypaned->Paned_id_value = Paned_id_value;
+	mypaned->Paned_orientation_value = Paned_orientation_value;
+	mypaned->Paned_default_position_value = Paned_default_position_value;
+	mypaned->Paned_show_handle_combo_box = Paned_show_handle_combo_box;
+
+	// fffffffffffffffffffffffffffff
+
+	GtkWidget *Paned_add = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                               ", FALSE, NULL, G_CALLBACK(traitement_paned), mypaned);
 
 	add_to_grid(Paned_grid, Paned_add, 4, 0, 2, 1);
 

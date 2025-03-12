@@ -508,11 +508,265 @@ void frame_widget_properties(){
     destroy_widget(dialog);
 }
 
-char * grid_container_properties(char *parent_id, GtkWidget *obj){}
-void grid_widget_properties(){}
+char * grid_container_properties(char *parent_id, GtkWidget *obj){
+    GtkWidget *box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
+        GtkWidget *grid = create_grid(5, 5, TRUE, TRUE);
 
-char * paned_container_properties(char *parent_id, GtkWidget *obj){}
-void paned_widget_properties(){}
+            GtkWidget *row_label = create_label("Row", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+            add_to_grid(grid, row_label, 0, 0, 1, 1);
+            GtkWidget *row_value = create_spin_button(0, 100, 1, 2, 0, TRUE, TRUE);
+            add_to_grid(grid, row_value, 0, 1, 1, 1);
+
+            GtkWidget *column_label = create_label("Column", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+            add_to_grid(grid, column_label, 1, 0, 1, 1);
+            GtkWidget *column_value = create_spin_button(0, 100, 1, 2, 0, TRUE, TRUE);
+            add_to_grid(grid, column_value, 1, 1, 1, 1);
+
+            GtkWidget *row_span_label = create_label("Row Span", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+            add_to_grid(grid, row_span_label, 2, 0, 1, 1);
+            GtkWidget *row_span_value = create_spin_button(0, 10, 1, 1, 0, TRUE, TRUE);
+            add_to_grid(grid, row_span_value, 2, 1, 1, 1);
+
+            GtkWidget *column_span_label = create_label("Column Span", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+            add_to_grid(grid, column_span_label, 3, 0, 1, 1);
+            GtkWidget *column_span_value = create_spin_button(0, 10, 1, 2, 0, TRUE, TRUE);
+            add_to_grid(grid, column_span_value, 3, 1, 1, 1);
+
+        add_to_box(box, grid, START, FALSE, FALSE, 0, 0, 0, 0, 0);
+
+    GtkWidget *dialog = create_dialog("Grid Container Properties", NULL, GTK_DIALOG_MODAL, 30, 30, 1, box, "OK", GTK_RESPONSE_OK, NULL, GTK_RESPONSE_CANCEL, NULL, GTK_RESPONSE_REJECT);
+    gint response = run_dialog(dialog);
+
+    gint row_spacing = get_value_spin_button(row_value);
+    gint column_spacing = get_value_spin_button(column_value);
+    gint row_span = get_value_spin_button(row_span_value);
+    gint column_span = get_value_spin_button(column_span_value);
+
+    TreeNodeData *dataWidget = search_tree(global_tree, parent_id);
+
+    add_to_grid(dataWidget->widget, obj, row_spacing, column_spacing, column_span, row_span);
+
+    char *closing_tag = malloc(100 * sizeof(char));
+    if(!closing_tag) return NULL;
+
+    sprintf(closing_tag, "</%s add_to_grid(%s, %s, %d, %d, %d, %d)>", global_widget_data_pointer->widget_name, parent_id, global_widget_data_pointer->id_widget, row_spacing, column_spacing, column_span, row_span);
+
+    destroy_widget(dialog);
+
+    return closing_tag;
+}
+
+
+void grid_widget_properties(){
+
+    TreeNodeData *dataWidget = search_tree(global_tree, get_selected_node_id(GTK_TREE_VIEW(global_tree)));
+
+    GtkWidget *box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
+
+    GtkWidget *Grid_grid = create_grid(7, 7, TRUE, FALSE);
+
+	GtkWidget *Grid_id_label = create_label("Widget ID", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+	
+	add_to_grid(Grid_grid, Grid_id_label, 0, 0, 1, 1);
+
+	GtkWidget *Grid_id_entry = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 20, 0.5);
+
+    set_text(Grid_id_entry, dataWidget->information);
+
+	add_to_grid(Grid_grid, Grid_id_entry, 0, 1, 1, 1);
+	
+	GtkWidget *Grid_rows_spacing_label = create_label("Rows spacing", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(Grid_grid, Grid_rows_spacing_label, 1, 0, 1, 1);
+
+	GtkWidget *Grid_rows_spacing_value = create_spin_button(0, 100, 5, 0, 0, FALSE, TRUE);
+
+    set_value_spin_button(Grid_rows_spacing_value, ((gridInfos *)(dataWidget->widget_data))->rows_spacing);
+
+	add_to_grid(Grid_grid, Grid_rows_spacing_value, 1, 1, 1, 1);
+	
+	GtkWidget *Grid_columns_spacing_label = create_label("Columns spacing", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(Grid_grid, Grid_columns_spacing_label, 2, 0, 1, 1);
+
+	GtkWidget *Grid_columns_spacing_value = create_spin_button(0, 100, 5, 0, 0, FALSE, TRUE);
+
+    set_value_spin_button(Grid_columns_spacing_value, ((gridInfos *)(dataWidget->widget_data))->columns_spacing);
+
+	add_to_grid(Grid_grid, Grid_columns_spacing_value, 2, 1, 1, 1);
+
+	GtkWidget *Grid_rows_homogeneous_label = create_label("Rows homogeneous", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(Grid_grid, Grid_rows_homogeneous_label, 3, 0, 1, 1);
+
+	GtkWidget *Grid_rows_homogeneous_value = create_combo_box();
+
+	add_to_combo_box(Grid_rows_homogeneous_value, "TRUE");
+
+	add_to_combo_box(Grid_rows_homogeneous_value, "FALSE");
+
+    if(((gridInfos *)(dataWidget->widget_data))->rows_homogeneous)
+        set_active_item(Grid_rows_homogeneous_value, 0);
+    else
+        set_active_item(Grid_rows_homogeneous_value, 1);    
+
+	add_to_grid(Grid_grid, Grid_rows_homogeneous_value, 3, 1, 1, 1);
+
+	GtkWidget *Grid_columns_homogeneous_label = create_label("Columns homogeneous", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(Grid_grid, Grid_columns_homogeneous_label, 4, 0, 1, 1);
+
+	GtkWidget *Grid_columns_homogeneous_value = create_combo_box();
+
+	add_to_combo_box(Grid_columns_homogeneous_value, "TRUE");
+
+	add_to_combo_box(Grid_columns_homogeneous_value, "FALSE");
+
+    if(((gridInfos *)(dataWidget->widget_data))->columns_homogeneous)
+        set_active_item(Grid_columns_homogeneous_value, 0);
+    else
+        set_active_item(Grid_columns_homogeneous_value, 1);
+
+	add_to_grid(Grid_grid, Grid_columns_homogeneous_value, 4, 1, 1, 1);
+
+    add_to_box(box, Grid_grid, START, FALSE, FALSE, 0, 0, 0, 0, 0);
+
+    GtkWidget *dialog = create_dialog("Grid Properties", NULL, GTK_DIALOG_MODAL, 30, 30, 1, box, "OK", GTK_RESPONSE_OK, "Annuler", GTK_RESPONSE_CANCEL, "Supprimer", GTK_RESPONSE_REJECT);
+    gint response = run_dialog(dialog);
+
+    if(response == GTK_RESPONSE_OK){
+        ((gridInfos *)(dataWidget->widget_data))->rows_spacing = get_value_spin_button(Grid_rows_spacing_value);
+        ((gridInfos *)(dataWidget->widget_data))->columns_spacing = get_value_spin_button(Grid_columns_spacing_value);
+        ((gridInfos *)(dataWidget->widget_data))->rows_homogeneous = (strcmp(get_selecter_item(Grid_rows_homogeneous_value), "TRUE") == 0) ? TRUE : FALSE;
+        ((gridInfos *)(dataWidget->widget_data))->columns_homogeneous = (strcmp(get_selecter_item(Grid_columns_homogeneous_value), "TRUE") == 0) ? TRUE : FALSE;
+
+        modify_grid(dataWidget->widget, ((gridInfos *)(dataWidget->widget_data)));
+    } else if(response == GTK_RESPONSE_REJECT){
+        if(is_child(global_tree)){
+            TreeNodeData *widget = search_tree(global_tree, get_selected_node_id(GTK_TREE_VIEW(global_tree)));
+            destroy_widget(widget->widget);
+            delete_selected_element(global_tree);
+            
+        } else {
+            GtkWidget *dialog = create_dialog("Your cannot remove a parent widget!!!", NULL, GTK_DIALOG_MODAL, 300, 30, 1, NULL, "                                               OK                                               ", 1, NULL, 1, NULL, 1);
+            run_dialog(dialog);
+            destroy_widget(dialog);
+        }
+    }
+    destroy_widget(dialog);
+}
+
+char * paned_container_properties(char *parent_id, GtkWidget *obj){
+    GtkWidget *box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
+        GtkWidget *grid = create_grid(5, 5, TRUE, TRUE);
+
+            GtkWidget *first_or_second_label = create_label("First Or Second", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+            add_to_grid(grid, first_or_second_label, 0, 0, 1, 1);
+
+            GtkWidget *first_or_second_value = create_combo_box();
+                add_to_combo_box(first_or_second_value, "FIRST");
+                add_to_combo_box(first_or_second_value, "SECOND");
+            add_to_grid(grid, first_or_second_value, 0, 1, 1, 1);
+        add_to_box(box, grid, START, FALSE, FALSE, 0, 0, 0, 0, 0);
+
+        GtkWidget *dialog = create_dialog("Paned Container Properties", NULL, GTK_DIALOG_MODAL, 30, 30, 1, box, "OK", GTK_RESPONSE_OK, NULL, GTK_RESPONSE_CANCEL, NULL, GTK_RESPONSE_REJECT);
+        gint response = run_dialog(dialog);
+        
+        FIRST_OR_SECOND first_or_second;
+        char *fos = get_selecter_item(first_or_second_value);
+
+        if(!fos){
+            first_or_second = FIRST;
+        } else if(strcmp(fos, "FIRST") == 0){
+            first_or_second = FIRST;
+        } else 
+            first_or_second = SECOND;
+
+    TreeNodeData *dataWidget = search_tree(global_tree, parent_id);
+
+    add_to_paned(dataWidget->widget, obj, first_or_second);
+
+    char *closing_tag = malloc(100 * sizeof(char));
+    if(!closing_tag) return NULL;
+
+    sprintf(closing_tag, "</%s add_to_paned(%s, %s, %d)>", global_widget_data_pointer->widget_name, parent_id, global_widget_data_pointer->id_widget, first_or_second);
+
+    destroy_widget(dialog);
+
+    return closing_tag;        
+}
+
+void paned_widget_properties(){
+
+    TreeNodeData *dataWidget = search_tree(global_tree, get_selected_node_id(GTK_TREE_VIEW(global_tree)));
+
+    GtkWidget *box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
+
+    GtkWidget *Paned_grid = create_grid(7, 7, TRUE, FALSE);
+
+	GtkWidget *Paned_id_label = create_label("ID", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(Paned_grid, Paned_id_label, 0, 0, 1, 1);
+
+	GtkWidget *Paned_id_value = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 20, 0.5);
+
+    set_text(Paned_id_value, dataWidget->information);
+
+	add_to_grid(Paned_grid, Paned_id_value, 0, 1, 1, 1);
+
+	GtkWidget *Paned_default_position_label = create_label("Default position", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(Paned_grid, Paned_default_position_label, 1, 0, 1, 1);
+
+	GtkWidget *Paned_default_position_value = create_spin_button(0, 1000, 100, 500, 0, FALSE, TRUE);
+
+    set_value_spin_button(Paned_default_position_value, ((panedInfos *)(dataWidget->widget_data))->default_position);
+
+	add_to_grid(Paned_grid, Paned_default_position_value, 1, 1, 1, 1);
+
+	GtkWidget *Paned_show_handle_label = create_label("Show Handle", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(Paned_grid, Paned_show_handle_label, 2, 0, 1, 1);
+
+	GtkWidget *Paned_show_handle_combo_box = create_combo_box();
+
+	add_to_combo_box(Paned_show_handle_combo_box, "TRUE");
+
+	add_to_combo_box(Paned_show_handle_combo_box, "FALSE");
+
+    if(((panedInfos *)(dataWidget->widget_data))->show_handle){
+        set_active_item(Paned_show_handle_combo_box, 0);
+    } else {
+        set_active_item(Paned_show_handle_combo_box, 1);
+    }
+
+	add_to_grid(Paned_grid, Paned_show_handle_combo_box, 2, 1, 1, 1);
+
+    add_to_box(box, Paned_grid, START, FALSE, FALSE, 0, 0, 0, 0, 0);
+
+    GtkWidget *dialog = create_dialog("Paned Properties", NULL, GTK_DIALOG_MODAL, 30, 30, 1, box, "OK", GTK_RESPONSE_OK, "Annuler", GTK_RESPONSE_CANCEL, "Supprimer", GTK_RESPONSE_REJECT);
+    gint response = run_dialog(dialog);
+
+    if(response == GTK_RESPONSE_OK){
+        ((panedInfos *)(dataWidget->widget_data))->default_position = get_value_spin_button(Paned_default_position_value);
+        ((panedInfos *)(dataWidget->widget_data))->show_handle = (strcmp(get_selecter_item(Paned_show_handle_combo_box), "TRUE") == 0) ? TRUE : FALSE;
+
+        modify_paned(dataWidget->widget, ((panedInfos *)(dataWidget->widget_data)));
+    } else if(response == GTK_RESPONSE_REJECT){
+        if(is_child(global_tree)){
+            TreeNodeData *widget = search_tree(global_tree, get_selected_node_id(GTK_TREE_VIEW(global_tree)));
+            destroy_widget(widget->widget);
+            delete_selected_element(global_tree);
+            
+        } else {
+            GtkWidget *dialog = create_dialog("Your cannot remove a parent widget!!!", NULL, GTK_DIALOG_MODAL, 300, 30, 1, NULL, "                                               OK                                               ", 1, NULL, 1, NULL, 1);
+            run_dialog(dialog);
+            destroy_widget(dialog);
+        }
+    }
+
+    destroy_widget(dialog);
+}
 
 char * stack_container_properties(char *parent_id, GtkWidget *obj){}
 void stack_widget_properties(){}

@@ -586,6 +586,81 @@ void traitement_frame(GtkWidget *widget, gpointer data){
 	global_widget_data_pointer = widget_data;
 }
 
+void traitement_grid(GtkWidget *widget, gpointer data){
+	gridI *mygrid = (gridI*)data;
+
+	gridInfos *infos = malloc(sizeof(gridInfos));
+	if(!infos) exit(EXIT_FAILURE);
+
+	infos->rows_spacing = get_value_spin_button(mygrid->Grid_rows_spacing_value);
+	infos->columns_spacing = get_value_spin_button(mygrid->Grid_columns_spacing_value);
+	char *rows_homogeneous = get_selecter_item(mygrid->Grid_rows_homogeneous_value);
+	if(!rows_homogeneous){
+		infos->rows_homogeneous = TRUE;
+	}
+	else{
+		if(strcmp(rows_homogeneous, "TRUE") == 0)
+			infos->rows_homogeneous = TRUE;
+		else
+			infos->rows_homogeneous = FALSE;
+	}
+
+	char *columns_homogeneous = get_selecter_item(mygrid->Grid_columns_homogeneous_value);
+	if(!columns_homogeneous){
+		infos->columns_homogeneous = TRUE;
+	}
+	else{
+		if(strcmp(columns_homogeneous, "TRUE") == 0)
+			infos->columns_homogeneous = TRUE;
+		else
+			infos->columns_homogeneous = FALSE;
+	}
+
+	data_widget *widget_data = malloc(sizeof(data_widget));
+	if(!widget_data) exit(EXIT_FAILURE);
+
+	widget_data->id_widget = get_text(mygrid->Grid_id_entry);
+	widget_data->data = infos;
+	widget_data->widget_name = "grid";
+
+	global_widget_data_pointer = widget_data;
+}
+
+void traitement_paned(GtkWidget *widget, gpointer data){
+	panedI *mypaned = (panedI *)data;
+
+	panedInfos *infos = malloc(sizeof(panedInfos));
+	if(!infos) return;
+
+	infos->default_position = get_value_spin_button(mypaned->Paned_default_position_value);
+	char *orientation = get_selecter_item(mypaned->Paned_orientation_value);
+	char *show_handle = get_selecter_item(mypaned->Paned_show_handle_combo_box);
+
+	if(!orientation){
+		infos->orientation = GTK_ORIENTATION_HORIZONTAL;
+	} else if (strcmp(orientation, "GTK_ORIENTATION_HORIZONTAL") == 0){
+		infos->orientation = GTK_ORIENTATION_HORIZONTAL;
+	} else {
+		infos->orientation = GTK_ORIENTATION_VERTICAL;
+	}
+
+	if(!show_handle){
+		infos->show_handle = TRUE;
+	} else if (strcmp(show_handle, "TRUE") == 0){
+		infos->show_handle = TRUE;
+	} else {
+		infos->show_handle = FALSE;
+	}
+
+	data_widget *widget_data = malloc(sizeof(data_widget));
+	if(!widget_data) exit(EXIT_FAILURE);
+
+	widget_data->id_widget = get_text(mypaned->Paned_id_value);
+	widget_data->data = infos;
+	widget_data->widget_name = "paned";
+
+	global_widget_data_pointer = widget_data;	
+}
 
 void on_click_grid(gpointer data){}
 

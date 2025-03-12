@@ -4,33 +4,21 @@
 
 static void activate(GtkApplication *app, gpointer data)
 {
-	GtkWidget *window = create_window(app, GTK_WINDOW_TOPLEVEL, "title", 500, 500, TRUE, GTK_WIN_POS_CENTER, TRUE, NULL, 1.0, FALSE);
+	GtkWidget *w = create_window(app, GTK_WINDOW_TOPLEVEL, "title", 800, 600, TRUE, GTK_WIN_POS_CENTER, TRUE, NULL, 1.0, FALSE);
 
-	GtkWidget *header_id = create_header_bar("UIBuilder", "Build Your App", NULL, TRUE);
+	GtkWidget *gdsfg = create_paned(1, 300, TRUE);
 
-	add_header_bar_to_window(window, header_id);
+	GtkWidget *lkes = create_header_bar("sgsdg", "hs", NULL, TRUE);
 
-	GtkWidget *box_id = create_box(GTK_ORIENTATION_HORIZONTAL, -1, 5);
+	add_to_paned(gdsfg, lkes, 0);
 
-	GtkWidget *fixed_id = create_fixed();
+	GtkWidget *lkesg = create_header_bar("sgsdg", "hs", NULL, TRUE);
 
-	GtkWidget *header_id1 = create_header_bar("UIBuilder", "Build Your App", NULL, TRUE);
+	add_to_paned(gdsfg, lkesg, 1);
 
-	add_to_fixed(fixed_id, header_id1, 40, 0);
+	add_to_container(w, gdsfg);
 
-	add_to_box(box_id, fixed_id, START, TRUE, TRUE, 0, 0, 0, 0, 0);
-
-	GtkWidget *fixed_id_2 = create_fixed();
-
-	GtkWidget *header_id2 = create_header_bar("UIBuilder", "Build Your App", NULL, TRUE);
-
-	add_to_fixed(fixed_id_2, header_id2, 20, 80);
-
-	add_to_box(box_id, fixed_id_2, START, TRUE, TRUE, 0, 0, 0, 0, 0);
-
-	add_to_container(window, box_id);
-
-	show_widget(window);
+	show_widget(w);
 
 }
 

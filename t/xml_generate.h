@@ -30,5 +30,9 @@
 
  void write_frame(frameInfos *frameInformations, FILE *file);
 
+ void write_grid(gridInfos *gridInformations, FILE *file);
+
+ void write_paned(panedInfos *panedInformations, FILE *file);
+
 
  #endif // XML_GENERATE_H
