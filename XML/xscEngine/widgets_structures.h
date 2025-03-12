@@ -61,4 +61,21 @@ typedef struct
     GtkWidget *Frame_vertical_placement_value;
 } frameI;
 
+typedef struct
+{
+    GtkWidget *Grid_id_entry;
+    GtkWidget *Grid_rows_spacing_value;
+    GtkWidget *Grid_columns_spacing_value;
+    GtkWidget *Grid_rows_homogeneous_value;
+    GtkWidget *Grid_columns_homogeneous_value;
+} gridI;
+
+typedef struct
+{
+    GtkWidget *Paned_id_value;
+    GtkWidget *Paned_orientation_value;
+    GtkWidget *Paned_default_position_value;
+    GtkWidget *Paned_show_handle_combo_box;
+} panedI;
+
 #endif //WIDGETS_STRUCTURES_H
