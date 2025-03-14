@@ -16,7 +16,7 @@
 #include "../include/GtkFramework/GtkFramework.h"
 #include "../XML/xscEngine/widgets_structures.h"
 #include "widgets_properties.h"
-
+#include <dlfcn.h> 
 
 typedef struct{
     char* id_widget;
@@ -35,6 +35,7 @@ typedef struct {
 } WidgetOnClick;
 
 typedef void (*WidgetPropertiesHandler)();
+
 
 extern const WidgetHandler widget_handlers[];
 extern const WidgetOnClick widget_on_click[];
@@ -56,9 +57,29 @@ void traitement_grid(GtkWidget *widget, gpointer data);
 
 void traitement_paned(GtkWidget *widget, gpointer data);
 
+void traitement_stack(GtkWidget *widget, gpointer data);
 
+void traitement_switcher(GtkWidget *widget, gpointer data);
 
-void on_click_stack(gpointer data);
+void traitement_scrolled_window(GtkWidget *widget, gpointer data);
+
+void traitement_button(GtkWidget *widget, gpointer data);
+
+void traitement_check_button(GtkWidget *widget, gpointer data);
+
+void traitement_color_button(GtkWidget *widget, gpointer data);
+
+void traitement_combo_box(GtkWidget *widget, gpointer data);
+
+void traitement_entry(GtkWidget *widget, gpointer data);
+
+void traitement_font_button(GtkWidget *widget, gpointer data);
+
+void traitement_image(GtkWidget *widget, gpointer data);
+
+void traitement_label(GtkWidget *widget, gpointer data);
+
+void traitement_level_bar(GtkWidget *widget, gpointer data);
 
 void on_click_switcher(gpointer data);
 
@@ -101,5 +122,6 @@ void on_click_spin_button(gpointer data);
 void on_click_spinner(gpointer data);
 
 void on_click_switch_button(gpointer data);
+
 
 #endif

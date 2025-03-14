@@ -40,5 +40,36 @@
  char * switcher_container_properties(char *parent_id, GtkWidget *obj);
  void switcher_widget_properties();
 
+ char * scrolled_window_container_properties(char *parent_id, GtkWidget *obj);
+ void scrolled_window_widget_properties();
+
+ char *button_container_properties(char *parent_id, GtkWidget *obj);
+ void button_widget_properties();
+
+ char *check_button_container_properties(char *parent_id, GtkWidget *obj);
+ void check_button_widget_properties(); 
+
+
+ char *color_button_container_properties(char *parent_id, GtkWidget *obj);
+ void color_button_widget_properties(); 
+
+ char *combo_box_container_properties(char *parent_id, GtkWidget *obj);
+ void combo_box_widget_properties(); 
+
+ char *entry_container_properties(char *parent_id, GtkWidget *obj);
+ void entry_widget_properties(); 
+
+
+ char *font_button_container_properties(char *parent_id, GtkWidget *obj);
+ void font_button_widget_properties(); 
+
+ char *image_container_properties(char *parent_id, GtkWidget *obj);
+ void image_widget_properties(); 
+
+ char *label_container_properties(char *parent_id, GtkWidget *obj);
+ void label_widget_properties(); 
+
+ char *level_bar_container_properties(char *parent_id, GtkWidget *obj);
+ void level_bar_widget_properties(); 
 
  #endif // WIDGETS_PROPERTIES_H

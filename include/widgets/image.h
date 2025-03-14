@@ -26,7 +26,7 @@
 
 typedef struct
 {
-    const gchar *path;   
+    gchar *path;   
 } imageInfos;
 
 /**
@@ -39,7 +39,7 @@ typedef struct
  * @return GtkWidget* the image
  */
 
-GtkWidget *create_image(const gchar *path);
+GtkWidget *create_image(gchar *path);
 
 /**
  * @brief set the properties of the image
@@ -64,5 +64,7 @@ GtkWidget *set_properties_image(imageInfos *imageInformation);
  */
 
 imageInfos *get_properties_image(GtkWidget *image);
+
+void modify_image(GtkWidget *image, imageInfos *imageInformation);
 
 #endif // LABEL_H

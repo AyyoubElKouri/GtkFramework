@@ -71,6 +71,8 @@ TreeNodeData *get_selected_parent_node_data(GtkTreeView *tree_view);
 
 int is_child(GtkWidget *tree_view);
 
-void delete_selected_element(GtkWidget *tree_view);
+void delete_selected_element(GtkWidget *tree_view) ;
+
+TreeNodeData *select_element_by_id(GtkWidget *tree_view, char* id);
 
 #endif

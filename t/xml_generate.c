@@ -35,6 +35,28 @@ static void xml_generation_callback(GtkTreeIter *iter, gpointer user_data, gbool
             write_grid(((gridInfos *)(node_data->widget_data)), xml_file);
         } else if (strcmp(node_data->widget_name, "paned") == 0){
             write_paned(((panedInfos *)(node_data->widget_data)), xml_file);
+        } else if (strcmp(node_data->widget_name, "stack") == 0){
+            write_stack(((stackInfos *)(node_data->widget_data)), xml_file);
+        } else if (strcmp(node_data->widget_name, "switcher") == 0){
+            write_switcher(((switcherInfos *)(node_data->widget_data)), xml_file);
+        } else if (strcmp(node_data->widget_name, "scrolled_window") == 0){
+            write_scrolled_window(((scrolledWindowInfos *)(node_data->widget_data)), xml_file);
+        } else if (strcmp(node_data->widget_name, "button") == 0){
+            write_button(((buttonInfos *)(node_data->widget_data)), xml_file);
+        } else if (strcmp(node_data->widget_name, "check_button") == 0){
+            write_check_button(((checkButtonInfos *)(node_data->widget_data)), xml_file);
+        } else if (strcmp(node_data->widget_name, "color_button") == 0){
+            write_color_button(((colorButtonInfos *)(node_data->widget_data)), xml_file);
+        } else if (strcmp(node_data->widget_name, "entry") == 0){
+            write_entry(((entryInfos *)(node_data->widget_data)), xml_file);
+        } else if (strcmp(node_data->widget_name, "font_button") == 0){
+            write_font_button(((fontButtonInfos *)(node_data->widget_data)), xml_file);
+        } else if (strcmp(node_data->widget_name, "image") == 0){
+            write_image(((imageInfos *)(node_data->widget_data)), xml_file);
+        } else if (strcmp(node_data->widget_name, "label") == 0){
+            write_label(((labelInfos *)(node_data->widget_data)), xml_file);
+        } else if (strcmp(node_data->widget_name, "level_bar") == 0){
+            write_level_bar(((levelBarInfos *)(node_data->widget_data)), xml_file);
         }
         fprintf(xml_file, ">\n");
     } else {
@@ -155,4 +177,160 @@ void write_paned(panedInfos *panedInformations, FILE *file){
     fprintf(file, "default_position = %d ", panedInformations->default_position);
 
     fprintf(file, "show_handle = %s", (panedInformations->show_handle) ? "TRUE" : "FALSE");
+}
+
+void write_stack(stackInfos *stackInformations, FILE *file){
+
+    
+    fprintf(file, "switcher = %s ", stackInformations->id_switcher);
+
+    if(stackInformations->transition_type == GTK_STACK_TRANSITION_TYPE_CROSSFADE){
+        fprintf(file, "transition_type = %s ", "GTK_STACK_TRANSITION_TYPE_CROSSFADE");
+    } else if(stackInformations->transition_type == GTK_STACK_TRANSITION_TYPE_NONE){
+        fprintf(file, "transition_type = %s ", "GTK_STACK_TRANSITION_TYPE_NONE");
+    } else if (stackInformations->transition_type ==GTK_STACK_TRANSITION_TYPE_SLIDE_LEFT){
+        fprintf(file, "transition_type = %s ", "GTK_STACK_TRANSITION_TYPE_SLIDE_LEFT");
+    } else {
+        fprintf(file, "transition_type = %s ", "GTK_STACK_TRANSITION_TYPE_SLIDE_RIGHT");
+    }
+
+    fprintf(file, "transition_duration = %d", stackInformations->transition_duration);
+}
+
+void write_switcher(switcherInfos *switcherInformations, FILE *file){
+    fprintf(file, "spacing = %d ", switcherInformations->spacing);
+
+    fprintf(file, "buttons_same_size = %s", (switcherInformations->buttons_same_size == TRUE) ? "TRUE" : "FALSE");
+}
+
+void write_scrolled_window(scrolledWindowInfos *scrolledWindowInforamtions, FILE *file){
+
+    fprintf(file, "horizontal = %s ", (scrolledWindowInforamtions->horizontal == TRUE) ? "TRUE" : "FALSE");
+
+    fprintf(file, "vertical = %s", (scrolledWindowInforamtions->vertical == TRUE) ? "TRUE" : "FALSE");
+}
+
+void write_button(buttonInfos *buttonInformations, FILE *file){
+
+    fprintf(file, "label = \"%s\" ", (buttonInformations->label) ? buttonInformations->label : "Default label");
+
+    fprintf(file, "relief = %s ", (buttonInformations->relief == GTK_RELIEF_NONE) ? "GTK_RELIEF_NONE" : "GTK_RELIEF_NORMAL");
+
+    fprintf(file, "use_underline = %s ", (buttonInformations->use_underline == TRUE) ? "TRUE" : "FALSE");
+
+    if(buttonInformations->path_to_image)
+        fprintf(file, "path_to_image = \"%s\" ", buttonInformations->path_to_image);
+
+    if(buttonInformations->callback_name)
+        fprintf(file, "callback = G_CALLBACK(%s) ", buttonInformations->callback_name);
+
+    if(buttonInformations->data_name)
+        fprintf(file, "data = \"%s\"", buttonInformations->data_name);
+}   
+
+void write_check_button(checkButtonInfos *checkButtonInformation, FILE *file){
+
+    fprintf(file, "label = \"%s\" ", checkButtonInformation->label);
+    fprintf(file, "active = %s ", (checkButtonInformation->active) ? "TRUE" : "FALSE");
+    fprintf(file, "use_underline = %s ", (checkButtonInformation->use_underline) ? "TRUE" : "FALSE");
+
+    if(checkButtonInformation->callback_name)
+        fprintf(file, "callback = G_CALLBACK(%s) ", checkButtonInformation->callback_name);
+
+    if(checkButtonInformation->data_name)
+        fprintf(file, "data = \"%s\"", checkButtonInformation->data_name);
+}
+
+void write_color_button(colorButtonInfos *colorButtonInformation, FILE *file){
+    fprintf(file, "default_color = \"%s\" ", colorButtonInformation->default_color);
+
+    if(!colorButtonInformation->title)
+        fprintf(file, "title = \"%s\" ", colorButtonInformation->title);
+
+    fprintf(file, "use_alpha = %s", (colorButtonInformation->use_alpha) ? "TRUE" : "FALSE");
+}
+
+void write_entry(entryInfos *entryInformations, FILE *file){
+
+    setlocale(LC_NUMERIC, "C");
+
+    if(entryInformations->default_text)
+        fprintf(file, "default_text = \"%s\" ", entryInformations->default_text);
+
+    if(entryInformations->indicator_text)
+        fprintf(file, "indicator_text = \"%s\" ",entryInformations->indicator_text);
+
+    fprintf(file, "visible = %s ",(entryInformations->visible) ? "TRUE" : "FALSE");
+
+    fprintf(file, "editable = %s ",(entryInformations->editable) ? "TRUE" : "FALSE");
+
+    fprintf(file, "max_length = %d ",entryInformations->max_length);
+
+    fprintf(file, "alignment = %.1f",entryInformations->alignment);
+
+}
+
+void write_font_button(fontButtonInfos *fontButtonInformations, FILE *file){
+    
+    if(fontButtonInformations->title){
+        fprintf(file, "title = \"%s\" ", fontButtonInformations->title);
+    }
+    if(fontButtonInformations->default_font_name)
+        fprintf(file, "default_font_name = \"%s\" ", fontButtonInformations->default_font_name);
+
+    fprintf(file, "show_size = %s ", (fontButtonInformations->show_size) ? "TRUE" : "FALSE");
+
+    fprintf(file, "show_style = %s ", (fontButtonInformations->show_style) ? "TRUE" : "FALSE");
+
+    fprintf(file, "use_size = %s ", (fontButtonInformations->use_size) ? "TRUE" : "FALSE");
+
+    fprintf(file, "use_font = %s ", (fontButtonInformations->use_font) ? "TRUE" : "FALSE");
+    
+}
+
+void write_image(imageInfos *imageInformations, FILE *file){
+    if(imageInformations->path){
+        fprintf(file, "path = \"%s\"", imageInformations->path);
+    }
+}
+
+void write_label(labelInfos *labelInformations, FILE *file){
+
+    if(labelInformations->text)
+        fprintf(file, "text = \"%s\" ", labelInformations->text);
+    
+    fprintf(file, "size = %d ", labelInformations->size);
+
+    fprintf(file, "font = \"%s\" ", labelInformations->font);
+
+    fprintf(file, "color = \"%s\" ", labelInformations->color);
+
+    fprintf(file, "background = \"%s\" ", labelInformations->background);
+
+    fprintf(file, "justify = %d ", (labelInformations->justify == GTK_JUSTIFY_CENTER) ? 2 : ((labelInformations->justify == GTK_JUSTIFY_LEFT) ? 0 : 1));
+
+    fprintf(file, "underline = %s ", (labelInformations->underline) ? "TRUE" : "FALSE");
+
+    fprintf(file, "weight = %d ", (labelInformations->weight == PANGO_WEIGHT_NORMAL) ? 400 :  700);
+
+    fprintf(file, "style = %d ",(labelInformations->style == PANGO_STYLE_NORMAL) ? 0 : 2);
+
+    fprintf(file, "wrap = %s",(labelInformations->wrap) ? "TRUE" : "FALSE");
+
+}
+
+void write_level_bar(levelBarInfos *levelBarInformations, FILE *file){
+
+    setlocale(LC_NUMERIC, "C");
+
+    fprintf(file, "inverted = %s ", (levelBarInformations->inverted) ? "TRUE" : "FALSE");
+
+    fprintf(file, "min_value = %.f ", levelBarInformations->min_value);
+
+    fprintf(file, "max_value = %.f ", levelBarInformations->max_value);
+
+    fprintf(file, "default_value = %.f ", levelBarInformations->default_value);
+
+    fprintf(file, "mode = %d ", levelBarInformations->mode);
+
 }

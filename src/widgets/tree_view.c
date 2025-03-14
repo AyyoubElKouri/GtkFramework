@@ -324,3 +324,34 @@ void delete_selected_element(GtkWidget *tree_view) {
         gtk_tree_store_remove(store, &iter); // Suppression récursive avec enfants
     }
 }
+
+TreeNodeData *select_element_by_id(GtkWidget *tree_view, char* id) {
+    TreeNodeIterator *it = tree_dfs_begin(tree_view);
+    
+    while (it && !g_queue_is_empty(it->stack)) {
+        GtkTreeIter *current_iter = g_queue_peek_head(it->stack);
+        TreeNodeData *node_data = tree_node_get_data(it->model, current_iter);
+        
+        if(strcmp(node_data->information, id) == 0) {
+            // Récupérer le chemin de l'élément trouvé
+            GtkTreePath *path = gtk_tree_model_get_path(it->model, current_iter);
+            
+            // Sélectionner l'élément dans le TreeView
+            GtkTreeSelection *selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(tree_view));
+            gtk_tree_selection_select_path(selection, path);
+            gtk_tree_path_free(path); // Libérer le chemin
+
+            tree_dfs_end(it);
+            return node_data;
+        }
+
+        g_free(node_data->widget_name);
+        g_free(node_data->information);
+        g_free(node_data->closing_tag);
+        g_free(node_data);
+
+        it = tree_dfs_next(it);
+    }
+    tree_dfs_end(it);
+    return NULL;
+}

@@ -14,6 +14,7 @@
 
  extern GtkWidget *global_tree;
  extern data_widget* global_widget_data_pointer;
+ static int combo_box_items = 0;
 
  char * box_container_properties(char *parent_id, GtkWidget *obj){
 
@@ -118,7 +119,7 @@ void box_widget_properties(){
 
     add_to_grid(Box_case_informations_grid, Box_case_informations_id_label, 0, 0, 1, 1);
 
-    GtkWidget *Box_case_informations_id_entry = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 20, 0.5);
+    GtkWidget *Box_case_informations_id_entry = create_entry(NULL, "must be unique and no space", TRUE, FALSE, 20, 0.5);
 
     set_text(Box_case_informations_id_entry, dataWidget->information);
 
@@ -239,7 +240,7 @@ void header_bar_widget_properties(){
 
 	add_to_grid(header_bar_informations_grid, header_bar_id_label, 0, 0, 1, 1);
 
-	GtkWidget *header_bar_id_value = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 200, 0.5);
+	GtkWidget *header_bar_id_value = create_entry(NULL, "must be unique and no space", TRUE, FALSE, 200, 0.5);
 
     set_text(header_bar_id_value, dataWidget->information);
 
@@ -443,7 +444,7 @@ void frame_widget_properties(){
 
 	add_to_grid(Frame_grid, Frame_id_label, 0, 0, 1, 1);
 
-	GtkWidget *Frame_id_entry = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 20, 0.5);
+	GtkWidget *Frame_id_entry = create_entry(NULL, "must be unique and no space", TRUE, FALSE, 20, 0.5);
 
     set_text(Frame_id_entry, dataWidget->information);
 
@@ -569,7 +570,7 @@ void grid_widget_properties(){
 	
 	add_to_grid(Grid_grid, Grid_id_label, 0, 0, 1, 1);
 
-	GtkWidget *Grid_id_entry = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 20, 0.5);
+	GtkWidget *Grid_id_entry = create_entry(NULL, "must be unique and no space", TRUE, FALSE, 20, 0.5);
 
     set_text(Grid_id_entry, dataWidget->information);
 
@@ -708,7 +709,7 @@ void paned_widget_properties(){
 
 	add_to_grid(Paned_grid, Paned_id_label, 0, 0, 1, 1);
 
-	GtkWidget *Paned_id_value = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 20, 0.5);
+	GtkWidget *Paned_id_value = create_entry(NULL, "must be unique and no space", TRUE, FALSE, 20, 0.5);
 
     set_text(Paned_id_value, dataWidget->information);
 
@@ -768,8 +769,1771 @@ void paned_widget_properties(){
     destroy_widget(dialog);
 }
 
-char * stack_container_properties(char *parent_id, GtkWidget *obj){}
-void stack_widget_properties(){}
+char * stack_container_properties(char *parent_id, GtkWidget *obj){
+    GtkWidget *box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
+        GtkWidget *grid = create_grid(5, 5, TRUE, TRUE);
 
-char * switcher_container_properties(char *parent_id, GtkWidget *obj){}
-void switcher_widget_properties(){}
+            GtkWidget *name_label = create_label("Name ", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+            add_to_grid(grid, name_label, 0, 0, 1, 1);
+
+            GtkWidget *name_value = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);            
+            add_to_grid(grid, name_value, 0, 1, 1, 1);
+
+        add_to_box(box, grid, START, FALSE, FALSE, 0, 0, 0, 0, 0);
+    
+    GtkWidget *dialog = create_dialog("Stack Container Properties", NULL, GTK_DIALOG_MODAL, 30, 30, 1, box, "OK", GTK_RESPONSE_OK, NULL, GTK_RESPONSE_CANCEL, NULL, GTK_RESPONSE_REJECT);
+    gint response = run_dialog(dialog);
+
+    char *name = get_text(name_value);
+    TreeNodeData *dataWidget = search_tree(global_tree, parent_id);
+
+    add_to_stack(dataWidget->widget, obj, name);
+
+    char *closing_tag = malloc(100 * sizeof(char));
+    if(!closing_tag) return NULL;
+
+    sprintf(closing_tag, "</%s add_to_stack(%s, %s, \"%s\")>", global_widget_data_pointer->widget_name, parent_id, global_widget_data_pointer->id_widget, name);
+
+    destroy_widget(dialog);
+
+    return closing_tag;
+
+}
+
+void stack_widget_properties(){
+
+    TreeNodeData *dataWidget = search_tree(global_tree, get_selected_node_id(GTK_TREE_VIEW(global_tree)));
+
+    GtkWidget *box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
+
+    GtkWidget *Stack_grid = create_grid(7, 7, TRUE, FALSE);
+
+	GtkWidget *stack_widget_id_label = create_label("Widget ID", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(Stack_grid, stack_widget_id_label, 0, 0, 1, 1);
+
+	GtkWidget *stack_widget_id_value = create_entry(NULL, "must be unique and no space", TRUE, FALSE, 20, 0.5);
+
+    set_text(stack_widget_id_value, dataWidget->widget_name);
+
+	add_to_grid(Stack_grid, stack_widget_id_value, 0, 1, 1, 1);
+	
+	GtkWidget *stack_switcher_widget_label = create_label("Switcher ID", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(Stack_grid, stack_switcher_widget_label, 1, 0, 1, 1);
+
+	GtkWidget *stack_switcher_widget_id = create_entry(NULL, "must be unique and no space", TRUE, FALSE, 20, 0.5);
+
+    set_text(stack_switcher_widget_id, ((stackInfos *)(dataWidget->widget_data))->id_switcher);
+
+	add_to_grid(Stack_grid, stack_switcher_widget_id, 1, 1, 1, 1);
+
+	GtkWidget *stack_transition_type_label = create_label("Transition Type", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(Stack_grid, stack_transition_type_label, 2, 0, 1, 1);
+
+	GtkWidget *stack_transition_type_value_combo_box = create_combo_box();
+
+	add_to_combo_box(stack_transition_type_value_combo_box, "GTK_STACK_TRANSITION_TYPE_CROSSFADE");
+
+	add_to_combo_box(stack_transition_type_value_combo_box, "GTK_STACK_TRANSITION_TYPE_NONE");
+
+	add_to_combo_box(stack_transition_type_value_combo_box, "GTK_STACK_TRANSITION_TYPE_SLIDE_LEFT");
+
+	add_to_combo_box(stack_transition_type_value_combo_box, "GTK_STACK_TRANSITION_TYPE_SLIDE_RIGHT");
+
+    if(((stackInfos *)(dataWidget->widget_data))->transition_type == GTK_STACK_TRANSITION_TYPE_CROSSFADE){
+        set_active_item(stack_transition_type_value_combo_box, 0);
+    } else if (((stackInfos *)(dataWidget->widget_data))->transition_type == GTK_STACK_TRANSITION_TYPE_NONE){
+        set_active_item(stack_transition_type_value_combo_box, 1);
+    } else if (((stackInfos *)(dataWidget->widget_data))->transition_type == GTK_STACK_TRANSITION_TYPE_SLIDE_LEFT){
+        set_active_item(stack_transition_type_value_combo_box, 2);
+    } else {
+        set_active_item(stack_transition_type_value_combo_box, 3);
+    }
+
+	add_to_grid(Stack_grid, stack_transition_type_value_combo_box, 2, 1, 1, 1);
+
+	GtkWidget *stack_duration_label = create_label("Duration", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(Stack_grid, stack_duration_label, 3, 0, 1, 1);
+
+	GtkWidget *stack_duration_value_spin_button = create_spin_button(0, 1000, 100, 500, 0, FALSE, TRUE);
+
+    set_value_spin_button(stack_duration_value_spin_button, ((stackInfos *)(dataWidget->widget_data))->transition_duration);
+
+	add_to_grid(Stack_grid, stack_duration_value_spin_button, 3, 1, 1, 1);
+
+    add_to_box(box, Stack_grid, START, FALSE, FALSE, 0, 0, 0, 0, 0);
+
+    GtkWidget *dialog = create_dialog("Stack Properties", NULL, GTK_DIALOG_MODAL, 30, 30, 1, box, "OK", GTK_RESPONSE_OK, "Annuler", GTK_RESPONSE_CANCEL, "Supprimer", GTK_RESPONSE_REJECT);
+    gint response = run_dialog(dialog);
+
+    if(response == GTK_RESPONSE_OK){
+        ((stackInfos *)(dataWidget->widget_data))->transition_duration = get_value_spin_button(stack_duration_value_spin_button);
+        
+        char *transmition = get_selecter_item(stack_transition_type_value_combo_box);
+        if(strcmp(transmition, "GTK_STACK_TRANSITION_TYPE_CROSSFADE") == 0){
+            ((stackInfos *)(dataWidget->widget_data))->transition_type = GTK_STACK_TRANSITION_TYPE_CROSSFADE;
+        } else if (strcmp(transmition, "GTK_STACK_TRANSITION_TYPE_NONE") == 0){
+            ((stackInfos *)(dataWidget->widget_data))->transition_type = GTK_STACK_TRANSITION_TYPE_NONE;
+        } else if (strcmp(transmition, "GTK_STACK_TRANSITION_TYPE_SLIDE_LEFT") == 0){
+            ((stackInfos *)(dataWidget->widget_data))->transition_type = GTK_STACK_TRANSITION_TYPE_SLIDE_LEFT;
+        } else {
+            ((stackInfos *)(dataWidget->widget_data))->transition_type = GTK_STACK_TRANSITION_TYPE_SLIDE_RIGHT;
+        }
+
+        modify_stack(dataWidget->widget, ((stackInfos *)(dataWidget->widget_data)));
+    } else if(response == GTK_RESPONSE_REJECT){
+        if(is_child(global_tree)){
+            TreeNodeData *widget = search_tree(global_tree, get_selected_node_id(GTK_TREE_VIEW(global_tree)));
+            destroy_widget(widget->widget);
+            delete_selected_element(global_tree);
+            
+        } else {
+            GtkWidget *dialog = create_dialog("Your cannot remove a parent widget!!!", NULL, GTK_DIALOG_MODAL, 300, 30, 1, NULL, "                                               OK                                               ", 1, NULL, 1, NULL, 1);
+            run_dialog(dialog);
+            destroy_widget(dialog);
+        }
+    }
+
+    destroy_widget(dialog);    
+}
+
+char * switcher_container_properties(char *parent_id, GtkWidget *obj){
+    GtkWidget *dialog = create_dialog("Your cannot add element to a switcher!!!", NULL, GTK_DIALOG_MODAL, 300, 30, 1, NULL, "                                               OK                                               ", 1, NULL, 1, NULL, 1);
+    run_dialog(dialog);
+    destroy_widget(dialog);
+}
+
+void switcher_widget_properties(){
+
+    TreeNodeData *dataWidget = search_tree(global_tree, get_selected_node_id(GTK_TREE_VIEW(global_tree)));
+
+    GtkWidget *box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
+
+    GtkWidget *Switcher_grid = create_grid(7, 7, TRUE, FALSE);
+
+	GtkWidget *switcher_id_label = create_label("Widget ID", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(Switcher_grid, switcher_id_label, 0, 0, 1, 1);
+
+	GtkWidget *switcher_id_entry = create_entry(NULL, "must be unique and no space", TRUE, FALSE, 20, 0.5);
+
+    set_text(switcher_id_entry, dataWidget->information);
+
+	add_to_grid(Switcher_grid, switcher_id_entry, 0, 1, 1, 1);
+
+	GtkWidget *switcher_spacing_label = create_label("Spacing", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(Switcher_grid, switcher_spacing_label, 1, 0, 1, 1);
+    
+	GtkWidget *switcher_spacing_value_spin_button = create_spin_button(0, 100, 5, 5, 0, FALSE, TRUE);
+
+    set_value_spin_button(switcher_spacing_value_spin_button, ((switcherInfos *)dataWidget->widget_data)->spacing);
+
+	add_to_grid(Switcher_grid, switcher_spacing_value_spin_button, 1, 1, 1, 1);
+
+	GtkWidget *same_size_label = create_label("Same Size", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(Switcher_grid, same_size_label, 2, 0, 1, 1);
+
+	GtkWidget *same_size_value_combo_box = create_combo_box();
+
+	add_to_combo_box(same_size_value_combo_box, "TRUE");
+
+	add_to_combo_box(same_size_value_combo_box, "FALSE");
+
+    if(((switcherInfos *)dataWidget->widget_data)->buttons_same_size)
+        set_active_item(same_size_value_combo_box, 0);
+    else
+        set_active_item(same_size_value_combo_box, 1);
+
+	add_to_grid(Switcher_grid, same_size_value_combo_box, 2, 1, 1, 1);
+
+    add_to_box(box, Switcher_grid, START, FALSE, FALSE, 0, 0, 0, 0, 0);
+
+    GtkWidget *dialog = create_dialog("Switcher Properties", NULL, GTK_DIALOG_MODAL, 30, 30, 1, box, "OK", GTK_RESPONSE_OK, "Annuler", GTK_RESPONSE_CANCEL, "Supprimer", GTK_RESPONSE_REJECT);
+    gint response = run_dialog(dialog);
+
+    if(response == GTK_RESPONSE_OK){
+        ((switcherInfos *)dataWidget->widget_data)->spacing = get_value_spin_button(switcher_spacing_value_spin_button);
+        ((switcherInfos *)dataWidget->widget_data)->buttons_same_size = (strcmp(get_selecter_item(same_size_value_combo_box), "TRUE") == 0) ? TRUE : FALSE;
+
+        modify_switcher(dataWidget->widget, ((switcherInfos *)dataWidget->widget_data));
+    } else if(response == GTK_RESPONSE_REJECT){
+        if(is_child(global_tree)){
+            TreeNodeData *widget = search_tree(global_tree, get_selected_node_id(GTK_TREE_VIEW(global_tree)));
+            destroy_widget(widget->widget);
+            delete_selected_element(global_tree);
+            
+        } else {
+            GtkWidget *dialog = create_dialog("Your cannot remove a parent widget!!!", NULL, GTK_DIALOG_MODAL, 300, 30, 1, NULL, "                                               OK                                               ", 1, NULL, 1, NULL, 1);
+            run_dialog(dialog);
+            destroy_widget(dialog);
+        }
+    }
+
+    destroy_widget(dialog);
+}
+
+char * scrolled_window_container_properties(char *parent_id, GtkWidget *obj){
+    
+    TreeNodeData *dataWidget = search_tree(global_tree, parent_id);
+
+    add_to_scrolled_window(dataWidget->widget, obj);
+
+    char *closing_tag = malloc(100 * sizeof(char));
+    if(!closing_tag) return NULL;
+
+    sprintf(closing_tag, "</%s add_to_scrolled_window(%s, %s)>", global_widget_data_pointer->widget_name, parent_id, global_widget_data_pointer->id_widget);
+
+    return closing_tag;
+}
+
+void scrolled_window_widget_properties(){
+
+    TreeNodeData *dataWidget = search_tree(global_tree, get_selected_node_id(GTK_TREE_VIEW(global_tree)));
+
+    GtkWidget *box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
+
+    GtkWidget *scrolled_window_informations_grid = create_grid(7, 7, TRUE, FALSE);
+
+	GtkWidget *scrolled_window_informations_id_label = create_label("Widget ID", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(scrolled_window_informations_grid, scrolled_window_informations_id_label, 0, 0, 1, 1);
+
+	GtkWidget *scrolled_window_informations_id_value = create_entry(NULL, "must be unique and no space", TRUE, FALSE, 20, 0.5);
+
+    set_text(scrolled_window_informations_id_value, dataWidget->widget_name);
+
+	add_to_grid(scrolled_window_informations_grid, scrolled_window_informations_id_value, 0, 1, 1, 1);
+
+	GtkWidget *scrolled_window_informations_horizontal_label = create_label("Horizontal", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(scrolled_window_informations_grid, scrolled_window_informations_horizontal_label, 1, 0, 1, 1);
+
+	GtkWidget *scrolled_window_informations_horizontal_value = create_combo_box();
+
+	add_to_combo_box(scrolled_window_informations_horizontal_value, "TRUE");
+
+	add_to_combo_box(scrolled_window_informations_horizontal_value, "FALSE");
+
+    if(((scrolledWindowInfos *)(dataWidget->widget_data))->horizontal){
+        set_active_item(scrolled_window_informations_horizontal_value, 0);
+    } else {
+        set_active_item(scrolled_window_informations_horizontal_value, 1);
+    }
+
+	add_to_grid(scrolled_window_informations_grid, scrolled_window_informations_horizontal_value, 1, 1, 1, 1);
+
+	GtkWidget *scrolled_window_informations_vertical_label = create_label("Vertical", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(scrolled_window_informations_grid, scrolled_window_informations_vertical_label, 2, 0, 1, 1);
+
+	GtkWidget *scrolled_window_informations_vertical_value = create_combo_box();
+
+	add_to_combo_box(scrolled_window_informations_vertical_value, "TRUE");
+
+	add_to_combo_box(scrolled_window_informations_vertical_value, "FALSE");
+
+    if(((scrolledWindowInfos *)(dataWidget->widget_data))->vertical){
+        set_active_item(scrolled_window_informations_vertical_value, 0);
+    } else {
+        set_active_item(scrolled_window_informations_vertical_value, 1);
+    }
+
+	add_to_grid(scrolled_window_informations_grid, scrolled_window_informations_vertical_value, 2, 1, 1, 1);
+
+    add_to_box(box, scrolled_window_informations_grid, START, FALSE, FALSE, 0, 0, 0, 0, 0);
+
+    GtkWidget *dialog = create_dialog("Scrolled Window Properties", NULL, GTK_DIALOG_MODAL, 30, 30, 1, box, "OK", GTK_RESPONSE_OK, "Annuler", GTK_RESPONSE_CANCEL, "Supprimer", GTK_RESPONSE_REJECT);
+    gint response = run_dialog(dialog);
+
+    if(response == GTK_RESPONSE_OK){
+        ((scrolledWindowInfos *)(dataWidget->widget_data))->horizontal = (strcmp(get_selecter_item(scrolled_window_informations_horizontal_value), "TRUE") == 0) ? TRUE : FALSE;
+        ((scrolledWindowInfos *)(dataWidget->widget_data))->vertical = (strcmp(get_selecter_item(scrolled_window_informations_vertical_value), "TRUE") == 0) ? TRUE : FALSE;
+
+        modify_scrolled_window(dataWidget->widget, ((scrolledWindowInfos *)dataWidget->widget_data));
+    } else if(response == GTK_RESPONSE_REJECT){
+        if(is_child(global_tree)){
+            TreeNodeData *widget = search_tree(global_tree, get_selected_node_id(GTK_TREE_VIEW(global_tree)));
+            destroy_widget(widget->widget);
+            delete_selected_element(global_tree);
+            
+        } else {
+            GtkWidget *dialog = create_dialog("Your cannot remove a parent widget!!!", NULL, GTK_DIALOG_MODAL, 300, 30, 1, NULL, "                                               OK                                               ", 1, NULL, 1, NULL, 1);
+            run_dialog(dialog);
+            destroy_widget(dialog);
+        }
+    }
+ 
+    destroy_widget(dialog);
+
+}
+
+char *button_container_properties(char *parent_id, GtkWidget *obj){
+
+    GtkWidget *dialog = create_dialog("Your cannot add widgets to a no container widget!!!", NULL, GTK_DIALOG_MODAL, 300, 30, 1, NULL, "                                                       OK                                                       ", 1, NULL, 1, NULL, 1);
+    run_dialog(dialog);
+    destroy_widget(dialog);
+}
+
+
+void button_widget_properties(){
+
+    TreeNodeData *dataWidget = search_tree(global_tree, get_selected_node_id(GTK_TREE_VIEW(global_tree)));
+
+    GtkWidget *box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
+
+    GtkWidget *button_grid = create_grid(7, 7, TRUE, FALSE);
+
+	GtkWidget *button_id_label = create_label("Widget ID", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(button_grid, button_id_label, 0, 0, 1, 1);
+
+	GtkWidget *button_id_entry = create_entry(NULL, "must be unique and no space", TRUE, FALSE, 20, 0.5);
+
+    set_text(button_id_entry, dataWidget->information);
+
+	add_to_grid(button_grid, button_id_entry, 0, 1, 1, 1);
+
+	GtkWidget *button_relief_label = create_label("Relief", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(button_grid, button_relief_label, 1, 0, 1, 1);
+
+	GtkWidget *button_relief_combo_box = create_combo_box();
+
+	add_to_combo_box(button_relief_combo_box, "GTK_RELIEF_NONE");
+
+	add_to_combo_box(button_relief_combo_box, "GTK_RELIEF_NORMAL");
+
+    if(((buttonInfos *)(dataWidget->widget_data))->relief == GTK_RELIEF_NONE){
+        set_active_item(button_relief_combo_box, 0);
+    } else {
+        set_active_item(button_relief_combo_box, 1);
+    }
+
+	add_to_grid(button_grid, button_relief_combo_box, 1, 1, 1, 1);
+
+	GtkWidget *button_label_label = create_label("Label", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(button_grid, button_label_label, 2, 0, 1, 1);
+
+	GtkWidget *button_label_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+
+    if(!((buttonInfos *)(dataWidget->widget_data))->label){
+        set_text(button_label_entry, "");
+    }else
+        set_text(button_label_entry, ((buttonInfos *)(dataWidget->widget_data))->label);
+
+	add_to_grid(button_grid, button_label_entry, 2, 1, 1, 1);
+
+	GtkWidget *button_use_underline_label = create_label("Use Underline", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(button_grid, button_use_underline_label, 3, 0, 1, 1);
+
+	GtkWidget *button_use_underline_combo_box = create_combo_box();
+
+	add_to_combo_box(button_use_underline_combo_box, "TRUE");
+
+	add_to_combo_box(button_use_underline_combo_box, "FALSE");
+
+    if(((buttonInfos *)(dataWidget->widget_data))->use_underline == TRUE){
+        set_active_item(button_use_underline_combo_box, 0);
+    } else {
+        set_active_item(button_use_underline_combo_box, 1);
+    }
+
+	add_to_grid(button_grid, button_use_underline_combo_box, 3, 1, 1, 1);
+
+	GtkWidget *button_path_to_image_label = create_label("Path to Image", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(button_grid, button_path_to_image_label, 4, 0, 1, 1);
+
+	GtkWidget *button_path_to_image_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+
+    if(!((buttonInfos *)(dataWidget->widget_data))->path_to_image){
+        set_text(button_path_to_image_entry, "");
+    }else 
+        set_text(button_path_to_image_entry, ((buttonInfos *)(dataWidget->widget_data))->path_to_image);
+
+	add_to_grid(button_grid, button_path_to_image_entry, 4, 1, 1, 1);
+
+	GtkWidget *button_callback_label = create_label("Callback", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(button_grid, button_callback_label, 5, 0, 1, 1);
+
+	GtkWidget *button_callback_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+
+    if(!((buttonInfos *)(dataWidget->widget_data))->callback_name){
+        set_text(button_callback_entry, "");
+    }else
+        set_text(button_callback_entry, ((buttonInfos *)(dataWidget->widget_data))->callback_name);
+
+	add_to_grid(button_grid, button_callback_entry, 5, 1, 1, 1);
+
+	GtkWidget *button_data_label = create_label("Data", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(button_grid, button_data_label, 6, 0, 1, 1);
+
+	GtkWidget *button_data_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+
+    if(!((buttonInfos *)(dataWidget->widget_data))->data_name){
+        set_text(button_data_entry, "");
+    }else
+        set_text(button_data_entry, ((buttonInfos *)(dataWidget->widget_data))->data_name);
+
+	add_to_grid(button_grid, button_data_entry, 6, 1, 1, 1);
+
+    add_to_box(box, button_grid, START, FALSE, FALSE, 0, 0, 0 , 0, 0);
+
+    GtkWidget *dialog = create_dialog("Button Properties", NULL, GTK_DIALOG_MODAL, 30, 30, 1, box, "OK", GTK_RESPONSE_OK, "Annuler", GTK_RESPONSE_CANCEL, "Supprimer", GTK_RESPONSE_REJECT);
+    gint response = run_dialog(dialog);
+
+    if(response == GTK_RESPONSE_OK){
+        char *chaine = ((buttonInfos *)(dataWidget->widget_data))->label;
+
+        if(strcmp(get_text(button_label_entry), "") == 0)
+            ((buttonInfos *)(dataWidget->widget_data))->label = NULL;
+        else if(!chaine){
+            ((buttonInfos *)(dataWidget->widget_data))->label = malloc(sizeof(get_text(button_label_entry)));
+        }
+        if((strcmp(get_text(button_label_entry), "") != 0))
+        strcpy(((buttonInfos *)(dataWidget->widget_data))->label, get_text(button_label_entry));
+
+        chaine = ((buttonInfos *)(dataWidget->widget_data))->path_to_image;
+
+        if(strcmp(get_text(button_path_to_image_entry), "") == 0){
+            ((buttonInfos *)(dataWidget->widget_data))->path_to_image = NULL;
+        } else if(!chaine){
+            ((buttonInfos *)(dataWidget->widget_data))->path_to_image = malloc(sizeof(get_text(button_path_to_image_entry)));
+        }
+        if(strcmp(get_text(button_path_to_image_entry), "") != 0)
+            strcpy(((buttonInfos *)(dataWidget->widget_data))->path_to_image, get_text(button_path_to_image_entry));
+
+        if(strcmp(get_text(button_callback_entry), "") == 0){
+            ((buttonInfos *)(dataWidget->widget_data))->callback_name = NULL;
+        } else if(!chaine){
+            ((buttonInfos *)(dataWidget->widget_data))->callback_name = malloc(sizeof(get_text(button_callback_entry)));
+        }
+
+        if(strcmp(get_text(button_callback_entry), "") != 0)
+            strcpy(((buttonInfos *)(dataWidget->widget_data))->callback_name, get_text(button_callback_entry));
+
+        chaine = ((buttonInfos *)(dataWidget->widget_data))->data_name;
+
+        if(strcmp(get_text(button_data_entry), "") == 0){
+            ((buttonInfos *)(dataWidget->widget_data))->data_name = NULL;
+        } else if(!chaine){
+            ((buttonInfos *)(dataWidget->widget_data))->data_name = malloc(sizeof(get_text(button_data_entry)));
+        }
+
+        if(strcmp(get_text(button_data_entry), "") != 0)
+            strcpy(((buttonInfos *)(dataWidget->widget_data))->data_name, get_text(button_data_entry));
+
+        ((buttonInfos *)(dataWidget->widget_data))->relief = (strcmp(get_selecter_item(button_relief_combo_box), "GTK_RELIEF_NONE") == 0) ? GTK_RELIEF_NONE : GTK_RELIEF_NORMAL;
+        ((buttonInfos *)(dataWidget->widget_data))->use_underline = (strcmp(get_selecter_item(button_use_underline_combo_box), "TRUE") == 0) ? TRUE : FALSE;
+
+
+        modify_button(dataWidget->widget, ((buttonInfos *)dataWidget->widget_data));
+
+    } else if(response == GTK_RESPONSE_REJECT){
+        if(is_child(global_tree)){
+            TreeNodeData *widget = search_tree(global_tree, get_selected_node_id(GTK_TREE_VIEW(global_tree)));
+            destroy_widget(widget->widget);
+            delete_selected_element(global_tree);
+            
+        } else {
+            GtkWidget *dialog = create_dialog("Your cannot remove a parent widget!!!", NULL, GTK_DIALOG_MODAL, 300, 30, 1, NULL, "                                               OK                                               ", 1, NULL, 1, NULL, 1);
+            run_dialog(dialog);
+            destroy_widget(dialog);
+        }
+    }
+
+    destroy_widget(dialog);
+}
+
+char *check_button_container_properties(char *parent_id, GtkWidget *obj){
+    GtkWidget *dialog = create_dialog("Your cannot add widgets to a no container widget!!!", NULL, GTK_DIALOG_MODAL, 300, 30, 1, NULL, "                                                       OK                                                       ", 1, NULL, 1, NULL, 1);
+    run_dialog(dialog);
+    destroy_widget(dialog);
+}
+
+void check_button_widget_properties(){
+
+    TreeNodeData *dataWidget = search_tree(global_tree, get_selected_node_id(GTK_TREE_VIEW(global_tree)));
+
+    GtkWidget *box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
+
+    GtkWidget *check_button_grid = create_grid(7, 0, FALSE, FALSE);
+
+	GtkWidget *check_button_id_label = create_label("Widget ID", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(check_button_grid, check_button_id_label, 0, 0, 1, 1);
+
+	GtkWidget *check_button_id_entry = create_entry(NULL, "must be unique and no space", TRUE, FALSE, 20, 0.5);
+
+    set_text(check_button_id_entry, dataWidget->information);
+
+	add_to_grid(check_button_grid, check_button_id_entry, 0, 1, 1, 1);
+
+	GtkWidget *check_button_label_label = create_label("Label", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(check_button_grid, check_button_label_label, 1, 0, 1, 1);
+
+	GtkWidget *check_button_label_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+
+    char *chaine = ((checkButtonInfos *)(dataWidget->widget_data))->label;
+    if(!chaine){
+        set_text(check_button_label_entry, "");
+    } else {
+        set_text(check_button_label_entry, chaine);
+    }
+
+	add_to_grid(check_button_grid, check_button_label_entry, 1, 1, 1, 1);
+
+	GtkWidget *check_button_active_label = create_label("Active", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(check_button_grid, check_button_active_label, 2, 0, 1, 1);
+
+	GtkWidget *check_button_active_combo_box = create_combo_box();
+
+	add_to_combo_box(check_button_active_combo_box, "TRUE");
+
+	add_to_combo_box(check_button_active_combo_box, "FALSE");
+
+    if(((checkButtonInfos *)(dataWidget->widget_data))->active){
+        set_active_item(check_button_active_combo_box, 0);
+    } else {
+        set_active_item(check_button_active_combo_box, 1);
+    }
+
+	add_to_grid(check_button_grid, check_button_active_combo_box, 2, 1, 1, 1);
+
+	GtkWidget *check_button_use_underline_label = create_label("Use Underline", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(check_button_grid, check_button_use_underline_label, 3, 0, 1, 1);
+
+	GtkWidget *check_button_use_underline_combo_box = create_combo_box();
+
+	add_to_combo_box(check_button_use_underline_combo_box, "TRUE");
+
+	add_to_combo_box(check_button_use_underline_combo_box, "FALSE");
+
+
+    if(((checkButtonInfos *)(dataWidget->widget_data))->use_underline){
+        set_active_item(check_button_use_underline_combo_box, 0);
+    } else {
+        set_active_item(check_button_use_underline_combo_box, 1);
+    }
+
+	add_to_grid(check_button_grid, check_button_use_underline_combo_box, 3, 1, 1, 1);
+
+	GtkWidget *check_button_callback_label = create_label("Callback", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(check_button_grid, check_button_callback_label, 4, 0, 1, 1);
+
+	GtkWidget *check_button_callback_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+
+    chaine = ((checkButtonInfos *)(dataWidget->widget_data))->callback_name;
+
+    if(!chaine){
+        set_text(check_button_callback_entry, "");
+    } else{
+        set_text(check_button_callback_entry, chaine);
+    }
+
+	add_to_grid(check_button_grid, check_button_callback_entry, 4, 1, 1, 1);
+
+	GtkWidget *check_button_data_label = create_label("Data", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(check_button_grid, check_button_data_label, 5, 0, 1, 1);
+
+	GtkWidget *check_button_data_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+
+    chaine = ((checkButtonInfos *)(dataWidget->widget_data))->data_name;
+
+    if(!chaine){
+        set_text(check_button_data_entry, "");
+    } else{
+        set_text(check_button_data_entry, chaine);
+    }
+    
+	add_to_grid(check_button_grid, check_button_data_entry, 5, 1, 1, 1);
+
+    add_to_box(box, check_button_grid, START, FALSE, FALSE, 0, 0, 0, 0, 0);
+
+    GtkWidget *dialog = create_dialog("Check Button Properties", NULL, GTK_DIALOG_MODAL, 30, 30, 1, box, "OK", GTK_RESPONSE_OK, "Annuler", GTK_RESPONSE_CANCEL, "Supprimer", GTK_RESPONSE_REJECT);
+    gint response = run_dialog(dialog);
+
+    if(response == GTK_RESPONSE_OK){
+        chaine = get_text(check_button_label_entry);
+        if(strcmp(chaine, "") == 0){
+            ((checkButtonInfos *)(dataWidget->widget_data))->label = NULL;
+        } else if(!((checkButtonInfos *)(dataWidget->widget_data))->label){
+            ((checkButtonInfos *)(dataWidget->widget_data))->label = malloc(sizeof(chaine));
+        }
+
+        if(strcmp(chaine, "") != 0){
+            strcpy(((checkButtonInfos *)(dataWidget->widget_data))->label, chaine);
+        }
+
+        chaine = get_selecter_item(check_button_active_combo_box);
+        if(!chaine){
+            ((checkButtonInfos *)(dataWidget->widget_data))->active = TRUE;
+        } else if(strcmp(chaine, "TRUE") == 0){
+            ((checkButtonInfos *)(dataWidget->widget_data))->active = TRUE;
+        } else {
+            ((checkButtonInfos *)(dataWidget->widget_data))->active = FALSE;
+        }
+        
+
+        chaine = get_selecter_item(check_button_use_underline_combo_box);
+        if(!chaine){
+            ((checkButtonInfos *)(dataWidget->widget_data))->use_underline = FALSE;
+        } else if(strcmp(chaine, "TRUE") == 0){
+            ((checkButtonInfos *)(dataWidget->widget_data))->use_underline = TRUE;
+        } else {
+            ((checkButtonInfos *)(dataWidget->widget_data))->use_underline = FALSE;
+        }
+
+
+        chaine = get_text(check_button_callback_entry);
+        if(strcmp(chaine, "") == 0){
+            ((checkButtonInfos *)(dataWidget->widget_data))->callback_name = NULL;
+        } else if(!((checkButtonInfos *)(dataWidget->widget_data))->callback_name){
+            ((checkButtonInfos *)(dataWidget->widget_data))->callback_name = malloc(sizeof(chaine));
+        }
+
+        if(strcmp(chaine, "") != 0){
+            strcpy(((checkButtonInfos *)(dataWidget->widget_data))->callback_name, chaine);
+        }
+
+        chaine = get_text(check_button_data_entry);
+        if(strcmp(chaine, "") == 0){
+            ((checkButtonInfos *)(dataWidget->widget_data))->data_name = NULL;
+        } else if(!((checkButtonInfos *)(dataWidget->widget_data))->data_name){
+            ((checkButtonInfos *)(dataWidget->widget_data))->data_name = malloc(sizeof(chaine));
+        }
+
+        if(strcmp(chaine, "") != 0){
+            strcpy(((checkButtonInfos *)(dataWidget->widget_data))->data_name, chaine);
+        }
+
+        modify_check_button(dataWidget->widget, (checkButtonInfos *)(dataWidget->widget_data));
+
+    } else if(response == GTK_RESPONSE_REJECT){
+        if(is_child(global_tree)){
+            TreeNodeData *widget = search_tree(global_tree, get_selected_node_id(GTK_TREE_VIEW(global_tree)));
+            destroy_widget(widget->widget);
+            delete_selected_element(global_tree);
+            
+        } else {
+            GtkWidget *dialog = create_dialog("Your cannot remove a parent widget!!!", NULL, GTK_DIALOG_MODAL, 300, 30, 1, NULL, "                                               OK                                               ", 1, NULL, 1, NULL, 1);
+            run_dialog(dialog);
+            destroy_widget(dialog);
+        }
+    }
+
+    destroy_widget(dialog);
+}
+
+char *color_button_container_properties(char *parent_id, GtkWidget *obj){
+    GtkWidget *dialog = create_dialog("Your cannot add widgets to a no container widget!!!", NULL, GTK_DIALOG_MODAL, 300, 30, 1, NULL, "                                                       OK                                                       ", 1, NULL, 1, NULL, 1);
+    run_dialog(dialog);
+    destroy_widget(dialog);
+}
+
+void color_button_widget_properties(){
+
+    TreeNodeData *dataWidget = search_tree(global_tree, get_selected_node_id(GTK_TREE_VIEW(global_tree)));
+
+    GtkWidget *box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
+
+    GtkWidget *color_button_grid = create_grid(7, 7, TRUE, FALSE);
+
+	GtkWidget *color_button_id_label = create_label("Widget ID", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(color_button_grid, color_button_id_label, 0, 0, 1, 1);
+
+	GtkWidget *color_button_id_entry = create_entry(NULL, "must be unique and no space", TRUE, FALSE, 20, 0.5);
+
+    set_text(color_button_id_entry, dataWidget->information);
+
+	add_to_grid(color_button_grid, color_button_id_entry, 0, 1, 1, 1);
+
+	GtkWidget *color_button_default_color_label = create_label("Default Color", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(color_button_grid, color_button_default_color_label, 1, 0, 1, 1);
+
+	GtkWidget *color_button_default_color_color_button = create_color_button("#FFFFFF", "coloring", TRUE);
+
+	add_to_grid(color_button_grid, color_button_default_color_color_button, 1, 1, 1, 1);
+
+	GtkWidget *color_button_title_label = create_label("Title", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(color_button_grid, color_button_title_label, 2, 0, 1, 1);
+
+	GtkWidget *color_button_label_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+
+    char *chaine = ((colorButtonInfos *)(dataWidget->widget_data))->title;
+    if(!chaine){
+        set_text(color_button_label_entry, "");
+    } else {
+        set_text(color_button_label_entry, chaine);
+    }
+
+	add_to_grid(color_button_grid, color_button_label_entry, 2, 1, 1, 1);
+
+	GtkWidget *color_button_use_alpha_label = create_label("Use Alpha", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(color_button_grid, color_button_use_alpha_label, 3, 0, 1, 1);
+
+	GtkWidget *color_button_use_alpha_combo_box = create_combo_box();
+
+	add_to_combo_box(color_button_use_alpha_combo_box, "TRUE");
+
+	add_to_combo_box(color_button_use_alpha_combo_box, "FALSE");
+
+    if(((colorButtonInfos *)(dataWidget->widget_data))->use_alpha == TRUE){
+        set_active_item(color_button_use_alpha_combo_box, 0);
+    } else {
+        set_active_item(color_button_use_alpha_combo_box, 1);
+    }
+
+	add_to_grid(color_button_grid, color_button_use_alpha_combo_box, 3, 1, 1, 1);
+
+    add_to_box(box, color_button_grid, START, FALSE, FALSE, 0, 0, 0, 0, 0);
+
+    GtkWidget *dialog = create_dialog("Color Button Properties", NULL, GTK_DIALOG_MODAL, 30, 30, 1, box, "OK", GTK_RESPONSE_OK, "Annuler", GTK_RESPONSE_CANCEL, "Supprimer", GTK_RESPONSE_REJECT);
+    gint response = run_dialog(dialog);
+
+    if(response == GTK_RESPONSE_OK){
+        char *chaine = get_color(color_button_default_color_color_button);
+        if(strcmp(chaine, "") == 0){
+            ((colorButtonInfos *)(dataWidget->widget_data))->default_color = NULL;
+        } else if(!((colorButtonInfos *)(dataWidget->widget_data))->default_color){
+            ((colorButtonInfos *)(dataWidget->widget_data))->default_color = malloc(sizeof(chaine));
+        }
+
+        if(strcmp(chaine, "") != 0)
+            strcpy(((colorButtonInfos *)(dataWidget->widget_data))->default_color, chaine);
+
+        chaine = get_text(color_button_label_entry);
+        if(strcmp(chaine, "") == 0){
+            ((colorButtonInfos *)(dataWidget->widget_data))->title = NULL;
+        } else if(!((colorButtonInfos *)(dataWidget->widget_data))->title){
+            ((colorButtonInfos *)(dataWidget->widget_data))->title = malloc(sizeof(chaine));
+        }
+
+        if(strcmp(chaine, "") != 0)
+            strcpy(((colorButtonInfos *)(dataWidget->widget_data))->title, chaine);
+
+        chaine = get_selecter_item(color_button_use_alpha_combo_box);
+
+        if(!chaine){
+            ((colorButtonInfos *)(dataWidget->widget_data))->use_alpha = TRUE;
+        } else if(strcmp(chaine, "TRUE") == 0){
+            ((colorButtonInfos *)(dataWidget->widget_data))->use_alpha = TRUE;
+        } else {
+            ((colorButtonInfos *)(dataWidget->widget_data))->use_alpha = FALSE;
+        }
+
+        modify_color_button(dataWidget->widget, (colorButtonInfos *)(dataWidget->widget_data));
+    } else if(response == GTK_RESPONSE_REJECT){
+        if(is_child(global_tree)){
+            TreeNodeData *widget = search_tree(global_tree, get_selected_node_id(GTK_TREE_VIEW(global_tree)));
+            destroy_widget(widget->widget);
+            delete_selected_element(global_tree);
+            
+        } else {
+            GtkWidget *dialog = create_dialog("Your cannot remove a parent widget!!!", NULL, GTK_DIALOG_MODAL, 300, 30, 1, NULL, "                                               OK                                               ", 1, NULL, 1, NULL, 1);
+            run_dialog(dialog);
+            destroy_widget(dialog);
+        }
+    }
+
+    destroy_widget(dialog);
+}
+
+char *combo_box_container_properties(char *parent_id, GtkWidget *obj){
+    GtkWidget *dialog = create_dialog("Your can add only a text to a combo box!!!", NULL, GTK_DIALOG_MODAL, 300, 30, 1, NULL, "                                                       OK                                                       ", 1, NULL, 1, NULL, 1);
+    run_dialog(dialog);
+    destroy_widget(dialog);
+}
+
+void combo_box_widget_properties(){
+    
+    TreeNodeData *dataWidget = search_tree(global_tree, get_selected_node_id(GTK_TREE_VIEW(global_tree)));
+
+    GtkWidget *box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
+
+    GtkWidget *grid = create_grid(7, 7 , TRUE, FALSE);
+
+    GtkWidget *attention = create_label("You can delete only the last item added\nOne operation at time", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+    add_to_grid(grid, attention, 0, 0, 2, 1);
+
+    GtkWidget *delete_item_label = create_label("Delete item", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+    
+    add_to_grid(grid, delete_item_label, 1, 0, 1, 1);
+
+    GtkWidget *delete_item_value = create_spin_button(0, 100, 1, 100, 0, TRUE, TRUE);
+
+    add_to_grid(grid, delete_item_value, 1, 1, 1, 1);
+
+    GtkWidget *add_item_label = create_label("Add item", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+    add_to_grid(grid, add_item_label, 2, 0, 1, 1);
+
+    GtkWidget *add_item_value = create_entry(NULL, NULL, TRUE, TRUE, 30, 0.5);
+
+    add_to_grid(grid, add_item_value, 2, 1, 1, 1);
+
+    add_to_box(box, grid, START, FALSE, FALSE, 0, 0, 0, 0, 0);
+
+
+    GtkWidget *dialog = create_dialog("Combo box Properties", NULL, GTK_DIALOG_MODAL, 30, 30, 1, box, "OK", GTK_RESPONSE_OK, "Annuler", GTK_RESPONSE_CANCEL, "Supprimer", GTK_RESPONSE_REJECT);
+    gint response = run_dialog(dialog);
+
+    if(response == GTK_RESPONSE_OK){
+        int delete = get_value_spin_button(delete_item_value);
+        if(delete != 100){
+            remove_from_combo_box(dataWidget->widget, delete);
+            char ch[2];
+            ch[0] = '0' + delete;
+            ch[1] = '\0';
+
+        
+            select_element_by_id(global_tree, ch);
+            delete_selected_element(global_tree);
+
+            --combo_box_items;
+        }
+
+        char *add = get_text(add_item_value);
+        if(strcmp(add, "") != 0){
+            add_to_combo_box(dataWidget->widget, add);
+            TreeNodeData *parent = get_selected_parent_node_data(GTK_TREE_VIEW(global_tree));
+
+            char *closing_tag = malloc(100 *sizeof(char));
+            if(!closing_tag) return;
+
+            char ch[2];
+            ch[0] = '0' + combo_box_items;
+            ch[1] = '\0';
+            sprintf(closing_tag, "</combo_box_item add_to_combo_box(%s, \"%s\")>", dataWidget->information, add);
+
+            add_to_tree(global_tree, dataWidget->information, ch, NULL, NULL, NULL, NULL, closing_tag, "combo_box_item");
+
+            ++combo_box_items;
+        }
+    } else if(response == GTK_RESPONSE_REJECT){
+        if(is_child(global_tree)){
+            TreeNodeData *widget = search_tree(global_tree, get_selected_node_id(GTK_TREE_VIEW(global_tree)));
+            destroy_widget(widget->widget);
+            delete_selected_element(global_tree);
+            
+        } else {
+            GtkWidget *dialog = create_dialog("Your cannot remove a parent widget!!!", NULL, GTK_DIALOG_MODAL, 300, 30, 1, NULL, "                                               OK                                               ", 1, NULL, 1, NULL, 1);
+            run_dialog(dialog);
+            destroy_widget(dialog);
+        }
+
+    }
+    destroy_widget(dialog);
+}
+
+char *entry_container_properties(char *parent_id, GtkWidget *obj){
+    GtkWidget *dialog = create_dialog("Your cannot add widgets to a no container widget!!!", NULL, GTK_DIALOG_MODAL, 300, 30, 1, NULL, "                                                       OK                                                       ", 1, NULL, 1, NULL, 1);
+    run_dialog(dialog);
+    destroy_widget(dialog);
+}
+
+void entry_widget_properties(){
+
+    TreeNodeData *dataWidget = search_tree(global_tree, get_selected_node_id(GTK_TREE_VIEW(global_tree)));
+
+    GtkWidget *box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
+
+    GtkWidget *entry_box_grid = create_grid(7, 7, TRUE, FALSE);
+
+	GtkWidget *entry_id_label = create_label("Widget ID", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(entry_box_grid, entry_id_label, 0, 0, 1, 1);
+
+	GtkWidget *entry_id_entry = create_entry(NULL, "must be unique and no space", TRUE, FALSE, 20, 0.5);
+
+    set_text(entry_id_entry, dataWidget->information);
+
+	add_to_grid(entry_box_grid, entry_id_entry, 0, 1, 1, 1);
+
+	GtkWidget *entry_default_text_label = create_label("Default Text", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(entry_box_grid, entry_default_text_label, 1, 0, 1, 1);
+
+	GtkWidget *entry_default_text_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+
+    char *chaine = ((entryInfos *)(dataWidget->widget_data))->default_text;
+    if(!chaine){
+        set_text(entry_default_text_entry, "");
+    } else {
+        set_text(entry_default_text_entry, chaine);
+    }
+
+	add_to_grid(entry_box_grid, entry_default_text_entry, 1, 1, 1, 1);
+
+	GtkWidget *entry_indicator_text_label = create_label("Indicator Text", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(entry_box_grid, entry_indicator_text_label, 2, 0, 1, 1);
+
+	GtkWidget *entry_indicator_text_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+
+    chaine = ((entryInfos *)(dataWidget->widget_data))->indicator_text;
+
+    if(!chaine){
+        set_text(entry_indicator_text_entry, "");
+    } else {
+        set_text(entry_indicator_text_entry, chaine);
+    }
+
+	add_to_grid(entry_box_grid, entry_indicator_text_entry, 2, 1, 1, 1);
+
+	GtkWidget *entry_visibility_label = create_label("Visibility", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(entry_box_grid, entry_visibility_label, 3, 0, 1, 1);
+
+	GtkWidget *entry_visibility_combo_box = create_combo_box();
+
+	add_to_combo_box(entry_visibility_combo_box, "TRUE");
+
+	add_to_combo_box(entry_visibility_combo_box, "FALSE");
+
+    if(((entryInfos *)(dataWidget->widget_data))->visible == TRUE){
+        set_active_item(entry_visibility_combo_box, 0);
+    } else {
+        set_active_item(entry_visibility_combo_box, 1);
+    }
+
+	add_to_grid(entry_box_grid, entry_visibility_combo_box, 3, 1, 1, 1);
+
+	GtkWidget *entry_editable_label = create_label("Editable", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(entry_box_grid, entry_editable_label, 4, 0, 1, 1);
+
+	GtkWidget *entry_editable_combo_box = create_combo_box();
+
+	add_to_combo_box(entry_editable_combo_box, "TRUE");
+
+	add_to_combo_box(entry_editable_combo_box, "FALSE");
+
+    if(((entryInfos *)(dataWidget->widget_data))->editable == TRUE){
+        set_active_item(entry_editable_combo_box, 0);
+    } else {
+
+        set_active_item(entry_editable_combo_box, 1);
+    }
+
+
+	add_to_grid(entry_box_grid, entry_editable_combo_box, 4, 1, 1, 1);
+
+	GtkWidget *entry_max_length_label = create_label("Max Length", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(entry_box_grid, entry_max_length_label, 5, 0, 1, 1);
+
+	GtkWidget *entry_max_length_spin_button = create_spin_button(0, 100, 5, 20, 0, FALSE, FALSE);
+
+    set_value_spin_button(entry_max_length_spin_button, ((entryInfos *)(dataWidget->widget_data))->max_length);
+
+	add_to_grid(entry_box_grid, entry_max_length_spin_button, 5, 1, 1, 1);
+
+	GtkWidget *entry_alignment_label = create_label("Alignment", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(entry_box_grid, entry_alignment_label, 6, 0, 1, 1);
+
+	GtkWidget *entry_alignment_spin_button = create_spin_button(0, 1, 0.5, 0, 1, FALSE, FALSE);
+
+    set_value_spin_button(entry_alignment_spin_button, ((entryInfos *)(dataWidget->widget_data))->alignment);
+
+	add_to_grid(entry_box_grid, entry_alignment_spin_button, 6, 1, 1, 1);
+
+    add_to_box(box, entry_box_grid, START , FALSE, FALSE, 0, 0, 0, 0, 0);
+
+    GtkWidget *dialog = create_dialog("Entry Properties", NULL, GTK_DIALOG_MODAL, 30, 30, 1, box, "OK", GTK_RESPONSE_OK, "Annuler", GTK_RESPONSE_CANCEL, "Supprimer", GTK_RESPONSE_REJECT);
+    gint response = run_dialog(dialog);
+
+    if(response == GTK_RESPONSE_OK){
+        
+        char *chaine = get_text(entry_default_text_entry);
+        if(strcmp(chaine, "") == 0){
+            ((entryInfos *)(dataWidget->widget_data))->default_text = NULL;
+        } else {
+            ((entryInfos *)(dataWidget->widget_data))->default_text = malloc(sizeof(chaine));
+        }
+
+        if(strcmp(chaine, "") != 0){
+            strcpy(((entryInfos *)(dataWidget->widget_data))->default_text, chaine);
+        }
+
+        chaine = get_text(entry_indicator_text_entry);
+        if(strcmp(chaine, "") == 0){
+            ((entryInfos *)(dataWidget->widget_data))->indicator_text = NULL;
+        } else {
+            ((entryInfos *)(dataWidget->widget_data))->indicator_text = malloc(sizeof(chaine));
+        }
+
+        if(strcmp(chaine, "") != 0){
+            strcpy(((entryInfos *)(dataWidget->widget_data))->indicator_text, chaine);
+        }
+
+        chaine = get_selecter_item(entry_visibility_combo_box);
+
+        if(!chaine){
+            ((entryInfos *)(dataWidget->widget_data))->visible = TRUE;
+        } else if (strcmp(chaine, "TRUE") == 0){
+            ((entryInfos *)(dataWidget->widget_data))->visible = TRUE;
+        } else {
+            ((entryInfos *)(dataWidget->widget_data))->visible = FALSE;
+        }
+
+        chaine = get_selecter_item(entry_editable_combo_box);
+
+        if(!chaine){
+            ((entryInfos *)(dataWidget->widget_data))->editable = TRUE;
+        } else if (strcmp(chaine, "TRUE") == 0){
+            ((entryInfos *)(dataWidget->widget_data))->editable = TRUE;
+        } else {
+            ((entryInfos *)(dataWidget->widget_data))->editable = FALSE;
+        }
+
+
+        ((entryInfos *)(dataWidget->widget_data))->max_length = get_value_spin_button(entry_max_length_spin_button);
+        ((entryInfos *)(dataWidget->widget_data))->alignment = get_value_spin_button(entry_alignment_spin_button);
+
+        modify_entry(dataWidget->widget, ((entryInfos *)(dataWidget->widget_data)));
+    } else if(response == GTK_RESPONSE_REJECT){
+        if(is_child(global_tree)){
+            TreeNodeData *widget = search_tree(global_tree, get_selected_node_id(GTK_TREE_VIEW(global_tree)));
+            destroy_widget(widget->widget);
+            delete_selected_element(global_tree);
+            
+        } else {
+            GtkWidget *dialog = create_dialog("Your cannot remove a parent widget!!!", NULL, GTK_DIALOG_MODAL, 300, 30, 1, NULL, "                                               OK                                               ", 1, NULL, 1, NULL, 1);
+            run_dialog(dialog);
+            destroy_widget(dialog);
+        }
+
+    }
+    destroy_widget(dialog);
+}
+
+char *font_button_container_properties(char *parent_id, GtkWidget *obj){
+    GtkWidget *dialog = create_dialog("Your cannot add widgets to a no container widget!!!", NULL, GTK_DIALOG_MODAL, 300, 30, 1, NULL, "                                                       OK                                                       ", 1, NULL, 1, NULL, 1);
+    run_dialog(dialog);
+    destroy_widget(dialog);
+}
+
+void font_button_widget_properties(){
+
+    TreeNodeData *dataWidget = search_tree(global_tree, get_selected_node_id(GTK_TREE_VIEW(global_tree)));
+
+    GtkWidget *box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
+
+    GtkWidget *font_button_grid = create_grid(7, 7, TRUE, FALSE);
+
+	GtkWidget *font_button_id_label = create_label("Widget ID", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(font_button_grid, font_button_id_label, 0, 0, 1, 1);
+
+	GtkWidget *font_button_id_entry = create_entry(NULL, "must be unique and no space", TRUE, FALSE, 20, 0.5);
+
+    set_text(font_button_id_entry, dataWidget->information);
+
+	add_to_grid(font_button_grid, font_button_id_entry, 0, 1, 1, 1);
+
+	GtkWidget *font_button_default_font_name_label = create_label("Default Font Name", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(font_button_grid, font_button_default_font_name_label, 1, 0, 1, 1);
+
+	GtkWidget *font_button_default_font_name_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+
+    char *chaine = ((fontButtonInfos *)(dataWidget->widget_data))->default_font_name;
+
+    if(!chaine){
+        set_text(font_button_default_font_name_entry, "");
+    } else {
+        set_text(font_button_default_font_name_entry, chaine);
+    }
+
+	add_to_grid(font_button_grid, font_button_default_font_name_entry, 1, 1, 1, 1);
+
+	GtkWidget *font_button_title_label = create_label("Title", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(font_button_grid, font_button_title_label, 2, 0, 1, 1);
+
+	GtkWidget *font_button_title_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+
+    chaine = ((fontButtonInfos *)(dataWidget->widget_data))->title;
+
+    if(!chaine){
+        set_text(font_button_title_entry, "");
+    } else {
+        set_text(font_button_title_entry, chaine);
+    }
+
+	add_to_grid(font_button_grid, font_button_title_entry, 2, 1, 1, 1);
+
+	GtkWidget *font_button_show_size_label = create_label("Show Size", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(font_button_grid, font_button_show_size_label, 3, 0, 1, 1);
+
+	GtkWidget *font_button_show_size_combo_box = create_combo_box();
+
+	add_to_combo_box(font_button_show_size_combo_box, "TRUE");
+
+	add_to_combo_box(font_button_show_size_combo_box, "FALSE");
+
+    if(((fontButtonInfos *)(dataWidget->widget_data))->show_size){
+        set_active_item(font_button_show_size_combo_box, 0);
+    } else {
+        set_active_item(font_button_show_size_combo_box, 1);
+    }
+
+	add_to_grid(font_button_grid, font_button_show_size_combo_box, 3, 1, 1, 1);
+
+	GtkWidget *font_button_show_style_label = create_label("Show Style", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(font_button_grid, font_button_show_style_label, 4, 0, 1, 1);
+
+	GtkWidget *font_button_show_style_combo_box = create_combo_box();
+
+	add_to_combo_box(font_button_show_style_combo_box, "TRUE");
+
+	add_to_combo_box(font_button_show_style_combo_box, "FALSE");
+
+    if(((fontButtonInfos *)(dataWidget->widget_data))->show_style){
+        set_active_item(font_button_show_style_combo_box, 0);
+    } else {
+        set_active_item(font_button_show_style_combo_box, 1);
+    }
+
+	add_to_grid(font_button_grid, font_button_show_style_combo_box, 4, 1, 1, 1);
+
+	GtkWidget *font_button_use_size_label = create_label("Use Size", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(font_button_grid, font_button_use_size_label, 5, 0, 1, 1);
+
+	GtkWidget *font_button_use_size_combo_box = create_combo_box();
+
+	add_to_combo_box(font_button_use_size_combo_box, "TRUE");
+
+	add_to_combo_box(font_button_use_size_combo_box, "FALSE");
+
+    if(((fontButtonInfos *)(dataWidget->widget_data))->use_size){
+        set_active_item(font_button_use_size_combo_box, 0);
+    } else {
+        set_active_item(font_button_use_size_combo_box, 1);
+    }
+
+	add_to_grid(font_button_grid, font_button_use_size_combo_box, 5, 1, 1, 1);
+
+	GtkWidget *font_button_use_font_label = create_label("Use Font", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(font_button_grid, font_button_use_font_label, 6, 0, 1, 1);
+
+	GtkWidget *font_button_use_font_combo_box = create_combo_box();
+
+	add_to_combo_box(font_button_use_font_combo_box, "TRUE");
+
+	add_to_combo_box(font_button_use_font_combo_box, "FALSE");
+
+    if(((fontButtonInfos *)(dataWidget->widget_data))->use_font){
+        set_active_item(font_button_use_font_combo_box, 0);
+    } else {
+        set_active_item(font_button_use_font_combo_box, 1);
+    }
+
+	add_to_grid(font_button_grid, font_button_use_font_combo_box, 6, 1, 1, 1);
+
+    add_to_box(box, font_button_grid, START, FALSE, FALSE, 0, 0, 0, 0, 0);
+
+    GtkWidget *dialog = create_dialog("Font Button Properties", NULL, GTK_DIALOG_MODAL, 30, 30, 1, box, "OK", GTK_RESPONSE_OK, "Annuler", GTK_RESPONSE_CANCEL, "Supprimer", GTK_RESPONSE_REJECT);
+    gint response = run_dialog(dialog);
+
+    if(response == GTK_RESPONSE_OK){
+
+        char *chaine = get_text(font_button_title_entry);
+
+        if(strcmp(chaine, "") == 0){
+            ((fontButtonInfos *)(dataWidget->widget_data))->title = NULL;
+        } else {
+            ((fontButtonInfos *)(dataWidget->widget_data))->title = malloc(sizeof(chaine));
+        }
+
+        if(strcmp(chaine, "") != 0){
+            strcpy(((fontButtonInfos *)(dataWidget->widget_data))->title, chaine);
+        }
+
+        chaine = get_text(font_button_default_font_name_entry);
+
+        if(strcmp(chaine, "") == 0){
+            ((fontButtonInfos *)(dataWidget->widget_data))->default_font_name = NULL;
+        } else {
+            ((fontButtonInfos *)(dataWidget->widget_data))->default_font_name = malloc(sizeof(chaine));
+        }
+        if(strcmp(chaine, "") != 0)
+            strcpy(((fontButtonInfos *)(dataWidget->widget_data))->default_font_name, chaine);
+
+        chaine = get_selecter_item(font_button_show_size_combo_box);
+        
+        if(!chaine){
+            ((fontButtonInfos *)(dataWidget->widget_data))->show_size = TRUE;
+        } else if (strcmp(chaine, "TRUE") == 0){
+            ((fontButtonInfos *)(dataWidget->widget_data))->show_size = TRUE;
+        } else {
+            ((fontButtonInfos *)(dataWidget->widget_data))->show_size = FALSE;
+        }
+
+        chaine = get_selecter_item(font_button_show_style_combo_box);
+        
+        if(!chaine){
+            ((fontButtonInfos *)(dataWidget->widget_data))->show_style = TRUE;
+        } else if (strcmp(chaine, "TRUE") == 0){
+            ((fontButtonInfos *)(dataWidget->widget_data))->show_style = TRUE;
+        } else {
+            ((fontButtonInfos *)(dataWidget->widget_data))->show_style = FALSE;
+        }
+
+        chaine = get_selecter_item(font_button_use_size_combo_box);
+        
+        if(!chaine){
+            ((fontButtonInfos *)(dataWidget->widget_data))->use_size = TRUE;
+        } else if (strcmp(chaine, "TRUE") == 0){
+            ((fontButtonInfos *)(dataWidget->widget_data))->use_size = TRUE;
+        } else {
+            ((fontButtonInfos *)(dataWidget->widget_data))->use_size = FALSE;
+        }
+
+        chaine = get_selecter_item(font_button_use_font_combo_box);
+
+        if(!chaine){
+            ((fontButtonInfos *)(dataWidget->widget_data))->use_font = TRUE;
+        } else if (strcmp(chaine, "TRUE") == 0){
+            ((fontButtonInfos *)(dataWidget->widget_data))->use_size = TRUE;
+        } else {
+            ((fontButtonInfos *)(dataWidget->widget_data))->use_size = FALSE;
+        }
+
+        modify_font_button(dataWidget->widget, ((fontButtonInfos *)(dataWidget->widget_data)));
+
+    } else if(response == GTK_RESPONSE_REJECT){
+        if(is_child(global_tree)){
+            TreeNodeData *widget = search_tree(global_tree, get_selected_node_id(GTK_TREE_VIEW(global_tree)));
+            destroy_widget(widget->widget);
+            delete_selected_element(global_tree);
+            
+        } else {
+            GtkWidget *dialog = create_dialog("Your cannot remove a parent widget!!!", NULL, GTK_DIALOG_MODAL, 300, 30, 1, NULL, "                                               OK                                               ", 1, NULL, 1, NULL, 1);
+            run_dialog(dialog);
+            destroy_widget(dialog);
+        }
+
+    }
+
+    destroy_widget(dialog);
+}
+
+char *image_container_properties(char *parent_id, GtkWidget *obj){
+    GtkWidget *dialog = create_dialog("Your cannot add widgets to a no container widget!!!", NULL, GTK_DIALOG_MODAL, 300, 30, 1, NULL, "                                                       OK                                                       ", 1, NULL, 1, NULL, 1);
+    run_dialog(dialog);
+    destroy_widget(dialog);
+}
+
+void image_widget_properties(){
+
+    TreeNodeData *dataWidget = search_tree(global_tree, get_selected_node_id(GTK_TREE_VIEW(global_tree)));
+
+    GtkWidget *box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
+
+    GtkWidget *image_grid = create_grid(7, 7, TRUE, FALSE);
+
+	GtkWidget *image_id_label = create_label("Widget ID", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(image_grid, image_id_label, 0, 0, 1, 1);
+
+	GtkWidget *image_id_entry = create_entry(NULL, "must be unique and no space", TRUE, FALSE, 20, 0.5);
+
+    set_text(image_id_entry, dataWidget->information);
+
+	add_to_grid(image_grid, image_id_entry, 0, 1, 1, 1);
+
+	GtkWidget *image_path_label = create_label("Path", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(image_grid, image_path_label, 1, 0, 1, 1);
+
+	GtkWidget *image_path_entry = create_entry(NULL, NULL, TRUE, TRUE, 200, 0.5);
+
+    char *chaine = ((imageInfos *)(dataWidget->widget_data))->path;
+    
+    if(!chaine){
+        set_text(image_path_entry, "");
+    } else {
+        set_text(image_path_entry, chaine);
+    }
+
+	add_to_grid(image_grid, image_path_entry, 1, 1, 1, 1);
+
+    add_to_box(box, image_grid, START, FALSE, FALSE, 0, 0, 0, 0, 0);
+
+    GtkWidget *dialog = create_dialog("Font Button Properties", NULL, GTK_DIALOG_MODAL, 30, 30, 1, box, "OK", GTK_RESPONSE_OK, "Annuler", GTK_RESPONSE_CANCEL, "Supprimer", GTK_RESPONSE_REJECT);
+    gint response = run_dialog(dialog);
+
+    
+    if(response == GTK_RESPONSE_OK){
+        char *chaine = get_text(image_path_entry);
+        if(strcmp(chaine, "") == 0){
+            ((imageInfos *)(dataWidget->widget_data))->path = NULL;
+        } else {
+            ((imageInfos *)(dataWidget->widget_data))->path = malloc(sizeof(chaine));
+        }
+
+        if(strcmp(chaine, "") != 0){
+            strcpy(((imageInfos *)(dataWidget->widget_data))->path, chaine);
+        }
+
+        modify_image(dataWidget->widget, (imageInfos *)(dataWidget->widget_data));
+    } else  if(response == GTK_RESPONSE_REJECT){
+        if(is_child(global_tree)){
+            TreeNodeData *widget = search_tree(global_tree, get_selected_node_id(GTK_TREE_VIEW(global_tree)));
+            destroy_widget(widget->widget);
+            delete_selected_element(global_tree);
+            
+        } else {
+            GtkWidget *dialog = create_dialog("Your cannot remove a parent widget!!!", NULL, GTK_DIALOG_MODAL, 300, 30, 1, NULL, "                                               OK                                               ", 1, NULL, 1, NULL, 1);
+            run_dialog(dialog);
+            destroy_widget(dialog);
+        }
+
+    }
+
+    destroy_widget(dialog);
+}
+
+char *label_container_properties(char *parent_id, GtkWidget *obj){
+    GtkWidget *dialog = create_dialog("Your cannot add widgets to a no container widget!!!", NULL, GTK_DIALOG_MODAL, 300, 30, 1, NULL, "                                                       OK                                                       ", 1, NULL, 1, NULL, 1);
+    run_dialog(dialog);
+    destroy_widget(dialog);
+}
+
+void label_widget_properties(){
+
+    TreeNodeData *dataWidget = search_tree(global_tree, get_selected_node_id(GTK_TREE_VIEW(global_tree)));
+
+    GtkWidget *box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
+
+    GtkWidget *label_grid_frame = create_frame(NULL, 0.5, 0.5);
+
+	GtkWidget *label_grid = create_grid(7, 7, TRUE, FALSE);
+
+	GtkWidget *label_id_label = create_label("Widget ID", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(label_grid, label_id_label, 0, 0, 1, 1);
+
+	GtkWidget *label_id_entry = create_entry(NULL, "must be unique and no space", TRUE, FALSE, 20, 0.5);
+
+    set_text(label_id_entry, dataWidget->information);
+
+	add_to_grid(label_grid, label_id_entry, 0, 1, 1, 1);
+
+	GtkWidget *label_text_label = create_label("Text", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(label_grid, label_text_label, 1, 0, 1, 1);
+
+	GtkWidget *label_text_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+
+    char *chaine = ((labelInfos *)(dataWidget->widget_data))->text;
+
+    if(!chaine){
+        set_text(label_text_entry, "");
+    } else {
+        set_text(label_text_entry, chaine);
+    }
+
+	add_to_grid(label_grid, label_text_entry, 1, 1, 1, 1);
+
+	GtkWidget *label_size_label = create_label("Size", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(label_grid, label_size_label, 2, 0, 1, 1);
+
+	GtkWidget *label_size_spin_button = create_spin_button(0, 100, 5, 0, 0, FALSE, FALSE);
+
+    set_value_spin_button(label_size_spin_button, ((labelInfos *)(dataWidget->widget_data))->size);
+
+	add_to_grid(label_grid, label_size_spin_button, 2, 1, 1, 1);
+
+	GtkWidget *label_font_label = create_label("Font", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(label_grid, label_font_label, 3, 0, 1, 1);
+
+	GtkWidget *label_font_font_button = create_font_button("Arial", "font", TRUE, TRUE, FALSE, FALSE);
+
+    chaine = ((labelInfos *)(dataWidget->widget_data))->font;
+
+    set_font(label_font_font_button, chaine);
+
+	add_to_grid(label_grid, label_font_font_button, 3, 1, 1, 1);
+
+	GtkWidget *label_color_label = create_label("Color", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(label_grid, label_color_label, 4, 0, 1, 1);
+
+	GtkWidget *label_color_color_button = create_color_button("#FFFFFF", "coloring", TRUE);
+
+    chaine = ((labelInfos *)(dataWidget->widget_data))->color;
+
+    set_color(label_color_color_button, chaine);
+
+	add_to_grid(label_grid, label_color_color_button, 4, 1, 1, 1);
+
+	GtkWidget *label_background_label = create_label("Background", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(label_grid, label_background_label, 5, 0, 1, 1);
+
+	GtkWidget *label_background_color_button = create_color_button("#000000", "coloring", TRUE);
+    
+    chaine = ((labelInfos *)(dataWidget->widget_data))->background;
+    
+    set_color(label_background_color_button, chaine);
+
+	add_to_grid(label_grid, label_background_color_button, 5, 1, 1, 1);
+
+	GtkWidget *label_justify_label = create_label("Justify", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(label_grid, label_justify_label, 6, 0, 1, 1);
+
+	GtkWidget *label_justify_combo_box = create_combo_box();
+
+	add_to_combo_box(label_justify_combo_box, "GTK_JUSTIFY_CENTER");
+
+	add_to_combo_box(label_justify_combo_box, "GTK_JUSTIFY_LEFT");
+
+	add_to_combo_box(label_justify_combo_box, "GTK_JUSTIFY_RIGHT");
+
+    if(((labelInfos *)(dataWidget->widget_data))->justify == GTK_JUSTIFY_CENTER){
+        set_active_item(label_justify_combo_box, 0);
+    } else if (((labelInfos *)(dataWidget->widget_data))->justify == GTK_JUSTIFY_LEFT){
+        set_active_item(label_justify_combo_box, 1);
+    } else {
+        set_active_item(label_justify_combo_box, 2);
+    }
+
+	add_to_grid(label_grid, label_justify_combo_box, 6, 1, 1, 1);
+
+	GtkWidget *label_use_underline_label = create_label("Use Underline", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(label_grid, label_use_underline_label, 7, 0, 1, 1);
+
+	GtkWidget *label_use_underline_combo_box = create_combo_box();
+
+	add_to_combo_box(label_use_underline_combo_box, "TRUE");
+
+	add_to_combo_box(label_use_underline_combo_box, "FALSE");
+
+    if(((labelInfos *)(dataWidget->widget_data))->underline == TRUE){
+        set_active_item(label_use_underline_combo_box, 0);
+    } else {
+        set_active_item(label_use_underline_combo_box, 1);
+    }
+
+	add_to_grid(label_grid, label_use_underline_combo_box, 7, 1, 1, 1);
+
+	GtkWidget *label_pango_weight_label = create_label("Pango Weight", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(label_grid, label_pango_weight_label, 8, 0, 1, 1);
+
+	GtkWidget *label_pango_weight_combo_box = create_combo_box();
+
+	add_to_combo_box(label_pango_weight_combo_box, "PANGO_WEIGHT_NORMAL");
+
+	add_to_combo_box(label_pango_weight_combo_box, "PANGO_WEIGHT_BOLD");
+
+    if(((labelInfos *)(dataWidget->widget_data))->weight == PANGO_WEIGHT_NORMAL){
+        set_active_item(label_pango_weight_combo_box, 0);
+    } else {
+        set_active_item(label_pango_weight_combo_box, 1);
+    }
+
+	add_to_grid(label_grid, label_pango_weight_combo_box, 8, 1, 1, 1);
+
+	GtkWidget *label_pango_style_label = create_label("Pango Style", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(label_grid, label_pango_style_label, 9, 0, 1, 1);
+
+	GtkWidget *label_pango_style_combo_box = create_combo_box();
+
+	add_to_combo_box(label_pango_style_combo_box, "PANGO_STYLE_NORMAL");
+
+	add_to_combo_box(label_pango_style_combo_box, "PANGO_STYLE_ITALIC");
+
+    if(((labelInfos *)(dataWidget->widget_data))->style == PANGO_STYLE_NORMAL){
+        set_active_item(label_pango_style_combo_box, 0);
+    } else {
+        set_active_item(label_pango_style_combo_box, 1);
+    }
+
+	add_to_grid(label_grid, label_pango_style_combo_box, 9, 1, 1, 1);
+
+	GtkWidget *label_wrap_label = create_label("Wrap", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(label_grid, label_wrap_label, 10, 0, 1, 1);
+
+	GtkWidget *label_wrap_combo_box = create_combo_box();
+
+	add_to_combo_box(label_wrap_combo_box, "TRUE");
+
+	add_to_combo_box(label_wrap_combo_box, "FALSE");
+
+    if(((labelInfos *)(dataWidget->widget_data))->wrap == TRUE){
+        set_active_item(label_wrap_combo_box, 0);
+    } else {
+        set_active_item(label_wrap_combo_box, 1);
+    }
+
+	add_to_grid(label_grid, label_wrap_combo_box, 10, 1, 1, 1);
+
+    add_to_box(box, label_grid, START, FALSE, FALSE , 0, 0, 0, 0, 0);
+
+    GtkWidget *dialog = create_dialog("Label Properties", NULL, GTK_DIALOG_MODAL, 30, 30, 1, box, "OK", GTK_RESPONSE_OK, "Annuler", GTK_RESPONSE_CANCEL, "Supprimer", GTK_RESPONSE_REJECT);
+    gint response = run_dialog(dialog);
+
+    
+    if(response == GTK_RESPONSE_OK){
+        char *chaine = get_text(label_text_entry);
+        if(strcmp(chaine, "") == 0){
+            ((labelInfos *)(dataWidget->widget_data))->text = NULL;
+        } else{
+            ((labelInfos *)(dataWidget->widget_data))->text = malloc(sizeof(chaine));
+        }
+
+        if(strcmp(chaine, "") != 0){
+            strcpy(((labelInfos *)(dataWidget->widget_data))->text, chaine);
+        }
+
+        ((labelInfos *)(dataWidget->widget_data))->size = get_value_spin_button(label_size_spin_button);
+
+        chaine = get_font(label_font_font_button);
+        ((labelInfos *)(dataWidget->widget_data))->font = chaine;
+
+        chaine = get_color(label_color_color_button);
+        ((labelInfos *)(dataWidget->widget_data))->color = malloc(sizeof(chaine));
+        strcpy(((labelInfos *)(dataWidget->widget_data))->color, chaine);
+
+        chaine = get_color(label_background_color_button);
+        ((labelInfos *)(dataWidget->widget_data))->background = get_color(label_background_color_button);
+        strcpy(((labelInfos *)(dataWidget->widget_data))->background, chaine);
+
+        chaine = get_selecter_item(label_justify_combo_box);
+        if(!chaine){
+            ((labelInfos *)(dataWidget->widget_data))->justify = GTK_JUSTIFY_CENTER;
+        } else if (strcmp(chaine, "GTK_JUSTIFY_CENTER") == 0){
+            ((labelInfos *)(dataWidget->widget_data))->justify = GTK_JUSTIFY_CENTER;
+        } else if (strcmp(chaine, "GTK_JUSTIFY_LEFT") == 0){
+            ((labelInfos *)(dataWidget->widget_data))->justify = GTK_JUSTIFY_LEFT;
+        } else {
+            ((labelInfos *)(dataWidget->widget_data))->justify = GTK_JUSTIFY_RIGHT;
+        }
+
+        chaine = get_selecter_item(label_use_underline_combo_box);
+
+        if(!chaine){
+            ((labelInfos *)(dataWidget->widget_data))->underline = TRUE;
+        } else if (strcmp(chaine , "TRUE") == 0){
+            ((labelInfos *)(dataWidget->widget_data))->underline = TRUE;
+        } else {
+            ((labelInfos *)(dataWidget->widget_data))->underline = FALSE;
+        }
+
+        chaine = get_selecter_item(label_pango_weight_combo_box);
+        
+        if(!chaine){
+            ((labelInfos *)(dataWidget->widget_data))->weight  = PANGO_WEIGHT_NORMAL;
+        } else if(strcmp(chaine , "PANGO_WEIGHT_NORMAL") == 0){
+            ((labelInfos *)(dataWidget->widget_data))->weight  = PANGO_WEIGHT_NORMAL;
+        } else {
+            ((labelInfos *)(dataWidget->widget_data))->weight  = PANGO_WEIGHT_BOLD;
+        }
+
+        chaine = get_selecter_item(label_pango_style_combo_box);
+
+        if(!chaine){
+            ((labelInfos *)(dataWidget->widget_data))->style = PANGO_STYLE_NORMAL;
+        } else if (strcmp(chaine, "PANGO_STYLE_NORMAL") == 0){
+            ((labelInfos *)(dataWidget->widget_data))->style = PANGO_STYLE_NORMAL;
+        } else {
+            ((labelInfos *)(dataWidget->widget_data))->style = PANGO_STYLE_ITALIC;
+        }
+
+        chaine = get_selecter_item(label_wrap_combo_box);
+        if(!chaine){
+            ((labelInfos *)(dataWidget->widget_data))->wrap = TRUE;
+        } else if (strcmp(chaine, "TRUE") == 0){
+            ((labelInfos *)(dataWidget->widget_data))->wrap = TRUE;
+        } else {
+            ((labelInfos *)(dataWidget->widget_data))->wrap = FALSE;
+        }
+
+        modify_label(dataWidget->widget, (labelInfos *)(dataWidget->widget_data));
+    } else if(response == GTK_RESPONSE_REJECT){
+        if(is_child(global_tree)){
+            TreeNodeData *widget = search_tree(global_tree, get_selected_node_id(GTK_TREE_VIEW(global_tree)));
+            destroy_widget(widget->widget);
+            delete_selected_element(global_tree);
+            
+        } else {
+            GtkWidget *dialog = create_dialog("Your cannot remove a parent widget!!!", NULL, GTK_DIALOG_MODAL, 300, 30, 1, NULL, "                                               OK                                               ", 1, NULL, 1, NULL, 1);
+            run_dialog(dialog);
+            destroy_widget(dialog);
+        }
+    }
+
+    destroy_widget(dialog);
+}
+
+char *level_bar_container_properties(char *parent_id, GtkWidget *obj){
+    GtkWidget *dialog = create_dialog("Your cannot add widgets to a no container widget!!!", NULL, GTK_DIALOG_MODAL, 300, 30, 1, NULL, "                                                       OK                                                       ", 1, NULL, 1, NULL, 1);
+    run_dialog(dialog);
+    destroy_widget(dialog);
+}
+
+void level_bar_widget_properties(){
+
+    TreeNodeData *dataWidget = search_tree(global_tree, get_selected_node_id(GTK_TREE_VIEW(global_tree)));
+
+    GtkWidget *box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
+
+    GtkWidget *level_bar_grid = create_grid(7, 7, TRUE, FALSE);
+    
+    GtkWidget *level_bar_id_label = create_label("Widget ID", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(level_bar_grid, level_bar_id_label, 0, 0, 1, 1);
+
+	GtkWidget *level_bar_id_entry = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 20, 0.5);
+
+    set_text(level_bar_id_entry, dataWidget->information);
+
+	add_to_grid(level_bar_grid, level_bar_id_entry, 0, 1, 1, 1);
+
+	GtkWidget *level_bar_min_value_label = create_label("Min Value", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(level_bar_grid, level_bar_min_value_label, 1, 0, 1, 1);
+
+	GtkWidget *level_bar_min_value_spin_button = create_spin_button(0, 100, 1, 0, 0, FALSE, FALSE);
+
+    set_value_spin_button(level_bar_min_value_spin_button, ((levelBarInfos *)(dataWidget->widget_data))->min_value);
+
+	add_to_grid(level_bar_grid, level_bar_min_value_spin_button, 1, 1, 1, 1);
+
+	GtkWidget *level_bar_max_value_label = create_label("Max Value", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(level_bar_grid, level_bar_max_value_label, 2, 0, 1, 1);
+
+	GtkWidget *level_bar_max_value_spin_button = create_spin_button(0, 100, 1, 10, 0, FALSE, FALSE);
+
+    set_value_spin_button(level_bar_max_value_spin_button, ((levelBarInfos *)(dataWidget->widget_data))->max_value);
+
+	add_to_grid(level_bar_grid, level_bar_max_value_spin_button, 2, 1, 1, 1);
+
+	GtkWidget *level_bar_default_value_label = create_label("Default Value", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(level_bar_grid, level_bar_default_value_label, 3, 0, 1, 1);
+
+	GtkWidget *level_bar_default_value_spin_button = create_spin_button(0, 100, 1, 50, 0, FALSE, FALSE);
+
+    set_value_spin_button(level_bar_default_value_spin_button, ((levelBarInfos *)(dataWidget->widget_data))->default_value);
+
+	add_to_grid(level_bar_grid, level_bar_default_value_spin_button, 3, 1, 1, 1);
+
+	GtkWidget *level_bar_mode_label = create_label("Mode", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(level_bar_grid, level_bar_mode_label, 4, 0, 1, 1);
+
+	GtkWidget *level_bar_mode_combo_box = create_combo_box();
+
+	add_to_combo_box(level_bar_mode_combo_box, "GTK_LEVEL_BAR_MODE_CONTINUOUS");
+
+	add_to_combo_box(level_bar_mode_combo_box, "GTK_LEVEL_BAR_MODE_DISCRETE");
+
+    if(((levelBarInfos *)(dataWidget->widget_data))->mode == GTK_LEVEL_BAR_MODE_CONTINUOUS){
+        set_active_item(level_bar_mode_combo_box, 0);
+    } else {
+        set_active_item(level_bar_mode_combo_box, 1);
+    }
+
+	add_to_grid(level_bar_grid, level_bar_mode_combo_box, 4, 1, 1, 1);
+
+	GtkWidget *level_bar_reversed_label = create_label("Reversed", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(level_bar_grid, level_bar_reversed_label, 5, 0, 1, 1);
+
+	GtkWidget *level_bar_reversed_combo_box = create_combo_box();
+
+	add_to_combo_box(level_bar_reversed_combo_box, "FALSE");
+
+	add_to_combo_box(level_bar_reversed_combo_box, "TRUE");
+
+    if(((levelBarInfos *)(dataWidget->widget_data))->inverted){
+        set_active_item(level_bar_reversed_combo_box, 1);
+    } else {
+        set_active_item(level_bar_reversed_combo_box, 0);
+    }
+
+	add_to_grid(level_bar_grid, level_bar_reversed_combo_box, 5, 1, 1, 1);
+
+    add_to_box(box, level_bar_grid, START, FALSE, FALSE, 0, 0, 0, 0, 0);
+
+    GtkWidget *dialog = create_dialog("Level Bar Properties", NULL, GTK_DIALOG_MODAL, 30, 30, 1, box, "OK", GTK_RESPONSE_OK, "Annuler", GTK_RESPONSE_CANCEL, "Supprimer", GTK_RESPONSE_REJECT);
+    gint response = run_dialog(dialog);
+
+    
+    if(response == GTK_RESPONSE_OK){
+        ((levelBarInfos *)(dataWidget->widget_data))->default_value = get_value_spin_button(level_bar_default_value_spin_button);
+        ((levelBarInfos *)(dataWidget->widget_data))->min_value = get_value_spin_button(level_bar_min_value_spin_button);
+        ((levelBarInfos *)(dataWidget->widget_data))->max_value = get_value_spin_button(level_bar_max_value_spin_button);
+
+        char *chaine = get_selecter_item(level_bar_mode_combo_box);
+
+        if(!chaine){
+            ((levelBarInfos *)(dataWidget->widget_data))->mode = GTK_LEVEL_BAR_MODE_CONTINUOUS;
+        } else if (strcmp(chaine, "GTK_LEVEL_BAR_MODE_CONTINUOUS") == 0){
+            ((levelBarInfos *)(dataWidget->widget_data))->mode = GTK_LEVEL_BAR_MODE_CONTINUOUS;
+        } else {
+            ((levelBarInfos *)(dataWidget->widget_data))->mode = GTK_LEVEL_BAR_MODE_DISCRETE;
+        }
+
+        chaine = get_selecter_item(level_bar_reversed_combo_box);
+
+        if(!chaine){
+            ((levelBarInfos *)(dataWidget->widget_data))->inverted = TRUE;
+        } else if (strcmp(chaine, "TRUE") == 0){
+            ((levelBarInfos *)(dataWidget->widget_data))->inverted = TRUE;
+        } else {
+            ((levelBarInfos *)(dataWidget->widget_data))->inverted = FALSE;
+        }
+
+        modify_level_bar(dataWidget->widget, ((levelBarInfos *)(dataWidget->widget_data)));
+    } else if(response == GTK_RESPONSE_REJECT){
+        if(is_child(global_tree)){
+            TreeNodeData *widget = search_tree(global_tree, get_selected_node_id(GTK_TREE_VIEW(global_tree)));
+            destroy_widget(widget->widget);
+            delete_selected_element(global_tree);
+            
+        } else {
+            GtkWidget *dialog = create_dialog("Your cannot remove a parent widget!!!", NULL, GTK_DIALOG_MODAL, 300, 30, 1, NULL, "                                               OK                                               ", 1, NULL, 1, NULL, 1);
+            run_dialog(dialog);
+            destroy_widget(dialog);
+        }
+    }
+
+    destroy_widget(dialog);
+}

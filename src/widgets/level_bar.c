@@ -67,3 +67,19 @@ levelBarInfos *get_properties_level_bar(GtkWidget *levelBar)
 
     return levelBarInformation;
 }
+
+void modify_level_bar(GtkWidget *level_bar, levelBarInfos *levelBarInformation){
+
+    gtk_level_bar_set_min_value(GTK_LEVEL_BAR(level_bar), levelBarInformation->min_value);
+
+    gtk_level_bar_set_max_value(GTK_LEVEL_BAR(level_bar), levelBarInformation->max_value);
+
+    // set the default value
+    gtk_level_bar_set_value(GTK_LEVEL_BAR(level_bar), levelBarInformation->default_value);
+
+    // set the mode of the level bar
+    gtk_level_bar_set_mode(GTK_LEVEL_BAR(level_bar), levelBarInformation->mode);
+
+    // set the inverted of the level bar
+    gtk_level_bar_set_inverted(GTK_LEVEL_BAR(level_bar), levelBarInformation->inverted);
+}

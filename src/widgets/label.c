@@ -14,7 +14,7 @@
 #include <string.h>
 #include "../../include/widgets/label.h"
 
-GtkWidget *create_label(const gchar *text, gint size, const gchar *font, const gchar *color, const gchar *background, GtkJustification justify, gboolean underline, PangoWeight weight, PangoStyle style, gboolean wrap)
+GtkWidget *create_label(gchar *text, gint size, gchar *font, gchar *color, gchar *background, GtkJustification justify, gboolean underline, PangoWeight weight, PangoStyle style, gboolean wrap)
 {
     labelInfos *labelInformation = (labelInfos *)malloc(sizeof(labelInfos));
     if(!labelInformation) return NULL;
@@ -179,7 +179,7 @@ labelInfos *get_properties_label(GtkWidget *label)
 
     labelInformation->wrap  = gtk_label_get_line_wrap(GTK_LABEL(label));
 
-        // Lire les attributs du label
+    // Lire les attributs du label
     PangoAttrList *labelAttrList = gtk_label_get_attributes(GTK_LABEL(label));
     if (labelAttrList)
     {
@@ -246,4 +246,110 @@ labelInfos *get_properties_label(GtkWidget *label)
     }
 
     return labelInformation;
+}
+
+void modify_label(GtkWidget *label, labelInfos *labelInformations){
+
+    // create a label
+    gtk_label_set_text(GTK_LABEL(label), labelInformations->text);
+    
+    // create list attributes
+    PangoAttrList *attrList = pango_attr_list_new();
+
+    // set the size
+    PangoAttribute *size = pango_attr_size_new(labelInformations->size * PANGO_SCALE);
+    pango_attr_list_insert(attrList, size);
+
+    // set the font
+    PangoAttribute *font = pango_attr_family_new(labelInformations->font);
+    pango_attr_list_insert(attrList, font);
+
+    // set the color
+    // extract the color
+    int red, green, blue;
+
+    // Vérifier que la chaîne commence par '#' et a une longueur de 7 caractères
+    if (labelInformations->color[0] != '#' || strlen(labelInformations->color) != 7) {
+        perror("Format de couleur invalide. Utilisez le format '#RRGGBB'.\n");
+        exit(EXIT_FAILURE);
+    }
+
+    // Convertir les composantes rouge, verte et bleue
+    char temp[3];
+
+    temp[0] = labelInformations->color[1];
+    temp[1] = labelInformations->color[2];
+    temp[2] = '\0';
+    red = (int)strtol(temp, NULL, 16);
+
+    temp[0] = labelInformations->color[3];
+    temp[1] = labelInformations->color[4];
+    temp[2] = '\0';
+    green = (int)strtol(temp, NULL, 16);
+
+    temp[0] = labelInformations->color[5];
+    temp[1] = labelInformations->color[6];
+    temp[2] = '\0';
+    blue = (int)strtol(temp, NULL, 16);
+    
+    PangoAttribute *color = pango_attr_foreground_new(red * 256, green * 256, blue * 256);
+    pango_attr_list_insert(attrList, color);
+
+
+
+
+    // set the background
+    // extract the background
+    // Vérifier que la chaîne commence par '#' et a une longueur de 7 caractères
+    if (labelInformations->background[0] != '#' || strlen(labelInformations->background) != 7) {
+        perror("Format de couleur invalide. Utilisez le format '#RRGGBB'.\n");
+        exit(EXIT_FAILURE);
+    }
+
+    // Convertir les composantes rouge, verte et bleue
+    temp[0] = labelInformations->background[1];
+    temp[1] = labelInformations->background[2];
+    temp[2] = '\0';
+    red = (int)strtol(temp, NULL, 16);
+
+    temp[0] = labelInformations->background[3];
+    temp[1] = labelInformations->background[4];
+    temp[2] = '\0';
+    green = (int)strtol(temp, NULL, 16);
+
+    temp[0] = labelInformations->background[5];
+    temp[1] = labelInformations->background[6];
+    temp[2] = '\0';
+    blue = (int)strtol(temp, NULL, 16);
+
+    PangoAttribute *background = pango_attr_background_new(red * 256, green * 256, blue * 256);
+    pango_attr_list_insert(attrList, background);
+    
+
+
+
+    // set the alignment
+    gtk_label_set_justify(GTK_LABEL(label), labelInformations->justify);
+
+    // set the underline
+    if(labelInformations->underline)
+    {
+        PangoAttribute *underline = pango_attr_underline_new(PANGO_UNDERLINE_SINGLE);
+        pango_attr_list_insert(attrList, underline);
+    }
+
+    // set the weight
+    PangoAttribute *weight = pango_attr_weight_new(labelInformations->weight);
+    pango_attr_list_insert(attrList, weight);
+
+    // set the style
+    PangoAttribute *style = pango_attr_style_new(labelInformations->style);
+    pango_attr_list_insert(attrList, style);
+
+
+    // set the attributes
+    gtk_label_set_attributes(GTK_LABEL(label), attrList);
+
+    // set the wrap of the text
+    gtk_label_set_line_wrap(GTK_LABEL(label), labelInformations->wrap);
 }

@@ -57,7 +57,7 @@
  * 
  * stack:
  *      GtkWidget *create_stack(GtkStackTransitionType transition_type, gint transition_duration);
- *      <stack id = "stack id" GTK transition_type = GTK_HH transition_duration = 200>
+ *      <stack id = "stack id"  transition_type = GTK_HH transition_duration = 200>
  * 
  * switcher:
  *      GtkWidget *create_switcher(gint spacing, gboolean buttons_same_size);

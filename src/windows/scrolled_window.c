@@ -65,6 +65,20 @@ scrolledWindowInfos *get_scrolled_window_properties(GtkWidget *scrolled_window)
     return scrolledwindowInformations;
 }
 
+void modify_scrolled_window(GtkWidget *scrolled_window, scrolledWindowInfos *scrolledwindowInformations){
+    
+    // Set the properties of the scrolled window
+    if(scrolledwindowInformations->horizontal && scrolledwindowInformations->vertical)
+        gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled_window), GTK_POLICY_ALWAYS, GTK_POLICY_ALWAYS);
+    else if(scrolledwindowInformations->horizontal)
+        gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled_window), GTK_POLICY_ALWAYS, GTK_POLICY_NEVER);
+    else if(scrolledwindowInformations->vertical)
+        gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled_window), GTK_POLICY_NEVER, GTK_POLICY_ALWAYS);
+    else
+        gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled_window), GTK_POLICY_NEVER, GTK_POLICY_NEVER);
+
+}
+
 void add_to_scrolled_window(GtkWidget *scrolled_window, GtkWidget *widget)
 {
     // Add the widget to the scrolled window

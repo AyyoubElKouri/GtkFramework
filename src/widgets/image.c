@@ -13,7 +13,7 @@
 #include "../../include/widgets/image.h"
 char path[100];
 
-GtkWidget *create_image(const gchar *path)
+GtkWidget *create_image(gchar *path)
 {
     imageInfos *imageInformation = (imageInfos *)malloc(sizeof(imageInfos));
     if(!imageInformation) return NULL;
@@ -33,10 +33,12 @@ GtkWidget *create_image(const gchar *path)
 
 GtkWidget *set_properties_image(imageInfos *imageInformation)
 {
-    GtkWidget *image = gtk_image_new_from_file(imageInformation->path);
-
+    GtkWidget *image;
+    if(imageInformation->path)
+        image = gtk_image_new_from_file(imageInformation->path);
+    else
+        image = gtk_image_new();
     // save the path of the image
-    strcpy(path, imageInformation->path);
 
     return image;
 }
@@ -52,3 +54,6 @@ imageInfos *get_properties_image(GtkWidget *image)
 }
  
 
+void modify_image(GtkWidget *image, imageInfos *imageInformation){
+    gtk_image_set_from_file(GTK_IMAGE(image), imageInformation->path);
+}

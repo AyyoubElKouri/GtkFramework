@@ -75,4 +75,6 @@ scrolledWindowInfos *get_scrolled_window_properties(GtkWidget *scrolled_window);
 
 void add_to_scrolled_window(GtkWidget *scrolled_window, GtkWidget *widget);
 
+void modify_scrolled_window(GtkWidget *scrolled_window, scrolledWindowInfos *scrolledwindowInformations);
+
 #endif // SCROLLED_WINDOW_H

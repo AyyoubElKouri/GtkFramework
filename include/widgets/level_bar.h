@@ -70,4 +70,6 @@ GtkWidget *set_properties_level_bar(levelBarInfos *levelBarInformation);
 
 levelBarInfos *get_properties_level_bar(GtkWidget *levelBar);
 
+void modify_level_bar(GtkWidget *level_bar, levelBarInfos *levelBarInformation);
+
 #endif // LEVEL_BAR_H

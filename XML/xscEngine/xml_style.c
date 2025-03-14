@@ -24,7 +24,7 @@ void call_database_function(NodeA *widget_linked_list, FILE *file)
             return;
         }
     }
-    
+
     fprintf(stderr, "widget %s not found in our database\n", widget_linked_list->val);
     exit(EXIT_FAILURE);
 }

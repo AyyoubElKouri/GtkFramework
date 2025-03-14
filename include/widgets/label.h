@@ -24,11 +24,11 @@
 
 typedef struct
 {
-    const gchar *text;
+    gchar *text;
     gint size;
-    const gchar *font;
-    const gchar *color;
-    const gchar *background;
+    gchar *font;
+    gchar *color;
+    gchar *background;
     GtkJustification justify;
     gboolean underline;
     PangoWeight weight;
@@ -55,7 +55,7 @@ typedef struct
  * @return GtkWidget* A pointer to the created label.
  */
 
-GtkWidget *create_label(const gchar *text, gint size, const gchar *font, const gchar *color, const gchar *background, GtkJustification justify, gboolean underline, PangoWeight weight, PangoStyle style, gboolean wrap);
+GtkWidget *create_label(gchar *text, gint size, gchar *font, gchar *color, gchar *background, GtkJustification justify, gboolean underline, PangoWeight weight, PangoStyle style, gboolean wrap);
 
 /**
  * @brief This function sets the properties of the label.
@@ -76,5 +76,7 @@ GtkWidget *set_properties_label(labelInfos *labelInformations);
  */
 
 labelInfos *get_properties_label(GtkWidget *label);
+
+void modify_label(GtkWidget *label, labelInfos *labelInformations);
 
 #endif // LABEL_H

@@ -34,5 +34,26 @@
 
  void write_paned(panedInfos *panedInformations, FILE *file);
 
+ void write_stack(stackInfos *stackInformations, FILE *file);
+
+ void write_switcher(switcherInfos *switcherInformations, FILE *file);
+
+ void write_scrolled_window(scrolledWindowInfos *scrolledWindowInforamtions, FILE *file);
+
+ void write_button(buttonInfos *buttonInformations, FILE *file);
+
+ void write_check_button(checkButtonInfos *checkButtonInformation, FILE *file);
+
+ void write_color_button(colorButtonInfos *colorButtonInformation, FILE *file);
+
+ void write_entry(entryInfos *entryInformations, FILE *file);
+
+ void write_font_button(fontButtonInfos *fontButtonInformations, FILE *file);
+
+ void write_image(imageInfos *imageInformations, FILE *file);
+
+ void write_label(labelInfos *labelInformations, FILE *file);
+
+ void write_level_bar(levelBarInfos *levelBarInformations, FILE *file);
 
  #endif // XML_GENERATE_H

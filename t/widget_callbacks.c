@@ -16,6 +16,7 @@ GtkWidget *test_box = NULL;
 GtkWidget *global_tree;
 data_widget* global_widget_data_pointer = NULL;
 
+
 void on_click_window(gpointer data){
 	if(global_widget_data_pointer){
 		GtkWidget *obj;
@@ -440,8 +441,28 @@ void on_click_box(gpointer data){
 			closing_tag = paned_container_properties(parent_id, obj);
 		} else if (strcmp(parent_data->widget_name, "stack") == 0){
 			closing_tag = stack_container_properties(parent_id, obj);
-		} else {
+		} else if (strcmp(parent_data->widget_name, "scrolled_window")== 0){
+			closing_tag = scrolled_window_container_properties(parent_id, obj);
+		} else if (strcmp(parent_data->widget_name, "button")== 0){
+			closing_tag = button_container_properties(parent_id, obj);
+		} else if(strcmp(parent_data->widget_name, "check_button") == 0){
+			closing_tag = check_button_container_properties(parent_id, obj);
+		} else if (strcmp(parent_data->widget_name, "color_button") == 0){
+			closing_tag = color_button_container_properties(parent_id, obj);
+		} else if (strcmp(parent_data->widget_name, "combo_box") == 0){
+			closing_tag = combo_box_container_properties(parent_id, obj);
+		} else if(strcmp(parent_data->widget_name, "switcher")) {
 			closing_tag = switcher_container_properties(parent_id, obj);
+		} else if (strcmp(parent_data->widget_name, "entry") == 0){
+			closing_tag = entry_container_properties(parent_id, obj);
+		} else if (strcmp(parent_data->widget_name, "font_button") == 0){
+			closing_tag = entry_container_properties(parent_id, obj);
+		} else if (strcmp(parent_data->widget_name, "image") == 0){
+			closing_tag = image_container_properties(parent_id, obj);
+		} else if (strcmp(parent_data->widget_name, "label") == 0){
+			closing_tag = label_container_properties(parent_id, obj);
+		} else if (strcmp(parent_data->widget_name, "level_bar") == 0){
+			closing_tag = level_bar_container_properties(parent_id, obj);
 		}
 
 		add_to_tree(global_tree, parent_id, global_widget_data_pointer->id_widget, obj, on_click_box, global_widget_data_pointer->id_widget, global_widget_data_pointer->data, closing_tag, global_widget_data_pointer->widget_name);
@@ -465,10 +486,29 @@ void on_click_box(gpointer data){
 			paned_widget_properties();
 		} else if (strcmp(widget->widget_name, "stack") == 0){
 			stack_widget_properties();
-		} else {
+		} else if (strcmp(widget->widget_name, "scrolled_window") == 0){
+			scrolled_window_widget_properties();
+		} else if (strcmp(widget->widget_name, "button") == 0){
+			button_widget_properties();
+		} else if(strcmp(widget->widget_name, "check_button") == 0){
+			check_button_widget_properties();
+		} else if(strcmp(widget->widget_name, "color_button") == 0){
+			color_button_widget_properties();
+		} else if (strcmp(widget->widget_name, "combo_box") == 0){
+			combo_box_widget_properties();
+		} else if(strcmp(widget->widget_name, "switcher") == 0) {
 			switcher_widget_properties();
+		} else if (strcmp(widget->widget_name, "entry") == 0){
+			entry_widget_properties();
+		} else if (strcmp(widget->widget_name, "font_button") == 0){
+			font_button_widget_properties();
+		} else if (strcmp(widget->widget_name, "image") == 0){
+			image_widget_properties();
+		} else if (strcmp(widget->widget_name, "label") == 0){
+			label_widget_properties();
+		} else if (strcmp(widget->widget_name, "level_bar") == 0){
+			level_bar_widget_properties();
 		}
-		
 	}
 }
 
@@ -662,6 +702,513 @@ void traitement_paned(GtkWidget *widget, gpointer data){
 	global_widget_data_pointer = widget_data;	
 }
 
+void traitement_stack(GtkWidget *widget, gpointer data){
+	stackI *mystack = (stackI *)data;
+	stackInfos *infos = malloc(sizeof(stackInfos));
+	if(!infos) return;
+
+	infos->id_switcher = get_text(mystack->stack_switcher_widget_id);;
+	
+	TreeNodeData *switcher = search_tree(global_tree, infos->id_switcher);
+	infos->switcher = switcher->widget;
+
+	char *transmition = get_selecter_item(mystack->stack_transition_type_value_combo_box);
+
+	if(strcmp(transmition, "GTK_STACK_TRANSITION_TYPE_CROSSFADE") == 0){
+		infos->transition_type = GTK_STACK_TRANSITION_TYPE_CROSSFADE;
+	} else if (strcmp(transmition, "GTK_STACK_TRANSITION_TYPE_NONE") == 0){
+		infos->transition_type = GTK_STACK_TRANSITION_TYPE_NONE;
+	} else if (strcmp(transmition, "GTK_STACK_TRANSITION_TYPE_SLIDE_LEFT")){
+		infos->transition_type = GTK_STACK_TRANSITION_TYPE_SLIDE_LEFT;
+	} else {
+		infos->transition_type = GTK_STACK_TRANSITION_TYPE_SLIDE_RIGHT;
+	}
+
+	infos->transition_duration = get_value_spin_button(mystack->stack_duration_value_spin_button);
+
+	data_widget *widget_data = malloc(sizeof(data_widget));
+	if(!widget_data) exit(EXIT_FAILURE);
+
+	widget_data->id_widget = get_text(mystack->stack_widget_id_value);
+	widget_data->data = infos;
+	widget_data->widget_name = "stack";
+
+	global_widget_data_pointer = widget_data;	
+}
+
+void traitement_switcher(GtkWidget *widget, gpointer data){
+	switcherI *myswitcher = (switcherI *)data;
+	switcherInfos *infos = malloc(sizeof(switcherInfos));
+	if(!infos) return;
+
+	infos->spacing = get_value_spin_button(myswitcher->switcher_spacing_value_spin_button);
+	char *same_size = get_selecter_item(myswitcher->same_size_value_combo_box);
+
+	if(strcmp(same_size, "TRUE") == 0){
+		infos->buttons_same_size = TRUE;
+	} else {
+		infos->buttons_same_size = FALSE;
+	}
+
+	data_widget *widget_data = malloc(sizeof(data_widget));
+	if(!widget_data) exit(EXIT_FAILURE);
+
+	widget_data->id_widget = get_text(myswitcher->switcher_id_entry);
+	widget_data->data = infos;
+	widget_data->widget_name = "switcher";
+
+	global_widget_data_pointer = widget_data;	
+}
+
+void traitement_scrolled_window(GtkWidget *widget, gpointer data){
+	scrolled_windowI *myScrolled_window = (scrolled_windowI *)data;
+	scrolledWindowInfos *infos = malloc(sizeof(scrolledWindowInfos));
+	if(!infos) return;
+
+	infos->horizontal = (strcmp(get_selecter_item(myScrolled_window->scrolled_window_informations_horizontal_value), "TRUE") == 0) ? TRUE : FALSE;
+	infos->vertical = (strcmp(get_selecter_item(myScrolled_window->scrolled_window_informations_vertical_value), "TRUE") == 0) ? TRUE : FALSE;
+
+	data_widget *widget_data = malloc(sizeof(data_widget));
+	if(!widget_data) exit(EXIT_FAILURE);
+
+	widget_data->id_widget = get_text(myScrolled_window->scrolled_window_informations_id_value);
+	widget_data->data = infos;
+	widget_data->widget_name = "scrolled_window";
+
+	global_widget_data_pointer = widget_data;		
+}
+
+void traitement_button(GtkWidget *widget, gpointer data){
+	buttonI *mybutton = (buttonI *)data;
+	buttonInfos *infos = malloc(sizeof(buttonInfos));
+	if(!infos) return;
+
+	infos->label = get_text(mybutton->button_label_entry);
+	if(strcmp(infos->label, "") == 0){
+		infos->label = NULL;
+	}
+
+	infos->path_to_image = get_text(mybutton->button_path_to_image_entry);
+	if(strcmp(infos->path_to_image, "") == 0){
+		infos->path_to_image = NULL;
+	}
+
+	infos->callback_name = get_text(mybutton->button_callback_entry);
+	if(strcmp(infos->callback_name, "") == 0){
+		infos->callback_name = NULL;
+	}
+
+	infos->data_name = get_text(mybutton->button_data_entry);
+	if(strcmp(infos->data_name, "") == 0){
+		infos->data_name = NULL;
+	}
+
+	infos->callback = NULL;
+	infos->data = NULL;
+
+	char *relief = get_selecter_item(mybutton->button_relief_combo_box);
+
+	if(!relief){
+		infos->relief = GTK_RELIEF_NORMAL;
+	} else if (strcmp(relief, "GTK_RELIEF_NORMAL") == 0){
+		infos->relief = GTK_RELIEF_NORMAL;
+	} else {
+		infos->relief = GTK_RELIEF_NONE;
+	}
+
+	char *use = get_selecter_item(mybutton->button_use_underline_combo_box);
+	if(!use){
+		infos->use_underline = TRUE;
+	} else if (strcmp(use, "TRUE") == 0){
+		infos->use_underline = TRUE;
+	} else {
+		infos->use_underline = FALSE;
+	}
+
+	data_widget *widget_data = malloc(sizeof(data_widget));
+	if(!widget_data) exit(EXIT_FAILURE);
+
+	widget_data->id_widget = get_text(mybutton->button_id_entry);
+	widget_data->data = infos;
+	widget_data->widget_name = "button";
+
+	global_widget_data_pointer = widget_data;	
+}
+
+void traitement_check_button(GtkWidget *widget, gpointer data){
+	check_buttonI *myCheck_button = (check_buttonI *)data;
+	checkButtonInfos *infos = malloc(sizeof(checkButtonInfos));
+	if(!infos) return;
+
+	char *chaine = get_text(myCheck_button->check_button_label_entry);
+	if(strcmp(chaine, "") == 0){
+		infos->label = NULL;
+	} else {
+		infos->label = chaine;
+	}
+
+	chaine = get_selecter_item(myCheck_button->check_button_active_combo_box);
+
+	if(!chaine){
+		infos->active = TRUE;
+	} else if(strcmp(chaine, "TRUE") == 0){
+		infos->active = TRUE;
+	} else
+		infos->active = FALSE;
+
+	chaine = get_selecter_item(myCheck_button->check_button_use_underline_combo_box);
+
+	if(!chaine){
+		infos->use_underline = TRUE;
+	} else if(strcmp(chaine, "TRUE") == 0){
+		infos->use_underline = TRUE;
+	} else
+		infos->use_underline = FALSE;
+
+	chaine = get_text(myCheck_button->check_button_callback_entry);
+
+	if(strcmp(chaine, "") == 0){
+		infos->callback_name = NULL;
+	} else {
+		infos->callback_name = chaine;
+	}
+
+	chaine = get_text(myCheck_button->check_button_data_entry);
+
+	if(strcmp(chaine, "") == 0){
+		infos->data_name = NULL;
+	} else {
+		infos->data_name = chaine;
+	}
+
+	data_widget *widget_data = malloc(sizeof(data_widget));
+	if(!widget_data) exit(EXIT_FAILURE);
+
+	infos->callback = NULL;
+	infos->data = NULL;
+
+	widget_data->id_widget = get_text(myCheck_button->check_button_id_entry);
+	widget_data->data = infos;
+	widget_data->widget_name = "check_button";
+
+	global_widget_data_pointer = widget_data;
+}
+
+void traitement_color_button(GtkWidget *widget, gpointer data){
+	color_buttonI *myColor_button = (color_buttonI *)data;
+	colorButtonInfos *infos = malloc(sizeof(colorButtonInfos));
+	if(!infos) return;
+
+	char *chaine = get_text(myColor_button->color_button_label_entry);
+	if(strcmp(chaine, "") == 0){
+		infos->title = NULL;
+	} else {
+		infos->title = chaine;
+	}
+
+	chaine = get_color(myColor_button->color_button_default_color_color_button);
+	if(!chaine){
+		infos->default_color = NULL;
+	}else {
+		infos->default_color = chaine;
+	}
+
+	chaine = get_selecter_item(myColor_button->color_button_use_alpha_combo_box);
+	if(!chaine){
+		infos->use_alpha = TRUE;
+	} else if (strcmp(chaine, "TRUE") == 0){
+		infos->use_alpha = TRUE;
+	} else 
+		infos->use_alpha = FALSE;
+
+	data_widget *widget_data = malloc(sizeof(data_widget));
+	if(!widget_data) exit(EXIT_FAILURE);
+
+	widget_data->id_widget = get_text(myColor_button->color_button_id_entry);
+	widget_data->data = infos;
+	widget_data->widget_name = "color_button";
+
+	global_widget_data_pointer = widget_data;
+}
+
+void traitement_combo_box(GtkWidget *widget, gpointer data){
+	combo_boxI *myCombo_box = (combo_boxI *)data;
+	
+	data_widget *widget_data = malloc(sizeof(data_widget));
+	if(!widget_data) exit(EXIT_FAILURE);
+
+	widget_data->id_widget = get_text(myCombo_box->combo_box_id_entry);
+	widget_data->data = NULL;
+	widget_data->widget_name = "combo_box";
+
+	global_widget_data_pointer = widget_data;
+}
+
+void traitement_entry(GtkWidget *widget, gpointer data){
+	entryI *myentry = (entryI *)data;
+	entryInfos *infos = malloc(sizeof(entryI));
+	if(!infos) return;
+
+	char *chaine = get_text(myentry->entry_default_text_entry);
+	if(strcmp(chaine, "") == 0){
+		infos->default_text = NULL;
+	} else {
+		infos->default_text = chaine;
+	}
+
+	chaine = get_text(myentry->entry_indicator_text_entry);
+	if(strcmp(chaine, "") == 0){
+		infos->indicator_text = NULL;
+	} else {
+		infos->indicator_text = chaine;
+	}
+
+	chaine = get_selecter_item(myentry->entry_editable_combo_box);
+	if(!chaine){
+		infos->editable = TRUE;
+	} else if (strcmp(chaine, "TRUE") == 0){
+		infos->editable = TRUE;
+	} else {
+		infos->editable = FALSE;
+	}
+
+	chaine = get_selecter_item(myentry->entry_visibility_combo_box);
+	if(!chaine){
+		infos->visible = TRUE;
+	} else if(strcmp(chaine, "TRUE") == 0){
+		infos->visible = TRUE;
+	} else {
+		infos->visible = FALSE;
+	}
+
+	infos->alignment = get_value_spin_button(myentry->entry_alignment_spin_button);
+	infos->max_length = get_value_spin_button(myentry->entry_max_length_spin_button);
+
+	data_widget *widget_data = malloc(sizeof(data_widget));
+	if(!widget_data) exit(EXIT_FAILURE);
+
+	widget_data->id_widget = get_text(myentry->entry_id_entry);
+	widget_data->data = infos;
+	widget_data->widget_name = "entry";
+
+	global_widget_data_pointer = widget_data;
+}
+
+void traitement_font_button(GtkWidget *widget, gpointer data){
+	font_buttonI *myFont_button = (font_buttonI *)data;
+	fontButtonInfos *infos = malloc(sizeof(fontButtonInfos));
+	if(!infos) return;
+
+	char *chaine = get_text(myFont_button->font_button_title_entry);
+	
+	if(strcmp(chaine, "") == 0){
+		infos->title = NULL;
+	} else {
+		infos->title = chaine;
+	}
+
+	chaine = get_text(myFont_button->font_button_default_font_name_entry);
+
+	if(strcmp(chaine, "") == 0){
+		infos->default_font_name = "consolas";
+	} else {
+		infos->default_font_name = chaine;
+	}
+
+	chaine = get_selecter_item(myFont_button->font_button_use_font_combo_box);
+
+	if(!chaine){
+		infos->use_font = TRUE;
+	} else if(strcmp(chaine, "TRUE") == 0){
+		infos->use_font = TRUE;
+	} else {
+		infos->use_font = FALSE;
+	}
+
+	chaine = get_selecter_item(myFont_button->font_button_use_size_combo_box);
+
+	if(!chaine){
+		infos->use_size = TRUE;
+	} else if(strcmp(chaine, "TRUE") == 0){
+		infos->use_size = TRUE;
+	} else {
+		infos->use_size = FALSE;
+	}
+
+	chaine = get_selecter_item(myFont_button->font_button_show_size_combo_box);
+	if(!chaine){
+		infos->show_size = TRUE;
+	} else if(strcmp(chaine, "TRUE") == 0){
+		infos->show_size = TRUE;
+	} else {
+		infos->show_size = FALSE;
+	}
+
+
+	chaine = get_selecter_item(myFont_button->font_button_show_style_combo_box);
+
+	if(!chaine){
+		infos->show_style = TRUE;
+	} else if (strcmp(chaine, "TRUE") == 0){
+		infos->show_style = TRUE;
+	} else {
+		infos->show_style = FALSE;
+	}
+
+	data_widget *widget_data = malloc(sizeof(data_widget));
+	if(!widget_data) exit(EXIT_FAILURE);
+
+	widget_data->id_widget = get_text(myFont_button->font_button_id_entry);
+	widget_data->data = infos;
+	widget_data->widget_name = "font_button";
+
+	global_widget_data_pointer = widget_data;
+}
+
+void traitement_image(GtkWidget *widget, gpointer data){
+	imageI *myimage = (imageI *)data;
+	imageInfos *infos = malloc(sizeof(imageInfos));
+	if(!infos) return;
+
+	char *chaine = get_text(myimage->image_path_entry);
+	if(strcmp(chaine, "")== 0){
+		infos->path = NULL;
+	} else {
+		infos->path = chaine;
+	}
+
+	data_widget *widget_data = malloc(sizeof(data_widget));
+	if(!widget_data) exit(EXIT_FAILURE);
+
+	widget_data->id_widget = get_text(myimage->image_id_entry);
+	widget_data->data = infos;
+	widget_data->widget_name = "image";
+
+	global_widget_data_pointer = widget_data;
+}
+
+void traitement_label(GtkWidget *widget, gpointer data){
+
+	labelI *mylabel = (labelI *)data;
+
+	labelInfos *infos = malloc(sizeof(labelInfos));
+	if(!infos) return;
+
+	infos->color = get_color(mylabel->label_color_color_button);
+	infos->background = get_color(mylabel->label_background_color_button);
+	
+	char *chaine = get_selecter_item(mylabel->label_justify_combo_box);
+
+	if(!chaine){
+		infos->justify = GTK_JUSTIFY_CENTER;
+	} else if (strcmp(chaine, "GTK_JUSTIFY_CENTER") == 0){
+		infos->justify = GTK_JUSTIFY_CENTER;
+	} else if (strcmp(chaine, "GTK_JUSTIFY_LEFT") == 0){
+		infos->justify = GTK_JUSTIFY_LEFT;
+	} else {
+		infos->justify = GTK_JUSTIFY_RIGHT;
+	}
+
+	chaine = get_selecter_item(mylabel->label_pango_style_combo_box);
+
+	if(!chaine){
+		infos->style = PANGO_STYLE_NORMAL;
+	} else if (strcmp(chaine, "PANGO_STYLE_NORMAL") == 0){
+		infos->style = PANGO_STYLE_NORMAL;
+	} else {
+		infos->style = 	PANGO_STYLE_ITALIC;
+	}
+
+	chaine = get_selecter_item(mylabel->label_pango_weight_combo_box);
+
+	if(!chaine){
+		infos->weight = PANGO_WEIGHT_NORMAL;
+	} else if (strcmp(chaine, "PANGO_WEIGHT_NORMAL") == 0){
+		infos->weight = PANGO_WEIGHT_NORMAL;
+	} else {
+		infos->weight = PANGO_WEIGHT_BOLD;
+	}
+
+	chaine = get_selecter_item(mylabel->label_use_underline_combo_box);
+
+	if(!chaine){
+		infos->underline = FALSE;
+	} else if (strcmp(chaine, "TRUE") == 0){
+		infos->underline = TRUE;
+	} else {
+		infos->underline = FALSE;
+	}
+
+	chaine = get_selecter_item(mylabel->label_wrap_combo_box);
+
+	if(!chaine){
+		infos->wrap = FALSE;
+	} else if (strcmp(chaine, "TRUE")){
+		infos->wrap = TRUE;
+	} else {
+		infos->wrap = TRUE;
+	}
+
+	infos->size = get_value_spin_button(mylabel->label_size_spin_button);
+	
+	chaine = get_text(mylabel->label_text_entry);
+	
+	if(!chaine){
+		infos->text = NULL;
+	} else {
+		infos->text = chaine;
+	}
+
+	infos->font = get_font(mylabel->label_font_font_button);
+
+	data_widget *widget_data = malloc(sizeof(data_widget));
+	if(!widget_data) exit(EXIT_FAILURE);
+
+	widget_data->id_widget = get_text(mylabel->label_id_entry);
+	widget_data->data = infos;
+	widget_data->widget_name = "label";
+
+	global_widget_data_pointer = widget_data;
+}
+
+void traitement_level_bar(GtkWidget *widget, gpointer data){
+	level_barI *myLevel_bar = (level_barI *)data;
+	levelBarInfos *infos = malloc(sizeof(levelBarInfos));
+	if(!infos) return;
+
+	infos->default_value = get_value_spin_button(myLevel_bar->level_bar_default_value_spin_button);
+	infos->min_value = get_value_spin_button(myLevel_bar->level_bar_min_value_spin_button);
+	infos->max_value = get_value_spin_button(myLevel_bar->level_bar_max_value_spin_button);
+
+	char *chaine = get_selecter_item(myLevel_bar->level_bar_mode_combo_box);
+	
+	if(!chaine){
+		infos->mode = GTK_LEVEL_BAR_MODE_CONTINUOUS;
+	} else if (strcmp(chaine, "GTK_LEVEL_BAR_MODE_CONTINUOUS") == 0){
+		infos->mode = GTK_LEVEL_BAR_MODE_CONTINUOUS;
+	} else {
+		infos->mode = GTK_LEVEL_BAR_MODE_DISCRETE;
+	}
+
+	chaine = get_selecter_item(myLevel_bar->level_bar_reversed_combo_box);
+	if(!chaine){
+		infos->inverted = FALSE;
+	} else if (strcmp(chaine, "TRUE") == 0){
+		infos->inverted = TRUE;
+	} else {
+		infos->inverted = FALSE;
+	}
+
+	data_widget *widget_data = malloc(sizeof(data_widget));
+	if(!widget_data) exit(EXIT_FAILURE);
+
+	widget_data->id_widget = get_text(myLevel_bar->level_bar_id_entry);
+	widget_data->data = infos;
+	widget_data->widget_name = "level_bar";
+
+	global_widget_data_pointer = widget_data;
+}
+
 void on_click_grid(gpointer data){}
 
 void on_click_paned(gpointer data){}
@@ -712,8 +1259,10 @@ void on_click_switch_button(gpointer data){}
 
 
 
+
 const WidgetHandler widget_handlers[] = {
     {"header_bar", (void*(*)(void*))set_properties_header_bar},
+	{"scrolled_window", (void*(*)(void*))set_properties_scrolled_window},
     {"box", (void*(*)(void*))set_properties_box},
     {"fixed", (void*(*)(void*))create_fixed},
     {"frame", (void*(*)(void*))set_properties_frame},
