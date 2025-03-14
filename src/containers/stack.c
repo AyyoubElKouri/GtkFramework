@@ -52,6 +52,14 @@ stackInfos *get_properties_stack(GtkWidget *stack)
     return stackInformations;
 }
 
+void modify_stack(GtkWidget *stack, stackInfos *stackInformations){
+        // set the transition type
+        gtk_stack_set_transition_type(GTK_STACK(stack), stackInformations->transition_type);
+
+        // set the transition duration
+        gtk_stack_set_transition_duration(GTK_STACK(stack), stackInformations->transition_duration);
+}
+
 void add_to_stack(GtkWidget *stack, GtkWidget *widget, const gchar *name)
 {
     // Add the widget to the stack

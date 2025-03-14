@@ -24,6 +24,7 @@
 typedef struct
 {
     GtkWidget *switcher;
+    char *id_switcher;
     GtkStackTransitionType transition_type;
     gint transition_duration;
 }stackInfos;
@@ -65,6 +66,9 @@ stackInfos *get_properties_stack(GtkWidget *stack);
  * @param stack the stack widget
  * @param widget the widget to add
  */
+
+void modify_stack(GtkWidget *stack, stackInfos *stackInformations);
+
 
 void add_to_stack(GtkWidget *stack, GtkWidget *widget, const gchar *name);
 
