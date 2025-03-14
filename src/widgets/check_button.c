@@ -68,3 +68,17 @@ checkButtonInfos *get_properties_check_button(GtkWidget *checkButton)
     
     return checkButtonInformation;
 }
+
+void modify_check_button(GtkWidget *checkButton, checkButtonInfos *checkButtonInformation){
+
+    if(checkButtonInformation->label)
+        gtk_button_set_label(GTK_BUTTON(checkButton), checkButtonInformation->label);
+
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkButton), checkButtonInformation->active);
+
+    gtk_button_set_use_underline(GTK_BUTTON(checkButton), checkButtonInformation->use_underline);
+
+    if(checkButtonInformation->callback)
+        g_signal_connect(G_OBJECT(checkButton), "toggled", G_CALLBACK(checkButtonInformation->callback), checkButtonInformation->data);
+
+}

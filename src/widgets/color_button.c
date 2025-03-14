@@ -12,7 +12,7 @@
 
 #include "../../include/widgets/color_button.h"
 
-GtkWidget *create_color_button(const gchar *default_color, const gchar *title, gboolean use_alpha)
+GtkWidget *create_color_button(gchar *default_color, gchar *title, gboolean use_alpha)
 {
     colorButtonInfos *colorButtonInformations = (colorButtonInfos *)malloc(sizeof(colorButtonInfos));
     if(!colorButtonInformations) return NULL;
@@ -86,4 +86,27 @@ char *get_color(GtkWidget* colorButton){
     char *hex_color = (char *)malloc(8);
     snprintf(hex_color, 8, "#%02x%02x%02x", gdk_color.red>>8, gdk_color.green>>8, gdk_color.blue>>8);
     return hex_color;
+}
+
+void modify_color_button(GtkWidget *colorButton, colorButtonInfos *colorButtonInformation){
+    
+        // set the default color
+        GdkColor gdk_color;
+        gdk_color_parse(colorButtonInformation->default_color, &gdk_color);
+        gtk_color_button_set_color(GTK_COLOR_BUTTON(colorButton), &gdk_color);
+    
+        // det the title
+        gtk_color_button_set_title(GTK_COLOR_BUTTON(colorButton), colorButtonInformation->title);
+    
+        // set the use alpha
+        gtk_color_button_set_use_alpha(GTK_COLOR_BUTTON(colorButton), colorButtonInformation->use_alpha);
+    
+
+}
+
+void set_color(GtkWidget *color_button, char *color) {
+    GdkColor gdk_color;
+    if (gdk_color_parse(color, &gdk_color)) {
+        gtk_color_button_set_color(GTK_COLOR_BUTTON(color_button), &gdk_color);
+    }
 }

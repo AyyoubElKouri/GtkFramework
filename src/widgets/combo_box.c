@@ -24,6 +24,10 @@ void add_to_combo_box(GtkWidget *combo_box, const gchar *item)
     gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(combo_box), item);
 }
 
+void remove_from_combo_box(GtkWidget *combo_box, int index){
+    gtk_combo_box_text_remove(GTK_COMBO_BOX_TEXT(combo_box), index);
+}
+
 char *get_selecter_item(GtkWidget *combo_box){
     char* text = gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(combo_box));
     return text;

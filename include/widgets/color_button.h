@@ -23,8 +23,8 @@
 
 typedef struct
 {
-    const gchar *default_color;
-    const gchar *title;
+    gchar *default_color;
+    gchar *title;
     gboolean use_alpha;
 }colorButtonInfos;
 
@@ -38,7 +38,7 @@ typedef struct
  * @return the color button widget
  */
 
-GtkWidget *create_color_button(const gchar *default_color, const gchar *title, gboolean use_alpha);
+GtkWidget *create_color_button(gchar *default_color, gchar *title, gboolean use_alpha);
 
 /**
  * @brief sets the properties of the color button widget
@@ -62,4 +62,7 @@ colorButtonInfos *get_properties_color_button(GtkWidget *colorButton);
 
 char *get_color(GtkWidget* colorButton);
 
+void set_color(GtkWidget *color_button, char *color);
+
+void modify_color_button(GtkWidget *colorButton, colorButtonInfos *colorButtonInformations);
 #endif // COLOR_BUTTON_H

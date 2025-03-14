@@ -23,11 +23,13 @@
 
 typedef struct
 {
-    const char *label;
+    char *label;
     gboolean active;
     gboolean use_underline;
     GCallback callback;
+    char *callback_name;
     gpointer data;
+    char *data_name;
 }checkButtonInfos;
 
 /**
@@ -67,5 +69,7 @@ GtkWidget *set_properties_check_button(checkButtonInfos *checkButtonInformation)
  */
 
 checkButtonInfos *get_properties_check_button(GtkWidget *checkButton);
+
+void modify_check_button(GtkWidget *checkButton, checkButtonInfos *checkButtonInformation);
 
 #endif // CHECK_BUTTON_H

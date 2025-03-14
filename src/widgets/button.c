@@ -16,7 +16,7 @@ gchar *Gfile_name;
 GCallback Gcallback;
 gpointer Gdata;
 
-GtkWidget *create_button(GtkReliefStyle relief, const gchar *label, gboolean use_underline, const gchar *path_to_image, GCallback callback, gpointer data)
+GtkWidget *create_button(GtkReliefStyle relief, char *label, gboolean use_underline, char *path_to_image, GCallback callback, gpointer data)
 {
     buttonInfos *buttonInformation = (buttonInfos *)malloc(sizeof(buttonInfos));
     if(!buttonInformation) return NULL;
@@ -95,3 +95,28 @@ buttonInfos *get_properties_button(GtkWidget *button)
     return buttonInformation;
 }
 
+void modify_button(GtkWidget *button, buttonInfos *buttonInformation){
+    
+    if(strcmp(buttonInformation->label, "") != 0)
+        gtk_button_set_label(GTK_BUTTON(button), buttonInformation->label);
+
+
+    // set the relief
+    gtk_button_set_relief(GTK_BUTTON(button), buttonInformation->relief);
+
+    // set the underline if it exists
+        gtk_button_set_use_underline(GTK_BUTTON(button), buttonInformation->use_underline);
+
+    // set the image if it existsc
+    if(strcmp(buttonInformation->label, "") == 0)
+        if(buttonInformation->path_to_image)
+        {
+            GtkWidget *image = gtk_image_new_from_file(buttonInformation->path_to_image);
+            gtk_button_set_image(GTK_BUTTON(button), image);
+            Gfile_name = g_strdup(buttonInformation->path_to_image);
+        }
+
+    // set the callback if it exists
+    if(buttonInformation->callback)
+        g_signal_connect(button, "clicked", G_CALLBACK(buttonInformation->callback), buttonInformation->data);
+}

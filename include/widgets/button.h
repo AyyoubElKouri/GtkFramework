@@ -24,11 +24,13 @@
 typedef struct
 {
     GtkReliefStyle relief;
-    const gchar *label;
+    char *label;
     gboolean use_underline;
-    const gchar *path_to_image;
+    char *path_to_image;
     GCallback callback;
+    char *callback_name;
     gpointer data;
+    char *data_name;
 }buttonInfos;
 
 /**
@@ -45,7 +47,7 @@ typedef struct
  * @return GtkWidget* the button
  */
 
-GtkWidget *create_button(GtkReliefStyle relief, const gchar *label, gboolean use_underline, const gchar *path_to_image, GCallback callback, gpointer data);
+GtkWidget *create_button(GtkReliefStyle relief, char *label, gboolean use_underline, char *path_to_image, GCallback callback, gpointer data);
 
 /**
  * @brief set the properties of the button
@@ -71,6 +73,7 @@ GtkWidget *set_properties_button(buttonInfos *buttonInformation);
 
 buttonInfos *get_properties_button(GtkWidget *button);
 
+void modify_button(GtkWidget *button, buttonInfos *buttonInformation);
 
 
 #endif // BUTTON_H
