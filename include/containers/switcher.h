@@ -60,5 +60,7 @@ GtkWidget *set_properties_switcher(switcherInfos *switcherInformations);
 switcherInfos *get_properties_switcher(GtkWidget *switcher);
 
 
+void modify_switcher(GtkWidget *switcher, switcherInfos *switcherInformations);
+
 
 #endif // SWITCHER_H

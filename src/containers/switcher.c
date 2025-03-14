@@ -47,3 +47,7 @@ switcherInfos *get_properties_switcher(GtkWidget *switcher)
     return switcherInformations;
 }
 
+void modify_switcher(GtkWidget *switcher, switcherInfos *switcherInformations){
+    gtk_box_set_spacing(GTK_BOX(switcher), switcherInformations->spacing);
+    gtk_box_set_homogeneous(GTK_BOX(switcher), switcherInformations->buttons_same_size);
+}

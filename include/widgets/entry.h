@@ -73,4 +73,6 @@ char *get_text(GtkWidget *entry);
 
 void set_text(GtkWidget *entry, char *text);
 
+void modify_entry(GtkWidget *entry, entryInfos *entryInformations);
+
 #endif // ENTRY_H

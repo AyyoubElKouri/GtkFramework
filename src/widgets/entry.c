@@ -93,3 +93,26 @@ char *get_text(GtkWidget *entry){
 void set_text(GtkWidget *entry, char *text){
     gtk_entry_set_text(GTK_ENTRY(entry), text);
 }
+
+void modify_entry(GtkWidget *entry, entryInfos *entryInformations){
+
+    // set the default text if there is one
+    if(entryInformations->default_text)
+        gtk_entry_set_text(GTK_ENTRY(entry), entryInformations->default_text);
+
+    // set the indicator text if there is one
+    if(entryInformations->indicator_text)
+        gtk_entry_set_placeholder_text(GTK_ENTRY(entry), entryInformations->indicator_text);
+
+    // set the visibility option
+    gtk_entry_set_visibility(GTK_ENTRY(entry), entryInformations->visible);
+
+    // set the editable obtion
+    gtk_editable_set_editable(GTK_EDITABLE(entry), entryInformations->editable);
+
+    // set the max length
+    gtk_entry_set_max_length(GTK_ENTRY(entry), entryInformations->max_length);
+
+    // set the alignment
+    gtk_entry_set_alignment(GTK_ENTRY(entry), entryInformations->alignment);
+}

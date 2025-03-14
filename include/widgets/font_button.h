@@ -18,8 +18,8 @@
 
 typedef struct
 {
-    const gchar *default_font_name;
-    const gchar *title;
+    gchar *default_font_name;
+    gchar *title;
     gboolean show_size;
     gboolean show_style;
     gboolean use_size;
@@ -39,7 +39,7 @@ typedef struct
  * @return the font button widget
  */
 
-GtkWidget *create_font_button(const gchar *default_font_name, const gchar *title, gboolean show_size, gboolean show_style, gboolean use_size, gboolean use_font);
+GtkWidget *create_font_button(gchar *default_font_name, gchar *title, gboolean show_size, gboolean show_style, gboolean use_size, gboolean use_font);
 
 /**
  * @brief sets the properties of the font button widget
@@ -60,5 +60,11 @@ GtkWidget *set_properties_font_button(fontButtonInfos *fontButtonInformations);
  */
 
 fontButtonInfos *get_properties_font_button(GtkWidget *fontButton);
+
+void modify_font_button(GtkWidget *font_button, fontButtonInfos *fontButtonInformations);
+
+char *get_font(GtkWidget *font_button);
+
+void set_font(GtkWidget *font_button, char *font);
 
 #endif // FONT_BUTTON_H
