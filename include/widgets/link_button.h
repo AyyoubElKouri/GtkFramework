@@ -24,8 +24,8 @@
 
 typedef struct
 {
-    const gchar *uri;
-    const gchar *label;
+    gchar *url;
+    gchar *label;
 }linkButtonInfos;
 
 /**
@@ -37,7 +37,7 @@ typedef struct
  * @return GtkWidget* A pointer to the created link button.
  */
 
-GtkWidget *create_link_button(const gchar *uri, const gchar *label);
+GtkWidget *create_link_button(gchar *uri, gchar *label);
 
 /**
  * @brief set the properties of the link button
@@ -62,5 +62,7 @@ GtkWidget *set_properties_link_button(linkButtonInfos *linkButtonInformation);
  */
 
 linkButtonInfos *get_properties_link_button(GtkWidget *linkButton);
+
+void modify_link_button(GtkWidget *linkButton, linkButtonInfos *linkButtonInformation);
 
 #endif // LINK_BUTTON_H

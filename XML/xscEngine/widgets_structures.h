@@ -202,7 +202,14 @@ typedef struct
     GtkWidget *level_bar_default_value_spin_button;
     GtkWidget *level_bar_mode_combo_box;
     GtkWidget *level_bar_reversed_combo_box;
-    
+
 } level_barI;
+
+typedef struct
+{
+    GtkWidget *Link_button_id_entry;
+    GtkWidget *Link_button_url_entry;
+    GtkWidget *Link_button_label_entry;
+} link_buttonI;
 
 #endif //WIDGETS_STRUCTURES_H

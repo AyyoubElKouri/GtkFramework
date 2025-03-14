@@ -264,7 +264,7 @@ void link_button_data_bases(NodeA *widget, FILE *file)
 {
     NodeA *link_button = NULL;
     link_button = insert_end(link_button, "widget", "link_button", 1);
-    link_button = insert_end(link_button, "uri", "https://www.google.com", 1);
+    link_button = insert_end(link_button, "url", "https://www.google.com", 1);
     link_button = insert_end(link_button, "label", "Click me", 1);
 
     write_to_file(widget, link_button, file);

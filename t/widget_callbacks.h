@@ -38,13 +38,14 @@ typedef void (*WidgetPropertiesHandler)();
 
 
 extern const WidgetHandler widget_handlers[];
-extern const WidgetOnClick widget_on_click[];
 
 
 void on_click_window(gpointer data);
+
+void on_click(gpointer data);
+
 void traitementWindow(GtkWidget *widget, gpointer data);
 
-void on_click_box(gpointer data);
 void traitementBox(GtkWidget *widget, gpointer data);
 
 void traitementHeaderBar(GtkWidget *widget, gpointer data);
@@ -81,47 +82,7 @@ void traitement_label(GtkWidget *widget, gpointer data);
 
 void traitement_level_bar(GtkWidget *widget, gpointer data);
 
-void on_click_switcher(gpointer data);
-
-void on_click_button(gpointer data);
-
-void on_click_check_button(gpointer data);
-
-void on_click_color_button(gpointer data);
-
-void on_click_combo_box(gpointer data);
-
-void on_click_entry(gpointer data);
-
-void on_click_font_button(gpointer data);
-
-void on_click_image(gpointer data);
-
-void on_click_label(gpointer data);
-
-void on_click_level_bar(gpointer data);
-
-void on_click_link_button(gpointer data);
-
-void on_click_menu_button(gpointer data);
-
-void on_click_menu_item(gpointer data);
-
-void on_click_menu(gpointer data);
-
-void on_click_progress_bar(gpointer data);
-
-void on_click_radio_button(gpointer data);
-
-void on_click_scale(gpointer data);
-
-void on_click_separator(gpointer data);
-
-void on_click_spin_button(gpointer data);
-
-void on_click_spinner(gpointer data);
-
-void on_click_switch_button(gpointer data);
+void traitement_link_button(GtkWidget *widget, gpointer data);
 
 
 #endif

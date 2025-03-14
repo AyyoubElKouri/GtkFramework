@@ -4,21 +4,13 @@
 
 static void activate(GtkApplication *app, gpointer data)
 {
-	GtkWidget *wind = create_window(app, GTK_WINDOW_TOPLEVEL, "title", 800, 600, TRUE, GTK_WIN_POS_CENTER, TRUE, NULL, 1.0, FALSE);
+	GtkWidget *w = create_window(app, GTK_WINDOW_TOPLEVEL, "title", 800, 600, TRUE, GTK_WIN_POS_CENTER, TRUE, NULL, 1.0, FALSE);
 
-	GtkWidget *sfdsg = create_box(GTK_ORIENTATION_VERTICAL, GTK_ALIGN_CENTER, 0);
+	GtkWidget *d = create_link_button("https://www.fstm.ac.ma/", "dsd");
 
-	GtkWidget *gsdfg = create_grid(0, 0, TRUE, TRUE);
+	add_to_container(w, d);
 
-	GtkWidget *gfdgf = create_level_bar(0, 10, 2, 1, FALSE);
-
-	add_to_grid(gsdfg, gfdgf, 0, 0, 1, 1);
-
-	add_to_box(sfdsg, gsdfg, START, TRUE, TRUE, 0, 0, 0, 0, 0);
-
-	add_to_container(wind, sfdsg);
-
-	show_widget(wind);
+	show_widget(w);
 
 }
 

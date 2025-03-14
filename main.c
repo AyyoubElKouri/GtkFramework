@@ -1652,7 +1652,6 @@ static void activate(GtkApplication *app, gpointer data)
 
 	GtkWidget *level_bar_grid_frame = create_frame(NULL, 0.5, 0.5);
 
-	//ffffffffffffffffffff
 	GtkWidget *level_bar_grid = create_grid(7, 7, TRUE, FALSE);
 
 	GtkWidget *level_bar_id_label = create_label("Widget ID", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
@@ -1721,8 +1720,6 @@ static void activate(GtkApplication *app, gpointer data)
     myLevel_bar->level_bar_mode_combo_box = level_bar_mode_combo_box;
     myLevel_bar->level_bar_reversed_combo_box = level_bar_reversed_combo_box;
 
-	// ffffffffffffffffffff
-
 	GtkWidget *level_bar_add_button = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                               ", FALSE, NULL, G_CALLBACK(traitement_level_bar), myLevel_bar);
 
 	add_to_grid(level_bar_grid, level_bar_add_button, 6, 0, 2, 1);
@@ -1745,6 +1742,8 @@ static void activate(GtkApplication *app, gpointer data)
 
 	GtkWidget *Link_button_grid_frame = create_frame(NULL, 0.5, 0.5);
 
+	// ffffffffffffff
+
 	GtkWidget *Link_button_grid = create_grid(7, 7, TRUE, FALSE);
 
 	GtkWidget *Link_button_id_label = create_label("Widget ID", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
@@ -1759,7 +1758,9 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(Link_button_grid, Link_button_url_label, 1, 0, 1, 1);
 
-	GtkWidget *Link_button_url_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+	GtkWidget *Link_button_url_entry = create_entry(NULL, NULL, TRUE, TRUE, 200, 0.5);
+
+	set_text(Link_button_url_entry, "https://www.google.com/");
 
 	add_to_grid(Link_button_grid, Link_button_url_entry, 1, 1, 1, 1);
 
@@ -1771,7 +1772,16 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(Link_button_grid, Link_button_label_entry, 2, 1, 1, 1);
 
-	GtkWidget *Link_button_add_button = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                               ", FALSE, NULL, NULL, NULL);
+	link_buttonI *myLink_button = malloc(sizeof(link_buttonI));
+	if(!myLink_button) return;
+
+	myLink_button->Link_button_id_entry = Link_button_id_entry;
+	myLink_button->Link_button_url_entry = Link_button_url_entry;
+	myLink_button->Link_button_label_entry = Link_button_label_entry;
+
+	// fffffffffff
+
+	GtkWidget *Link_button_add_button = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                               ", FALSE, NULL, G_CALLBACK(traitement_link_button), myLink_button);
 
 	add_to_grid(Link_button_grid, Link_button_add_button, 3, 0, 2, 1);
 

@@ -42,7 +42,7 @@ void on_click_window(gpointer data){
 			sprintf(closing_tag, "</%s add_to_container(%s, %s)>", global_widget_data_pointer->widget_name, (char *)data, global_widget_data_pointer->id_widget);
 		}
 		
-		add_to_tree(global_tree,  (char *)data, global_widget_data_pointer->id_widget, obj, on_click_box, global_widget_data_pointer->id_widget, global_widget_data_pointer->data, closing_tag, global_widget_data_pointer->widget_name);
+		add_to_tree(global_tree,  (char *)data, global_widget_data_pointer->id_widget, obj, on_click, global_widget_data_pointer->id_widget, global_widget_data_pointer->data, closing_tag, global_widget_data_pointer->widget_name);
 		global_widget_data_pointer = NULL;
 	} else {
 
@@ -411,7 +411,7 @@ void traitementWindow(GtkWidget *widget, gpointer data) {
 	}
 }
 
-void on_click_box(gpointer data){
+void on_click(gpointer data){
 
 	char *parent_id = get_selected_node_id(GTK_TREE_VIEW(global_tree));
 	GtkWidget *obj;
@@ -463,9 +463,11 @@ void on_click_box(gpointer data){
 			closing_tag = label_container_properties(parent_id, obj);
 		} else if (strcmp(parent_data->widget_name, "level_bar") == 0){
 			closing_tag = level_bar_container_properties(parent_id, obj);
-		}
+		} else if (strcmp(parent_data->widget_name, "link_button") == 0){
+			closing_tag = link_button_container_properties(parent_id, obj);
+		}	
 
-		add_to_tree(global_tree, parent_id, global_widget_data_pointer->id_widget, obj, on_click_box, global_widget_data_pointer->id_widget, global_widget_data_pointer->data, closing_tag, global_widget_data_pointer->widget_name);
+		add_to_tree(global_tree, parent_id, global_widget_data_pointer->id_widget, obj, on_click, global_widget_data_pointer->id_widget, global_widget_data_pointer->data, closing_tag, global_widget_data_pointer->widget_name);
 		
 		show_widget(obj);	
 		global_widget_data_pointer = NULL;
@@ -508,6 +510,8 @@ void on_click_box(gpointer data){
 			label_widget_properties();
 		} else if (strcmp(widget->widget_name, "level_bar") == 0){
 			level_bar_widget_properties();
+		} else if (strcmp(widget->widget_name, "link_button") == 0){
+			link_button_widget_properties();
 		}
 	}
 }
@@ -1181,7 +1185,7 @@ void traitement_level_bar(GtkWidget *widget, gpointer data){
 	infos->max_value = get_value_spin_button(myLevel_bar->level_bar_max_value_spin_button);
 
 	char *chaine = get_selecter_item(myLevel_bar->level_bar_mode_combo_box);
-	
+
 	if(!chaine){
 		infos->mode = GTK_LEVEL_BAR_MODE_CONTINUOUS;
 	} else if (strcmp(chaine, "GTK_LEVEL_BAR_MODE_CONTINUOUS") == 0){
@@ -1209,55 +1213,36 @@ void traitement_level_bar(GtkWidget *widget, gpointer data){
 	global_widget_data_pointer = widget_data;
 }
 
-void on_click_grid(gpointer data){}
+void traitement_link_button(GtkWidget *widget, gpointer data){
+	link_buttonI *myLink_button = (link_buttonI *)data;
+	linkButtonInfos *infos = malloc(sizeof(linkButtonInfos));
+	if(!infos) return;
 
-void on_click_paned(gpointer data){}
+	char *chaine = get_text(myLink_button->Link_button_url_entry);
 
-void on_click_stack(gpointer data){}
+	if(strcmp(chaine, "") == 0){
+		infos->url = NULL;
+	} else {
+		infos->url = chaine;
+	}
 
-void on_click_switcher(gpointer data){}
+	chaine = get_text(myLink_button->Link_button_label_entry);
 
-void on_click_button(gpointer data){}
+	if(strcmp(chaine, "") == 0){
+		infos->label = NULL;
+	} else {
+		infos->label = chaine;
+	}
 
-void on_click_check_button(gpointer data){}
+	data_widget *widget_data = malloc(sizeof(data_widget));
+	if(!widget_data) exit(EXIT_FAILURE);
 
-void on_click_color_button(gpointer data){}
+	widget_data->id_widget = get_text(myLink_button->Link_button_id_entry);
+	widget_data->data = infos;
+	widget_data->widget_name = "link_button";
 
-void on_click_combo_box(gpointer data){}
-
-void on_click_entry(gpointer data){}
-
-void on_click_font_button(gpointer data){}
-
-void on_click_image(gpointer data){}
-
-void on_click_label(gpointer data){}
-
-void on_click_level_bar(gpointer data){}
-
-void on_click_link_button(gpointer data){}
-
-void on_click_menu_button(gpointer data){}
-
-void on_click_menu_item(gpointer data){}
-
-void on_click_menu(gpointer data){}
-
-void on_click_progress_bar(gpointer data){}
-
-void on_click_radio_button(gpointer data){}
-
-void on_click_scale(gpointer data){}
-
-void on_click_separator(gpointer data){}
-
-void on_click_spin_button(gpointer data){}
-
-void on_click_spinner(gpointer data){}
-
-void on_click_switch_button(gpointer data){}
-
-
+	global_widget_data_pointer = widget_data;
+}
 
 
 const WidgetHandler widget_handlers[] = {
@@ -1293,33 +1278,3 @@ const WidgetHandler widget_handlers[] = {
     {NULL, NULL}
 };
 
-
-const WidgetOnClick widget_on_click[] = {
-    {"window", on_click_window},
-    {"box", on_click_box},
-    {"grid", on_click_grid},
-    {"paned", on_click_paned},
-    {"stack", on_click_stack},
-    {"switcher", on_click_switcher},
-    {"button", on_click_button},
-    {"check_button", on_click_check_button},
-    {"color_button", on_click_color_button},
-    {"combo_box", on_click_combo_box},
-    {"entry", on_click_entry},
-    {"font_button", on_click_font_button},
-    {"image", on_click_image},
-    {"label", on_click_label},
-    {"level_bar", on_click_level_bar},
-    {"link_button", on_click_link_button},
-    {"menu_button", on_click_menu_button},
-    {"menu_item", on_click_menu_item},
-    {"menu", on_click_menu},
-    {"progress_bar", on_click_progress_bar},
-    {"radio_button", on_click_radio_button},
-    {"scale", on_click_scale},
-    {"separator", on_click_separator},
-    {"spin_button", on_click_spin_button},
-    {"spinner", on_click_spinner},
-    {"switch_button", on_click_switch_button},
-    {NULL, NULL}
-};

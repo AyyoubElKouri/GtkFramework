@@ -12,12 +12,12 @@
 
 #include "../../include/widgets/link_button.h"
 
-GtkWidget *create_link_button(const gchar *uri, const gchar *label)
+GtkWidget *create_link_button(gchar *uri, gchar *label)
 {
     linkButtonInfos *linkButtonInformation = (linkButtonInfos *)malloc(sizeof(linkButtonInfos));
     if(!linkButtonInformation) return NULL;
 
-    linkButtonInformation->uri = g_strdup(uri);
+    linkButtonInformation->url = g_strdup(uri);
     linkButtonInformation->label = g_strdup(label);
 
     GtkWidget *linkButton = set_properties_link_button(linkButtonInformation);
@@ -28,7 +28,10 @@ GtkWidget *create_link_button(const gchar *uri, const gchar *label)
 
 GtkWidget *set_properties_link_button(linkButtonInfos *linkButtonInformation)
 {
-    GtkWidget *linkButton = gtk_link_button_new_with_label(linkButtonInformation->uri, linkButtonInformation->label);
+    GtkWidget *linkButton = gtk_link_button_new(linkButtonInformation->url);
+
+    if(linkButtonInformation->label)
+        gtk_button_set_label(GTK_BUTTON(linkButton), linkButtonInformation->label);
     return linkButton;
 }
 
@@ -37,9 +40,16 @@ linkButtonInfos *get_properties_link_button(GtkWidget *linkButton)
     linkButtonInfos *linkButtonInformation = (linkButtonInfos *)malloc(sizeof(linkButtonInfos));
     if(!linkButtonInformation) return NULL;
 
-    linkButtonInformation->uri = gtk_link_button_get_uri(GTK_LINK_BUTTON(linkButton));
+    linkButtonInformation->url = gtk_link_button_get_uri(GTK_LINK_BUTTON(linkButton));
     linkButtonInformation->label = gtk_button_get_label(GTK_BUTTON(linkButton));
 
     return linkButtonInformation;
 }
 
+void modify_link_button(GtkWidget *linkButton, linkButtonInfos *linkButtonInformation){
+    if(linkButtonInformation->url)
+        gtk_link_button_set_uri(GTK_LINK_BUTTON(linkButton), linkButtonInformation->url);
+
+    if(linkButtonInformation->label)
+        gtk_button_set_label(GTK_BUTTON(linkButton), linkButtonInformation->label);
+}

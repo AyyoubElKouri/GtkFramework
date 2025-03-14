@@ -57,6 +57,8 @@ static void xml_generation_callback(GtkTreeIter *iter, gpointer user_data, gbool
             write_label(((labelInfos *)(node_data->widget_data)), xml_file);
         } else if (strcmp(node_data->widget_name, "level_bar") == 0){
             write_level_bar(((levelBarInfos *)(node_data->widget_data)), xml_file);
+        } else if (strcmp(node_data->widget_name, "link_button") == 0){
+            write_link_button(((linkButtonInfos *)(node_data->widget_data)), xml_file);
         }
         fprintf(xml_file, ">\n");
     } else {
@@ -333,4 +335,15 @@ void write_level_bar(levelBarInfos *levelBarInformations, FILE *file){
 
     fprintf(file, "mode = %d ", levelBarInformations->mode);
 
+}
+
+void write_link_button(linkButtonInfos *linkButtonInformations, FILE *file){
+
+    if(linkButtonInformations->label){
+        fprintf(file, "label = \"%s\" ", linkButtonInformations->label);
+    }
+
+    if(linkButtonInformations->url){
+        fprintf(file, "uri = \"%s\" ", linkButtonInformations->url);
+    }
 }

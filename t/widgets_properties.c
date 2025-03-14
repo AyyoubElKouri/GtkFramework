@@ -2418,7 +2418,7 @@ void level_bar_widget_properties(){
 
 	add_to_grid(level_bar_grid, level_bar_id_label, 0, 0, 1, 1);
 
-	GtkWidget *level_bar_id_entry = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 20, 0.5);
+	GtkWidget *level_bar_id_entry = create_entry(NULL, "must be unique and no space", TRUE, FALSE, 20, 0.5);
 
     set_text(level_bar_id_entry, dataWidget->information);
 
@@ -2522,6 +2522,111 @@ void level_bar_widget_properties(){
         }
 
         modify_level_bar(dataWidget->widget, ((levelBarInfos *)(dataWidget->widget_data)));
+    } else if(response == GTK_RESPONSE_REJECT){
+        if(is_child(global_tree)){
+            TreeNodeData *widget = search_tree(global_tree, get_selected_node_id(GTK_TREE_VIEW(global_tree)));
+            destroy_widget(widget->widget);
+            delete_selected_element(global_tree);
+            
+        } else {
+            GtkWidget *dialog = create_dialog("Your cannot remove a parent widget!!!", NULL, GTK_DIALOG_MODAL, 300, 30, 1, NULL, "                                               OK                                               ", 1, NULL, 1, NULL, 1);
+            run_dialog(dialog);
+            destroy_widget(dialog);
+        }
+    }
+
+    destroy_widget(dialog);
+}
+
+char *link_button_container_properties(char *parent_id, GtkWidget *obj){
+    GtkWidget *dialog = create_dialog("Your cannot add widgets to a no container widget!!!", NULL, GTK_DIALOG_MODAL, 300, 30, 1, NULL, "                                                       OK                                                       ", 1, NULL, 1, NULL, 1);
+    run_dialog(dialog);
+    destroy_widget(dialog);
+}
+
+void link_button_widget_properties(){
+
+    TreeNodeData *dataWidget = search_tree(global_tree, get_selected_node_id(GTK_TREE_VIEW(global_tree)));
+
+    GtkWidget *box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
+
+    GtkWidget *Link_button_grid = create_grid(7, 7, TRUE, FALSE);
+
+	GtkWidget *Link_button_id_label = create_label("Widget ID", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(Link_button_grid, Link_button_id_label, 0, 0, 1, 1);
+
+	GtkWidget *Link_button_id_entry = create_entry(NULL, "must be unique and no space", TRUE, FALSE, 20, 0.5);
+
+    set_text(Link_button_id_entry, dataWidget->information);
+
+	add_to_grid(Link_button_grid, Link_button_id_entry, 0, 1, 1, 1);
+
+	GtkWidget *Link_button_url_label = create_label("URL", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(Link_button_grid, Link_button_url_label, 1, 0, 1, 1);
+
+	GtkWidget *Link_button_url_entry = create_entry(NULL, NULL, TRUE, TRUE, 200, 0.5);
+
+    char *chaine = ((linkButtonInfos *)(dataWidget->widget_data))->url;
+
+    if(!chaine){
+        set_text(Link_button_url_entry, "");
+    } else {
+        set_text(Link_button_url_entry, chaine);
+    }
+
+	add_to_grid(Link_button_grid, Link_button_url_entry, 1, 1, 1, 1);
+
+	GtkWidget *Link_button_label_label = create_label("Label", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(Link_button_grid, Link_button_label_label, 2, 0, 1, 1);
+
+	GtkWidget *Link_button_label_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+
+    chaine = ((linkButtonInfos *)(dataWidget->widget_data))->label;
+
+    if(!chaine){
+        set_text(Link_button_label_entry, "");
+    } else {
+        set_text(Link_button_label_entry, chaine);
+    }
+
+	add_to_grid(Link_button_grid, Link_button_label_entry, 2, 1, 1, 1);
+
+    add_to_box(box, Link_button_grid,START, FALSE, FALSE,  0, 0, 0, 0, 0);
+
+    GtkWidget *dialog = create_dialog("Link Button Properties", NULL, GTK_DIALOG_MODAL, 30, 30, 1, box, "OK", GTK_RESPONSE_OK, "Annuler", GTK_RESPONSE_CANCEL, "Supprimer", GTK_RESPONSE_REJECT);
+    gint response = run_dialog(dialog);
+
+    
+    if(response == GTK_RESPONSE_OK){
+        
+        char *chaine = get_text(Link_button_label_entry);
+
+        if(strcmp(chaine, "") == 0){
+            ((linkButtonInfos *)(dataWidget->widget_data))->label = NULL;
+        } else {
+            ((linkButtonInfos *)(dataWidget->widget_data))->label = malloc(sizeof(chaine));
+        }
+
+        if(strcmp(chaine, "") != 0){
+            strcpy(((linkButtonInfos *)(dataWidget->widget_data))->label, chaine);
+        }
+
+        chaine = get_text(Link_button_url_entry);
+
+        if(strcmp(chaine, "") == 0){
+            ((linkButtonInfos *)(dataWidget->widget_data))->url = NULL;
+        } else {
+            ((linkButtonInfos *)(dataWidget->widget_data))->url = malloc(sizeof(chaine));
+        }
+
+        if(strcmp(chaine, "") != 0){
+            strcpy(((linkButtonInfos *)(dataWidget->widget_data))->url, chaine);
+        }
+
+        modify_link_button(dataWidget->widget, ((linkButtonInfos *)(dataWidget->widget_data)));
     } else if(response == GTK_RESPONSE_REJECT){
         if(is_child(global_tree)){
             TreeNodeData *widget = search_tree(global_tree, get_selected_node_id(GTK_TREE_VIEW(global_tree)));

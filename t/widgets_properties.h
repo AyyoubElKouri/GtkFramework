@@ -49,7 +49,6 @@
  char *check_button_container_properties(char *parent_id, GtkWidget *obj);
  void check_button_widget_properties(); 
 
-
  char *color_button_container_properties(char *parent_id, GtkWidget *obj);
  void color_button_widget_properties(); 
 
@@ -71,5 +70,8 @@
 
  char *level_bar_container_properties(char *parent_id, GtkWidget *obj);
  void level_bar_widget_properties(); 
+
+ char *link_button_container_properties(char *parent_id, GtkWidget *obj);
+ void link_button_widget_properties();
 
  #endif // WIDGETS_PROPERTIES_H

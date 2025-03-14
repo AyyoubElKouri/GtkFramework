@@ -56,4 +56,6 @@
 
  void write_level_bar(levelBarInfos *levelBarInformations, FILE *file);
 
+ void write_link_button(linkButtonInfos *linkButtonInformations, FILE *file);
+
  #endif // XML_GENERATE_H
