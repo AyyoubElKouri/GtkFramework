@@ -74,4 +74,15 @@
  char *link_button_container_properties(char *parent_id, GtkWidget *obj);
  void link_button_widget_properties();
 
+ char *menu_button_container_properties(char *parent_id, GtkWidget *obj);
+ void menu_button_widget_properties();
+
+ char *menu_container_properties(char *parent_id, GtkWidget *obj);
+ void menu_widget_properties();
+
+ char *menu_item_container_properties(char *parent_id, GtkWidget *obj);
+ void menu_item_widget_properties();
+
+ char *radio_button_container_properties(char *parent_id, GtkWidget *obj);
+ void radio_button_widget_properties();
  #endif // WIDGETS_PROPERTIES_H

@@ -7,6 +7,8 @@
 extern GtkWidget *test_box;
 extern GtkWidget *global_tree;
 extern data_widget* global_widget_data_pointer;
+extern GtkWidget *drag_button;
+
 
 
 static void activate(GtkApplication *app, gpointer data)
@@ -1742,8 +1744,6 @@ static void activate(GtkApplication *app, gpointer data)
 
 	GtkWidget *Link_button_grid_frame = create_frame(NULL, 0.5, 0.5);
 
-	// ffffffffffffff
-
 	GtkWidget *Link_button_grid = create_grid(7, 7, TRUE, FALSE);
 
 	GtkWidget *Link_button_id_label = create_label("Widget ID", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
@@ -1778,8 +1778,6 @@ static void activate(GtkApplication *app, gpointer data)
 	myLink_button->Link_button_id_entry = Link_button_id_entry;
 	myLink_button->Link_button_url_entry = Link_button_url_entry;
 	myLink_button->Link_button_label_entry = Link_button_label_entry;
-
-	// fffffffffff
 
 	GtkWidget *Link_button_add_button = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                               ", FALSE, NULL, G_CALLBACK(traitement_link_button), myLink_button);
 
@@ -1845,7 +1843,15 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(menu_button_grid, menu_button_arrow_type_combo_box, 3, 1, 1, 1);
 
-	GtkWidget *menu_button_add_button = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                               ", FALSE, NULL, NULL, NULL);
+	menu_buttonI *myMenu_button = malloc(sizeof(menu_buttonI));
+	if(!myMenu_button) return;
+
+	myMenu_button->menu_button_id_entry = menu_button_id_entry;
+	myMenu_button->menu_button_label_entry = menu_button_label_entry;
+	myMenu_button->menu_button_path_to_image_entry = menu_button_path_to_image_entry;
+	myMenu_button->menu_button_arrow_type_combo_box = menu_button_arrow_type_combo_box;
+
+	GtkWidget *menu_button_add_button = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                               ", FALSE, NULL, G_CALLBACK(traitement_menu_button), myMenu_button);
 
 	add_to_grid(menu_button_grid, menu_button_add_button, 4, 0, 2, 1);
 
@@ -1917,7 +1923,16 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(menu_item_grid, menu_item_data_entry, 4, 1, 1, 1);
 
-	GtkWidget *menu_item_add_button = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                              ", FALSE, NULL, NULL, NULL);
+	menu_itemI *myMenu_item = malloc(sizeof(menu_itemI));
+	if(!myMenu_item) return;
+
+	myMenu_item->menu_item_id_entry = menu_item_id_entry;
+    myMenu_item->menu_item_label_entry = menu_item_label_entry;
+    myMenu_item->menu_item_type_combo_box = menu_item_type_combo_box;
+    myMenu_item->menu_item_callback_entry = menu_item_callback_entry;
+    myMenu_item->menu_item_data_entry = menu_item_data_entry;
+
+	GtkWidget *menu_item_add_button = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                              ", FALSE, NULL, G_CALLBACK(traitement_menu_item), myMenu_item);
 
 	add_to_grid(menu_item_grid, menu_item_add_button, 5, 0, 2, 1);
 
@@ -1969,7 +1984,14 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(menu_grid, menu_label_entry, 2, 1, 1, 1);
 
-	GtkWidget *menu_add_button = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                              ", FALSE, NULL, NULL, NULL);
+	menuI *mymenu = malloc(sizeof(menuI));
+	if(!mymenu) return;
+
+	mymenu->menu_id_entry = menu_id_entry;
+    mymenu->menu_is_primary_combo_box = menu_is_primary_combo_box;
+    mymenu->menu_label_entry = menu_label_entry;
+
+	GtkWidget *menu_add_button = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                              ", FALSE, NULL, G_CALLBACK(traitement_menu), mymenu);
 
 	add_to_grid(menu_grid, menu_add_button, 3, 0, 2, 1);
 
@@ -2075,6 +2097,8 @@ static void activate(GtkApplication *app, gpointer data)
 
 	GtkWidget *radio_button_grid_frame = create_frame(NULL, 0.5, 0.5);
 
+	//  fffffffffffffffffff
+
 	GtkWidget *radio_button_grid = create_grid(7, 7, TRUE, FALSE);
 
 	GtkWidget *radio_button_id_label = create_label("Widget Id", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
@@ -2121,7 +2145,18 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(radio_button_grid, radio_button_default_state_combo_box, 4, 1, 1, 1);
 
-	GtkWidget *radio_button_add_button = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                             ", FALSE, NULL, NULL, NULL);
+	radio_buttonI * myRadio_button = malloc(sizeof(radio_buttonI));
+	if(!myRadio_button) return;
+
+	myRadio_button->radio_button_id_entry = radio_button_id_entry;
+    myRadio_button->radio_button_label_entry = radio_button_label_entry;
+    myRadio_button->radio_button_path_image_entry = radio_button_path_image_entry;
+    myRadio_button->radio_button_id_radio_group_member_entry = radio_button_id_radio_group_member_entry;
+    myRadio_button->radio_button_default_state_combo_box = radio_button_default_state_combo_box;
+
+	// ffffffffffffffffffffff
+
+	GtkWidget *radio_button_add_button = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                             ", FALSE, NULL, G_CALLBACK(traitement_radio_button), myRadio_button);
 
 	add_to_grid(radio_button_grid, radio_button_add_button, 5, 0, 2, 1);
 
@@ -2461,7 +2496,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_box(control_box, generate_button, START, FALSE, FALSE, 0, 0, 0, 0, 7);
 
-	GtkWidget *drag_button = create_button(GTK_RELIEF_NORMAL, "Drag", FALSE, NULL, NULL, NULL);
+	drag_button = create_button(GTK_RELIEF_NORMAL, "Drag/Drop", FALSE, NULL, G_CALLBACK(cancel), NULL);
 
 	add_to_box(control_box, drag_button, START, TRUE, TRUE, 0, 0, 0, 0, 0);
 

@@ -15,6 +15,11 @@
 GtkWidget *test_box = NULL;
 GtkWidget *global_tree;
 data_widget* global_widget_data_pointer = NULL;
+GtkWidget *drag_button;
+GtkCssProvider *provider = NULL;
+
+
+
 
 
 void on_click_window(gpointer data){
@@ -44,6 +49,7 @@ void on_click_window(gpointer data){
 		
 		add_to_tree(global_tree,  (char *)data, global_widget_data_pointer->id_widget, obj, on_click, global_widget_data_pointer->id_widget, global_widget_data_pointer->data, closing_tag, global_widget_data_pointer->widget_name);
 		global_widget_data_pointer = NULL;
+		drop(drag_button);
 	} else {
 
 		GtkWidget *box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
@@ -451,7 +457,7 @@ void on_click(gpointer data){
 			closing_tag = color_button_container_properties(parent_id, obj);
 		} else if (strcmp(parent_data->widget_name, "combo_box") == 0){
 			closing_tag = combo_box_container_properties(parent_id, obj);
-		} else if(strcmp(parent_data->widget_name, "switcher")) {
+		} else if(strcmp(parent_data->widget_name, "switcher") == 0) {
 			closing_tag = switcher_container_properties(parent_id, obj);
 		} else if (strcmp(parent_data->widget_name, "entry") == 0){
 			closing_tag = entry_container_properties(parent_id, obj);
@@ -465,12 +471,21 @@ void on_click(gpointer data){
 			closing_tag = level_bar_container_properties(parent_id, obj);
 		} else if (strcmp(parent_data->widget_name, "link_button") == 0){
 			closing_tag = link_button_container_properties(parent_id, obj);
-		}	
+		} else if (strcmp(parent_data->widget_name, "menu_button") == 0){
+			closing_tag = menu_button_container_properties(parent_id, obj);	
+		} else if (strcmp(parent_data->widget_name, "menu") == 0){
+			closing_tag = menu_container_properties(parent_id, obj);
+		} else if (strcmp(parent_data->widget_name, "menu_item") == 0){
+			closing_tag = menu_item_container_properties(parent_id, obj);
+		} else if (strcmp(parent_data->widget_name, "radio_button") == 0){
+			closing_tag = radio_button_container_properties(parent_id, obj);
+		}
 
 		add_to_tree(global_tree, parent_id, global_widget_data_pointer->id_widget, obj, on_click, global_widget_data_pointer->id_widget, global_widget_data_pointer->data, closing_tag, global_widget_data_pointer->widget_name);
 		
-		show_widget(obj);	
+		show_widget(obj);
 		global_widget_data_pointer = NULL;
+		drop(drag_button);
 	}
 	else {
 		TreeNodeData *widget = search_tree(global_tree, get_selected_node_id(GTK_TREE_VIEW(global_tree)));
@@ -512,8 +527,17 @@ void on_click(gpointer data){
 			level_bar_widget_properties();
 		} else if (strcmp(widget->widget_name, "link_button") == 0){
 			link_button_widget_properties();
+		} else if (strcmp(widget->widget_name, "menu_button") == 0){
+			menu_button_widget_properties();
+		} else if (strcmp(widget->widget_name, "menu") == 0){
+			menu_widget_properties();
+		} else if (strcmp(widget->widget_name, "menu_item") == 0){
+			menu_item_widget_properties();
+		} else if (strcmp(widget->widget_name, "radio_button") == 0){
+			radio_button_widget_properties();
 		}
 	}
+
 }
 
 void traitementBox(GtkWidget *widget, gpointer data){
@@ -559,6 +583,7 @@ void traitementBox(GtkWidget *widget, gpointer data){
 	widget_data->widget_name = "box";
 
 	global_widget_data_pointer = widget_data;
+	drag(drag_button);
 }
 
 
@@ -597,6 +622,7 @@ void traitementHeaderBar(GtkWidget *widget, gpointer data){
 	widget_data->widget_name = "header_bar";
 
 	global_widget_data_pointer = widget_data;
+	drag(drag_button);
 }
 
 void traitement_fixed(GtkWidget *widget, gpointer data){
@@ -610,6 +636,7 @@ void traitement_fixed(GtkWidget *widget, gpointer data){
 	widget_data->widget_name = "fixed";
 
 	global_widget_data_pointer = widget_data;
+	drag(drag_button);
 }
 
 void traitement_frame(GtkWidget *widget, gpointer data){
@@ -628,6 +655,7 @@ void traitement_frame(GtkWidget *widget, gpointer data){
 	widget_data->widget_name = "frame";
 
 	global_widget_data_pointer = widget_data;
+	drag(drag_button);
 }
 
 void traitement_grid(GtkWidget *widget, gpointer data){
@@ -668,6 +696,7 @@ void traitement_grid(GtkWidget *widget, gpointer data){
 	widget_data->widget_name = "grid";
 
 	global_widget_data_pointer = widget_data;
+	drag(drag_button);
 }
 
 void traitement_paned(GtkWidget *widget, gpointer data){
@@ -703,7 +732,8 @@ void traitement_paned(GtkWidget *widget, gpointer data){
 	widget_data->data = infos;
 	widget_data->widget_name = "paned";
 
-	global_widget_data_pointer = widget_data;	
+	global_widget_data_pointer = widget_data;
+	drag(drag_button);	
 }
 
 void traitement_stack(GtkWidget *widget, gpointer data){
@@ -737,7 +767,8 @@ void traitement_stack(GtkWidget *widget, gpointer data){
 	widget_data->data = infos;
 	widget_data->widget_name = "stack";
 
-	global_widget_data_pointer = widget_data;	
+	global_widget_data_pointer = widget_data;
+	drag(drag_button);	
 }
 
 void traitement_switcher(GtkWidget *widget, gpointer data){
@@ -761,7 +792,8 @@ void traitement_switcher(GtkWidget *widget, gpointer data){
 	widget_data->data = infos;
 	widget_data->widget_name = "switcher";
 
-	global_widget_data_pointer = widget_data;	
+	global_widget_data_pointer = widget_data;
+	drag(drag_button);	
 }
 
 void traitement_scrolled_window(GtkWidget *widget, gpointer data){
@@ -779,7 +811,8 @@ void traitement_scrolled_window(GtkWidget *widget, gpointer data){
 	widget_data->data = infos;
 	widget_data->widget_name = "scrolled_window";
 
-	global_widget_data_pointer = widget_data;		
+	global_widget_data_pointer = widget_data;
+	drag(drag_button);		
 }
 
 void traitement_button(GtkWidget *widget, gpointer data){
@@ -836,7 +869,8 @@ void traitement_button(GtkWidget *widget, gpointer data){
 	widget_data->data = infos;
 	widget_data->widget_name = "button";
 
-	global_widget_data_pointer = widget_data;	
+	global_widget_data_pointer = widget_data;
+	drag(drag_button);	
 }
 
 void traitement_check_button(GtkWidget *widget, gpointer data){
@@ -896,6 +930,7 @@ void traitement_check_button(GtkWidget *widget, gpointer data){
 	widget_data->widget_name = "check_button";
 
 	global_widget_data_pointer = widget_data;
+	drag(drag_button);
 }
 
 void traitement_color_button(GtkWidget *widget, gpointer data){
@@ -933,6 +968,7 @@ void traitement_color_button(GtkWidget *widget, gpointer data){
 	widget_data->widget_name = "color_button";
 
 	global_widget_data_pointer = widget_data;
+	drag(drag_button);
 }
 
 void traitement_combo_box(GtkWidget *widget, gpointer data){
@@ -946,6 +982,7 @@ void traitement_combo_box(GtkWidget *widget, gpointer data){
 	widget_data->widget_name = "combo_box";
 
 	global_widget_data_pointer = widget_data;
+	drag(drag_button);
 }
 
 void traitement_entry(GtkWidget *widget, gpointer data){
@@ -996,6 +1033,7 @@ void traitement_entry(GtkWidget *widget, gpointer data){
 	widget_data->widget_name = "entry";
 
 	global_widget_data_pointer = widget_data;
+	drag(drag_button);
 }
 
 void traitement_font_button(GtkWidget *widget, gpointer data){
@@ -1067,6 +1105,7 @@ void traitement_font_button(GtkWidget *widget, gpointer data){
 	widget_data->widget_name = "font_button";
 
 	global_widget_data_pointer = widget_data;
+	drag(drag_button);
 }
 
 void traitement_image(GtkWidget *widget, gpointer data){
@@ -1089,6 +1128,7 @@ void traitement_image(GtkWidget *widget, gpointer data){
 	widget_data->widget_name = "image";
 
 	global_widget_data_pointer = widget_data;
+	drag(drag_button);
 }
 
 void traitement_label(GtkWidget *widget, gpointer data){
@@ -1173,6 +1213,7 @@ void traitement_label(GtkWidget *widget, gpointer data){
 	widget_data->widget_name = "label";
 
 	global_widget_data_pointer = widget_data;
+	drag(drag_button);
 }
 
 void traitement_level_bar(GtkWidget *widget, gpointer data){
@@ -1211,6 +1252,7 @@ void traitement_level_bar(GtkWidget *widget, gpointer data){
 	widget_data->widget_name = "level_bar";
 
 	global_widget_data_pointer = widget_data;
+	drag(drag_button);
 }
 
 void traitement_link_button(GtkWidget *widget, gpointer data){
@@ -1242,8 +1284,211 @@ void traitement_link_button(GtkWidget *widget, gpointer data){
 	widget_data->widget_name = "link_button";
 
 	global_widget_data_pointer = widget_data;
+	drag(drag_button);
 }
 
+void traitement_menu_button(GtkWidget *widget, gpointer data){
+	menu_buttonI *myMenu_button = (menu_buttonI *)data;
+	menuButtonInfos *infos = malloc(sizeof(menuButtonInfos));
+	if(!infos) return;
+
+	char *chaine = get_text(myMenu_button->menu_button_label_entry);
+
+	if(strcmp(chaine, "") == 0){
+		infos->label = NULL;
+	} else {
+		infos->label = chaine;
+	}
+
+	chaine = get_text(myMenu_button->menu_button_path_to_image_entry);
+
+	if(strcmp(chaine, "") == 0){
+		infos->path_to_image = NULL;
+	} else {
+		infos->path_to_image = chaine;
+	}
+
+	chaine = get_selecter_item(myMenu_button->menu_button_arrow_type_combo_box);
+
+	if(!chaine){
+		infos->arrow_type = GTK_ARROW_DOWN;
+	} else if (strcmp(chaine, "GTK_ARROW_DOWN") == 0){
+		infos->arrow_type = GTK_ARROW_DOWN;
+	} else if (strcmp(chaine, "GTK_ARROW_UP") == 0){
+		infos->arrow_type = GTK_ARROW_UP;
+	} else if (strcmp(chaine, "GTK_ARROW_LEFT") == 0){
+		infos->arrow_type = GTK_ARROW_LEFT;
+	} else {
+		infos->arrow_type = GTK_ARROW_RIGHT;
+	}
+
+	data_widget *widget_data = malloc(sizeof(data_widget));
+	if(!widget_data) exit(EXIT_FAILURE);
+
+	widget_data->id_widget = get_text(myMenu_button->menu_button_id_entry);
+	widget_data->data = infos;
+	widget_data->widget_name = "menu_button";
+
+	global_widget_data_pointer = widget_data;
+	drag(drag_button);
+}
+
+void traitement_menu(GtkWidget *widget, gpointer data){
+
+	menuI *mymenu = (menuI *)data;
+	menuInfos *infos = malloc(sizeof(menuInfos));
+	if(!infos) return;
+
+	char *chaine = get_text(mymenu->menu_label_entry);
+
+	if(strcmp(chaine, "") == 0){
+		infos->label = NULL;
+	} else {
+		infos->label = chaine;
+	}
+
+	chaine = get_selecter_item(mymenu->menu_is_primary_combo_box);
+
+	if(!chaine){
+		infos->is_primary = TRUE;
+	} else if (strcmp(chaine, "TRUE") == 0){
+		infos->is_primary = TRUE;
+	} else {
+		infos->is_primary = FALSE;
+	}
+
+	data_widget *widget_data = malloc(sizeof(data_widget));
+	if(!widget_data) exit(EXIT_FAILURE);
+
+	widget_data->id_widget = get_text(mymenu->menu_id_entry);
+	widget_data->data = infos;
+	widget_data->widget_name = "menu";
+
+	global_widget_data_pointer = widget_data;
+	drag(drag_button);
+}
+
+void traitement_menu_item(GtkWidget *widget, gpointer data){
+	menu_itemI *myMenu_item = (menu_itemI *)data;
+	menuItemInfos *infos = malloc(sizeof(menuItemInfos));
+	if(!infos) return;
+
+	char *chaine = get_text(myMenu_item->menu_item_label_entry);
+	if(strcmp(chaine , "") == 0){
+		infos->label = NULL;
+	} else {
+		infos->label = chaine;
+	}
+
+	chaine = get_selecter_item(myMenu_item->menu_item_type_combo_box);
+
+	if(!chaine){
+		infos->type = "normal";
+	} else if (strcmp(chaine, "normal") == 0){
+		infos->type = "normal";
+	} else if (strcmp(chaine, "separator") == 0){
+		infos->type = "separator";
+	} else if (strcmp(chaine, "check") == 0){
+		infos->type = "check";
+	} else {
+		infos->type = "radio";
+	}
+
+	chaine = get_text(myMenu_item->menu_item_callback_entry);
+
+	if(!chaine){
+		infos->callback_name = NULL;
+	} else {
+		infos->callback_name = chaine;
+	}
+
+	chaine = get_text(myMenu_item->menu_item_data_entry);
+
+	if(!chaine){
+		infos->data_name = NULL;
+	} else {
+		infos->data_name = chaine;
+	}
+
+	infos->callback = NULL;
+	infos->data = NULL;
+
+	data_widget *widget_data = malloc(sizeof(data_widget));
+	if(!widget_data) exit(EXIT_FAILURE);
+
+	widget_data->id_widget = get_text(myMenu_item->menu_item_id_entry);
+	widget_data->data = infos;
+	widget_data->widget_name = "menu_item";
+
+	global_widget_data_pointer = widget_data;
+	drag(drag_button);
+}
+
+void traitement_radio_button(GtkWidget *widget, gpointer data){
+
+	radio_buttonI *myRadio_button = (radio_buttonI *)data;
+	radioButtonInfos *infos = malloc(sizeof(radioButtonInfos));
+	if(!infos) return;
+
+	char * chaine = get_text(myRadio_button->radio_button_label_entry);
+
+	if(strcmp(chaine, "") == 0){
+		infos->label = NULL;
+	} else {
+		infos->label = chaine;
+	}
+
+	chaine = get_text(myRadio_button->radio_button_path_image_entry);
+	
+	if(strcmp(chaine, "") == 0){
+		infos->path_to_image = NULL;
+	} else {
+		infos->path_to_image = chaine;
+	}
+
+	chaine = get_text(myRadio_button->radio_button_id_radio_group_member_entry);
+
+	if(strcmp(chaine, "") == 0){
+		infos->radio_group_member_name = NULL;
+	} else {
+		infos->radio_group_member_name = chaine;
+	}
+
+	chaine = get_selecter_item(myRadio_button->radio_button_default_state_combo_box);
+
+	if(!chaine){
+		infos->default_state = FALSE;
+	} else if (strcmp(chaine, "TRUE") == 0){
+		infos->default_state = TRUE;
+	} else {
+		infos->default_state = FALSE;
+	}
+
+	if(infos->radio_group_member_name){
+		TreeNodeData *id = search_tree(global_tree, infos->radio_group_member_name);
+		if(id)
+			infos->radio_group_member = id->widget;
+		else
+			infos->radio_group_member = NULL;
+	} else {
+		infos->radio_group_member = NULL;
+	}
+
+	data_widget *widget_data = malloc(sizeof(data_widget));
+	if(!widget_data) exit(EXIT_FAILURE);
+
+	widget_data->id_widget = get_text(myRadio_button->radio_button_id_entry);
+	widget_data->data = infos;
+	widget_data->widget_name = "radio_button";
+
+	global_widget_data_pointer = widget_data;
+	drag(drag_button);
+}
+
+void cancel(GtkWidget *button, gpointer data){
+	global_widget_data_pointer = NULL;
+	drop(drag_button);
+}
 
 const WidgetHandler widget_handlers[] = {
     {"header_bar", (void*(*)(void*))set_properties_header_bar},
@@ -1266,7 +1511,7 @@ const WidgetHandler widget_handlers[] = {
     {"level_bar", (void*(*)(void*))set_properties_level_bar},
     {"link_button", (void*(*)(void*))set_properties_link_button},
     {"menu_button", (void*(*)(void*))set_properties_menuButton},
-    {"item", (void*(*)(void*))set_properties_item},
+    {"menu_item", (void*(*)(void*))set_properties_item},
     {"menu", (void*(*)(void*))set_properties_menu},
     {"progress_bar", (void*(*)(void*))set_properties_progress_bar},
     {"radio_button", (void*(*)(void*))set_properties_radio_button},
@@ -1278,3 +1523,43 @@ const WidgetHandler widget_handlers[] = {
     {NULL, NULL}
 };
 
+void drag(GtkWidget *button) {
+    // Créer un style CSS temporaire pour l'état actif
+    GtkCssProvider *provider = gtk_css_provider_new();
+    gtk_css_provider_load_from_data(provider,
+        "button {"
+        "   background:rgb(60, 255, 0);"  // Rouge vif
+        "   color: white;"
+        "}", -1, NULL);
+
+    // Appliquer le style au bouton
+    GtkStyleContext *context = gtk_widget_get_style_context(button);
+    gtk_style_context_add_provider(context, 
+        GTK_STYLE_PROVIDER(provider),
+        GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+
+    // Stocker le provider dans les données du bouton
+    g_object_set_data(G_OBJECT(button), "css-provider", provider);
+
+    // Changer le texte
+    gtk_button_set_label(GTK_BUTTON(button), "Cancel");
+}
+
+void drop(GtkWidget *button) {
+    // Récupérer le provider CSS
+    GtkCssProvider *provider = g_object_get_data(G_OBJECT(button), "css-provider");
+
+    if(provider) {
+        // Retirer le style
+        GtkStyleContext *context = gtk_widget_get_style_context(button);
+        gtk_style_context_remove_provider(context, 
+            GTK_STYLE_PROVIDER(provider));
+
+        // Nettoyer la mémoire
+        g_object_unref(provider);
+        g_object_set_data(G_OBJECT(button), "css-provider", NULL);
+    }
+
+    // Réinitialiser le texte
+    gtk_button_set_label(GTK_BUTTON(button), "Drag/Drop");
+}

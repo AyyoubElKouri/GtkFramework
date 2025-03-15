@@ -16,6 +16,7 @@
 
 
 #include <gtk/gtk.h>
+#include "tree_view.h"
 
 /**
  * @struct buttonRadioInfos
@@ -24,9 +25,10 @@
 
 typedef struct
 {
-    const gchar *label;
-    const gchar *path_to_image;
+    gchar *label;
+    gchar *path_to_image;
     GtkWidget *radio_group_member;
+    char *radio_group_member_name;
     gboolean default_state;
 } radioButtonInfos;
 
@@ -44,7 +46,7 @@ typedef struct
  * @return the radio button widget
  */
 
-GtkWidget *create_radio_button(const gchar *label, const gchar *path_to_image, GtkWidget *radio_group_member, gboolean default_state);
+GtkWidget *create_radio_button(gchar *label, gchar *path_to_image, GtkWidget *radio_group_member, gboolean default_state);
 
 /**
  * @brief sets the properties of the radio button widget
@@ -65,5 +67,7 @@ GtkWidget *set_properties_radio_button(radioButtonInfos *buttonRadioInformations
  */
 
 radioButtonInfos *get_properties_radio_button(GtkWidget *radioButton);
+
+void modify_radio_button(GtkWidget *radioButton, radioButtonInfos *radioButtonInformations, GtkWidget *global_tree);
 
 #endif // RADIO_BUTTON_H

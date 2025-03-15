@@ -16,7 +16,6 @@
 #include "../include/GtkFramework/GtkFramework.h"
 #include "../XML/xscEngine/widgets_structures.h"
 #include "widgets_properties.h"
-#include <dlfcn.h> 
 
 typedef struct{
     char* id_widget;
@@ -35,6 +34,7 @@ typedef struct {
 } WidgetOnClick;
 
 typedef void (*WidgetPropertiesHandler)();
+
 
 
 extern const WidgetHandler widget_handlers[];
@@ -84,5 +84,17 @@ void traitement_level_bar(GtkWidget *widget, gpointer data);
 
 void traitement_link_button(GtkWidget *widget, gpointer data);
 
+void traitement_menu_button(GtkWidget *widget, gpointer data);
 
+void traitement_menu(GtkWidget *widget, gpointer data);
+
+void traitement_menu_item(GtkWidget *widget, gpointer data);
+
+void traitement_radio_button(GtkWidget *widget, gpointer data);
+
+void cancel(GtkWidget *button, gpointer data);
+
+void drag(GtkWidget *button);
+
+void drop(GtkWidget *button);
 #endif

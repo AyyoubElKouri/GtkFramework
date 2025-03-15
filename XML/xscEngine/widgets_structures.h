@@ -210,6 +210,44 @@ typedef struct
     GtkWidget *Link_button_id_entry;
     GtkWidget *Link_button_url_entry;
     GtkWidget *Link_button_label_entry;
+
 } link_buttonI;
+
+typedef struct
+{
+    GtkWidget *menu_button_id_entry;
+    GtkWidget *menu_button_label_entry;
+    GtkWidget *menu_button_path_to_image_entry;
+    GtkWidget *menu_button_arrow_type_combo_box;
+
+} menu_buttonI;
+
+typedef struct
+{
+    GtkWidget *menu_id_entry;
+    GtkWidget *menu_is_primary_combo_box;
+    GtkWidget *menu_label_entry;
+
+} menuI;
+
+typedef struct
+{
+    GtkWidget *menu_item_id_entry;
+    GtkWidget *menu_item_label_entry;
+    GtkWidget *menu_item_type_combo_box;
+    GtkWidget *menu_item_callback_entry;
+    GtkWidget *menu_item_data_entry;
+
+} menu_itemI;
+
+typedef struct
+{
+    GtkWidget *radio_button_id_entry;
+    GtkWidget *radio_button_label_entry;
+    GtkWidget *radio_button_path_image_entry;
+    GtkWidget *radio_button_id_radio_group_member_entry;
+    GtkWidget *radio_button_default_state_combo_box;
+
+} radio_buttonI;
 
 #endif //WIDGETS_STRUCTURES_H

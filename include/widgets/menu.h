@@ -26,8 +26,7 @@
 typedef struct
 {
     gboolean is_primary;
-    const gchar *label;
-    LinkedList *items;
+    gchar *label;
 }menuInfos;
 
 /**
@@ -39,7 +38,7 @@ typedef struct
  * @return the created menu
  */
 
-GtkWidget *create_menu(gboolean is_primary, const gchar *label);
+GtkWidget *create_menu(gboolean is_primary, gchar *label);
 
 /**
  * @brief sets the properties of the menu
@@ -69,5 +68,7 @@ menuInfos *get_properties_menu(GtkWidget *menu);
  */
 
 void add_to_menu(GtkWidget *menu, GtkWidget *menu_item);
+
+void modify_menu(GtkWidget *menu, menuInfos *menuInformation);
 
 #endif // MENU_H

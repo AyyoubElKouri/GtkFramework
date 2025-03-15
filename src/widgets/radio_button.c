@@ -15,7 +15,7 @@
 static gchar *Gfile_name;
 static GtkWidget *Ggroup_member;
 
-GtkWidget *create_radio_button(const gchar *label, const gchar *path_to_image, GtkWidget *radio_group_member, gboolean default_state)
+GtkWidget *create_radio_button(gchar *label, gchar *path_to_image, GtkWidget *radio_group_member, gboolean default_state)
 {
     radioButtonInfos *buttonRadioInformations = (radioButtonInfos *)malloc(sizeof(radioButtonInfos));
     if(!buttonRadioInformations) return NULL;
@@ -66,4 +66,24 @@ radioButtonInfos *get_properties_radio_button(GtkWidget *radioButton)
     buttonRadioInformations->default_state = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(radioButton));
     
     return buttonRadioInformations;
+}
+
+void modify_radio_button(GtkWidget *radioButton, radioButtonInfos *radioButtonInformations, GtkWidget *global_tree){
+    if(radioButtonInformations->radio_group_member){
+        if(radioButtonInformations->radio_group_member_name){
+            TreeNodeData *id = search_tree(global_tree, radioButtonInformations->radio_group_member_name);
+            if(id)
+                gtk_radio_button_join_group(GTK_RADIO_BUTTON(radioButton), GTK_RADIO_BUTTON(id->widget));
+        }
+    }
+
+    if(radioButtonInformations->label){
+        gtk_button_set_label(GTK_BUTTON(radioButton), radioButtonInformations->label);
+    } else {
+        if(radioButtonInformations->path_to_image){
+            gtk_button_set_image(GTK_BUTTON(radioButton), gtk_image_new_from_file(radioButtonInformations->path_to_image));
+        }
+    }
+
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(radioButton), radioButtonInformations->default_state);
 }

@@ -59,6 +59,14 @@ static void xml_generation_callback(GtkTreeIter *iter, gpointer user_data, gbool
             write_level_bar(((levelBarInfos *)(node_data->widget_data)), xml_file);
         } else if (strcmp(node_data->widget_name, "link_button") == 0){
             write_link_button(((linkButtonInfos *)(node_data->widget_data)), xml_file);
+        } else if (strcmp(node_data->widget_name, "menu_button") == 0){
+            write_menu_button(((menuButtonInfos *)(node_data->widget_data)), xml_file); 
+        } else if (strcmp(node_data->widget_name, "menu") == 0){
+            write_menu(((menuInfos *)(node_data->widget_data)), xml_file);
+        } else if (strcmp(node_data->widget_name, "menu_item") == 0){
+            write_menu_item(((menuItemInfos *)(node_data->widget_data)), xml_file);
+        } else if (strcmp(node_data->widget_name, "radio_button") == 0){
+            write_radio_button(((radioButtonInfos *)(node_data->widget_data)), xml_file);
         }
         fprintf(xml_file, ">\n");
     } else {
@@ -90,7 +98,7 @@ void generate_xml(GtkWidget *tree_view, const char *output_filename) {
 
 
 void start_generate(GtkWidget *widget, gpointer data){
-    generate_xml(global_tree, "test.x");
+    generate_xml(global_tree, "XML/test.x");
 }
 
 void write_window(windowInfos *windowInformations, FILE *file){
@@ -286,7 +294,7 @@ void write_font_button(fontButtonInfos *fontButtonInformations, FILE *file){
 
     fprintf(file, "use_size = %s ", (fontButtonInformations->use_size) ? "TRUE" : "FALSE");
 
-    fprintf(file, "use_font = %s ", (fontButtonInformations->use_font) ? "TRUE" : "FALSE");
+    fprintf(file, "use_font = %s", (fontButtonInformations->use_font) ? "TRUE" : "FALSE");
     
 }
 
@@ -333,7 +341,7 @@ void write_level_bar(levelBarInfos *levelBarInformations, FILE *file){
 
     fprintf(file, "default_value = %.f ", levelBarInformations->default_value);
 
-    fprintf(file, "mode = %d ", levelBarInformations->mode);
+    fprintf(file, "mode = %d", levelBarInformations->mode);
 
 }
 
@@ -346,4 +354,67 @@ void write_link_button(linkButtonInfos *linkButtonInformations, FILE *file){
     if(linkButtonInformations->url){
         fprintf(file, "uri = \"%s\" ", linkButtonInformations->url);
     }
+}
+
+void write_menu_button(menuButtonInfos *menuButtonInformations, FILE *file){
+
+    if(menuButtonInformations->label){
+        fprintf(file, "label = \"%s\" ", menuButtonInformations->label);
+    }
+
+    if(menuButtonInformations->path_to_image){
+        fprintf(file, "image = \"%s\" ", menuButtonInformations->path_to_image);
+    }
+
+    if(menuButtonInformations->arrow_type == GTK_ARROW_DOWN){
+        fprintf(file, "arrow_type = %s", "GTK_ARROW_DOWN");
+    } else if (menuButtonInformations->arrow_type == GTK_ARROW_UP){
+        fprintf(file, "arrow_type = %s", "GTK_ARROW_UP");
+    } else if (menuButtonInformations->arrow_type == GTK_ARROW_LEFT){
+        fprintf(file, "arrow_type = %s", "GTK_ARROW_LEFT");
+    } else {
+        fprintf(file, "arrow_type = %s", "GTK_ARROW_RIGHT");
+    }
+}
+
+void write_menu(menuInfos *menuInformations, FILE *file){
+
+    fprintf(file, "is_primary = %s ", (menuInformations->is_primary) ? "TRUE" : "FALSE");
+
+    if(menuInformations->label){
+        fprintf(file, "label = \"%s\"", menuInformations->label);
+    }
+}
+
+void write_menu_item(menuItemInfos *menuItemInformations, FILE *file){
+    
+    if(menuItemInformations->label)
+        fprintf(file, "label = \"%s\" ", menuItemInformations->label);
+
+    fprintf(file, "type = \"%s\" ", menuItemInformations->type);
+
+    if(menuItemInformations->callback_name && strcmp(menuItemInformations->callback_name, "") != 0)
+        fprintf(file, "callback = G_CALLBACK(%s) ", menuItemInformations->callback_name);
+
+    if(menuItemInformations->data_name && strcmp(menuItemInformations->data_name, "") != 0)
+        fprintf(file, "data = \"%s\"", menuItemInformations->data_name);
+    
+}
+
+void write_radio_button(radioButtonInfos *radioButtonInformations, FILE *file){
+
+    if(radioButtonInformations->label && strcmp(radioButtonInformations->label, "") != 0){
+        fprintf(file, "label = \"%s\" ", radioButtonInformations->label);
+    }
+
+    if(radioButtonInformations->path_to_image && strcmp(radioButtonInformations->path_to_image, "") != 0){
+        fprintf(file, "path_to_image = \"%s\" ", radioButtonInformations->path_to_image);
+    }
+
+    if(radioButtonInformations->radio_group_member_name && strcmp(radioButtonInformations->radio_group_member_name, "") != 0){
+        fprintf(file, "id_radio_group_member = \"%s\" ", radioButtonInformations->radio_group_member_name);
+    }
+
+    fprintf(file, "default_state = %s", (radioButtonInformations->default_state) ? "TRUE" : "FALSE");
+
 }

@@ -16,7 +16,7 @@
 static GCallback Gcallback;
 static gpointer Gdata;
 
-GtkWidget *create_menu_item(const gchar *label, const gchar *type, GCallback callback, gpointer data)
+GtkWidget *create_menu_item(gchar *label, gchar *type, GCallback callback, gpointer data)
 {
     menuItemInfos *menuItemInformation = (menuItemInfos *)malloc(sizeof(menuItemInfos));
     if(!menuItemInformation) return NULL;
@@ -87,4 +87,8 @@ menuItemInfos *get_properties_menuItem(GtkWidget *menuItem)
 void add_to_menu_item(GtkWidget *menuItem, GtkWidget *submenu)
 {
     gtk_menu_item_set_submenu(GTK_MENU_ITEM(menuItem), submenu);
+}
+
+void modify_menu_item(GtkWidget *menuItem, menuItemInfos *menuItemInformation){
+        gtk_menu_item_set_label(GTK_MENU_ITEM(menuItem), menuItemInformation->label);
 }

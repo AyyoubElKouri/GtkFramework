@@ -18,6 +18,8 @@
         "limits": "cpp",
         "widgets_structures.h": "c",
         "supp.h": "c",
-        "xml_generate.h": "c"
+        "xml_generate.h": "c",
+        "linked_list.h": "c",
+        "cstdlib": "c"
     }
 }

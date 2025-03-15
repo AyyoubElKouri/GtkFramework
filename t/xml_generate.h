@@ -58,4 +58,12 @@
 
  void write_link_button(linkButtonInfos *linkButtonInformations, FILE *file);
 
+ void write_menu_button(menuButtonInfos *menuButtonInformations, FILE *file);
+
+ void write_menu(menuInfos *menuInformations, FILE *file);
+
+ void write_menu_item(menuItemInfos *menuItemInformations, FILE *file); 
+
+ void write_radio_button(radioButtonInfos *radioButtonInformations, FILE *file);
+
  #endif // XML_GENERATE_H

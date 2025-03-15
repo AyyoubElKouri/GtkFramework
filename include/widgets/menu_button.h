@@ -24,10 +24,10 @@
 
 typedef struct 
 {
-    const gchar *label;
-    const gchar *path_to_image;
+    gchar *label;
+    gchar *path_to_image;
     GtkArrowType arrow_type;
-    
+
 } menuButtonInfos;
 
 /**
@@ -42,7 +42,7 @@ typedef struct
  * @warning you can chose only one between label and path_to_image, give NULL to the other
  */
 
-GtkWidget *create_menu_button(const gchar *label, const gchar *path_to_image, GtkArrowType arrow_type);
+GtkWidget *create_menu_button(gchar *label, gchar *path_to_image, GtkArrowType arrow_type);
 
 /**
  * @brief set the properties of the menu button
@@ -73,5 +73,6 @@ menuButtonInfos *get_properties_menuButton(GtkWidget *menuButton);
 
 void add_to_menu_button(GtkWidget *menuButton, GtkWidget *menu);
 
+void modify_menu_button(GtkWidget *menuButton, menuButtonInfos *menuButtonInformation);
 
 #endif // MENU_BUTTON_H

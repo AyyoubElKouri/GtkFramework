@@ -15,6 +15,8 @@
  extern GtkWidget *global_tree;
  extern data_widget* global_widget_data_pointer;
  static int combo_box_items = 0;
+ extern GtkCssProvider *provider;
+
 
  char * box_container_properties(char *parent_id, GtkWidget *obj){
 
@@ -84,7 +86,6 @@
     
     
     TreeNodeData *dataWidget = search_tree(global_tree, parent_id);
-    
     
     add_to_box(dataWidget->widget, obj, (strcmp(get_selecter_item(position),"START") == 0) ? START : END, (strcmp(get_selecter_item(expand),"TRUE") == 0) ? TRUE : FALSE, (strcmp(get_selecter_item(fill),"TRUE") == 0) ? TRUE : FALSE, get_value_spin_button(padding),
     get_value_spin_button(margin_top),
@@ -2628,6 +2629,617 @@ void link_button_widget_properties(){
 
         modify_link_button(dataWidget->widget, ((linkButtonInfos *)(dataWidget->widget_data)));
     } else if(response == GTK_RESPONSE_REJECT){
+        if(is_child(global_tree)){
+            TreeNodeData *widget = search_tree(global_tree, get_selected_node_id(GTK_TREE_VIEW(global_tree)));
+            destroy_widget(widget->widget);
+            delete_selected_element(global_tree);
+            
+        } else {
+            GtkWidget *dialog = create_dialog("Your cannot remove a parent widget!!!", NULL, GTK_DIALOG_MODAL, 300, 30, 1, NULL, "                                               OK                                               ", 1, NULL, 1, NULL, 1);
+            run_dialog(dialog);
+            destroy_widget(dialog);
+        }
+    }
+
+    destroy_widget(dialog);
+}
+
+char *menu_button_container_properties(char *parent_id, GtkWidget *obj){
+
+    GtkWidget *dialog = create_dialog("Make sure that you are adding a menu to a menu button", NULL, GTK_DIALOG_MODAL, 300, 30, 1, NULL, "                                                            yes                                                            ", 1, "No!", 2, NULL, 1);
+    int response = run_dialog(dialog);
+
+    if(response == 1){
+
+        TreeNodeData *dataWidget = search_tree(global_tree, parent_id);
+        char *closing_tag;
+
+        add_to_menu_button(dataWidget->widget, obj);
+    
+        closing_tag = malloc(100 * sizeof(char));
+        if(!closing_tag) return NULL;
+    
+        sprintf(closing_tag, "</%s add_to_menu_button(%s, %s)>", global_widget_data_pointer->widget_name, parent_id, global_widget_data_pointer->id_widget);
+        destroy_widget(dialog);
+    
+        return closing_tag;
+    }
+
+    destroy_widget(dialog);
+    return NULL;
+}
+
+void menu_button_widget_properties(){
+
+    TreeNodeData *dataWidget = search_tree(global_tree, get_selected_node_id(GTK_TREE_VIEW(global_tree)));
+
+    GtkWidget *box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
+
+    GtkWidget *menu_button_grid = create_grid(7, 7, TRUE, FALSE);
+
+	GtkWidget *menu_button_id_label = create_label("Widget ID", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(menu_button_grid, menu_button_id_label, 0, 0, 1, 1);
+
+	GtkWidget *menu_button_id_entry = create_entry(NULL, "must be unique and no space", TRUE, FALSE, 20, 0.5);
+    
+    set_text(menu_button_id_entry, dataWidget->information);
+
+	add_to_grid(menu_button_grid, menu_button_id_entry, 0, 1, 1, 1);
+
+	GtkWidget *menu_button_label_label = create_label("Label", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(menu_button_grid, menu_button_label_label, 1, 0, 1, 1);
+
+	GtkWidget *menu_button_label_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+
+    char *chaine = ((menuButtonInfos *)(dataWidget->widget_data))->label;
+
+    if(!chaine){
+        set_text(menu_button_label_entry, "");
+    } else {
+        set_text(menu_button_label_entry, chaine);
+    }
+
+	add_to_grid(menu_button_grid, menu_button_label_entry, 1, 1, 1, 1);
+
+	GtkWidget *menu_button_path_to_image_label = create_label("Path to image", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(menu_button_grid, menu_button_path_to_image_label, 2, 0, 1, 1);
+
+	GtkWidget *menu_button_path_to_image_entry = create_entry(NULL, "Chose image or lable", TRUE, TRUE, 20, 0.5);
+
+    chaine = ((menuButtonInfos *)(dataWidget->widget_data))->path_to_image;
+
+    if(!chaine){
+        set_text(menu_button_path_to_image_entry, "");
+    } else {
+        set_text(menu_button_path_to_image_entry, chaine);
+    }
+
+	add_to_grid(menu_button_grid, menu_button_path_to_image_entry, 2, 1, 1, 1);
+
+	GtkWidget *menu_button_arrow_type_label = create_label("Arrow type", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(menu_button_grid, menu_button_arrow_type_label, 3, 0, 1, 1);
+
+	GtkWidget *menu_button_arrow_type_combo_box = create_combo_box();
+
+	add_to_combo_box(menu_button_arrow_type_combo_box, "GTK_ARROW_DOWN");
+
+	add_to_combo_box(menu_button_arrow_type_combo_box, "GTK_ARROW_UP");
+
+	add_to_combo_box(menu_button_arrow_type_combo_box, "GTK_ARROW_LEFT");
+
+	add_to_combo_box(menu_button_arrow_type_combo_box, "GTK_ARROW_RIGHT");
+
+    if(((menuButtonInfos *)(dataWidget->widget_data))->arrow_type == GTK_ARROW_DOWN){
+        gtk_combo_box_set_active(GTK_COMBO_BOX(menu_button_arrow_type_combo_box), 0);
+    } else if (((menuButtonInfos *)(dataWidget->widget_data))->arrow_type == GTK_ARROW_UP){
+        gtk_combo_box_set_active(GTK_COMBO_BOX(menu_button_arrow_type_combo_box), 1);
+    } else if (((menuButtonInfos *)(dataWidget->widget_data))->arrow_type == GTK_ARROW_LEFT){
+        gtk_combo_box_set_active(GTK_COMBO_BOX(menu_button_arrow_type_combo_box), 2);
+    } else {
+        gtk_combo_box_set_active(GTK_COMBO_BOX(menu_button_arrow_type_combo_box), 3);
+    }
+
+	add_to_grid(menu_button_grid, menu_button_arrow_type_combo_box, 3, 1, 1, 1);
+
+    add_to_box(box, menu_button_grid, START, FALSE, FALSE, 0, 0, 0, 0, 0);
+
+    GtkWidget *dialog = create_dialog("Link Button Properties", NULL, GTK_DIALOG_MODAL, 30, 30, 1, box, "OK", GTK_RESPONSE_OK, "Annuler", GTK_RESPONSE_CANCEL, "Supprimer", GTK_RESPONSE_REJECT);
+    gint response = run_dialog(dialog);
+
+    
+    if(response == GTK_RESPONSE_OK){
+
+        char *chaine = get_text(menu_button_label_entry);
+
+        if(strcmp(chaine, "") == 0){
+            ((menuButtonInfos *)(dataWidget->widget_data))->label = NULL;
+        } else {
+            ((menuButtonInfos *)(dataWidget->widget_data))->label = malloc(sizeof(chaine));
+        }
+
+        if(strcmp(chaine, "") != 0){
+            strcpy(((menuButtonInfos *)(dataWidget->widget_data))->label, chaine);
+        }
+
+        chaine = get_text(menu_button_path_to_image_entry);
+
+        if(strcmp(chaine, "") == 0){
+            ((menuButtonInfos *)(dataWidget->widget_data))->path_to_image = NULL;
+        } else {
+            ((menuButtonInfos *)(dataWidget->widget_data))->path_to_image = malloc(sizeof(chaine));
+        }
+
+        if(strcmp(chaine, "") != 0){
+            strcpy(((menuButtonInfos *)(dataWidget->widget_data))->path_to_image, chaine);
+        }
+
+        chaine = get_selecter_item(menu_button_arrow_type_combo_box);
+
+        if(!chaine){
+            ((menuButtonInfos *)(dataWidget->widget_data))->arrow_type = GTK_ARROW_DOWN;
+        } else if (strcmp(chaine, "GTK_ARROW_DOWN") == 0){
+            ((menuButtonInfos *)(dataWidget->widget_data))->arrow_type = GTK_ARROW_DOWN;
+        } else if (strcmp(chaine, "GTK_ARROW_UP") == 0){
+            ((menuButtonInfos *)(dataWidget->widget_data))->arrow_type = GTK_ARROW_UP;
+        } else if (strcmp(chaine, "GTK_ARROW_LEFT") == 0){
+            ((menuButtonInfos *)(dataWidget->widget_data))->arrow_type = GTK_ARROW_LEFT;
+        } else {
+            ((menuButtonInfos *)(dataWidget->widget_data))->arrow_type = GTK_ARROW_RIGHT;
+        }
+
+        modify_menu_button(dataWidget->widget, ((menuButtonInfos *)(dataWidget->widget_data)));
+    } else if(response == GTK_RESPONSE_REJECT){
+        if(is_child(global_tree)){
+            TreeNodeData *widget = search_tree(global_tree, get_selected_node_id(GTK_TREE_VIEW(global_tree)));
+            destroy_widget(widget->widget);
+            delete_selected_element(global_tree);
+            
+        } else {
+            GtkWidget *dialog = create_dialog("Your cannot remove a parent widget!!!", NULL, GTK_DIALOG_MODAL, 300, 30, 1, NULL, "                                               OK                                               ", 1, NULL, 1, NULL, 1);
+            run_dialog(dialog);
+            destroy_widget(dialog);
+        }
+    }
+
+    destroy_widget(dialog);
+}
+
+char *menu_container_properties(char *parent_id, GtkWidget *obj){
+
+    GtkWidget *dialog = create_dialog("Make sure that you are adding a menu item to a menu", NULL, GTK_DIALOG_MODAL, 300, 30, 1, NULL, "                                                            yes                                                            ", 1, "No!", 2, NULL, 1);
+    int response = run_dialog(dialog);
+
+    if(response == 1){
+        
+        TreeNodeData *dataWidget = search_tree(global_tree, parent_id);
+        char *closing_tag;
+
+
+        add_to_menu(dataWidget->widget, obj);
+
+    
+        closing_tag = malloc(100 * sizeof(char));
+        if(!closing_tag) return NULL;
+    
+
+        sprintf(closing_tag, "</%s add_to_menu(%s, %s)>", global_widget_data_pointer->widget_name, parent_id, global_widget_data_pointer->id_widget);
+        destroy_widget(dialog);
+    
+        return closing_tag;
+    }
+
+    destroy_widget(dialog);
+    return NULL;
+}
+
+void menu_widget_properties(){
+
+    TreeNodeData *dataWidget = search_tree(global_tree, get_selected_node_id(GTK_TREE_VIEW(global_tree)));
+
+    GtkWidget *box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
+
+    GtkWidget *menu_grid_frame = create_frame(NULL, 0.5, 0.5);
+
+	GtkWidget *menu_grid = create_grid(7, 7, TRUE, FALSE);
+
+	GtkWidget *menu_id_label = create_label("Widget Id", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(menu_grid, menu_id_label, 0, 0, 1, 1);
+
+	GtkWidget *menu_id_entry = create_entry(NULL, "must be unique and no space", TRUE, FALSE, 20, 0.5);
+
+    set_text(menu_id_entry, dataWidget->information);
+
+	add_to_grid(menu_grid, menu_id_entry, 0, 1, 1, 1);
+
+	GtkWidget *menu_is_primary_label = create_label("Is Primary", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(menu_grid, menu_is_primary_label, 1, 0, 1, 1);
+
+	GtkWidget *menu_is_primary_combo_box = create_combo_box();
+
+	add_to_combo_box(menu_is_primary_combo_box, "TRUE");
+
+	add_to_combo_box(menu_is_primary_combo_box, "FALSE");
+
+    if(((menuInfos *)(dataWidget->widget_data))->is_primary){
+        set_active_item(menu_is_primary_combo_box, 0);
+    } else {
+        set_active_item(menu_is_primary_combo_box, 1);
+    }
+
+	add_to_grid(menu_grid, menu_is_primary_combo_box, 1, 1, 1, 1);
+
+	GtkWidget *menu_label_label = create_label("Label", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(menu_grid, menu_label_label, 2, 0, 1, 1);
+
+	GtkWidget *menu_label_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+
+    char *chaine = ((menuInfos *)(dataWidget->widget_data))->label;
+
+    if(!chaine){
+        set_text(menu_label_entry, "");
+    } else {
+        set_text(menu_label_entry, chaine);
+    }
+
+	add_to_grid(menu_grid, menu_label_entry, 2, 1, 1, 1);
+
+    add_to_box(box, menu_grid, START, FALSE, FALSE, 0, 0, 0, 0, 0);
+
+    GtkWidget *dialog = create_dialog("Menu Properties", NULL, GTK_DIALOG_MODAL, 30, 30, 1, box, "OK", GTK_RESPONSE_OK, "Annuler", GTK_RESPONSE_CANCEL, "Supprimer", GTK_RESPONSE_REJECT);
+    gint response = run_dialog(dialog);
+
+    
+    if(response == GTK_RESPONSE_OK){
+
+        char *chaine = get_selecter_item(menu_is_primary_combo_box);
+
+        if(!chaine){
+            ((menuInfos *)(dataWidget->widget_data))->is_primary = TRUE;
+        } else if (strcmp(chaine, "TRUE") == 0){
+            ((menuInfos *)(dataWidget->widget_data))->is_primary = TRUE;
+        } else {
+            ((menuInfos *)(dataWidget->widget_data))->is_primary = FALSE;
+        }
+
+        chaine = get_text(menu_label_entry);
+
+        if(strcmp(chaine, "") == 0){
+            ((menuInfos *)(dataWidget->widget_data))->label = NULL;
+        } else {
+            ((menuInfos *)(dataWidget->widget_data))->label = malloc(sizeof(chaine));
+        }
+
+        if(strcmp(chaine, "") != 0){
+            strcpy(((menuInfos *)(dataWidget->widget_data))->label, chaine);
+        }
+
+        modify_menu(dataWidget->widget, ((menuInfos *)(dataWidget->widget_data)));
+    } else if(response == GTK_RESPONSE_REJECT){
+        if(is_child(global_tree)){
+            TreeNodeData *widget = search_tree(global_tree, get_selected_node_id(GTK_TREE_VIEW(global_tree)));
+            destroy_widget(widget->widget);
+            delete_selected_element(global_tree);
+            
+        } else {
+            GtkWidget *dialog = create_dialog("Your cannot remove a parent widget!!!", NULL, GTK_DIALOG_MODAL, 300, 30, 1, NULL, "                                               OK                                               ", 1, NULL, 1, NULL, 1);
+            run_dialog(dialog);
+            destroy_widget(dialog);
+        }
+    }
+
+    destroy_widget(dialog);
+}
+
+char *menu_item_container_properties(char *parent_id, GtkWidget *obj){
+
+    GtkWidget *dialog = create_dialog("Make sure that you are adding a submenu to a menu item", NULL, GTK_DIALOG_MODAL, 300, 30, 1, NULL, "                                                            yes                                                            ", 1, "No!", 2, NULL, 1);
+    int response = run_dialog(dialog);
+
+    if(response == 1){
+
+        TreeNodeData *dataWidget = search_tree(global_tree, parent_id);
+        char *closing_tag;
+
+        add_to_menu_item(dataWidget->widget, obj);
+    
+        closing_tag = malloc(100 * sizeof(char));
+        if(!closing_tag) return NULL;
+    
+        sprintf(closing_tag, "</%s add_to_menu_item(%s, %s)>", global_widget_data_pointer->widget_name, parent_id, global_widget_data_pointer->id_widget);
+        destroy_widget(dialog);
+    
+        return closing_tag;
+    }
+
+    destroy_widget(dialog);
+    return NULL;
+
+}
+
+void menu_item_widget_properties(){
+
+    TreeNodeData *dataWidget = search_tree(global_tree, get_selected_node_id(GTK_TREE_VIEW(global_tree)));
+
+    GtkWidget *box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
+
+    GtkWidget *menu_item_grid = create_grid(7, 7, TRUE, FALSE);
+
+	GtkWidget *menu_item_id_label = create_label("Widget ID", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(menu_item_grid, menu_item_id_label, 0, 0, 1, 1);
+
+	GtkWidget *menu_item_id_entry = create_entry(NULL, "must be unique and no space", TRUE, FALSE, 20, 0.5);
+
+    set_text(menu_item_id_entry, dataWidget->information);
+
+	add_to_grid(menu_item_grid, menu_item_id_entry, 0, 1, 1, 1);
+
+	GtkWidget *menu_item_label_label = create_label("Label", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(menu_item_grid, menu_item_label_label, 1, 0, 1, 1);
+
+	GtkWidget *menu_item_label_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+
+    char *chaine = ((menuItemInfos *)(dataWidget->widget_data))->label;
+
+    if(!chaine){
+        set_text(menu_item_label_entry, "");
+    } else {
+        set_text(menu_item_label_entry, chaine);
+    }
+
+	add_to_grid(menu_item_grid, menu_item_label_entry, 1, 1, 1, 1);
+
+
+	GtkWidget *menu_item_callback_label = create_label("Callback", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(menu_item_grid, menu_item_callback_label, 2, 0, 1, 1);
+
+	GtkWidget *menu_item_callback_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+
+    chaine = ((menuItemInfos *)(dataWidget->widget_data))->callback_name;
+
+    if(!chaine){
+        set_text(menu_item_callback_entry, "");
+    } else {
+        set_text(menu_item_callback_entry, chaine);
+    }
+
+	add_to_grid(menu_item_grid, menu_item_callback_entry, 2, 1, 1, 1);
+
+	GtkWidget *menu_item_data_label = create_label("Data", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(menu_item_grid, menu_item_data_label, 3, 0, 1, 1);
+
+	GtkWidget *menu_item_data_entry = create_entry(NULL, NULL, TRUE, TRUE, 200, 0.5);
+
+    chaine = ((menuItemInfos *)(dataWidget->widget_data))->data_name;
+
+    if(!chaine){
+        set_text(menu_item_data_entry, "");
+    } else {
+        set_text(menu_item_data_entry, chaine);
+    }
+
+	add_to_grid(menu_item_grid, menu_item_data_entry, 3, 1, 1, 1);
+
+    add_to_box(box, menu_item_grid, START, FALSE, FALSE, 0, 0, 0, 0, 0);
+
+    GtkWidget *dialog = create_dialog("Menu Item Properties", NULL, GTK_DIALOG_MODAL, 30, 30, 1, box, "OK", GTK_RESPONSE_OK, "Annuler", GTK_RESPONSE_CANCEL, "Supprimer", GTK_RESPONSE_REJECT);
+    gint response = run_dialog(dialog);
+
+    
+    if(response == GTK_RESPONSE_OK){
+
+        chaine = get_text(menu_item_label_entry);
+
+        if(strcmp(chaine, "") == 0){
+            ((menuItemInfos *)(dataWidget->widget_data))->label = NULL;
+        } else {
+            ((menuItemInfos *)(dataWidget->widget_data))->label = malloc(sizeof(chaine));
+        }
+
+        if(strcmp(chaine, "") != 0){
+            strcpy(((menuItemInfos *)(dataWidget->widget_data))->label, chaine);
+        }
+
+        chaine = get_text(menu_item_callback_entry);
+
+        if(strcmp(chaine, "") == 0){
+            ((menuItemInfos *)(dataWidget->widget_data))->callback_name = NULL;
+        } else {
+            ((menuItemInfos *)(dataWidget->widget_data))->callback_name = malloc(sizeof(chaine));
+        }
+
+        if(strcmp(chaine, "") != 0){
+            strcpy(((menuItemInfos *)(dataWidget->widget_data))->callback_name, chaine);
+        }
+
+        chaine = get_text(menu_item_data_entry);
+
+        if(strcmp(chaine, "") == 0){
+            ((menuItemInfos *)(dataWidget->widget_data))->data_name = NULL;
+        } else {
+            ((menuItemInfos *)(dataWidget->widget_data))->data_name = malloc(sizeof(chaine));
+        }
+
+        if(strcmp(chaine, "") != 0){
+            strcpy(((menuItemInfos *)(dataWidget->widget_data))->data_name, chaine);
+        }
+
+        modify_menu_item(dataWidget->widget, ((menuItemInfos *)(dataWidget->widget_data)));
+
+    } else if(response == GTK_RESPONSE_REJECT){
+        if(is_child(global_tree)){
+            TreeNodeData *widget = search_tree(global_tree, get_selected_node_id(GTK_TREE_VIEW(global_tree)));
+            destroy_widget(widget->widget);
+            delete_selected_element(global_tree);
+            
+        } else {
+            GtkWidget *dialog = create_dialog("Your cannot remove a parent widget!!!", NULL, GTK_DIALOG_MODAL, 300, 30, 1, NULL, "                                               OK                                               ", 1, NULL, 1, NULL, 1);
+            run_dialog(dialog);
+            destroy_widget(dialog);
+        }
+    }
+
+    destroy_widget(dialog);
+}
+
+char *radio_button_container_properties(char *parent_id, GtkWidget *obj){
+    GtkWidget *dialog = create_dialog("Your cannot add widgets to a no container widget!!!", NULL, GTK_DIALOG_MODAL, 300, 30, 1, NULL, "                                                       OK                                                       ", 1, NULL, 1, NULL, 1);
+    run_dialog(dialog);
+    destroy_widget(dialog);
+}
+
+void radio_button_widget_properties(){
+
+    TreeNodeData *dataWidget = search_tree(global_tree, get_selected_node_id(GTK_TREE_VIEW(global_tree)));
+
+    GtkWidget *box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
+
+    GtkWidget *radio_button_grid = create_grid(7, 7, TRUE, FALSE);
+
+	GtkWidget *radio_button_id_label = create_label("Widget Id", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(radio_button_grid, radio_button_id_label, 0, 0, 1, 1);
+
+	GtkWidget *radio_button_id_entry = create_entry(NULL, "must be unique and no space", TRUE, FALSE, 20, 0.5);
+
+    set_text(radio_button_id_entry, dataWidget->information);
+
+	add_to_grid(radio_button_grid, radio_button_id_entry, 0, 1, 1, 1);
+
+	GtkWidget *radio_button_label_label = create_label("Label", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(radio_button_grid, radio_button_label_label, 1, 0, 1, 1);
+
+	GtkWidget *radio_button_label_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+
+    char *chaine = ((radioButtonInfos *)(dataWidget->widget_data))->label;
+
+    if(!chaine){
+        set_text(radio_button_label_entry, "");
+    } else {
+        set_text(radio_button_label_entry, chaine);
+    }
+
+	add_to_grid(radio_button_grid, radio_button_label_entry, 1, 1, 1, 1);
+
+	GtkWidget *radio_button_path_image_label = create_label("Path Image", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(radio_button_grid, radio_button_path_image_label, 2, 0, 1, 1);
+
+	GtkWidget *radio_button_path_image_entry = create_entry(NULL, "if you chose label let this NULL", TRUE, TRUE, 20, 0.5);
+
+    chaine = ((radioButtonInfos *)(dataWidget->widget_data))->path_to_image;
+
+    if(!chaine){
+        set_text(radio_button_path_image_entry, "");
+    } else {
+        set_text(radio_button_path_image_entry, chaine);
+    }
+
+	add_to_grid(radio_button_grid, radio_button_path_image_entry, 2, 1, 1, 1);
+
+	GtkWidget *radio_button_id_radio_group_member_label = create_label("Id Radio Group Member", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(radio_button_grid, radio_button_id_radio_group_member_label, 3, 0, 1, 1);
+
+	GtkWidget *radio_button_id_radio_group_member_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+
+    chaine = ((radioButtonInfos *)(dataWidget->widget_data))->radio_group_member_name;
+
+    if(!chaine){
+        set_text(radio_button_id_radio_group_member_entry, "");
+    } else {
+        set_text(radio_button_id_radio_group_member_entry, chaine);
+    }
+
+	add_to_grid(radio_button_grid, radio_button_id_radio_group_member_entry, 3, 1, 1, 1);
+
+	GtkWidget *radio_button_default_state_label = create_label("Default State", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(radio_button_grid, radio_button_default_state_label, 4, 0, 1, 1);
+
+	GtkWidget *radio_button_default_state_combo_box = create_combo_box();
+
+	add_to_combo_box(radio_button_default_state_combo_box, "FALSE");
+
+	add_to_combo_box(radio_button_default_state_combo_box, "TRUE");
+
+    if(((radioButtonInfos *)(dataWidget->widget_data))->default_state == TRUE){
+        set_active_item(radio_button_default_state_combo_box, 1);
+    } else {
+        set_active_item(radio_button_default_state_combo_box, 0);
+    }
+
+	add_to_grid(radio_button_grid, radio_button_default_state_combo_box, 4, 1, 1, 1);
+
+    add_to_box(box, radio_button_grid, START, FALSE, FALSE, 0, 0, 0, 0, 0);
+
+    GtkWidget *dialog = create_dialog("Radio Button Properties", NULL, GTK_DIALOG_MODAL, 30, 30, 1, box, "OK", GTK_RESPONSE_OK, "Annuler", GTK_RESPONSE_CANCEL, "Supprimer", GTK_RESPONSE_REJECT);
+    gint response = run_dialog(dialog);
+
+    
+    if(response == GTK_RESPONSE_OK){
+
+        char *chaine = get_text(radio_button_label_entry);
+        
+        if(strcmp(chaine, "") == 0){
+            ((radioButtonInfos *)(dataWidget->widget_data))->label = NULL;
+        } else {
+            ((radioButtonInfos *)(dataWidget->widget_data))->label = malloc(sizeof(chaine));
+        }
+
+        if(strcmp(chaine, "") != 0){
+            strcpy(((radioButtonInfos *)(dataWidget->widget_data))->label, chaine);
+        }
+
+        chaine = get_text(radio_button_path_image_entry);
+
+        if(strcmp(chaine, "") == 0){
+            ((radioButtonInfos *)(dataWidget->widget_data))->path_to_image = NULL;
+        } else {
+            ((radioButtonInfos *)(dataWidget->widget_data))->path_to_image = malloc(sizeof(chaine));
+        }
+
+        if(strcmp(chaine, "") != 0){
+            strcpy(((radioButtonInfos *)(dataWidget->widget_data))->path_to_image, chaine);
+        }
+
+        chaine = get_text(radio_button_id_radio_group_member_entry);
+
+        if(strcmp(chaine, "") == 0){
+            ((radioButtonInfos *)(dataWidget->widget_data))->radio_group_member_name = NULL;
+        } else {
+            ((radioButtonInfos *)(dataWidget->widget_data))->radio_group_member_name = malloc(sizeof(chaine));
+        }
+
+        if(strcmp(chaine, "") != 0){
+            strcpy(((radioButtonInfos *)(dataWidget->widget_data))->radio_group_member_name, chaine);
+        }
+
+        chaine = get_selecter_item(radio_button_default_state_combo_box);
+        if(!chaine){
+            ((radioButtonInfos *)(dataWidget->widget_data))->default_state = FALSE;
+        } else if (strcmp(chaine, "TRUE") == 0){
+            ((radioButtonInfos *)(dataWidget->widget_data))->default_state = TRUE;
+        } else {
+            ((radioButtonInfos *)(dataWidget->widget_data))->default_state = FALSE;
+        }
+
+
+        modify_radio_button(dataWidget->widget, ((radioButtonInfos *)(dataWidget->widget_data)), global_tree);
+    }
+
+    else if(response == GTK_RESPONSE_REJECT){
         if(is_child(global_tree)){
             TreeNodeData *widget = search_tree(global_tree, get_selected_node_id(GTK_TREE_VIEW(global_tree)));
             destroy_widget(widget->widget);

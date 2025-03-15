@@ -15,7 +15,7 @@
 static gboolean Gis_primary;
 static gchar *Glabel;
 
-GtkWidget *create_menu(gboolean is_primary, const gchar *label)
+GtkWidget *create_menu(gboolean is_primary, gchar *label)
 {
     menuInfos *menuInformation = (menuInfos *)malloc(sizeof(menuInfos));
     if(!menuInformation) return NULL;
@@ -38,7 +38,7 @@ GtkWidget *set_properties_menu(menuInfos *menuInformation)
 
     if(menuInformation->is_primary)
         gtk_widget_show_all(menu);
-    
+
     return menu;
 }
 
@@ -56,4 +56,10 @@ menuInfos *get_properties_menu(GtkWidget *menu)
 void add_to_menu(GtkWidget *menu, GtkWidget *menu_item)
 {
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), menu_item);
+}
+
+void modify_menu(GtkWidget *menu, menuInfos *menuInformation){
+
+    if(menuInformation->is_primary)
+        gtk_widget_show_all(menu);
 }
