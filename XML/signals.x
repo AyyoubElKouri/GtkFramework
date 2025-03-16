@@ -14,6 +14,7 @@ void on_click(GtkWidget *widget, gpointer data){
 }
 
 void on_click_submit(GtkWidget *widget, gpointer data){
+    
 	GtkWidget *window = create_window(NULL, GTK_WINDOW_TOPLEVEL, "Default title", 500, 500, TRUE, GTK_WIN_POS_CENTER, TRUE, NULL, 1.0, FALSE);
 
 	GtkWidget *header_bar = create_header_bar("UIBuilder", "Build your UI Application", NULL, TRUE);
@@ -30,7 +31,7 @@ void on_click_submit(GtkWidget *widget, gpointer data){
 
     add_to_box(main_box, entry, START, TRUE, FALSE, 0, 0, 0, 0, 0);
 
-    char *chaine = get_text(entry);
+    char *chaine = get_text(entry); 
 
     GtkWidget *button = create_button(GTK_RELIEF_NORMAL, "Click here to see another think", FALSE, NULL, G_CALLBACK(on_click), "ilisi");
 
