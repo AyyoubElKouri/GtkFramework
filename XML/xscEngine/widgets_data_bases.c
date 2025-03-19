@@ -29,6 +29,8 @@ void window_data_bases(NodeA *widget, FILE *file)
     window = insert_end(window, "icon", "NULL", 0);
     window = insert_end(window, "opacity", "1.0", 0);
     window = insert_end(window, "fullscreen", "FALSE", 0);
+    window = insert_end(window, "color", "NULL", 1);
+    window = insert_end(window, "image", "NULL", 1);
 
     write_to_file(widget, window, file);
 

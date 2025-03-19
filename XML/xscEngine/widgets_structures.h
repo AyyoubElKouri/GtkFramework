@@ -29,6 +29,8 @@ typedef struct
     GtkWidget *window_informations_icon_value;
     GtkWidget *window_informations_opacity_value;
     GtkWidget *window_informations_fullscreen_value;
+    GtkWidget *window_informations_color_entry;
+    GtkWidget *window_informations_image_entry;
 
 } windowI;
 
