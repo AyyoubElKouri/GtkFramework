@@ -372,7 +372,7 @@ char* extraire_contenu(const char* chaine)
     // Trouver la fin du nom de la balise (après "</")
     const char* debut_nom = chaine + 2; // Après "</"
     const char* fin_nom = debut_nom;
-    
+
     // Avancer jusqu'au premier espace/tabulation
     while (*fin_nom && !isspace(*fin_nom) && (fin_nom < chaine + len - 1)) {
         fin_nom++;

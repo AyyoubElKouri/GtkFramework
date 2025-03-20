@@ -35,6 +35,8 @@ typedef struct
     GdkPixbuf *icon;
     double opacity;
     gboolean fullscreen;
+    char *background_color;
+    char *background_image;
 } windowInfos;
 
 /**
@@ -55,7 +57,7 @@ typedef struct
  * @return GtkWidget pointer (you need to create a GtkWidget pointer to receive it) or NULL if no memory space is available for the window
  */
 
-GtkWidget *create_window(GtkApplication *app, GtkWindowType type, gchar *title, gint width, gint height, gboolean resizable, GtkWindowPosition position, gboolean decorate, GdkPixbuf *icon, double opacity, gboolean fullscreen);
+GtkWidget *create_window(GtkApplication *app, GtkWindowType type, gchar *title, gint width, gint height, gboolean resizable, GtkWindowPosition position, gboolean decorate, GdkPixbuf *icon, double opacity, gboolean fullscreen, char *background_color, char *background_image);
 
 /**
  * @brief This function creates the window and sets its properties.
