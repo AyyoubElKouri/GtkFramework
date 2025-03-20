@@ -14,7 +14,7 @@ extern GtkWidget *drag_button;
 static void activate(GtkApplication *app, gpointer data)
 {
 	global_tree = create_tree_view();
-	GtkWidget *window = create_window(app, GTK_WINDOW_TOPLEVEL, "Default title", 5000, 5000, TRUE, GTK_WIN_POS_CENTER, TRUE, NULL, 1.0, FALSE);
+	GtkWidget *window = create_window(app, GTK_WINDOW_TOPLEVEL, "Default title", 5000, 5000, TRUE, GTK_WIN_POS_CENTER, TRUE, NULL, 1.0, FALSE, NULL, NULL);
 
 	GtkWidget *Header_bar = create_header_bar("UIBuilder", "Build your UI Application", NULL, TRUE);
 
@@ -24,7 +24,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	GtkWidget *app_box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
 
-	GtkWidget *main_paned = create_paned(GTK_ORIENTATION_HORIZONTAL, 240, TRUE);
+	GtkWidget *main_paned = create_paned(GTK_ORIENTATION_HORIZONTAL, 215, TRUE);
 
 	GtkWidget *hierarchy_widgets_box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
 
@@ -46,11 +46,11 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_paned(main_paned, hierarchy_widgets_box, FIRST);
 
-	GtkWidget *build_space_paned = create_paned(GTK_ORIENTATION_HORIZONTAL, 625, TRUE);
+	GtkWidget *build_space_paned = create_paned(GTK_ORIENTATION_HORIZONTAL, 750, TRUE);
 
 	GtkWidget *first_space_box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
 
-	GtkWidget *contents_space_paned = create_paned(GTK_ORIENTATION_VERTICAL, 480, TRUE);
+	GtkWidget *contents_space_paned = create_paned(GTK_ORIENTATION_VERTICAL, 515, TRUE);
 
 	GtkWidget *working_space_box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
 
@@ -212,6 +212,8 @@ static void activate(GtkApplication *app, gpointer data)
 
 	GtkWidget *window_informations_width_value = create_spin_button(0, 1000, 10, 800, 0, FALSE, TRUE);
 
+	set_value_spin_button(window_informations_width_value, 750);
+
 	add_to_grid(window_informations_grid, window_informations_width_value, 4, 1, 1, 1);
 
 	GtkWidget *window_informations_height_label = create_label("Height", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
@@ -219,6 +221,8 @@ static void activate(GtkApplication *app, gpointer data)
 	add_to_grid(window_informations_grid, window_informations_height_label, 5, 0, 1, 1);
 
 	GtkWidget *window_informations_height_value = create_spin_button(0, 1000, 10, 600, 0, FALSE, TRUE);
+
+	set_value_spin_button(window_informations_height_value, 440);
 
 	add_to_grid(window_informations_grid, window_informations_height_value, 5, 1, 1, 1);
 
@@ -240,11 +244,11 @@ static void activate(GtkApplication *app, gpointer data)
 
 	GtkWidget *window_informations_position_value = create_combo_box();
 
-	add_to_combo_box(window_informations_position_value, "GTK_WIN_POS_CENTER");
+	add_to_combo_box(window_informations_position_value, "CENTER");
 
-	add_to_combo_box(window_informations_position_value, "GTK_WIN_POS_CENTER_ON_PARENT");
+	add_to_combo_box(window_informations_position_value, "ON_PARENT");
 
-	add_to_combo_box(window_informations_position_value, "GTK_WIN_POS_MOUSE");
+	add_to_combo_box(window_informations_position_value, "MOUSE");
 	
 	add_to_grid(window_informations_grid, window_informations_position_value, 7, 1, 1, 1);
 
@@ -285,8 +289,26 @@ static void activate(GtkApplication *app, gpointer data)
 	add_to_combo_box(window_informations_fullscreen_value, "TRUE");
 
 	add_to_combo_box(window_informations_fullscreen_value, "FALSE");
+
+	set_active_item(window_informations_fullscreen_value, 1);
 	
 	add_to_grid(window_informations_grid, window_informations_fullscreen_value, 11, 1, 1, 1);
+
+	GtkWidget *window_informations_color_label = create_label("Color", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(window_informations_grid, window_informations_color_label, 12, 0, 1, 1);
+
+	GtkWidget *window_informations_color_entry = create_entry(NULL, NULL, TRUE, TRUE, 100, 0.5);
+
+	add_to_grid(window_informations_grid, window_informations_color_entry, 12, 1, 1, 1);
+
+	GtkWidget *window_informations_image_label = create_label("Image", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+	add_to_grid(window_informations_grid, window_informations_image_label, 13, 0, 1, 1);
+
+	GtkWidget *window_informations_image_entry = create_entry(NULL, NULL, TRUE, TRUE, 100, 0.5);
+
+	add_to_grid(window_informations_grid, window_informations_image_entry, 13, 1, 1, 1);
 	
 	windowI* mywindow = malloc(sizeof(windowI));
 	if(!mywindow) exit(EXIT_FAILURE);
@@ -303,18 +325,20 @@ static void activate(GtkApplication *app, gpointer data)
     mywindow->window_informations_fullscreen_value = window_informations_fullscreen_value;
     mywindow->window_informations_id_value = window_informations_id_value;
     mywindow->window_informations_opacity_value = window_informations_opacity_value;
+	mywindow->window_informations_color_entry = window_informations_color_entry;
+	mywindow->window_informations_image_entry = window_informations_image_entry;
 
-	GtkWidget *window_informations_add_button = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                               ", FALSE, NULL, G_CALLBACK(traitementWindow), mywindow);
+	GtkWidget *window_informations_add_button = create_button(GTK_RELIEF_NORMAL, "Add  ", FALSE, NULL, G_CALLBACK(traitementWindow), mywindow);
 
-	add_to_grid(window_informations_grid, window_informations_add_button, 12, 0, 2, 1);
+	add_to_grid(window_informations_grid, window_informations_add_button, 14, 0, 2, 1);
 
-	add_to_box(window_informations_main_box, window_informations_grid, START, TRUE, FALSE, 0, 21, 21, 0, 0);
+	add_to_box(window_informations_main_box, window_informations_grid, START, TRUE, FALSE, 0, 21, 21, 21, 21);
 
 	add_to_frame(window_informations_frame, window_informations_main_box, 0, 0, 0, 0);
 
-	add_to_box(window_case, window_informations_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0);
+	add_to_box(window_case, window_informations_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
 
-	add_to_box(Windows_box, window_case, START, TRUE, TRUE, 0, 7, 0, 0, 0);
+	add_to_box(Windows_box, window_case, START, FALSE, FALSE, 0, 7, 0, 0, 0);
 
 	GtkWidget *Header_bar_case = create_box(GTK_ORIENTATION_VERTICAL, GTK_ALIGN_START, 0);
 
@@ -328,7 +352,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	GtkWidget *header_bar_informations_main_box_frame = create_frame(NULL, 0.5, 0.5);
 
-	GtkWidget *header_bar_informations_main_box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
+	GtkWidget *header_bar_informations_main_box = create_box(GTK_ORIENTATION_HORIZONTAL, -1, 0);
 
 	GtkWidget *header_bar_informations_grid = create_grid(7, 7, TRUE, FALSE);
 
@@ -385,17 +409,17 @@ static void activate(GtkApplication *app, gpointer data)
 	myHeaderBar->header_bar_informations_subtitle_value = header_bar_informations_subtitle_value;
 	myHeaderBar->header_bar_informations_title_value = header_bar_informations_title_value;
 
-	GtkWidget *header_bar_informations_add_button = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                               ", FALSE, NULL, G_CALLBACK(traitementHeaderBar), myHeaderBar);
+	GtkWidget *header_bar_informations_add_button = create_button(GTK_RELIEF_NORMAL, "Add  ", FALSE, NULL, G_CALLBACK(traitementHeaderBar), myHeaderBar);
 
 	add_to_grid(header_bar_informations_grid, header_bar_informations_add_button, 5, 0, 2, 1);
 
-	add_to_box(header_bar_informations_main_box, header_bar_informations_grid, START, TRUE, FALSE, 0, 14, 0, 14, 0);
+	add_to_box(header_bar_informations_main_box, header_bar_informations_grid, START, TRUE, FALSE, 0, 21, 21, 21, 21);
 
-	add_to_frame(header_bar_informations_main_box_frame, header_bar_informations_main_box, 0, 18, 0, 0);
+	add_to_frame(header_bar_informations_main_box_frame, header_bar_informations_main_box, 0, 0, 0, 0);
 
-	add_to_box(Header_bar_case, header_bar_informations_main_box_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0);
+	add_to_box(Header_bar_case, header_bar_informations_main_box_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
 
-	add_to_box(Windows_box, Header_bar_case, START, TRUE, TRUE, 0, 25, 0, 0, 0);
+	add_to_box(Windows_box, Header_bar_case, START, FALSE, FALSE, 0, 0, 0, 0, 0);
 
 	GtkWidget *scrolled_window_case = create_box(GTK_ORIENTATION_VERTICAL, GTK_ALIGN_START, 0);
 
@@ -409,7 +433,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	GtkWidget *scrolled_window_informations_main_box_frame = create_frame(NULL, 0.5, 0.5);
 
-	GtkWidget *scrolled_window_informations_main_box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
+	GtkWidget *scrolled_window_informations_main_box = create_box(GTK_ORIENTATION_HORIZONTAL, -1, 0);
 
 	GtkWidget *scrolled_window_informations_grid = create_grid(7, 7, TRUE, FALSE);
 
@@ -452,7 +476,7 @@ static void activate(GtkApplication *app, gpointer data)
 	myScrolled_window->scrolled_window_informations_horizontal_value = scrolled_window_informations_horizontal_value;
 	myScrolled_window->scrolled_window_informations_vertical_value = scrolled_window_informations_vertical_value;
 
-	GtkWidget *scrolled_window_informations_add_button = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                               ", FALSE, NULL, G_CALLBACK(traitement_scrolled_window), myScrolled_window);
+	GtkWidget *scrolled_window_informations_add_button = create_button(GTK_RELIEF_NORMAL, "Add  ", FALSE, NULL, G_CALLBACK(traitement_scrolled_window), myScrolled_window);
 
 	add_to_grid(scrolled_window_informations_grid, scrolled_window_informations_add_button, 3, 0, 2, 1);
 
@@ -460,9 +484,9 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_frame(scrolled_window_informations_main_box_frame, scrolled_window_informations_main_box, 0, 18, 14, 0);
 
-	add_to_box(scrolled_window_case, scrolled_window_informations_main_box_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0);
+	add_to_box(scrolled_window_case, scrolled_window_informations_main_box_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
 
-	add_to_box(Windows_box, scrolled_window_case, START, TRUE, TRUE, 0, 25, 0, 0, 0);
+	add_to_box(Windows_box, scrolled_window_case, START, FALSE, FALSE, 0, 25, 0, 0, 0);
 
 	add_to_scrolled_window(scrolled_window_window, Windows_box);
 
@@ -484,7 +508,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	GtkWidget *Box_case_informations_main_box_frame = create_frame(NULL, 0.5, 0.5);
 
-	GtkWidget *Box_case_informations_main_box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
+	GtkWidget *Box_case_informations_main_box = create_box(GTK_ORIENTATION_HORIZONTAL, -1, 0);
 
 	GtkWidget *Box_case_informations_grid = create_grid(7, 7, TRUE, FALSE);
 
@@ -502,9 +526,9 @@ static void activate(GtkApplication *app, gpointer data)
 
 	GtkWidget *Box_case_informations_orientation_value = create_combo_box();
 
-	add_to_combo_box(Box_case_informations_orientation_value, "GTK_ORIENTATION_HORIZONTAL");
+	add_to_combo_box(Box_case_informations_orientation_value, "HORIZONTAL");
 
-	add_to_combo_box(Box_case_informations_orientation_value, "GTK_ORIENTATION_VERTICAL");
+	add_to_combo_box(Box_case_informations_orientation_value, "VERTICAL");
 
 	add_to_grid(Box_case_informations_grid, Box_case_informations_orientation_value, 1, 1, 1, 1);
 
@@ -514,11 +538,11 @@ static void activate(GtkApplication *app, gpointer data)
 
 	GtkWidget *Box_case_informations_align_value = create_combo_box();
 
-	add_to_combo_box(Box_case_informations_align_value, "GTK_ALIGN_START");
+	add_to_combo_box(Box_case_informations_align_value, "START");
 
-	add_to_combo_box(Box_case_informations_align_value, "GTK_ALIGN_END");
+	add_to_combo_box(Box_case_informations_align_value, "END");
 
-	add_to_combo_box(Box_case_informations_align_value, "GTK_ALIGN_CENTER");
+	add_to_combo_box(Box_case_informations_align_value, "CENTER");
 
 	add_to_combo_box(Box_case_informations_align_value, "-1");
 
@@ -540,7 +564,7 @@ static void activate(GtkApplication *app, gpointer data)
 	mybox->Box_case_informations_align_value = Box_case_informations_align_value;
 	mybox->Box_case_informations_spacing_value = Box_case_informations_spacing_value;
 
-	GtkWidget *Box_case_informations_add = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                               ", FALSE, NULL, G_CALLBACK(traitementBox), mybox);
+	GtkWidget *Box_case_informations_add = create_button(GTK_RELIEF_NORMAL, "Add  ", FALSE, NULL, G_CALLBACK(traitementBox), mybox);
 
 	add_to_grid(Box_case_informations_grid, Box_case_informations_add, 4, 0, 2, 1);
 
@@ -548,9 +572,9 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_frame(Box_case_informations_main_box_frame, Box_case_informations_main_box, 5, 18, 14, 0);
 
-	add_to_box(Box_case, Box_case_informations_main_box_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0);
+	add_to_box(Box_case, Box_case_informations_main_box_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
 
-	add_to_box(Containers_box, Box_case, START, TRUE, TRUE, 0, 14, 0, 0, 0);
+	add_to_box(Containers_box, Box_case, START, FALSE, FALSE, 0, 14, 0, 0, 0);
 
 	GtkWidget *Fixed_box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
 
@@ -563,6 +587,8 @@ static void activate(GtkApplication *app, gpointer data)
 	add_to_box(Fixed_box, Fixed_label_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
 
 	GtkWidget *Fixed_grid_frame = create_frame(NULL, 0.5, 0.5);
+
+	GtkWidget *fixed_main_box = create_box(GTK_ORIENTATION_HORIZONTAL, -1, 0);
 
 	GtkWidget *Fixed_grid = create_grid(7, 7, TRUE, FALSE);
 
@@ -578,15 +604,17 @@ static void activate(GtkApplication *app, gpointer data)
 	if(!myfixed) exit(EXIT_FAILURE);
 	myfixed->Fixed_id_entry = Fixed_id_entry;
 
-	GtkWidget *Fixed_add = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                               ", FALSE, NULL, G_CALLBACK(traitement_fixed), myfixed);
+	GtkWidget *Fixed_add = create_button(GTK_RELIEF_NORMAL, "Add  ", FALSE, NULL, G_CALLBACK(traitement_fixed), myfixed);
 
 	add_to_grid(Fixed_grid, Fixed_add, 1, 0, 2, 1);
 
-	add_to_frame(Fixed_grid_frame, Fixed_grid, 14, 14, 14, 0);
+	add_to_box(fixed_main_box, Fixed_grid, START, TRUE, FALSE, 0, 0, 0, 0, 0);
+
+	add_to_frame(Fixed_grid_frame, fixed_main_box, 14, 14, 14, 0);
 
 	add_to_box(Fixed_box, Fixed_grid_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
 
-	add_to_box(Containers_box, Fixed_box, START, TRUE, TRUE, 0, 14, 0, 0, 0);
+	add_to_box(Containers_box, Fixed_box, START, FALSE, FALSE, 0, 14, 0, 0, 0);
 
 	GtkWidget *Frame_box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
 
@@ -599,6 +627,8 @@ static void activate(GtkApplication *app, gpointer data)
 	add_to_box(Frame_box, Frame_label_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
 
 	GtkWidget *Frame_grid_frame = create_frame(NULL, 0.5, 0.5);
+
+	GtkWidget *frame_main_box = create_box(GTK_ORIENTATION_HORIZONTAL, -1, 0);
 
 	GtkWidget *Frame_grid = create_grid(7, 7, TRUE, FALSE);
 
@@ -642,15 +672,17 @@ static void activate(GtkApplication *app, gpointer data)
 	myframe->Frame_vertical_placement_value = Frame_vertical_placement_value;
 	myframe->Frame_horizontal_placement_value = Frame_horizontal_placement_value;
 	
-	GtkWidget *Frame_add = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                               ", FALSE, NULL, G_CALLBACK(traitement_frame), myframe);
+	GtkWidget *Frame_add = create_button(GTK_RELIEF_NORMAL, "Add  ", FALSE, NULL, G_CALLBACK(traitement_frame), myframe);
 
 	add_to_grid(Frame_grid, Frame_add, 4, 0, 2, 1);
 
-	add_to_frame(Frame_grid_frame, Frame_grid, 14, 14, 14, 0);
+	add_to_box(frame_main_box, Frame_grid, START, TRUE, FALSE, 0, 0, 0, 0, 0);
+
+	add_to_frame(Frame_grid_frame, frame_main_box, 14, 14, 14, 0);
 
 	add_to_box(Frame_box, Frame_grid_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
 
-	add_to_box(Containers_box, Frame_box, START, TRUE, TRUE, 0, 14, 0, 0, 0);
+	add_to_box(Containers_box, Frame_box, START, FALSE, FALSE, 0, 14, 0, 0, 0);
 
 	GtkWidget *Grid_box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
 
@@ -663,6 +695,8 @@ static void activate(GtkApplication *app, gpointer data)
 	add_to_box(Grid_box, Grid_label_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
 
 	GtkWidget *Grid_grid_frame = create_frame(NULL, 0.5, 0.5);
+
+	GtkWidget *grid_main_box = create_box(GTK_ORIENTATION_HORIZONTAL, -1, 0);
 
 	GtkWidget *Grid_grid = create_grid(7, 7, TRUE, FALSE);
 
@@ -724,11 +758,13 @@ static void activate(GtkApplication *app, gpointer data)
 	mygrid->Grid_rows_homogeneous_value = Grid_rows_homogeneous_value;
 	mygrid->Grid_columns_homogeneous_value = Grid_columns_homogeneous_value;
 
-	GtkWidget *Grid_add = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                               ", FALSE, NULL, G_CALLBACK(traitement_grid), mygrid);
+	GtkWidget *Grid_add = create_button(GTK_RELIEF_NORMAL, "Add", FALSE, NULL, G_CALLBACK(traitement_grid), mygrid);
 
 	add_to_grid(Grid_grid, Grid_add, 5, 0, 2, 1);
 
-	add_to_frame(Grid_grid_frame, Grid_grid, 14, 14, 14, 0);
+	add_to_box(grid_main_box, Grid_grid, START, TRUE, FALSE, 0, 0, 0, 0, 0);
+
+	add_to_frame(Grid_grid_frame, grid_main_box, 14, 14, 14, 0);
 
 	add_to_box(Grid_box, Grid_grid_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
 
@@ -746,6 +782,8 @@ static void activate(GtkApplication *app, gpointer data)
 
 	GtkWidget *Paned_grid_frame = create_frame(NULL, 0.5, 0.5);
 
+	GtkWidget *paned_main_box = create_box(GTK_ORIENTATION_HORIZONTAL, -1, 0);
+
 	GtkWidget *Paned_grid = create_grid(7, 7, TRUE, FALSE);
 
 	GtkWidget *Paned_id_label = create_label("ID", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
@@ -762,9 +800,9 @@ static void activate(GtkApplication *app, gpointer data)
 
 	GtkWidget *Paned_orientation_value = create_combo_box();
 
-	add_to_combo_box(Paned_orientation_value, "GTK_ORIENTATION_HORIZONTAL");
+	add_to_combo_box(Paned_orientation_value, "HORIZONTAL");
 
-	add_to_combo_box(Paned_orientation_value, "GTK_ORIENTATION_VERTICAL");
+	add_to_combo_box(Paned_orientation_value, "VERTICAL");
 
 	add_to_grid(Paned_grid, Paned_orientation_value, 1, 1, 1, 1);
 
@@ -798,11 +836,13 @@ static void activate(GtkApplication *app, gpointer data)
 	mypaned->Paned_default_position_value = Paned_default_position_value;
 	mypaned->Paned_show_handle_combo_box = Paned_show_handle_combo_box;
 
-	GtkWidget *Paned_add = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                               ", FALSE, NULL, G_CALLBACK(traitement_paned), mypaned);
+	GtkWidget *Paned_add = create_button(GTK_RELIEF_NORMAL, "Add  ", FALSE, NULL, G_CALLBACK(traitement_paned), mypaned);
 
 	add_to_grid(Paned_grid, Paned_add, 4, 0, 2, 1);
 
-	add_to_frame(Paned_grid_frame, Paned_grid, 14, 14, 14, 0);
+	add_to_box(paned_main_box, Paned_grid, START, TRUE, FALSE, 0, 0, 0, 0, 0);
+
+	add_to_frame(Paned_grid_frame, paned_main_box, 14, 14, 14, 0);
 
 	add_to_box(Paned_box, Paned_grid_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
 
@@ -819,6 +859,8 @@ static void activate(GtkApplication *app, gpointer data)
 	add_to_box(Stack_box, Stack_label_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
 
 	GtkWidget *Stack_grid_frame = create_frame(NULL, 0.5, 0.5);
+
+	GtkWidget *stack_main_box = create_box(GTK_ORIENTATION_HORIZONTAL, -1, 0);
 
 	GtkWidget *Stack_grid = create_grid(7, 7, TRUE, FALSE);
 
@@ -844,13 +886,13 @@ static void activate(GtkApplication *app, gpointer data)
 
 	GtkWidget *stack_transition_type_value_combo_box = create_combo_box();
 
-	add_to_combo_box(stack_transition_type_value_combo_box, "GTK_STACK_TRANSITION_TYPE_CROSSFADE");
+	add_to_combo_box(stack_transition_type_value_combo_box, "CROSSFADE");
 
-	add_to_combo_box(stack_transition_type_value_combo_box, "GTK_STACK_TRANSITION_TYPE_NONE");
+	add_to_combo_box(stack_transition_type_value_combo_box, "NONE");
 
-	add_to_combo_box(stack_transition_type_value_combo_box, "GTK_STACK_TRANSITION_TYPE_SLIDE_LEFT");
+	add_to_combo_box(stack_transition_type_value_combo_box, "SLIDE_LEFT");
 
-	add_to_combo_box(stack_transition_type_value_combo_box, "GTK_STACK_TRANSITION_TYPE_SLIDE_RIGHT");
+	add_to_combo_box(stack_transition_type_value_combo_box, "SLIDE_RIGHT");
 
 	add_to_grid(Stack_grid, stack_transition_type_value_combo_box, 2, 1, 1, 1);
 
@@ -870,15 +912,17 @@ static void activate(GtkApplication *app, gpointer data)
 	mystack->stack_transition_type_value_combo_box = stack_transition_type_value_combo_box;
 	mystack->stack_duration_value_spin_button = stack_duration_value_spin_button;
 
-	GtkWidget *stack_informations_add_button = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                               ", FALSE, NULL, G_CALLBACK(traitement_stack), mystack);
+	GtkWidget *stack_informations_add_button = create_button(GTK_RELIEF_NORMAL, "Add  ", FALSE, NULL, G_CALLBACK(traitement_stack), mystack);
 
 	add_to_grid(Stack_grid, stack_informations_add_button, 4, 0, 2, 1);
 
-	add_to_frame(Stack_grid_frame, Stack_grid, 14, 14, 14, 14);
+	add_to_box(stack_main_box, Stack_grid, START, TRUE, FALSE, 0, 0, 0, 0, 0);
+
+	add_to_frame(Stack_grid_frame, stack_main_box, 14, 14, 14, 14);
 
 	add_to_box(Stack_box, Stack_grid_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
 
-	add_to_box(Containers_box, Stack_box, START, TRUE, TRUE, 0, 14, 0, 0, 0);
+	add_to_box(Containers_box, Stack_box, START, FALSE, FALSE, 0, 14, 0, 0, 0);
 
 	GtkWidget *Switcher_box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
 
@@ -891,6 +935,8 @@ static void activate(GtkApplication *app, gpointer data)
 	add_to_box(Switcher_box, Switcher_label_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
 
 	GtkWidget *Switcher_grid_frame = create_frame(NULL, 0.5, 0.5);
+
+	GtkWidget *switcher_main_box = create_box(GTK_ORIENTATION_HORIZONTAL, -1, 0);
 
 	GtkWidget *Switcher_grid = create_grid(7, 7, TRUE, FALSE);
 
@@ -929,15 +975,17 @@ static void activate(GtkApplication *app, gpointer data)
 	myswitcher->switcher_spacing_value_spin_button = switcher_spacing_value_spin_button;
 	myswitcher->same_size_value_combo_box = same_size_value_combo_box;
 
-	GtkWidget *switcher_informations_add_button = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                               ", FALSE, NULL, G_CALLBACK(traitement_switcher), myswitcher);
+	GtkWidget *switcher_informations_add_button = create_button(GTK_RELIEF_NORMAL, "Add  ", FALSE, NULL, G_CALLBACK(traitement_switcher), myswitcher);
 
 	add_to_grid(Switcher_grid, switcher_informations_add_button, 3, 0, 2, 1);
 
-	add_to_frame(Switcher_grid_frame, Switcher_grid, 14, 14, 14, 14);
+	add_to_box(switcher_main_box, Switcher_grid, START, TRUE, FALSE, 0, 0, 0, 0, 0);
+
+	add_to_frame(Switcher_grid_frame, switcher_main_box, 14, 14, 14, 14);
 
 	add_to_box(Switcher_box, Switcher_grid_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
 
-	add_to_box(Containers_box, Switcher_box, START, TRUE, TRUE, 0, 14, 0, 0, 0);
+	add_to_box(Containers_box, Switcher_box, START, FALSE, FALSE, 0, 14, 0, 0, 0);
 
 	add_to_scrolled_window(scrolled_containers_window, Containers_box);
 
@@ -958,6 +1006,8 @@ static void activate(GtkApplication *app, gpointer data)
 	add_to_box(button_box, button_label_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
 
 	GtkWidget *button_grid_frame = create_frame(NULL, 0.5, 0.5);
+
+	GtkWidget *button_main_box = create_box(GTK_ORIENTATION_HORIZONTAL, -1, 0);
 
 	GtkWidget *button_grid = create_grid(7, 7, TRUE, FALSE);
 
@@ -1036,11 +1086,13 @@ static void activate(GtkApplication *app, gpointer data)
     mybutton->button_callback_entry = button_callback_entry;
     mybutton->button_data_entry = button_data_entry;
 
-	GtkWidget *button_add = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                               ", FALSE, NULL, G_CALLBACK(traitement_button), mybutton);
+	GtkWidget *button_add = create_button(GTK_RELIEF_NORMAL, "Add  ", FALSE, NULL, G_CALLBACK(traitement_button), mybutton);
 
 	add_to_grid(button_grid, button_add, 7, 0, 2, 1);
 
-	add_to_frame(button_grid_frame, button_grid, 14, 14, 14, 14);
+	add_to_box(button_main_box, button_grid, START, TRUE, FALSE, 0, 0, 0, 0, 0);
+
+	add_to_frame(button_grid_frame, button_main_box, 14, 14, 14, 14);
 
 	add_to_box(button_box, button_grid_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
 
@@ -1057,6 +1109,8 @@ static void activate(GtkApplication *app, gpointer data)
 	add_to_box(check_button_box, check_button_label_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
 
 	GtkWidget *check_button_grid_frame = create_frame(NULL, 0.5, 0.5);
+
+	GtkWidget *check_button_main_box = create_box(GTK_ORIENTATION_HORIZONTAL, -1, 0);
 
 	GtkWidget *check_button_grid = create_grid(7, 0, FALSE, FALSE);
 
@@ -1126,11 +1180,13 @@ static void activate(GtkApplication *app, gpointer data)
     myCheck_button->check_button_callback_entry = check_button_callback_entry;
     myCheck_button->check_button_data_entry = check_button_data_entry;
 
-	GtkWidget *check_button_add_button = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                               ", FALSE, NULL, G_CALLBACK(traitement_check_button), myCheck_button);
+	GtkWidget *check_button_add_button = create_button(GTK_RELIEF_NORMAL, "Add  ", FALSE, NULL, G_CALLBACK(traitement_check_button), myCheck_button);
 
 	add_to_grid(check_button_grid, check_button_add_button, 6, 0, 2, 1);
 
-	add_to_frame(check_button_grid_frame, check_button_grid, 14, 14, 14, 14);
+	add_to_box(check_button_main_box, check_button_grid, START, TRUE, FALSE, 0, 0, 0, 0, 0);
+
+	add_to_frame(check_button_grid_frame, check_button_main_box, 14, 14, 14, 14);
 
 	add_to_box(check_button_box, check_button_grid_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
 
@@ -1147,6 +1203,8 @@ static void activate(GtkApplication *app, gpointer data)
 	add_to_box(color_button_box, color_button_label_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
 
 	GtkWidget *color_button_grid_frame = create_frame(NULL, 0.5, 0.5);
+
+	GtkWidget *color_button_main_box = create_box(GTK_ORIENTATION_HORIZONTAL, -1, 0);
 
 	GtkWidget *color_button_grid = create_grid(7, 7, TRUE, FALSE);
 
@@ -1194,11 +1252,13 @@ static void activate(GtkApplication *app, gpointer data)
     myColor_button->color_button_label_entry = color_button_label_entry;
     myColor_button->color_button_use_alpha_combo_box = color_button_use_alpha_combo_box;
 
-	GtkWidget *color_button_add_button = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                               ", FALSE, NULL, G_CALLBACK(traitement_color_button), myColor_button);
+	GtkWidget *color_button_add_button = create_button(GTK_RELIEF_NORMAL, "Add  ", FALSE, NULL, G_CALLBACK(traitement_color_button), myColor_button);
 
 	add_to_grid(color_button_grid, color_button_add_button, 4, 0, 2, 1);
 
-	add_to_frame(color_button_grid_frame, color_button_grid, 14, 14, 14, 14);
+	add_to_box(color_button_main_box, color_button_grid, START, TRUE, FALSE , 0, 0, 0, 0, 0);
+
+	add_to_frame(color_button_grid_frame, color_button_main_box, 14, 14, 14, 14);
 
 	add_to_box(color_button_box, color_button_grid_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
 
@@ -1216,6 +1276,8 @@ static void activate(GtkApplication *app, gpointer data)
 
 	GtkWidget *combo_box_grid_frame = create_frame(NULL, 0.5, 0.5);
 
+	GtkWidget *combo_box_main_box = create_box(GTK_ORIENTATION_HORIZONTAL, -1, 0);
+
 	GtkWidget *combo_box_grid = create_grid(7, 7, TRUE, FALSE);
 
 	GtkWidget *combo_box_id_label = create_label("Widget ID", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
@@ -1231,11 +1293,13 @@ static void activate(GtkApplication *app, gpointer data)
 
 	myCombo_box->combo_box_id_entry = combo_box_id_entry;
 
-	GtkWidget *combo_box_add_button = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                               ", FALSE, NULL, G_CALLBACK(traitement_combo_box), myCombo_box);
+	GtkWidget *combo_box_add_button = create_button(GTK_RELIEF_NORMAL, "Add  ", FALSE, NULL, G_CALLBACK(traitement_combo_box), myCombo_box);
 
 	add_to_grid(combo_box_grid, combo_box_add_button, 1, 0, 2, 1);
 
-	add_to_frame(combo_box_grid_frame, combo_box_grid, 14, 14, 14, 14);
+	add_to_box(combo_box_main_box, combo_box_grid, START, TRUE, FALSE, 0, 0, 0, 0, 0);
+
+	add_to_frame(combo_box_grid_frame, combo_box_main_box, 14, 14, 14, 14);
 
 	add_to_box(combo_box_box, combo_box_grid_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
 
@@ -1252,6 +1316,8 @@ static void activate(GtkApplication *app, gpointer data)
 	add_to_box(entry_box, entry_label_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
 
 	GtkWidget *entry_box_grid_frame = create_frame(NULL, 0.5, 0.5);
+
+	GtkWidget *entry_main_box = create_box(GTK_ORIENTATION_HORIZONTAL, -1, 0);
 
 	GtkWidget *entry_box_grid = create_grid(7, 7, TRUE, FALSE);
 
@@ -1330,11 +1396,13 @@ static void activate(GtkApplication *app, gpointer data)
     myentry->entry_max_length_spin_button = entry_max_length_spin_button;
     myentry->entry_alignment_spin_button = entry_alignment_spin_button;
 
-	GtkWidget *entry_add_button = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                               ", FALSE, NULL, G_CALLBACK(traitement_entry), myentry);
+	GtkWidget *entry_add_button = create_button(GTK_RELIEF_NORMAL, "Add  ", FALSE, NULL, G_CALLBACK(traitement_entry), myentry);
 
 	add_to_grid(entry_box_grid, entry_add_button, 7, 0, 2, 1);
 
-	add_to_frame(entry_box_grid_frame, entry_box_grid, 14, 14, 14, 14);
+	add_to_box(entry_main_box, entry_box_grid, START, TRUE, FALSE, 0, 0, 0, 0, 0);
+
+	add_to_frame(entry_box_grid_frame, entry_main_box, 14, 14, 14, 14);
 
 	add_to_box(entry_box, entry_box_grid_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
 
@@ -1351,6 +1419,8 @@ static void activate(GtkApplication *app, gpointer data)
 	add_to_box(font_button_box, font_button_label_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0);
 
 	GtkWidget *font_button_grid_frame = create_frame(NULL, 0.5, 0.5);
+
+	GtkWidget *font_button_main_box = create_box(GTK_ORIENTATION_HORIZONTAL, -1, 0);
 
 	GtkWidget *font_button_grid = create_grid(7, 7, TRUE, FALSE);
 
@@ -1437,15 +1507,17 @@ static void activate(GtkApplication *app, gpointer data)
     myFont_button->font_button_use_size_combo_box = font_button_use_size_combo_box;
     myFont_button->font_button_use_font_combo_box = font_button_use_font_combo_box;
 
-	GtkWidget *font_button_add_button = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                               ", FALSE, NULL, G_CALLBACK(traitement_font_button), myFont_button);
+	GtkWidget *font_button_add_button = create_button(GTK_RELIEF_NORMAL, "Add  ", FALSE, NULL, G_CALLBACK(traitement_font_button), myFont_button);
 
 	add_to_grid(font_button_grid, font_button_add_button, 7, 0, 2, 1);
 
-	add_to_frame(font_button_grid_frame, font_button_grid, 14, 14, 14, 14);
+	add_to_box(font_button_main_box, font_button_grid, START, TRUE, FALSE, 0, 0, 0, 0, 0);
 
-	add_to_box(font_button_box, font_button_grid_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0);
+	add_to_frame(font_button_grid_frame, font_button_main_box, 14, 14, 14, 14);
 
-	add_to_box(Widgets_box, font_button_box, START, TRUE, TRUE, 0, 7, 0, 0, 0);
+	add_to_box(font_button_box, font_button_grid_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
+
+	add_to_box(Widgets_box, font_button_box, START, FALSE, FALSE, 0, 7, 0, 0, 0);
 
 	GtkWidget *image_box = create_box(GTK_ORIENTATION_VERTICAL, GTK_ALIGN_CENTER, 0);
 
@@ -1458,6 +1530,8 @@ static void activate(GtkApplication *app, gpointer data)
 	add_to_box(image_box, image_label_frame, START, TRUE, TRUE, 0, 7, 0, 0, 0);
 
 	GtkWidget *image_grid_frame = create_frame(NULL, 0.5, 0.5);
+
+	GtkWidget *image_main_box = create_box(GTK_ORIENTATION_HORIZONTAL, -1, 0);
 
 	GtkWidget *image_grid = create_grid(7, 7, TRUE, FALSE);
 
@@ -1483,11 +1557,13 @@ static void activate(GtkApplication *app, gpointer data)
 	myimage->image_id_entry = image_id_entry;
     myimage->image_path_entry = image_path_entry;
 
-	GtkWidget *image_add_button = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                               ", FALSE, NULL, G_CALLBACK(traitement_image), myimage);
+	GtkWidget *image_add_button = create_button(GTK_RELIEF_NORMAL, "Add  ", FALSE, NULL, G_CALLBACK(traitement_image), myimage);
 
 	add_to_grid(image_grid, image_add_button, 2, 0, 2, 1);
 
-	add_to_frame(image_grid_frame, image_grid, 14, 14, 14, 14);
+	add_to_box(image_main_box, image_grid, START, TRUE, FALSE, 0, 0, 0, 0, 0);
+
+	add_to_frame(image_grid_frame, image_main_box, 14, 14, 14, 14);
 
 	add_to_box(image_box, image_grid_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0);
 
@@ -1504,6 +1580,8 @@ static void activate(GtkApplication *app, gpointer data)
 	add_to_box(label_box, label_label_frame, START, TRUE, TRUE, 0, 7, 0, 0, 0);
 
 	GtkWidget *label_grid_frame = create_frame(NULL, 0.5, 0.5);
+
+	GtkWidget *label_main_box = create_box(GTK_ORIENTATION_HORIZONTAL, -1, 0);
 
 	GtkWidget *label_grid = create_grid(7, 7, TRUE, FALSE);
 
@@ -1561,11 +1639,11 @@ static void activate(GtkApplication *app, gpointer data)
 
 	GtkWidget *label_justify_combo_box = create_combo_box();
 
-	add_to_combo_box(label_justify_combo_box, "GTK_JUSTIFY_CENTER");
+	add_to_combo_box(label_justify_combo_box, "CENTER");
 
-	add_to_combo_box(label_justify_combo_box, "GTK_JUSTIFY_LEFT");
+	add_to_combo_box(label_justify_combo_box, "LEFT");
 
-	add_to_combo_box(label_justify_combo_box, "GTK_JUSTIFY_RIGHT");
+	add_to_combo_box(label_justify_combo_box, "RIGHT");
 
 	add_to_grid(label_grid, label_justify_combo_box, 6, 1, 1, 1);
 
@@ -1587,9 +1665,9 @@ static void activate(GtkApplication *app, gpointer data)
 
 	GtkWidget *label_pango_weight_combo_box = create_combo_box();
 
-	add_to_combo_box(label_pango_weight_combo_box, "PANGO_WEIGHT_NORMAL");
+	add_to_combo_box(label_pango_weight_combo_box, "NORMAL");
 
-	add_to_combo_box(label_pango_weight_combo_box, "PANGO_WEIGHT_BOLD");
+	add_to_combo_box(label_pango_weight_combo_box, "BOLD");
 
 	add_to_grid(label_grid, label_pango_weight_combo_box, 8, 1, 1, 1);
 
@@ -1599,9 +1677,9 @@ static void activate(GtkApplication *app, gpointer data)
 
 	GtkWidget *label_pango_style_combo_box = create_combo_box();
 
-	add_to_combo_box(label_pango_style_combo_box, "PANGO_STYLE_NORMAL");
+	add_to_combo_box(label_pango_style_combo_box, "NORMAL");
 
-	add_to_combo_box(label_pango_style_combo_box, "PANGO_STYLE_ITALIC");
+	add_to_combo_box(label_pango_style_combo_box, "ITALIC");
 
 	add_to_grid(label_grid, label_pango_style_combo_box, 9, 1, 1, 1);
 
@@ -1632,15 +1710,17 @@ static void activate(GtkApplication *app, gpointer data)
     mylabel->label_pango_style_combo_box = label_pango_style_combo_box;
     mylabel->label_wrap_combo_box = label_wrap_combo_box;
 
-	GtkWidget *label_button_add = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                               ", FALSE, NULL, G_CALLBACK(traitement_label), mylabel);
+	GtkWidget *label_button_add = create_button(GTK_RELIEF_NORMAL, "Add  ", FALSE, NULL, G_CALLBACK(traitement_label), mylabel);
 
 	add_to_grid(label_grid, label_button_add, 11, 0, 2, 1);
 
-	add_to_frame(label_grid_frame, label_grid, 14, 14, 14, 14);
+	add_to_box(label_main_box, label_grid, START, TRUE, FALSE, 0, 0, 0, 0, 0);
 
-	add_to_box(label_box, label_grid_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0);
+	add_to_frame(label_grid_frame, label_main_box, 14, 14, 14, 14);
 
-	add_to_box(Widgets_box, label_box, START, TRUE, TRUE, 0, 7, 0, 0, 0);
+	add_to_box(label_box, label_grid_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
+
+	add_to_box(Widgets_box, label_box, START, FALSE, FALSE, 0, 7, 0, 0, 0);
 
 	GtkWidget *level_bar_box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
 
@@ -1653,6 +1733,8 @@ static void activate(GtkApplication *app, gpointer data)
 	add_to_box(level_bar_box, level_bar_label_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0);
 
 	GtkWidget *level_bar_grid_frame = create_frame(NULL, 0.5, 0.5);
+
+	GtkWidget *level_bar_main_box = create_box(GTK_ORIENTATION_HORIZONTAL, -1, 0);
 
 	GtkWidget *level_bar_grid = create_grid(7, 7, TRUE, FALSE);
 
@@ -1694,9 +1776,9 @@ static void activate(GtkApplication *app, gpointer data)
 
 	GtkWidget *level_bar_mode_combo_box = create_combo_box();
 
-	add_to_combo_box(level_bar_mode_combo_box, "GTK_LEVEL_BAR_MODE_CONTINUOUS");
+	add_to_combo_box(level_bar_mode_combo_box, "CONTINUOUS");
 
-	add_to_combo_box(level_bar_mode_combo_box, "GTK_LEVEL_BAR_MODE_DISCRETE");
+	add_to_combo_box(level_bar_mode_combo_box, "DISCRETE");
 
 	add_to_grid(level_bar_grid, level_bar_mode_combo_box, 4, 1, 1, 1);
 
@@ -1722,15 +1804,17 @@ static void activate(GtkApplication *app, gpointer data)
     myLevel_bar->level_bar_mode_combo_box = level_bar_mode_combo_box;
     myLevel_bar->level_bar_reversed_combo_box = level_bar_reversed_combo_box;
 
-	GtkWidget *level_bar_add_button = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                               ", FALSE, NULL, G_CALLBACK(traitement_level_bar), myLevel_bar);
+	GtkWidget *level_bar_add_button = create_button(GTK_RELIEF_NORMAL, "Add  ", FALSE, NULL, G_CALLBACK(traitement_level_bar), myLevel_bar);
 
 	add_to_grid(level_bar_grid, level_bar_add_button, 6, 0, 2, 1);
 
-	add_to_frame(level_bar_grid_frame, level_bar_grid, 14, 14, 14, 14);
+	add_to_box(level_bar_main_box, level_bar_grid, START, TRUE, FALSE, 0, 0, 0, 0, 0);
 
-	add_to_box(level_bar_box, level_bar_grid_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0);
+	add_to_frame(level_bar_grid_frame, level_bar_main_box, 14, 14, 14, 14);
 
-	add_to_box(Widgets_box, level_bar_box, START, TRUE, TRUE, 0, 0, 0, 0, 0);
+	add_to_box(level_bar_box, level_bar_grid_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
+
+	add_to_box(Widgets_box, level_bar_box, START, FALSE, FALSE, 0, 0, 0, 0, 0);
 
 	GtkWidget *Link_button_box = create_box(GTK_ORIENTATION_VERTICAL, GTK_ALIGN_CENTER, 0);
 
@@ -1743,6 +1827,8 @@ static void activate(GtkApplication *app, gpointer data)
 	add_to_box(Link_button_box, Link_button_label_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0);
 
 	GtkWidget *Link_button_grid_frame = create_frame(NULL, 0.5, 0.5);
+
+	GtkWidget *link_main_box = create_box(GTK_ORIENTATION_HORIZONTAL, -1, 0);
 
 	GtkWidget *Link_button_grid = create_grid(7, 7, TRUE, FALSE);
 
@@ -1779,15 +1865,17 @@ static void activate(GtkApplication *app, gpointer data)
 	myLink_button->Link_button_url_entry = Link_button_url_entry;
 	myLink_button->Link_button_label_entry = Link_button_label_entry;
 
-	GtkWidget *Link_button_add_button = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                               ", FALSE, NULL, G_CALLBACK(traitement_link_button), myLink_button);
+	GtkWidget *Link_button_add_button = create_button(GTK_RELIEF_NORMAL, "Add  ", FALSE, NULL, G_CALLBACK(traitement_link_button), myLink_button);
 
 	add_to_grid(Link_button_grid, Link_button_add_button, 3, 0, 2, 1);
 
-	add_to_frame(Link_button_grid_frame, Link_button_grid, 14, 14, 14, 14);
+	add_to_box(link_main_box, Link_button_grid, START, TRUE, FALSE, 0, 0, 0, 0, 0);
 
-	add_to_box(Link_button_box, Link_button_grid_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0);
+	add_to_frame(Link_button_grid_frame, link_main_box, 14, 14, 14, 14);
 
-	add_to_box(Widgets_box, Link_button_box, START, TRUE, TRUE, 0, 0, 0, 0, 0);
+	add_to_box(Link_button_box, Link_button_grid_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
+
+	add_to_box(Widgets_box, Link_button_box, START, FALSE, FALSE, 0, 0, 0, 0, 0);
 
 	GtkWidget *menu_button_box = create_box(GTK_ORIENTATION_VERTICAL, GTK_ALIGN_CENTER, 0);
 
@@ -1800,6 +1888,8 @@ static void activate(GtkApplication *app, gpointer data)
 	add_to_box(menu_button_box, menu_button_label_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0);
 
 	GtkWidget *menu_button_grid_frame = create_frame(NULL, 0.5, 0.5);
+
+	GtkWidget *menu_button_main_box = create_box(GTK_ORIENTATION_HORIZONTAL, -1, 0);
 
 	GtkWidget *menu_button_grid = create_grid(7, 7, TRUE, FALSE);
 
@@ -1851,15 +1941,17 @@ static void activate(GtkApplication *app, gpointer data)
 	myMenu_button->menu_button_path_to_image_entry = menu_button_path_to_image_entry;
 	myMenu_button->menu_button_arrow_type_combo_box = menu_button_arrow_type_combo_box;
 
-	GtkWidget *menu_button_add_button = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                               ", FALSE, NULL, G_CALLBACK(traitement_menu_button), myMenu_button);
+	GtkWidget *menu_button_add_button = create_button(GTK_RELIEF_NORMAL, "Add  ", FALSE, NULL, G_CALLBACK(traitement_menu_button), myMenu_button);
 
 	add_to_grid(menu_button_grid, menu_button_add_button, 4, 0, 2, 1);
+	
+	add_to_box(menu_button_main_box, menu_button_grid, START, TRUE, FALSE, 0, 0, 0, 0, 0);
 
-	add_to_frame(menu_button_grid_frame, menu_button_grid, 14, 14, 14, 14);
+	add_to_frame(menu_button_grid_frame, menu_button_main_box, 14, 14, 14, 14);
 
-	add_to_box(menu_button_box, menu_button_grid_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0);
+	add_to_box(menu_button_box, menu_button_grid_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
 
-	add_to_box(Widgets_box, menu_button_box, START, TRUE, TRUE, 0, 0, 0, 0, 0);
+	add_to_box(Widgets_box, menu_button_box, START, FALSE, FALSE, 0, 0, 0, 0, 0);
 
 	GtkWidget *menu_item_box = create_box(GTK_ORIENTATION_VERTICAL, GTK_ALIGN_CENTER, 0);
 
@@ -1872,6 +1964,8 @@ static void activate(GtkApplication *app, gpointer data)
 	add_to_box(menu_item_box, menu_item_label_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0);
 
 	GtkWidget *menu_item_grid_frame = create_frame(NULL, 0.5, 0.5);
+
+	GtkWidget *menu_item_main_box = create_box(GTK_ORIENTATION_HORIZONTAL, -1, 0);
 
 	GtkWidget *menu_item_grid = create_grid(7, 7, TRUE, FALSE);
 
@@ -1932,15 +2026,17 @@ static void activate(GtkApplication *app, gpointer data)
     myMenu_item->menu_item_callback_entry = menu_item_callback_entry;
     myMenu_item->menu_item_data_entry = menu_item_data_entry;
 
-	GtkWidget *menu_item_add_button = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                              ", FALSE, NULL, G_CALLBACK(traitement_menu_item), myMenu_item);
+	GtkWidget *menu_item_add_button = create_button(GTK_RELIEF_NORMAL, "Add ", FALSE, NULL, G_CALLBACK(traitement_menu_item), myMenu_item);
 
 	add_to_grid(menu_item_grid, menu_item_add_button, 5, 0, 2, 1);
 
-	add_to_frame(menu_item_grid_frame, menu_item_grid, 14, 14, 14, 14);
+	add_to_box(menu_item_main_box, menu_item_grid, START, TRUE, FALSE, 0, 0, 0, 0, 0);
 
-	add_to_box(menu_item_box, menu_item_grid_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0);
+	add_to_frame(menu_item_grid_frame, menu_item_main_box, 14, 14, 14, 14);
 
-	add_to_box(Widgets_box, menu_item_box, START, TRUE, TRUE, 0, 0, 0, 0, 0);
+	add_to_box(menu_item_box, menu_item_grid_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
+
+	add_to_box(Widgets_box, menu_item_box, START, FALSE, FALSE, 0, 0, 0, 0, 0);
 
 	GtkWidget *menu_box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
 
@@ -1953,6 +2049,8 @@ static void activate(GtkApplication *app, gpointer data)
 	add_to_box(menu_box, menu_label_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0);
 
 	GtkWidget *menu_grid_frame = create_frame(NULL, 0.5, 0.5);
+
+	GtkWidget *menu_main_box = create_box(GTK_ORIENTATION_HORIZONTAL, -1, 0);
 
 	GtkWidget *menu_grid = create_grid(7, 7, TRUE, FALSE);
 
@@ -1991,99 +2089,17 @@ static void activate(GtkApplication *app, gpointer data)
     mymenu->menu_is_primary_combo_box = menu_is_primary_combo_box;
     mymenu->menu_label_entry = menu_label_entry;
 
-	GtkWidget *menu_add_button = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                              ", FALSE, NULL, G_CALLBACK(traitement_menu), mymenu);
+	GtkWidget *menu_add_button = create_button(GTK_RELIEF_NORMAL, "Add ", FALSE, NULL, G_CALLBACK(traitement_menu), mymenu);
 
 	add_to_grid(menu_grid, menu_add_button, 3, 0, 2, 1);
 
-	add_to_frame(menu_grid_frame, menu_grid, 14, 14, 14, 14);
+	add_to_box(menu_main_box, menu_grid, START, TRUE, FALSE, 0, 0, 0, 0, 0);
 
-	add_to_box(menu_box, menu_grid_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0);
+	add_to_frame(menu_grid_frame, menu_main_box, 14, 14, 14, 14);
 
-	add_to_box(Widgets_box, menu_box, START, TRUE, TRUE, 0, 0, 0, 0, 0);
+	add_to_box(menu_box, menu_grid_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
 
-	GtkWidget *progress_bar_box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
-
-	GtkWidget *progress_bar_label_frame = create_frame(NULL, 0.5, 0.5);
-
-	GtkWidget *progress_bar_label = create_label("Progress Bar", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
-
-	add_to_frame(progress_bar_label_frame, progress_bar_label, 7, 7, 14, 1);
-
-	add_to_box(progress_bar_box, progress_bar_label_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0);
-
-	GtkWidget *progress_bar_grid_frame = create_frame(NULL, 0.5, 0.5);
-
-	GtkWidget *progress_bar_grid = create_grid(7, 7, TRUE, FALSE);
-
-	GtkWidget *progress_bar_id_label = create_label("Widget Id", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
-
-	add_to_grid(progress_bar_grid, progress_bar_id_label, 0, 0, 1, 1);
-
-	GtkWidget *progress_bar_id_entry = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 20, 0.5);
-
-	add_to_grid(progress_bar_grid, progress_bar_id_entry, 0, 1, 1, 1);
-
-	GtkWidget *progress_bar_text_label = create_label("Text", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
-
-	add_to_grid(progress_bar_grid, progress_bar_text_label, 1, 0, 1, 1);
-
-	GtkWidget *progress_bar_text_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
-
-	add_to_grid(progress_bar_grid, progress_bar_text_entry, 1, 1, 1, 1);
-
-	GtkWidget *progress_bar_fraction_label = create_label("Fraction", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
-
-	add_to_grid(progress_bar_grid, progress_bar_fraction_label, 2, 0, 1, 1);
-
-	GtkWidget *progress_bar_fraction_spin_button = create_spin_button(0, 1, 0.1, 0.0, 1, FALSE, FALSE);
-
-	add_to_grid(progress_bar_grid, progress_bar_fraction_spin_button, 2, 1, 1, 1);
-
-	GtkWidget *level_bar_show_text_label = create_label("Show Text", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
-
-	add_to_grid(progress_bar_grid, level_bar_show_text_label, 3, 0, 1, 1);
-
-	GtkWidget *level_bar_show_text_combo_box = create_combo_box();
-
-	add_to_combo_box(level_bar_show_text_combo_box, "TRUE");
-
-	add_to_combo_box(level_bar_show_text_combo_box, "FALSE");
-
-	add_to_grid(progress_bar_grid, level_bar_show_text_combo_box, 3, 1, 1, 1);
-
-	GtkWidget *progress_bar_pulse_label = create_label("Pulse", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
-
-	add_to_grid(progress_bar_grid, progress_bar_pulse_label, 4, 0, 1, 1);
-
-	GtkWidget *progress_bar_pulse_combo_box = create_combo_box();
-
-	add_to_combo_box(progress_bar_pulse_combo_box, "TRUE");
-
-	add_to_combo_box(progress_bar_pulse_combo_box, "FALSE");
-
-	add_to_grid(progress_bar_grid, progress_bar_pulse_combo_box, 4, 1, 1, 1);
-
-	GtkWidget *progress_bar_inverted_label = create_label("Inverted", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
-
-	add_to_grid(progress_bar_grid, progress_bar_inverted_label, 5, 0, 1, 1);
-
-	GtkWidget *progress_bar_inverted_combo_box = create_combo_box();
-
-	add_to_combo_box(progress_bar_inverted_combo_box, "TRUE");
-
-	add_to_combo_box(progress_bar_inverted_combo_box, "FALSE");
-
-	add_to_grid(progress_bar_grid, progress_bar_inverted_combo_box, 5, 1, 1, 1);
-
-	GtkWidget *progress_bar_add_button = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                             ", FALSE, NULL, NULL, NULL);
-
-	add_to_grid(progress_bar_grid, progress_bar_add_button, 6, 0, 2, 1);
-
-	add_to_frame(progress_bar_grid_frame, progress_bar_grid, 14, 14, 14, 14);
-
-	add_to_box(progress_bar_box, progress_bar_grid_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0);
-
-	add_to_box(Widgets_box, progress_bar_box, START, TRUE, TRUE, 0, 0, 0, 0, 0);
+	add_to_box(Widgets_box, menu_box, START, FALSE, FALSE, 0, 0, 0, 0, 0);
 
 	GtkWidget *radio_button_box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
 
@@ -2097,7 +2113,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	GtkWidget *radio_button_grid_frame = create_frame(NULL, 0.5, 0.5);
 
-	//  fffffffffffffffffff
+	GtkWidget *radio_button_main_box = create_box(GTK_ORIENTATION_HORIZONTAL, -1, 0);
 
 	GtkWidget *radio_button_grid = create_grid(7, 7, TRUE, FALSE);
 
@@ -2154,325 +2170,17 @@ static void activate(GtkApplication *app, gpointer data)
     myRadio_button->radio_button_id_radio_group_member_entry = radio_button_id_radio_group_member_entry;
     myRadio_button->radio_button_default_state_combo_box = radio_button_default_state_combo_box;
 
-	// ffffffffffffffffffffff
-
-	GtkWidget *radio_button_add_button = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                             ", FALSE, NULL, G_CALLBACK(traitement_radio_button), myRadio_button);
+	GtkWidget *radio_button_add_button = create_button(GTK_RELIEF_NORMAL, "Add", FALSE, NULL, G_CALLBACK(traitement_radio_button), myRadio_button);
 
 	add_to_grid(radio_button_grid, radio_button_add_button, 5, 0, 2, 1);
 
-	add_to_frame(radio_button_grid_frame, radio_button_grid, 14, 14, 14, 14);
+	add_to_box(radio_button_main_box, radio_button_grid, START, TRUE, FALSE, 0, 0, 0, 0, 0);
 
-	add_to_box(radio_button_box, radio_button_grid_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0);
+	add_to_frame(radio_button_grid_frame, radio_button_main_box, 14, 14, 14, 14);
 
-	add_to_box(Widgets_box, radio_button_box, START, TRUE, TRUE, 0, 0, 0, 0, 0);
+	add_to_box(radio_button_box, radio_button_grid_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
 
-	GtkWidget *scale_box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
-
-	GtkWidget *scale_label_frame = create_frame(NULL, 0.5, 0.5);
-
-	GtkWidget *scale_label = create_label("Scale", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
-
-	add_to_frame(scale_label_frame, scale_label, 7, 7, 14, 1);
-
-	add_to_box(scale_box, scale_label_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0);
-
-	GtkWidget *scale_grid_frame = create_frame(NULL, 0.5, 0.5);
-
-	GtkWidget *scale_grid = create_grid(7, 7, TRUE, FALSE);
-
-	GtkWidget *scale_id_label = create_label("Widget Id", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
-
-	add_to_grid(scale_grid, scale_id_label, 0, 0, 1, 1);
-
-	GtkWidget *scale_id_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
-
-	add_to_grid(scale_grid, scale_id_entry, 0, 1, 1, 1);
-
-	GtkWidget *scale_orientation_label = create_label("Orientation", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
-
-	add_to_grid(scale_grid, scale_orientation_label, 1, 0, 1, 1);
-
-	GtkWidget *scale_oreintation_combo_box = create_combo_box();
-
-	GtkWidget *combo_box_item1 = create_combo_box();
-
-	add_to_combo_box(scale_oreintation_combo_box, "GTK_ORIENTATION_HORIZONTAL");
-
-	GtkWidget *combo_box_item2 = create_combo_box();
-
-	add_to_combo_box(scale_oreintation_combo_box, "GTK_ORIENTATION_VERTICAL");
-
-	add_to_grid(scale_grid, scale_oreintation_combo_box, 1, 1, 1, 1);
-
-	GtkWidget *scale_min_value_label = create_label("Min Value", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
-
-	add_to_grid(scale_grid, scale_min_value_label, 2, 0, 1, 1);
-
-	GtkWidget *scale_min_value_spin_button = create_spin_button(0, 100, 10, 0, 0, FALSE, FALSE);
-
-	add_to_grid(scale_grid, scale_min_value_spin_button, 2, 1, 1, 1);
-
-	GtkWidget *scale_max_value_label = create_label("Max Value", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
-
-	add_to_grid(scale_grid, scale_max_value_label, 3, 0, 1, 1);
-
-	GtkWidget *scale_max_value_spin_button = create_spin_button(0, 100, 10, 100, 0, FALSE, FALSE);
-
-	add_to_grid(scale_grid, scale_max_value_spin_button, 3, 1, 1, 1);
-
-	GtkWidget *scale_step_label = create_label("Step", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
-
-	add_to_grid(scale_grid, scale_step_label, 4, 0, 1, 1);
-
-	GtkWidget *scale_step_spin_button = create_spin_button(0, 50, 2, 10, 0, FALSE, FALSE);
-
-	add_to_grid(scale_grid, scale_step_spin_button, 4, 1, 1, 1);
-
-	GtkWidget *scale_add_button = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                             ", FALSE, NULL, NULL, NULL);
-
-	add_to_grid(scale_grid, scale_add_button, 5, 0, 2, 1);
-
-	add_to_frame(scale_grid_frame, scale_grid, 14, 14, 14, 14);
-
-	add_to_box(scale_box, scale_grid_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0);
-
-	add_to_box(Widgets_box, scale_box, START, TRUE, TRUE, 0, 0, 0, 0, 0);
-
-	GtkWidget *separator_box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
-
-	GtkWidget *separator_label_frame = create_frame(NULL, 0.5, 0.5);
-
-	GtkWidget *separator_label = create_label("Separator", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
-
-	add_to_frame(separator_label_frame, separator_label, 7, 7, 14, 1);
-
-	add_to_box(separator_box, separator_label_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
-
-	GtkWidget *separator_grid_frame = create_frame(NULL, 0.5, 0.5);
-
-	GtkWidget *separator_grid = create_grid(7, 7, TRUE, FALSE);
-
-	GtkWidget *separator_widget_id_label = create_label("Widget ID", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
-
-	add_to_grid(separator_grid, separator_widget_id_label, 0, 0, 1, 1);
-
-	GtkWidget *separator_widget_id_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
-
-	add_to_grid(separator_grid, separator_widget_id_entry, 0, 1, 1, 1);
-
-	GtkWidget *separator_orientation_label = create_label("Orientation", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
-
-	add_to_grid(separator_grid, separator_orientation_label, 1, 0, 1, 1);
-
-	GtkWidget *separator_orientation_combobox = create_combo_box();
-
-	add_to_combo_box(separator_orientation_combobox, "GTK_ORIENTATION_HORIZONTAL");
-
-	add_to_combo_box(separator_orientation_combobox, "GTK_ORIENTATION_VERTICAL");
-
-	add_to_grid(separator_grid, separator_orientation_combobox, 1, 1, 1, 1);
-
-	GtkWidget *separator_add_button = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                             ", FALSE, NULL, NULL, NULL);
-
-	add_to_grid(separator_grid, separator_add_button, 2, 0, 2, 1);
-
-	add_to_frame(separator_grid_frame, separator_grid, 14, 14, 14, 14);
-
-	add_to_box(separator_box, separator_grid_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
-
-	add_to_box(Widgets_box, separator_box, START, TRUE, TRUE, 0, 0, 0, 0, 0);
-
-	GtkWidget *spin_button_box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
-
-	GtkWidget *spin_button_label_frame = create_frame(NULL, 0.5, 0.5);
-
-	GtkWidget *spin_button_label = create_label("Spin Button", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
-
-	add_to_frame(spin_button_label_frame, spin_button_label, 7, 7, 14, 1);
-
-	add_to_box(spin_button_box, spin_button_label_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
-
-	GtkWidget *spin_button_grid_frame = create_frame(NULL, 0.5, 0.5);
-
-	GtkWidget *spin_button_grid = create_grid(7, 7, TRUE, FALSE);
-
-	GtkWidget *spin_button_widget_id_label = create_label("Widget ID", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
-
-	add_to_grid(spin_button_grid, spin_button_widget_id_label, 0, 0, 1, 1);
-
-	GtkWidget *spin_button_widget_id_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
-
-	add_to_grid(spin_button_grid, spin_button_widget_id_entry, 0, 1, 1, 1);
-
-	GtkWidget *spin_button_min_value_label = create_label("Min Value", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
-
-	add_to_grid(spin_button_grid, spin_button_min_value_label, 1, 0, 1, 1);
-
-	GtkWidget *spin_button_min_value_spin_button = create_spin_button(0, 100, 10, 0, 0, FALSE, FALSE);
-
-	add_to_grid(spin_button_grid, spin_button_min_value_spin_button, 1, 1, 1, 1);
-
-	GtkWidget *spin_button_max_value_label = create_label("Max Value", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
-
-	add_to_grid(spin_button_grid, spin_button_max_value_label, 2, 0, 1, 1);
-
-	GtkWidget *spin_button_max_value_spin_button = create_spin_button(0, 100, 10, 100, 0, FALSE, FALSE);
-
-	add_to_grid(spin_button_grid, spin_button_max_value_spin_button, 2, 1, 1, 1);
-
-	GtkWidget *spin_button_Default_Value_label = create_label("Default Value", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
-
-	add_to_grid(spin_button_grid, spin_button_Default_Value_label, 3, 0, 1, 1);
-
-	GtkWidget *spin_button_Default_Value_spin_button = create_spin_button(0, 100, 10, 50, 0, FALSE, FALSE);
-
-	add_to_grid(spin_button_grid, spin_button_Default_Value_spin_button, 3, 1, 1, 1);
-
-	GtkWidget *spin_button_digits_label = create_label("Digits", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
-
-	add_to_grid(spin_button_grid, spin_button_digits_label, 4, 0, 1, 1);
-
-	GtkWidget *spin_button_digits_spin_button = create_spin_button(0, 5, 1, 0, 0, FALSE, FALSE);
-
-	add_to_grid(spin_button_grid, spin_button_digits_spin_button, 4, 1, 1, 1);
-
-	GtkWidget *spin_button_wrap_label = create_label("Wrap", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
-
-	add_to_grid(spin_button_grid, spin_button_wrap_label, 5, 0, 1, 1);
-
-	GtkWidget *spin_button_wrap_combo_box = create_combo_box();
-
-	add_to_combo_box(spin_button_wrap_combo_box, "TRUE");
-
-	add_to_combo_box(spin_button_wrap_combo_box, "FALSE");
-
-	add_to_grid(spin_button_grid, spin_button_wrap_combo_box, 5, 1, 1, 1);
-
-	GtkWidget *spin_button_numeric_label = create_label("Numeric", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
-
-	add_to_grid(spin_button_grid, spin_button_numeric_label, 6, 0, 1, 1);
-
-	GtkWidget *spin_button_numeric_combo_box = create_combo_box();
-
-	add_to_combo_box(spin_button_numeric_combo_box, "TRUE");
-
-	add_to_combo_box(spin_button_numeric_combo_box, "FALSE");
-
-	add_to_grid(spin_button_grid, spin_button_numeric_combo_box, 6, 1, 1, 1);
-
-	GtkWidget *spin_button_add_button = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                             ", FALSE, NULL, NULL, NULL);
-
-	add_to_grid(spin_button_grid, spin_button_add_button, 7, 0, 2, 1);
-
-	add_to_frame(spin_button_grid_frame, spin_button_grid, 14, 14, 14, 14);
-
-	add_to_box(spin_button_box, spin_button_grid_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
-
-	add_to_box(Widgets_box, spin_button_box, START, TRUE, TRUE, 0, 0, 0, 0, 0);
-
-	GtkWidget *spinner_box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
-
-	GtkWidget *spinner_label_frame = create_frame(NULL, 0.5, 0.5);
-
-	GtkWidget *spinner_label = create_label("Spinner", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
-
-	add_to_frame(spinner_label_frame, spinner_label, 7, 7, 14, 1);
-
-	add_to_box(spinner_box, spinner_label_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
-
-	GtkWidget *spinner_grid_frame = create_frame(NULL, 0.5, 0.5);
-
-	GtkWidget *spinner_grid = create_grid(7, 7, TRUE, FALSE);
-
-	GtkWidget *spinner_widget_id_label = create_label("Widget ID", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
-
-	add_to_grid(spinner_grid, spinner_widget_id_label, 0, 0, 1, 1);
-
-	GtkWidget *spinner_widget_id_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
-
-	add_to_grid(spinner_grid, spinner_widget_id_entry, 0, 1, 1, 1);
-
-	GtkWidget *spinner_active_label = create_label("Active", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
-
-	add_to_grid(spinner_grid, spinner_active_label, 1, 0, 1, 1);
-
-	GtkWidget *spinner_active_combo_box = create_combo_box();
-
-	add_to_combo_box(spinner_active_combo_box, "TRUE");
-
-	add_to_combo_box(spinner_active_combo_box, "FALSE");
-
-	add_to_grid(spinner_grid, spinner_active_combo_box, 1, 1, 1, 1);
-
-	GtkWidget *spinner_add_button = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                             ", FALSE, NULL, NULL, NULL);
-
-	add_to_grid(spinner_grid, spinner_add_button, 2, 0, 2, 1);
-
-	add_to_frame(spinner_grid_frame, spinner_grid, 14, 14, 14, 14);
-
-	add_to_box(spinner_box, spinner_grid_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
-
-	add_to_box(Widgets_box, spinner_box, START, TRUE, TRUE, 0, 0, 0, 0, 0);
-
-	GtkWidget *switch_button_box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
-
-	GtkWidget *switch_button_label_frame = create_frame(NULL, 0.5, 0.5);
-
-	GtkWidget *switch_button_label = create_label("Switch Button", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
-
-	add_to_frame(switch_button_label_frame, switch_button_label, 7, 7, 14, 1);
-
-	add_to_box(switch_button_box, switch_button_label_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
-
-	GtkWidget *switch_button_grid_frame = create_frame(NULL, 0.5, 0.5);
-
-	GtkWidget *switch_button_grid = create_grid(7, 7, TRUE, FALSE);
-
-	GtkWidget *switch_button_widget_id_label = create_label("Widget ID", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
-
-	add_to_grid(switch_button_grid, switch_button_widget_id_label, 0, 0, 1, 1);
-
-	GtkWidget *switch_button_widget_id_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
-
-	add_to_grid(switch_button_grid, switch_button_widget_id_entry, 0, 1, 1, 1);
-
-	GtkWidget *switch_button_default_state_label = create_label("Default State", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
-
-	add_to_grid(switch_button_grid, switch_button_default_state_label, 1, 0, 1, 1);
-
-	GtkWidget *switch_button_default_state_combo_box = create_combo_box();
-
-	add_to_combo_box(switch_button_default_state_combo_box, "TRUE");
-
-	add_to_combo_box(switch_button_default_state_combo_box, "FALSE");
-
-	add_to_grid(switch_button_grid, switch_button_default_state_combo_box, 1, 1, 1, 1);
-
-	GtkWidget *switch_button_callback_label = create_label("Callback", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
-
-	add_to_grid(switch_button_grid, switch_button_callback_label, 2, 0, 1, 1);
-
-	GtkWidget *switch_button_callback_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
-
-	add_to_grid(switch_button_grid, switch_button_callback_entry, 2, 1, 1, 1);
-
-	GtkWidget *switch_button_data_label = create_label("Data", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
-
-	add_to_grid(switch_button_grid, switch_button_data_label, 3, 0, 1, 1);
-
-	GtkWidget *switch_button_data_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
-
-	add_to_grid(switch_button_grid, switch_button_data_entry, 3, 1, 1, 1);
-
-	GtkWidget *switch_button_add_button = create_button(GTK_RELIEF_NORMAL, "                                                               Add                                                             ", FALSE, NULL, NULL, NULL);
-
-	add_to_grid(switch_button_grid, switch_button_add_button, 4, 0, 2, 1);
-
-	add_to_frame(switch_button_grid_frame, switch_button_grid, 14, 14, 14, 14);
-
-	add_to_box(switch_button_box, switch_button_grid_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
-
-	add_to_box(Widgets_box, switch_button_box, START, TRUE, TRUE, 0, 0, 0, 0, 0);
+	add_to_box(Widgets_box, radio_button_box, START, FALSE, FALSE, 0, 0, 0, 0, 0);
 
 	add_to_scrolled_window(scrolled_widgets_window, Widgets_box);
 

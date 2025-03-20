@@ -14,7 +14,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-GtkWidget *create_window(GtkApplication *app, GtkWindowType type, gchar *title, gint width, gint height, gboolean resizable, GtkWindowPosition position, gboolean decorate, GdkPixbuf *icon, double opacity, gboolean fullscrean)
+GtkWidget *create_window(GtkApplication *app, GtkWindowType type, gchar *title, gint width, gint height, gboolean resizable, GtkWindowPosition position, gboolean decorate, GdkPixbuf *icon, double opacity, gboolean fullscrean, char *background_color, char *background_image)
 {
     // The structure of the window
     windowInfos *windowInformations = (windowInfos *)malloc(sizeof(windowInfos));
@@ -39,6 +39,15 @@ GtkWidget *create_window(GtkApplication *app, GtkWindowType type, gchar *title, 
     windowInformations->icon = icon;
     windowInformations->opacity = opacity;
     windowInformations->fullscreen = fullscrean;
+    if(background_color)
+        windowInformations->background_color = g_strdup(background_color);
+    else
+        windowInformations->background_color = NULL;
+
+    if(background_image)    
+        windowInformations->background_image = g_strdup(background_image);
+    else 
+        windowInformations->background_image = NULL;
 
     // Receiving the window and freeing the memory
     GtkWidget *window = set_properties_window(windowInformations);
@@ -81,6 +90,32 @@ GtkWidget *set_properties_window(windowInfos *windowInformations)
     // Set fullscreen option
     if(windowInformations->fullscreen)
         gtk_window_fullscreen(GTK_WINDOW(window));
+
+        if (windowInformations->background_color || windowInformations->background_image) {
+            GtkCssProvider *provider = gtk_css_provider_new();
+            
+            // Construire la chaîne CSS
+            GString *css = g_string_new("window {");
+        
+            if (windowInformations->background_color) {
+                g_string_append_printf(css, " background-color: %s;", windowInformations->background_color);
+            }
+        
+            if (windowInformations->background_image) {
+                g_string_append_printf(css, " background-image: url(\"%s\"); background-repeat: no-repeat; background-size: cover;", windowInformations->background_image);
+            }
+        
+            g_string_append(css, " }");
+        
+            // Charger le CSS
+            gtk_css_provider_load_from_data(provider, css->str, -1, NULL);
+            g_string_free(css, TRUE); // Libérer la mémoire
+        
+            // Appliquer le CSS au GtkWindow
+            GtkStyleContext *context = gtk_widget_get_style_context(window);
+            gtk_style_context_add_provider(context, GTK_STYLE_PROVIDER(provider), GTK_STYLE_PROVIDER_PRIORITY_USER);
+        }
+        
 
     return window;
 }

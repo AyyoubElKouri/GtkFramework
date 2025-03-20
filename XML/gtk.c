@@ -4,7 +4,11 @@
 
 static void activate(GtkApplication *app, gpointer data)
 {
-	GtkWidget *window = create_window(app, GTK_WINDOW_TOPLEVEL, "title", 800, 600, TRUE, GTK_WIN_POS_CENTER, TRUE, NULL, 1.0, FALSE, NULL, "../assets/w160/ar.png");
+	GtkWidget *window = create_window(app, GTK_WINDOW_TOPLEVEL, "title", 750, 440, TRUE, GTK_WIN_POS_CENTER, TRUE, NULL, 1.0, FALSE, NULL, "../assets/w160/ar.png");
+
+	GtkWidget *heade = create_header_bar("Default Title", "Default Subtitle", NULL, TRUE);
+
+	add_header_bar_to_window(window, heade);
 
 	show_widget(window);
 

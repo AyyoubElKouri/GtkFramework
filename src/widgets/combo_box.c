@@ -19,6 +19,7 @@ GtkWidget *create_combo_box()
     return combo_box;
 }
 
+
 void add_to_combo_box(GtkWidget *combo_box, const gchar *item)
 {
     gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(combo_box), item);

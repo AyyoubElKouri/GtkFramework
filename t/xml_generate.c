@@ -22,6 +22,7 @@ static void xml_generation_callback(GtkTreeIter *iter, gpointer user_data, gbool
     TreeNodeData *node_data = tree_node_get_data(model, iter);
 
     if (is_open_tag) {
+        fprintf(xml_file, "\n");
         fprintf(xml_file, "<%s id=\"%s\" ", node_data->widget_name, node_data->information);
         if(strcmp(node_data->widget_name, "window") == 0)
             write_window(((windowInfos *)(node_data->widget_data)), xml_file);
@@ -68,11 +69,12 @@ static void xml_generation_callback(GtkTreeIter *iter, gpointer user_data, gbool
         } else if (strcmp(node_data->widget_name, "radio_button") == 0){
             write_radio_button(((radioButtonInfos *)(node_data->widget_data)), xml_file);
         }
-        fprintf(xml_file, ">\n");
+        fprintf(xml_file, ">");
     } else {
         // Traitement de la balise fermée (utilise le closing_tag si disponible)
+        fprintf(xml_file, "\n");
         const char *closing_tag = node_data->closing_tag ? node_data->closing_tag : node_data->information;
-        fprintf(xml_file, "%s\n", closing_tag);
+        fprintf(xml_file, "%s", closing_tag);
     }
 
     // Libérer la mémoire allouée par tree_node_get_data()
@@ -129,7 +131,13 @@ void write_window(windowInfos *windowInformations, FILE *file){
         fprintf(file, "position = %s ", "GTK_WIN_POS_MOUSE");
     }
 
-    fprintf(file, "type = GTK_WINDOW_TOPLEVEL");
+    fprintf(file, "type = GTK_WINDOW_TOPLEVEL ");
+
+    if(windowInformations->background_color)
+        fprintf(file, "color = \"%s\" ", windowInformations->background_color);
+    
+    if(windowInformations->background_image)
+        fprintf(file, "image = \"../%s\" ", windowInformations->background_image);
 }
 
 void write_box(boxInfos *boxInformations, FILE *file){
@@ -156,17 +164,17 @@ void write_header_bar(headerBarInfos *headerBarInformations, FILE *file){
     fprintf(file, "title = \"%s\" ", headerBarInformations->title);
     fprintf(file, "subtitle = \"%s\" ", headerBarInformations->subtitle);
     if(headerBarInformations->icon_path)
-        fprintf(file, "icon_path = \"%s\" ", headerBarInformations->icon_path);
+        fprintf(file, "icon_path = \"../%s\" ", headerBarInformations->icon_path);
     fprintf(file, "settings = %s", (headerBarInformations->settings == TRUE) ? "TRUE" : "FALSE");
 }
 
 void write_frame(frameInfos *frameInformations, FILE *file){
-    
+    setlocale(LC_NUMERIC, "C");
     fprintf(file, "title = \"%s\" ", frameInformations->title);
 
-    fprintf(file, "horizontal_placement = %.0f ",frameInformations->horizontal_placement);
+    fprintf(file, "horizontal_placement = %.1f ",frameInformations->horizontal_placement);
 
-    fprintf(file, "vertical_placement = %.0f", frameInformations->vertical_placement);
+    fprintf(file, "vertical_placement = %.1f", frameInformations->vertical_placement);
 }
 
  void write_grid(gridInfos *gridInformations, FILE *file){

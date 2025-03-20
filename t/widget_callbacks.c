@@ -370,9 +370,9 @@ void traitementWindow(GtkWidget *widget, gpointer data) {
 		infos->position = GTK_WIN_POS_CENTER;
     }
     else{
-		if(strcmp(position, "GTK_WIN_POS_CENTER") == 0)
+		if(strcmp(position, "CENTER") == 0)
 		infos->position = GTK_WIN_POS_CENTER;
-        else if(strcmp(position, "GTK_WIN_POS_CENTER_ON_PARENT") == 0)
+        else if(strcmp(position, "ON_PARENT") == 0)
 		infos->position = GTK_WIN_POS_CENTER_ON_PARENT;
         else
 		infos->position = GTK_WIN_POS_MOUSE;
@@ -394,6 +394,38 @@ void traitementWindow(GtkWidget *widget, gpointer data) {
     if(get_text(mywindow->window_informations_type_value) == "GTK_WINDOW_TOPLEVEL"){
         infos->type = GTK_WINDOW_TOPLEVEL;
     }
+
+	char *color = get_text(mywindow->window_informations_color_entry);
+
+	if(strcmp(color, "") == 0){
+		infos->background_color = NULL;
+	} else {
+		infos->background_color = color;
+		GtkCssProvider *provider = gtk_css_provider_new();
+		GString *css = g_string_new(".test_box {");
+		g_string_append_printf(css, " background-color: %s; }", color);
+
+		gtk_css_provider_load_from_data(provider, css->str, -1, NULL);
+		GtkStyleContext *context = gtk_widget_get_style_context(test_box);
+		gtk_style_context_add_class(context, "test_box");
+        gtk_style_context_add_provider(context, GTK_STYLE_PROVIDER(provider), GTK_STYLE_PROVIDER_PRIORITY_USER);
+	}	
+
+	char *image = get_text(mywindow->window_informations_image_entry);
+
+	if(strcmp(image, "") == 0){
+		infos->background_image = NULL;
+	} else {
+		infos->background_image = image;
+		GtkCssProvider *provider = gtk_css_provider_new();
+		GString *css = g_string_new(".test_box {");
+		g_string_append_printf(css, " background-image: url(\"%s\"); background-repeat: no-repeat; background-size: cover; }", image);
+
+		gtk_css_provider_load_from_data(provider, css->str, -1, NULL);
+		GtkStyleContext *context = gtk_widget_get_style_context(test_box);
+		gtk_style_context_add_class(context, "test_box");
+        gtk_style_context_add_provider(context, GTK_STYLE_PROVIDER(provider), GTK_STYLE_PROVIDER_PRIORITY_USER);
+	}
 
 	data_widget *widget_data = malloc(sizeof(data_widget));
 
@@ -552,7 +584,7 @@ void traitementBox(GtkWidget *widget, gpointer data){
 		infos->orientation = GTK_ORIENTATION_VERTICAL;
 	}
 	else{
-		if(strcmp(orientation, "GTK_ORIENTATION_VERTICAL") == 0)
+		if(strcmp(orientation, "VERTICAL") == 0)
 			infos->orientation = GTK_ORIENTATION_VERTICAL;
 		else
 			infos->orientation = GTK_ORIENTATION_HORIZONTAL;
@@ -563,11 +595,11 @@ void traitementBox(GtkWidget *widget, gpointer data){
 		infos->align = GTK_ALIGN_CENTER;
 	}
 	else{
-		if(strcmp(align, "GTK_ALIGN_CENTER") == 0)
+		if(strcmp(align, "CENTER") == 0)
 			infos->align = GTK_ALIGN_CENTER;
-		else if(strcmp(align, "GTK_ALIGN_START") == 0)
+		else if(strcmp(align, "START") == 0)
 			infos->align = GTK_ALIGN_START;
-		else if(strcmp(align, "GTK_ALIGN_END") == 0)
+		else if(strcmp(align, "END") == 0)
 			infos->align = GTK_ALIGN_END;
 		else
 			infos->align = -1;
@@ -593,16 +625,16 @@ void traitementHeaderBar(GtkWidget *widget, gpointer data){
 	headerBarInfos *infos = malloc(sizeof(headerBarInfos));
 	if(!infos) exit(EXIT_FAILURE);
 
-	infos->title = get_text(myheaderBar->header_bar_informations_title_value);
+	infos->title = g_strdup(get_text(myheaderBar->header_bar_informations_title_value));
 	if(strcmp(infos->title, "") == 0){
 		infos->title = "Default Title";
 	}
 
-	infos->icon_path = get_text(myheaderBar->header_bar_informations_icon_value);
+	infos->icon_path = g_strdup(get_text(myheaderBar->header_bar_informations_icon_value));
 	if(strcmp(infos->icon_path, "") == 0)
 		infos->icon_path = NULL;
 
-	infos->subtitle = get_text(myheaderBar->header_bar_informations_subtitle_value);
+	infos->subtitle = g_strdup(get_text(myheaderBar->header_bar_informations_subtitle_value));
 	if(strcmp(infos->subtitle, "") == 0){
 		infos->subtitle = "Default Subtitle";
 	}
@@ -644,7 +676,9 @@ void traitement_frame(GtkWidget *widget, gpointer data){
 	frameInfos *frameInformations = malloc(sizeof(frameInfos));
 	if(!frameInformations) return;
 
-	frameInformations->title = get_text(myframe->Frame_title_value);
+	
+	frameInformations->title = g_strdup(get_text(myframe->Frame_title_value));
+
 	frameInformations->vertical_placement = get_value_spin_button(myframe->Frame_vertical_placement_value);
 	frameInformations->horizontal_placement = get_value_spin_button(myframe->Frame_horizontal_placement_value);
 	data_widget *widget_data = malloc(sizeof(data_widget));
@@ -711,7 +745,7 @@ void traitement_paned(GtkWidget *widget, gpointer data){
 
 	if(!orientation){
 		infos->orientation = GTK_ORIENTATION_HORIZONTAL;
-	} else if (strcmp(orientation, "GTK_ORIENTATION_HORIZONTAL") == 0){
+	} else if (strcmp(orientation, "HORIZONTAL") == 0){
 		infos->orientation = GTK_ORIENTATION_HORIZONTAL;
 	} else {
 		infos->orientation = GTK_ORIENTATION_VERTICAL;
@@ -748,11 +782,11 @@ void traitement_stack(GtkWidget *widget, gpointer data){
 
 	char *transmition = get_selecter_item(mystack->stack_transition_type_value_combo_box);
 
-	if(strcmp(transmition, "GTK_STACK_TRANSITION_TYPE_CROSSFADE") == 0){
+	if(strcmp(transmition, "CROSSFADE") == 0){
 		infos->transition_type = GTK_STACK_TRANSITION_TYPE_CROSSFADE;
-	} else if (strcmp(transmition, "GTK_STACK_TRANSITION_TYPE_NONE") == 0){
+	} else if (strcmp(transmition, "NONE") == 0){
 		infos->transition_type = GTK_STACK_TRANSITION_TYPE_NONE;
-	} else if (strcmp(transmition, "GTK_STACK_TRANSITION_TYPE_SLIDE_LEFT")){
+	} else if (strcmp(transmition, "SLIDE_LEFT")){
 		infos->transition_type = GTK_STACK_TRANSITION_TYPE_SLIDE_LEFT;
 	} else {
 		infos->transition_type = GTK_STACK_TRANSITION_TYPE_SLIDE_RIGHT;
@@ -820,22 +854,22 @@ void traitement_button(GtkWidget *widget, gpointer data){
 	buttonInfos *infos = malloc(sizeof(buttonInfos));
 	if(!infos) return;
 
-	infos->label = get_text(mybutton->button_label_entry);
+	infos->label = g_strdup(get_text(mybutton->button_label_entry));
 	if(strcmp(infos->label, "") == 0){
 		infos->label = NULL;
 	}
 
-	infos->path_to_image = get_text(mybutton->button_path_to_image_entry);
+	infos->path_to_image = g_strdup(get_text(mybutton->button_path_to_image_entry));
 	if(strcmp(infos->path_to_image, "") == 0){
 		infos->path_to_image = NULL;
 	}
 
-	infos->callback_name = get_text(mybutton->button_callback_entry);
+	infos->callback_name = g_strdup(get_text(mybutton->button_callback_entry));
 	if(strcmp(infos->callback_name, "") == 0){
 		infos->callback_name = NULL;
 	}
 
-	infos->data_name = get_text(mybutton->button_data_entry);
+	infos->data_name = g_strdup(get_text(mybutton->button_data_entry));
 	if(strcmp(infos->data_name, "") == 0){
 		infos->data_name = NULL;
 	}
@@ -878,7 +912,7 @@ void traitement_check_button(GtkWidget *widget, gpointer data){
 	checkButtonInfos *infos = malloc(sizeof(checkButtonInfos));
 	if(!infos) return;
 
-	char *chaine = get_text(myCheck_button->check_button_label_entry);
+	char *chaine = g_strdup(get_text(myCheck_button->check_button_label_entry));
 	if(strcmp(chaine, "") == 0){
 		infos->label = NULL;
 	} else {
@@ -903,7 +937,7 @@ void traitement_check_button(GtkWidget *widget, gpointer data){
 	} else
 		infos->use_underline = FALSE;
 
-	chaine = get_text(myCheck_button->check_button_callback_entry);
+	chaine = g_strdup(get_text(myCheck_button->check_button_callback_entry));
 
 	if(strcmp(chaine, "") == 0){
 		infos->callback_name = NULL;
@@ -911,7 +945,7 @@ void traitement_check_button(GtkWidget *widget, gpointer data){
 		infos->callback_name = chaine;
 	}
 
-	chaine = get_text(myCheck_button->check_button_data_entry);
+	chaine = g_strdup(get_text(myCheck_button->check_button_data_entry));
 
 	if(strcmp(chaine, "") == 0){
 		infos->data_name = NULL;
@@ -938,14 +972,14 @@ void traitement_color_button(GtkWidget *widget, gpointer data){
 	colorButtonInfos *infos = malloc(sizeof(colorButtonInfos));
 	if(!infos) return;
 
-	char *chaine = get_text(myColor_button->color_button_label_entry);
+	char *chaine = g_strdup(get_text(myColor_button->color_button_label_entry));
 	if(strcmp(chaine, "") == 0){
 		infos->title = NULL;
 	} else {
 		infos->title = chaine;
 	}
 
-	chaine = get_color(myColor_button->color_button_default_color_color_button);
+	chaine = g_strdup(get_color(myColor_button->color_button_default_color_color_button));
 	if(!chaine){
 		infos->default_color = NULL;
 	}else {
@@ -990,14 +1024,14 @@ void traitement_entry(GtkWidget *widget, gpointer data){
 	entryInfos *infos = malloc(sizeof(entryI));
 	if(!infos) return;
 
-	char *chaine = get_text(myentry->entry_default_text_entry);
+	char *chaine = g_strdup(get_text(myentry->entry_default_text_entry));
 	if(strcmp(chaine, "") == 0){
 		infos->default_text = NULL;
 	} else {
 		infos->default_text = chaine;
 	}
 
-	chaine = get_text(myentry->entry_indicator_text_entry);
+	chaine = g_strdup(get_text(myentry->entry_indicator_text_entry));
 	if(strcmp(chaine, "") == 0){
 		infos->indicator_text = NULL;
 	} else {
@@ -1041,7 +1075,7 @@ void traitement_font_button(GtkWidget *widget, gpointer data){
 	fontButtonInfos *infos = malloc(sizeof(fontButtonInfos));
 	if(!infos) return;
 
-	char *chaine = get_text(myFont_button->font_button_title_entry);
+	char *chaine = g_strdup(get_text(myFont_button->font_button_title_entry));
 	
 	if(strcmp(chaine, "") == 0){
 		infos->title = NULL;
@@ -1049,7 +1083,7 @@ void traitement_font_button(GtkWidget *widget, gpointer data){
 		infos->title = chaine;
 	}
 
-	chaine = get_text(myFont_button->font_button_default_font_name_entry);
+	chaine = g_strdup(get_text(myFont_button->font_button_default_font_name_entry));
 
 	if(strcmp(chaine, "") == 0){
 		infos->default_font_name = "consolas";
@@ -1113,7 +1147,7 @@ void traitement_image(GtkWidget *widget, gpointer data){
 	imageInfos *infos = malloc(sizeof(imageInfos));
 	if(!infos) return;
 
-	char *chaine = get_text(myimage->image_path_entry);
+	char *chaine = g_strdup(get_text(myimage->image_path_entry));
 	if(strcmp(chaine, "")== 0){
 		infos->path = NULL;
 	} else {
@@ -1138,16 +1172,16 @@ void traitement_label(GtkWidget *widget, gpointer data){
 	labelInfos *infos = malloc(sizeof(labelInfos));
 	if(!infos) return;
 
-	infos->color = get_color(mylabel->label_color_color_button);
-	infos->background = get_color(mylabel->label_background_color_button);
+	infos->color = g_strdup(get_color(mylabel->label_color_color_button));
+	infos->background = g_strdup(get_color(mylabel->label_background_color_button));
 	
 	char *chaine = get_selecter_item(mylabel->label_justify_combo_box);
 
 	if(!chaine){
 		infos->justify = GTK_JUSTIFY_CENTER;
-	} else if (strcmp(chaine, "GTK_JUSTIFY_CENTER") == 0){
+	} else if (strcmp(chaine, "CENTER") == 0){
 		infos->justify = GTK_JUSTIFY_CENTER;
-	} else if (strcmp(chaine, "GTK_JUSTIFY_LEFT") == 0){
+	} else if (strcmp(chaine, "LEFT") == 0){
 		infos->justify = GTK_JUSTIFY_LEFT;
 	} else {
 		infos->justify = GTK_JUSTIFY_RIGHT;
@@ -1157,7 +1191,7 @@ void traitement_label(GtkWidget *widget, gpointer data){
 
 	if(!chaine){
 		infos->style = PANGO_STYLE_NORMAL;
-	} else if (strcmp(chaine, "PANGO_STYLE_NORMAL") == 0){
+	} else if (strcmp(chaine, "NORMAL") == 0){
 		infos->style = PANGO_STYLE_NORMAL;
 	} else {
 		infos->style = 	PANGO_STYLE_ITALIC;
@@ -1167,7 +1201,7 @@ void traitement_label(GtkWidget *widget, gpointer data){
 
 	if(!chaine){
 		infos->weight = PANGO_WEIGHT_NORMAL;
-	} else if (strcmp(chaine, "PANGO_WEIGHT_NORMAL") == 0){
+	} else if (strcmp(chaine, "NORMAL") == 0){
 		infos->weight = PANGO_WEIGHT_NORMAL;
 	} else {
 		infos->weight = PANGO_WEIGHT_BOLD;
@@ -1195,7 +1229,7 @@ void traitement_label(GtkWidget *widget, gpointer data){
 
 	infos->size = get_value_spin_button(mylabel->label_size_spin_button);
 	
-	chaine = get_text(mylabel->label_text_entry);
+	chaine = g_strdup(get_text(mylabel->label_text_entry));
 	
 	if(!chaine){
 		infos->text = NULL;
@@ -1203,7 +1237,7 @@ void traitement_label(GtkWidget *widget, gpointer data){
 		infos->text = chaine;
 	}
 
-	infos->font = get_font(mylabel->label_font_font_button);
+	infos->font = g_strdup(get_font(mylabel->label_font_font_button));
 
 	data_widget *widget_data = malloc(sizeof(data_widget));
 	if(!widget_data) exit(EXIT_FAILURE);
@@ -1229,7 +1263,7 @@ void traitement_level_bar(GtkWidget *widget, gpointer data){
 
 	if(!chaine){
 		infos->mode = GTK_LEVEL_BAR_MODE_CONTINUOUS;
-	} else if (strcmp(chaine, "GTK_LEVEL_BAR_MODE_CONTINUOUS") == 0){
+	} else if (strcmp(chaine, "CONTINUOUS") == 0){
 		infos->mode = GTK_LEVEL_BAR_MODE_CONTINUOUS;
 	} else {
 		infos->mode = GTK_LEVEL_BAR_MODE_DISCRETE;
@@ -1260,7 +1294,7 @@ void traitement_link_button(GtkWidget *widget, gpointer data){
 	linkButtonInfos *infos = malloc(sizeof(linkButtonInfos));
 	if(!infos) return;
 
-	char *chaine = get_text(myLink_button->Link_button_url_entry);
+	char *chaine = g_strdup(get_text(myLink_button->Link_button_url_entry));
 
 	if(strcmp(chaine, "") == 0){
 		infos->url = NULL;
@@ -1268,7 +1302,7 @@ void traitement_link_button(GtkWidget *widget, gpointer data){
 		infos->url = chaine;
 	}
 
-	chaine = get_text(myLink_button->Link_button_label_entry);
+	chaine = g_strdup(get_text(myLink_button->Link_button_label_entry));
 
 	if(strcmp(chaine, "") == 0){
 		infos->label = NULL;
@@ -1279,7 +1313,7 @@ void traitement_link_button(GtkWidget *widget, gpointer data){
 	data_widget *widget_data = malloc(sizeof(data_widget));
 	if(!widget_data) exit(EXIT_FAILURE);
 
-	widget_data->id_widget = get_text(myLink_button->Link_button_id_entry);
+	widget_data->id_widget = g_strdup(get_text(myLink_button->Link_button_id_entry));
 	widget_data->data = infos;
 	widget_data->widget_name = "link_button";
 
@@ -1292,7 +1326,7 @@ void traitement_menu_button(GtkWidget *widget, gpointer data){
 	menuButtonInfos *infos = malloc(sizeof(menuButtonInfos));
 	if(!infos) return;
 
-	char *chaine = get_text(myMenu_button->menu_button_label_entry);
+	char *chaine = g_strdup(get_text(myMenu_button->menu_button_label_entry));
 
 	if(strcmp(chaine, "") == 0){
 		infos->label = NULL;
@@ -1300,7 +1334,7 @@ void traitement_menu_button(GtkWidget *widget, gpointer data){
 		infos->label = chaine;
 	}
 
-	chaine = get_text(myMenu_button->menu_button_path_to_image_entry);
+	chaine = g_strdup(get_text(myMenu_button->menu_button_path_to_image_entry));
 
 	if(strcmp(chaine, "") == 0){
 		infos->path_to_image = NULL;
@@ -1325,7 +1359,7 @@ void traitement_menu_button(GtkWidget *widget, gpointer data){
 	data_widget *widget_data = malloc(sizeof(data_widget));
 	if(!widget_data) exit(EXIT_FAILURE);
 
-	widget_data->id_widget = get_text(myMenu_button->menu_button_id_entry);
+	widget_data->id_widget = g_strdup(get_text(myMenu_button->menu_button_id_entry));
 	widget_data->data = infos;
 	widget_data->widget_name = "menu_button";
 
@@ -1339,7 +1373,7 @@ void traitement_menu(GtkWidget *widget, gpointer data){
 	menuInfos *infos = malloc(sizeof(menuInfos));
 	if(!infos) return;
 
-	char *chaine = get_text(mymenu->menu_label_entry);
+	char *chaine = g_strdup(get_text(mymenu->menu_label_entry));
 
 	if(strcmp(chaine, "") == 0){
 		infos->label = NULL;
@@ -1360,7 +1394,7 @@ void traitement_menu(GtkWidget *widget, gpointer data){
 	data_widget *widget_data = malloc(sizeof(data_widget));
 	if(!widget_data) exit(EXIT_FAILURE);
 
-	widget_data->id_widget = get_text(mymenu->menu_id_entry);
+	widget_data->id_widget = g_strdup(get_text(mymenu->menu_id_entry));
 	widget_data->data = infos;
 	widget_data->widget_name = "menu";
 
@@ -1373,7 +1407,7 @@ void traitement_menu_item(GtkWidget *widget, gpointer data){
 	menuItemInfos *infos = malloc(sizeof(menuItemInfos));
 	if(!infos) return;
 
-	char *chaine = get_text(myMenu_item->menu_item_label_entry);
+	char *chaine = g_strdup(get_text(myMenu_item->menu_item_label_entry));
 	if(strcmp(chaine , "") == 0){
 		infos->label = NULL;
 	} else {
@@ -1394,7 +1428,7 @@ void traitement_menu_item(GtkWidget *widget, gpointer data){
 		infos->type = "radio";
 	}
 
-	chaine = get_text(myMenu_item->menu_item_callback_entry);
+	chaine = g_strdup(get_text(myMenu_item->menu_item_callback_entry));
 
 	if(!chaine){
 		infos->callback_name = NULL;
@@ -1402,7 +1436,7 @@ void traitement_menu_item(GtkWidget *widget, gpointer data){
 		infos->callback_name = chaine;
 	}
 
-	chaine = get_text(myMenu_item->menu_item_data_entry);
+	chaine = g_strdup(get_text(myMenu_item->menu_item_data_entry));
 
 	if(!chaine){
 		infos->data_name = NULL;
@@ -1416,7 +1450,7 @@ void traitement_menu_item(GtkWidget *widget, gpointer data){
 	data_widget *widget_data = malloc(sizeof(data_widget));
 	if(!widget_data) exit(EXIT_FAILURE);
 
-	widget_data->id_widget = get_text(myMenu_item->menu_item_id_entry);
+	widget_data->id_widget = g_strdup(get_text(myMenu_item->menu_item_id_entry));
 	widget_data->data = infos;
 	widget_data->widget_name = "menu_item";
 
@@ -1430,7 +1464,7 @@ void traitement_radio_button(GtkWidget *widget, gpointer data){
 	radioButtonInfos *infos = malloc(sizeof(radioButtonInfos));
 	if(!infos) return;
 
-	char * chaine = get_text(myRadio_button->radio_button_label_entry);
+	char * chaine = g_strdup(get_text(myRadio_button->radio_button_label_entry));
 
 	if(strcmp(chaine, "") == 0){
 		infos->label = NULL;
@@ -1438,7 +1472,7 @@ void traitement_radio_button(GtkWidget *widget, gpointer data){
 		infos->label = chaine;
 	}
 
-	chaine = get_text(myRadio_button->radio_button_path_image_entry);
+	chaine = g_strdup(get_text(myRadio_button->radio_button_path_image_entry));
 	
 	if(strcmp(chaine, "") == 0){
 		infos->path_to_image = NULL;
@@ -1446,7 +1480,7 @@ void traitement_radio_button(GtkWidget *widget, gpointer data){
 		infos->path_to_image = chaine;
 	}
 
-	chaine = get_text(myRadio_button->radio_button_id_radio_group_member_entry);
+	chaine = g_strdup(get_text(myRadio_button->radio_button_id_radio_group_member_entry));
 
 	if(strcmp(chaine, "") == 0){
 		infos->radio_group_member_name = NULL;
@@ -1477,7 +1511,7 @@ void traitement_radio_button(GtkWidget *widget, gpointer data){
 	data_widget *widget_data = malloc(sizeof(data_widget));
 	if(!widget_data) exit(EXIT_FAILURE);
 
-	widget_data->id_widget = get_text(myRadio_button->radio_button_id_entry);
+	widget_data->id_widget = g_strdup(get_text(myRadio_button->radio_button_id_entry));
 	widget_data->data = infos;
 	widget_data->widget_name = "radio_button";
 

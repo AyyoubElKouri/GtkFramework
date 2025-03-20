@@ -86,8 +86,13 @@
     
     
     TreeNodeData *dataWidget = search_tree(global_tree, parent_id);
-    
-    add_to_box(dataWidget->widget, obj, (strcmp(get_selecter_item(position),"START") == 0) ? START : END, (strcmp(get_selecter_item(expand),"TRUE") == 0) ? TRUE : FALSE, (strcmp(get_selecter_item(fill),"TRUE") == 0) ? TRUE : FALSE, get_value_spin_button(padding),
+
+    char *position_chaine = (get_selecter_item(position)) ? get_selecter_item(position) : "START";
+    char *expand_chaine = (get_selecter_item(expand)) ? (get_selecter_item(expand)) : "TRUE";
+    char *fill_chaine = (get_selecter_item(fill)) ? (get_selecter_item(fill)) : "TRUE";
+
+
+    add_to_box(dataWidget->widget, obj, (strcmp(position_chaine, "START") == 0) ? START : END, (strcmp(expand_chaine,"TRUE") == 0) ? TRUE : FALSE, (strcmp(fill_chaine,"TRUE") == 0) ? TRUE : FALSE, get_value_spin_button(padding),
     get_value_spin_button(margin_top),
     get_value_spin_button(margin_buttom),
     get_value_spin_button(margin_right),
@@ -95,7 +100,7 @@
 
     char *closing_tag = malloc(100 * sizeof(char));
     if(!closing_tag) return NULL;
-    sprintf(closing_tag, "</%s add_to_box(%s, %s, %s, %s, %s, %.0f, %.0f, %.0f, %.0f, %.0f)>", global_widget_data_pointer->widget_name, parent_id, global_widget_data_pointer->id_widget, (strcmp(get_selecter_item(position),"START") == 0) ? "START" : "END", (strcmp(get_selecter_item(expand),"TRUE") == 0) ? "TRUE" : "FALSE", (strcmp(get_selecter_item(fill),"TRUE") == 0) ? "TRUE" : "FALSE", get_value_spin_button(padding),
+    sprintf(closing_tag, "</%s add_to_box(%s, %s, %s, %s, %s, %.0f, %.0f, %.0f, %.0f, %.0f)>", global_widget_data_pointer->widget_name, parent_id, global_widget_data_pointer->id_widget, (strcmp(position_chaine, "START") == 0) ? "START" : "END", (strcmp(expand_chaine,"TRUE") == 0) ? "TRUE" : "FALSE", (strcmp(fill_chaine,"TRUE") == 0) ? "TRUE" : "FALSE", get_value_spin_button(padding),
     get_value_spin_button(margin_top),
     get_value_spin_button(margin_buttom),
     get_value_spin_button(margin_right),
@@ -303,15 +308,37 @@ void header_bar_widget_properties(){
     gint response = run_dialog(dialog);
 
     if(response == GTK_RESPONSE_OK){
-        strcpy(((headerBarInfos *)(dataWidget->widget_data))->title, get_text(header_bar_informations_title_value));
-        strcpy(((headerBarInfos *)(dataWidget->widget_data))->subtitle, get_text(header_bar_informations_subtitle_value));
+
+        if(strcmp(get_text(header_bar_informations_title_value), "") != 0)
+        {
+            ((headerBarInfos *)(dataWidget->widget_data))->title = g_strdup(get_text(header_bar_informations_title_value));
+
+        } else if (((headerBarInfos *)(dataWidget->widget_data))->title) {
+
+                g_free(((headerBarInfos *)(dataWidget->widget_data))->title);
+                ((headerBarInfos *)(dataWidget->widget_data))->title = NULL;
+
+        }
+
+        if(strcmp(get_text(header_bar_informations_subtitle_value), "") != 0){
+            ((headerBarInfos *)(dataWidget->widget_data))->subtitle = g_strdup(get_text(header_bar_informations_subtitle_value));
+        } else if (((headerBarInfos *)(dataWidget->widget_data))->subtitle){
+            g_free(((headerBarInfos *)(dataWidget->widget_data))->subtitle);
+            ((headerBarInfos *)(dataWidget->widget_data))->subtitle = NULL;
+        }
+        
+
         if(strcmp(get_text(header_bar_informations_icon_value), "") != 0){
-            if(!((headerBarInfos *)(dataWidget->widget_data))->icon_path){
-                ((headerBarInfos *)(dataWidget->widget_data))->icon_path = malloc(sizeof(char) * (strlen(get_text(header_bar_informations_icon_value)) + 1));
+            if(((headerBarInfos *)(dataWidget->widget_data))->icon_path){
+                g_free(((headerBarInfos *)(dataWidget->widget_data))->icon_path);
             }
-            strcpy(((headerBarInfos *)(dataWidget->widget_data))->icon_path, get_text(header_bar_informations_icon_value));
-        } else 
+
+            ((headerBarInfos *)(dataWidget->widget_data))->icon_path = g_strdup(get_text(header_bar_informations_icon_value));
+
+        } else{
+            g_free(((headerBarInfos *)(dataWidget->widget_data))->icon_path);
             ((headerBarInfos *)(dataWidget->widget_data))->icon_path = NULL;
+        }
 
         ((headerBarInfos *)(dataWidget->widget_data))->settings = strcmp(get_selecter_item(header_bar_informations_settings_value), "TRUE") == 0 ? TRUE : FALSE;
 
@@ -483,15 +510,31 @@ void frame_widget_properties(){
 
     add_to_box(box, Frame_grid, START, FALSE, FALSE, 0, 0, 0, 0, 0);
 
-    GtkWidget *dialog = create_dialog("Header Bar Properties", NULL, GTK_DIALOG_MODAL, 30, 30, 1, box, "OK", GTK_RESPONSE_OK, "Annuler", GTK_RESPONSE_CANCEL, "Supprimer", GTK_RESPONSE_REJECT);
+    GtkWidget *dialog = create_dialog   (
+                                             "Header Bar Properties",
+                                                                NULL, 
+                                                    GTK_DIALOG_MODAL, 
+                                                                  30,
+                                                                  30, 
+                                                                   1, 
+                                                                 box, 
+                                                                "OK", 
+                                                     GTK_RESPONSE_OK, 
+                                                           "Annuler",
+                                                 GTK_RESPONSE_CANCEL, 
+                                                         "Supprimer",
+                                                GTK_RESPONSE_REJECT
+                                        );
+
     gint response = run_dialog(dialog);
 
     if(response == GTK_RESPONSE_OK){
-        ((frameInfos *)(dataWidget->widget_data))->title = g_strdup(get_text(Frame_title_value));
+        g_free(((frameInfos *)(dataWidget->widget_data))->title);
+        ((frameInfos *)(dataWidget->widget_data))->title                = g_strdup(get_text(Frame_title_value));
 
         ((frameInfos *)(dataWidget->widget_data))->horizontal_placement = get_value_spin_button(Frame_horizontal_placement_value);
 
-        ((frameInfos *)(dataWidget->widget_data))->vertical_placement = get_value_spin_button(Frame_vertical_placement_value);
+        ((frameInfos *)(dataWidget->widget_data))->vertical_placement   = get_value_spin_button(Frame_vertical_placement_value);
 
         modify_frame(dataWidget->widget, ((frameInfos *)(dataWidget->widget_data)));
     } else if (response == GTK_RESPONSE_REJECT){
@@ -516,12 +559,12 @@ char * grid_container_properties(char *parent_id, GtkWidget *obj){
 
             GtkWidget *row_label = create_label("Row", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
             add_to_grid(grid, row_label, 0, 0, 1, 1);
-            GtkWidget *row_value = create_spin_button(0, 100, 1, 2, 0, TRUE, TRUE);
+            GtkWidget *row_value = create_spin_button(0, 100, 1, 0, 0, TRUE, TRUE);
             add_to_grid(grid, row_value, 0, 1, 1, 1);
 
             GtkWidget *column_label = create_label("Column", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
             add_to_grid(grid, column_label, 1, 0, 1, 1);
-            GtkWidget *column_value = create_spin_button(0, 100, 1, 2, 0, TRUE, TRUE);
+            GtkWidget *column_value = create_spin_button(0, 100, 1, 0, 0, TRUE, TRUE);
             add_to_grid(grid, column_value, 1, 1, 1, 1);
 
             GtkWidget *row_span_label = create_label("Row Span", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
@@ -531,7 +574,7 @@ char * grid_container_properties(char *parent_id, GtkWidget *obj){
 
             GtkWidget *column_span_label = create_label("Column Span", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
             add_to_grid(grid, column_span_label, 3, 0, 1, 1);
-            GtkWidget *column_span_value = create_spin_button(0, 10, 1, 2, 0, TRUE, TRUE);
+            GtkWidget *column_span_value = create_spin_button(0, 10, 1, 1, 0, TRUE, TRUE);
             add_to_grid(grid, column_span_value, 3, 1, 1, 1);
 
         add_to_box(box, grid, START, FALSE, FALSE, 0, 0, 0, 0, 0);
