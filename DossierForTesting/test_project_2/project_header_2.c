@@ -29,7 +29,7 @@ static void stop_spinner_callback(GtkWidget *widget, gpointer data)
 void project2(GtkApplication *app)
 {
     /*---Start Window---*/
-    GtkWidget *window = create_window(app, GTK_WINDOW_TOPLEVEL, "Widgets", 1100, 600, TRUE, GTK_WIN_POS_CENTER, TRUE, NULL, 1.0, FALSE);
+    GtkWidget *window = create_window(app, GTK_WINDOW_TOPLEVEL, "Widgets", 1100, 600, TRUE, GTK_WIN_POS_CENTER, TRUE, NULL, 1.0, FALSE, NULL, NULL);
 
         /*---Start Header Bar---*/
         GtkWidget *header_bar = create_header_bar("Widgets Catalog", "Project 2", NULL, TRUE);

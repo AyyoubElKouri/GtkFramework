@@ -19,7 +19,7 @@
 void project1(GtkApplication *app)
 {
     /*---Start Window---*/
-    GtkWidget *window = create_window(app, GTK_WINDOW_TOPLEVEL, "Countries", 900, 600, TRUE, GTK_WIN_POS_CENTER, TRUE, NULL, 1, FALSE);
+    GtkWidget *window = create_window(app, GTK_WINDOW_TOPLEVEL, "Countries", 900, 600, TRUE, GTK_WIN_POS_CENTER, TRUE, NULL, 1, FALSE, NULL, NULL);
 
         /*--- Start Header Bar---*/
         GtkWidget *header_bar = create_header_bar("Countries", "Project 1", "assets/Application_icon/apple.png", TRUE);
