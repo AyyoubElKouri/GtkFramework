@@ -178,7 +178,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(window_informations_grid, window_informations_id_label, 0, 0, 1, 1);
 
-	GtkWidget *window_informations_id_value = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 20, 0.5);
+	GtkWidget *window_informations_id_value = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(window_informations_grid, window_informations_id_value, 0, 1, 1, 1);
 
@@ -186,7 +186,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(window_informations_grid, window_informations_app_label, 1, 0, 1, 1);
 
-	GtkWidget *window_informations_app_value = create_entry("app", "Chose App for TOPLEVEL", TRUE, TRUE, 20, 0.5);
+	GtkWidget *window_informations_app_value = create_entry("app", "Chose App for TOPLEVEL", TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(window_informations_grid, window_informations_app_value, 1, 1, 1, 1);
 
@@ -194,7 +194,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(window_informations_grid, window_informations_type_label, 2, 0, 1, 1);
 
-	GtkWidget *window_informations_type_value = create_entry("GTK_WINDOW_TOPLEVEL", "Chose Type of the window", TRUE, TRUE, 20, 0.5);
+	GtkWidget *window_informations_type_value = create_entry("GTK_WINDOW_TOPLEVEL", "Chose Type of the window", TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(window_informations_grid, window_informations_type_value, 2, 1, 1, 1);
 
@@ -202,7 +202,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(window_informations_grid, window_informations_title_label, 3, 0, 1, 1);
 
-	GtkWidget *window_informations_title_value = create_entry("title", "Chose Title for TOPLEVEL", TRUE, TRUE, 20, 0.5);
+	GtkWidget *window_informations_title_value = create_entry("title", "Chose Title for TOPLEVEL", TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(window_informations_grid, window_informations_title_value, 3, 1, 1, 1);
 
@@ -268,7 +268,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(window_informations_grid, window_informations_icon_label, 9, 0, 1, 1);
 
-	GtkWidget *window_informations_icon_value = create_entry(NULL, "icon path", TRUE, TRUE, 20, 0.5);
+	GtkWidget *window_informations_icon_value = create_entry(NULL, "icon path", TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(window_informations_grid, window_informations_icon_value, 9, 1, 1, 1);
 
@@ -441,7 +441,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(scrolled_window_informations_grid, scrolled_window_informations_id_label, 0, 0, 1, 1);
 
-	GtkWidget *scrolled_window_informations_id_value = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 20, 0.5);
+	GtkWidget *scrolled_window_informations_id_value = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(scrolled_window_informations_grid, scrolled_window_informations_id_value, 0, 1, 1, 1);
 
@@ -516,7 +516,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(Box_case_informations_grid, Box_case_informations_id_label, 0, 0, 1, 1);
 
-	GtkWidget *Box_case_informations_id_entry = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 20, 0.5);
+	GtkWidget *Box_case_informations_id_entry = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(Box_case_informations_grid, Box_case_informations_id_entry, 0, 1, 1, 1);
 
@@ -596,7 +596,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(Fixed_grid, Fixed_id_label, 0, 0, 1, 1);
 
-	GtkWidget *Fixed_id_entry = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 20, 0.5);
+	GtkWidget *Fixed_id_entry = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(Fixed_grid, Fixed_id_entry, 0, 1, 1, 1);
 
@@ -636,7 +636,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(Frame_grid, Frame_id_label, 0, 0, 1, 1);
 
-	GtkWidget *Frame_id_entry = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 20, 0.5);
+	GtkWidget *Frame_id_entry = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(Frame_grid, Frame_id_entry, 0, 1, 1, 1);
 
@@ -644,7 +644,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(Frame_grid, Frame_title_label, 1, 0, 1, 1);
 
-	GtkWidget *Frame_title_value = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+	GtkWidget *Frame_title_value = create_entry(NULL, NULL, TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(Frame_grid, Frame_title_value, 1, 1, 1, 1);
 
@@ -704,7 +704,7 @@ static void activate(GtkApplication *app, gpointer data)
 	
 	add_to_grid(Grid_grid, Grid_id_label, 0, 0, 1, 1);
 
-	GtkWidget *Grid_id_entry = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 20, 0.5);
+	GtkWidget *Grid_id_entry = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(Grid_grid, Grid_id_entry, 0, 1, 1, 1);
 	
@@ -790,7 +790,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(Paned_grid, Paned_id_label, 0, 0, 1, 1);
 
-	GtkWidget *Paned_id_value = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 20, 0.5);
+	GtkWidget *Paned_id_value = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(Paned_grid, Paned_id_value, 0, 1, 1, 1);
 
@@ -868,7 +868,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(Stack_grid, stack_widget_id_label, 0, 0, 1, 1);
 
-	GtkWidget *stack_widget_id_value = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 20, 0.5);
+	GtkWidget *stack_widget_id_value = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(Stack_grid, stack_widget_id_value, 0, 1, 1, 1);
 	
@@ -876,7 +876,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(Stack_grid, stack_switcher_widget_label, 1, 0, 1, 1);
 
-	GtkWidget *stack_switcher_widget_id = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 20, 0.5);
+	GtkWidget *stack_switcher_widget_id = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(Stack_grid, stack_switcher_widget_id, 1, 1, 1, 1);
 
@@ -944,7 +944,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(Switcher_grid, switcher_id_label, 0, 0, 1, 1);
 
-	GtkWidget *switcher_id_entry = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 20, 0.5);
+	GtkWidget *switcher_id_entry = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(Switcher_grid, switcher_id_entry, 0, 1, 1, 1);
 
@@ -1015,7 +1015,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(button_grid, button_id_label, 0, 0, 1, 1);
 
-	GtkWidget *button_id_entry = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 20, 0.5);
+	GtkWidget *button_id_entry = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(button_grid, button_id_entry, 0, 1, 1, 1);
 
@@ -1035,7 +1035,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(button_grid, button_label_label, 2, 0, 1, 1);
 
-	GtkWidget *button_label_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+	GtkWidget *button_label_entry = create_entry(NULL, NULL, TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(button_grid, button_label_entry, 2, 1, 1, 1);
 
@@ -1055,7 +1055,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(button_grid, button_path_to_image_label, 4, 0, 1, 1);
 
-	GtkWidget *button_path_to_image_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+	GtkWidget *button_path_to_image_entry = create_entry(NULL, NULL, TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(button_grid, button_path_to_image_entry, 4, 1, 1, 1);
 
@@ -1063,7 +1063,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(button_grid, button_callback_label, 5, 0, 1, 1);
 
-	GtkWidget *button_callback_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+	GtkWidget *button_callback_entry = create_entry(NULL, NULL, TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(button_grid, button_callback_entry, 5, 1, 1, 1);
 
@@ -1071,7 +1071,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(button_grid, button_data_label, 6, 0, 1, 1);
 
-	GtkWidget *button_data_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+	GtkWidget *button_data_entry = create_entry(NULL, NULL, TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(button_grid, button_data_entry, 6, 1, 1, 1);
 
@@ -1118,7 +1118,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(check_button_grid, check_button_id_label, 0, 0, 1, 1);
 
-	GtkWidget *check_button_id_entry = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 20, 0.5);
+	GtkWidget *check_button_id_entry = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(check_button_grid, check_button_id_entry, 0, 1, 1, 1);
 
@@ -1126,7 +1126,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(check_button_grid, check_button_label_label, 1, 0, 1, 1);
 
-	GtkWidget *check_button_label_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+	GtkWidget *check_button_label_entry = create_entry(NULL, NULL, TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(check_button_grid, check_button_label_entry, 1, 1, 1, 1);
 
@@ -1158,7 +1158,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(check_button_grid, check_button_callback_label, 4, 0, 1, 1);
 
-	GtkWidget *check_button_callback_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+	GtkWidget *check_button_callback_entry = create_entry(NULL, NULL, TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(check_button_grid, check_button_callback_entry, 4, 1, 1, 1);
 
@@ -1166,7 +1166,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(check_button_grid, check_button_data_label, 5, 0, 1, 1);
 
-	GtkWidget *check_button_data_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+	GtkWidget *check_button_data_entry = create_entry(NULL, NULL, TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(check_button_grid, check_button_data_entry, 5, 1, 1, 1);
 
@@ -1212,7 +1212,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(color_button_grid, color_button_id_label, 0, 0, 1, 1);
 
-	GtkWidget *color_button_id_entry = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 20, 0.5);
+	GtkWidget *color_button_id_entry = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(color_button_grid, color_button_id_entry, 0, 1, 1, 1);
 
@@ -1228,7 +1228,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(color_button_grid, color_button_title_label, 2, 0, 1, 1);
 
-	GtkWidget *color_button_label_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+	GtkWidget *color_button_label_entry = create_entry(NULL, NULL, TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(color_button_grid, color_button_label_entry, 2, 1, 1, 1);
 
@@ -1284,7 +1284,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(combo_box_grid, combo_box_id_label, 0, 0, 1, 1);
 
-	GtkWidget *combo_box_id_entry = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 20, 0.5);
+	GtkWidget *combo_box_id_entry = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(combo_box_grid, combo_box_id_entry, 0, 1, 1, 1);
 
@@ -1325,7 +1325,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(entry_box_grid, entry_id_label, 0, 0, 1, 1);
 
-	GtkWidget *entry_id_entry = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 20, 0.5);
+	GtkWidget *entry_id_entry = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(entry_box_grid, entry_id_entry, 0, 1, 1, 1);
 
@@ -1333,7 +1333,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(entry_box_grid, entry_default_text_label, 1, 0, 1, 1);
 
-	GtkWidget *entry_default_text_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+	GtkWidget *entry_default_text_entry = create_entry(NULL, NULL, TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(entry_box_grid, entry_default_text_entry, 1, 1, 1, 1);
 
@@ -1341,7 +1341,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(entry_box_grid, entry_indicator_text_label, 2, 0, 1, 1);
 
-	GtkWidget *entry_indicator_text_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+	GtkWidget *entry_indicator_text_entry = create_entry(NULL, NULL, TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(entry_box_grid, entry_indicator_text_entry, 2, 1, 1, 1);
 
@@ -1428,7 +1428,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(font_button_grid, font_button_id_label, 0, 0, 1, 1);
 
-	GtkWidget *font_button_id_entry = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 20, 0.5);
+	GtkWidget *font_button_id_entry = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(font_button_grid, font_button_id_entry, 0, 1, 1, 1);
 
@@ -1436,7 +1436,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(font_button_grid, font_button_default_font_name_label, 1, 0, 1, 1);
 
-	GtkWidget *font_button_default_font_name_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+	GtkWidget *font_button_default_font_name_entry = create_entry(NULL, NULL, TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(font_button_grid, font_button_default_font_name_entry, 1, 1, 1, 1);
 
@@ -1444,7 +1444,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(font_button_grid, font_button_title_label, 2, 0, 1, 1);
 
-	GtkWidget *font_button_title_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+	GtkWidget *font_button_title_entry = create_entry(NULL, NULL, TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(font_button_grid, font_button_title_entry, 2, 1, 1, 1);
 
@@ -1539,7 +1539,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(image_grid, image_id_label, 0, 0, 1, 1);
 
-	GtkWidget *image_id_entry = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 20, 0.5);
+	GtkWidget *image_id_entry = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(image_grid, image_id_entry, 0, 1, 1, 1);
 
@@ -1589,7 +1589,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(label_grid, label_id_label, 0, 0, 1, 1);
 
-	GtkWidget *label_id_entry = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 20, 0.5);
+	GtkWidget *label_id_entry = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(label_grid, label_id_entry, 0, 1, 1, 1);
 
@@ -1597,7 +1597,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(label_grid, label_text_label, 1, 0, 1, 1);
 
-	GtkWidget *label_text_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+	GtkWidget *label_text_entry = create_entry(NULL, NULL, TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(label_grid, label_text_entry, 1, 1, 1, 1);
 
@@ -1742,7 +1742,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(level_bar_grid, level_bar_id_label, 0, 0, 1, 1);
 
-	GtkWidget *level_bar_id_entry = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 20, 0.5);
+	GtkWidget *level_bar_id_entry = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(level_bar_grid, level_bar_id_entry, 0, 1, 1, 1);
 
@@ -1836,7 +1836,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(Link_button_grid, Link_button_id_label, 0, 0, 1, 1);
 
-	GtkWidget *Link_button_id_entry = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 20, 0.5);
+	GtkWidget *Link_button_id_entry = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(Link_button_grid, Link_button_id_entry, 0, 1, 1, 1);
 
@@ -1854,7 +1854,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(Link_button_grid, Link_button_label_label, 2, 0, 1, 1);
 
-	GtkWidget *Link_button_label_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+	GtkWidget *Link_button_label_entry = create_entry(NULL, NULL, TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(Link_button_grid, Link_button_label_entry, 2, 1, 1, 1);
 
@@ -1897,7 +1897,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(menu_button_grid, menu_button_id_label, 0, 0, 1, 1);
 
-	GtkWidget *menu_button_id_entry = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 20, 0.5);
+	GtkWidget *menu_button_id_entry = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(menu_button_grid, menu_button_id_entry, 0, 1, 1, 1);
 
@@ -1905,7 +1905,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(menu_button_grid, menu_button_label_label, 1, 0, 1, 1);
 
-	GtkWidget *menu_button_label_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+	GtkWidget *menu_button_label_entry = create_entry(NULL, NULL, TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(menu_button_grid, menu_button_label_entry, 1, 1, 1, 1);
 
@@ -1913,7 +1913,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(menu_button_grid, menu_button_path_to_image_label, 2, 0, 1, 1);
 
-	GtkWidget *menu_button_path_to_image_entry = create_entry(NULL, "Chose image or lable", TRUE, TRUE, 20, 0.5);
+	GtkWidget *menu_button_path_to_image_entry = create_entry(NULL, "Chose image or lable", TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(menu_button_grid, menu_button_path_to_image_entry, 2, 1, 1, 1);
 
@@ -1973,7 +1973,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(menu_item_grid, menu_item_id_label, 0, 0, 1, 1);
 
-	GtkWidget *menu_item_id_entry = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 20, 0.5);
+	GtkWidget *menu_item_id_entry = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(menu_item_grid, menu_item_id_entry, 0, 1, 1, 1);
 
@@ -1981,7 +1981,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(menu_item_grid, menu_item_label_label, 1, 0, 1, 1);
 
-	GtkWidget *menu_item_label_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+	GtkWidget *menu_item_label_entry = create_entry(NULL, NULL, TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(menu_item_grid, menu_item_label_entry, 1, 1, 1, 1);
 
@@ -2005,7 +2005,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(menu_item_grid, menu_item_callback_label, 3, 0, 1, 1);
 
-	GtkWidget *menu_item_callback_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+	GtkWidget *menu_item_callback_entry = create_entry(NULL, NULL, TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(menu_item_grid, menu_item_callback_entry, 3, 1, 1, 1);
 
@@ -2013,7 +2013,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(menu_item_grid, menu_item_data_label, 4, 0, 1, 1);
 
-	GtkWidget *menu_item_data_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+	GtkWidget *menu_item_data_entry = create_entry(NULL, NULL, TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(menu_item_grid, menu_item_data_entry, 4, 1, 1, 1);
 
@@ -2058,7 +2058,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(menu_grid, menu_id_label, 0, 0, 1, 1);
 
-	GtkWidget *menu_id_entry = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 20, 0.5);
+	GtkWidget *menu_id_entry = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(menu_grid, menu_id_entry, 0, 1, 1, 1);
 
@@ -2078,7 +2078,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(menu_grid, menu_label_label, 2, 0, 1, 1);
 
-	GtkWidget *menu_label_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+	GtkWidget *menu_label_entry = create_entry(NULL, NULL, TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(menu_grid, menu_label_entry, 2, 1, 1, 1);
 
@@ -2121,7 +2121,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(radio_button_grid, radio_button_id_label, 0, 0, 1, 1);
 
-	GtkWidget *radio_button_id_entry = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 20, 0.5);
+	GtkWidget *radio_button_id_entry = create_entry(NULL, "must be unique and no space", TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(radio_button_grid, radio_button_id_entry, 0, 1, 1, 1);
 
@@ -2129,7 +2129,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(radio_button_grid, radio_button_label_label, 1, 0, 1, 1);
 
-	GtkWidget *radio_button_label_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+	GtkWidget *radio_button_label_entry = create_entry(NULL, NULL, TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(radio_button_grid, radio_button_label_entry, 1, 1, 1, 1);
 
@@ -2137,7 +2137,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(radio_button_grid, radio_button_path_image_label, 2, 0, 1, 1);
 
-	GtkWidget *radio_button_path_image_entry = create_entry(NULL, "if you chose label let this NULL", TRUE, TRUE, 20, 0.5);
+	GtkWidget *radio_button_path_image_entry = create_entry(NULL, "if you chose label let this NULL", TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(radio_button_grid, radio_button_path_image_entry, 2, 1, 1, 1);
 
@@ -2145,7 +2145,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_grid(radio_button_grid, radio_button_id_radio_group_member_label, 3, 0, 1, 1);
 
-	GtkWidget *radio_button_id_radio_group_member_entry = create_entry(NULL, NULL, TRUE, TRUE, 20, 0.5);
+	GtkWidget *radio_button_id_radio_group_member_entry = create_entry(NULL, NULL, TRUE, TRUE, 200, 0.5);
 
 	add_to_grid(radio_button_grid, radio_button_id_radio_group_member_entry, 3, 1, 1, 1);
 

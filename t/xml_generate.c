@@ -308,7 +308,7 @@ void write_font_button(fontButtonInfos *fontButtonInformations, FILE *file){
 
 void write_image(imageInfos *imageInformations, FILE *file){
     if(imageInformations->path){
-        fprintf(file, "path = \"%s\"", imageInformations->path);
+        fprintf(file, "path = \"../%s\"", imageInformations->path);
     }
 }
 

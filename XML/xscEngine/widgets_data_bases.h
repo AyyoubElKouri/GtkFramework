@@ -150,69 +150,69 @@
 
 
 
-void window_data_bases(NodeA *widget, FILE *file);
+void window_data_bases          (NodeA *widget, FILE *file);
 
-void header_bar_data_bases(NodeA *widget, FILE *file);
+void header_bar_data_bases      (NodeA *widget, FILE *file);
 
-void scrolled_window_data_bases(NodeA *widget, FILE *file);
+void scrolled_window_data_bases (NodeA *widget, FILE *file);
 
-void box_data_bases(NodeA *widget, FILE *file);
+void box_data_bases             (NodeA *widget, FILE *file);
 
-void fixed_data_bases(NodeA *widget, FILE *file);
+void fixed_data_bases           (NodeA *widget, FILE *file);
 
-void frame_data_bases(NodeA *widget, FILE *file);
+void frame_data_bases           (NodeA *widget, FILE *file);
 
-void grid_data_bases(NodeA *widget, FILE *file);
+void grid_data_bases            (NodeA *widget, FILE *file);
 
-void paned_data_bases(NodeA *widget, FILE *file);
+void paned_data_bases           (NodeA *widget, FILE *file);
 
-void stack_data_bases(NodeA *widget, FILE *file);
+void stack_data_bases           (NodeA *widget, FILE *file);
 
-void switcher_data_bases(NodeA *widget, FILE *file);
+void switcher_data_bases        (NodeA *widget, FILE *file);
 
-void button_data_bases(NodeA *widget, FILE *file);
+void button_data_bases          (NodeA *widget, FILE *file);
 
-void check_button_data_bases(NodeA *widget, FILE *file);
+void check_button_data_bases    (NodeA *widget, FILE *file);
 
-void color_button_data_bases(NodeA *widget, FILE *file);
+void color_button_data_bases    (NodeA *widget, FILE *file);
 
-void entry_data_bases(NodeA *widget, FILE *file);
+void entry_data_bases           (NodeA *widget, FILE *file);
 
-void font_button_data_bases(NodeA *widget, FILE *file);
+void font_button_data_bases     (NodeA *widget, FILE *file);
 
-void image_data_bases(NodeA *widget, FILE *file);
+void image_data_bases           (NodeA *widget, FILE *file);
 
-void label_data_bases(NodeA *widget, FILE *file);
+void label_data_bases           (NodeA *widget, FILE *file);
 
-void level_bar_data_bases(NodeA *widget, FILE *file);
+void level_bar_data_bases       (NodeA *widget, FILE *file);
 
-void link_button_data_bases(NodeA *widget, FILE *file);
+void link_button_data_bases     (NodeA *widget, FILE *file);
 
-void menu_button_data_bases(NodeA *widget, FILE *file);
+void menu_button_data_bases     (NodeA *widget, FILE *file);
 
-void menu_item_data_bases(NodeA *widget, FILE *file);
+void menu_item_data_bases       (NodeA *widget, FILE *file);
 
-void menu_data_bases(NodeA *widget, FILE *file);
+void menu_data_bases            (NodeA *widget, FILE *file);
 
-void progress_bar_data_bases(NodeA *widget, FILE *file);
+void progress_bar_data_bases    (NodeA *widget, FILE *file);
 
-void radio_button_data_bases(NodeA *widget, FILE *file);
+void radio_button_data_bases    (NodeA *widget, FILE *file);
 
-void scale_data_bases(NodeA *widget, FILE *file);
+void scale_data_bases           (NodeA *widget, FILE *file);
 
-void separator_data_bases(NodeA *widget, FILE *file);
+void separator_data_bases       (NodeA *widget, FILE *file);
 
-void spin_button_data_bases(NodeA *widget, FILE *file);
+void spin_button_data_bases     (NodeA *widget, FILE *file);
 
-void spinner_data_bases(NodeA *widget, FILE *file);
+void spinner_data_bases         (NodeA *widget, FILE *file);
 
-void switch_button_data_bases(NodeA *widget, FILE *file);
+void switch_button_data_bases   (NodeA *widget, FILE *file);
 
-void text_view_data_bases(NodeA *widget, FILE *file);
+void text_view_data_bases       (NodeA *widget, FILE *file);
 
-void combo_box_data_bases(NodeA *widget, FILE *file);
+void combo_box_data_bases       (NodeA *widget, FILE *file);
 
-void combo_box_item_data_bases(NodeA *widget, FILE *file);
+void combo_box_item_data_bases  (NodeA *widget, FILE *file);
 
 
 #endif
