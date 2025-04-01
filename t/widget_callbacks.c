@@ -17,6 +17,7 @@ GtkWidget *global_tree;
 data_widget* global_widget_data_pointer = NULL;
 GtkWidget *drag_button;
 GtkCssProvider *provider = NULL;
+GtkWidget *box_test = NULL;
 
 
 
@@ -207,6 +208,22 @@ void on_click_window(gpointer data){
 		
 		add_to_grid(window_informations_grid, window_informations_fullscreen_value, 11, 1, 1, 1);
 
+		GtkWidget *color_label = create_label("Color", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+		add_to_grid(window_informations_grid, color_label, 12, 0, 1, 1);
+
+		GtkWidget *color_entry = create_entry(NULL, "Couleur", TRUE, TRUE, 20, 0.5);
+
+		add_to_grid(window_informations_grid, color_entry, 12, 1, 1, 1);
+
+		GtkWidget *image_label = create_label("Image", 12, "Arial", "#000000", "#f6f5f4", GTK_JUSTIFY_LEFT, FALSE, 0, 0, TRUE);
+
+		add_to_grid(window_informations_grid, image_label, 13, 0, 1, 1);
+
+		GtkWidget *image_entry = create_entry(NULL, "Image", TRUE, TRUE, 20, 0.5);
+
+		add_to_grid(window_informations_grid, image_entry, 13, 1, 1, 1);
+
 		add_to_box(box, window_informations_grid, START, TRUE, TRUE, 0, 0, 0, 0, 0);
 
 		GtkWidget *dialog = create_dialog("Window Information", NULL, GTK_DIALOG_MODAL, 300, 300, 1, box, "OK", GTK_RESPONSE_OK, "Annuler", GTK_RESPONSE_CANCEL, "Supprimer", GTK_RESPONSE_DELETE_EVENT);
@@ -289,6 +306,22 @@ void on_click_window(gpointer data){
 			
 			infos->type = GTK_WINDOW_TOPLEVEL; // TOUJOURS TOPLEVEL
 
+			char *color = get_text(color_entry);
+
+			if(strcmp(color, "") == 0){
+				infos->background_color = NULL;
+			} else {
+				infos->background_color = g_strdup(color);
+			}
+
+			char *image = get_text(image_entry);
+
+			if(strcmp(image, "") == 0){
+				infos->background_image = NULL;
+			} else {
+				infos->background_image = g_strdup(image);
+			}
+
 			((windowInfos *)(dataWidget->widget_data))->app = infos->app;
 			strcpy(((windowInfos *)(dataWidget->widget_data))->title,infos->title);
 			((windowInfos *)(dataWidget->widget_data))->decorate = infos->decorate;
@@ -299,6 +332,30 @@ void on_click_window(gpointer data){
 			((windowInfos *)(dataWidget->widget_data))->width = infos->width;
 			((windowInfos *)(dataWidget->widget_data))->height = infos->height;
 			((windowInfos *)(dataWidget->widget_data))->position = infos->position;
+			((windowInfos *)(dataWidget->widget_data))->background_color = infos->background_color;
+			((windowInfos *)(dataWidget->widget_data))->background_image = infos->background_image;
+
+			if(infos->background_image){
+				GtkCssProvider *provider = gtk_css_provider_new();
+				GString *css = g_string_new(".test_box {");
+				g_string_append_printf(css, " background-image: url(\"%s\"); background-repeat: no-repeat; background-size: cover; }", infos->background_image);
+
+				gtk_css_provider_load_from_data(provider, css->str, -1, NULL);
+				GtkStyleContext *context = gtk_widget_get_style_context(test_box);
+				gtk_style_context_add_class(context, "test_box");
+				gtk_style_context_add_provider(context, GTK_STYLE_PROVIDER(provider), GTK_STYLE_PROVIDER_PRIORITY_USER);
+
+			} else if (infos->background_color){
+				GtkCssProvider *provider = gtk_css_provider_new();
+				GString *css = g_string_new(".test_box {");
+				g_string_append_printf(css, " background-color: %s;  }", infos->background_color);
+
+				gtk_css_provider_load_from_data(provider, css->str, -1, NULL);
+				GtkStyleContext *context = gtk_widget_get_style_context(test_box);
+				gtk_style_context_add_class(context, "test_box");
+				gtk_style_context_add_provider(context, GTK_STYLE_PROVIDER(provider), GTK_STYLE_PROVIDER_PRIORITY_USER);
+			}
+			
 			
 		} else if (reponse == GTK_RESPONSE_DELETE_EVENT){
 
@@ -964,6 +1021,13 @@ void traitement_check_button(GtkWidget *widget, gpointer data){
 	widget_data->widget_name = "check_button";
 
 	global_widget_data_pointer = widget_data;
+
+	GtkWidget *check = set_properties_check_button(infos);
+
+	add_to_box(box_test, check, START, FALSE ,FALSE, 0, 0, 0, 0, 0);
+
+	show_widget(check);
+
 	drag(drag_button);
 }
 
