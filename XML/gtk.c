@@ -4,25 +4,13 @@
 
 static void activate(GtkApplication *app, gpointer data)
 {
-	GtkWidget *window = create_window(app, GTK_WINDOW_TOPLEVEL, "title", 750, 440, TRUE, GTK_WIN_POS_CENTER, TRUE, NULL, 1.0, FALSE, "#e6cce0", NULL);
+	GtkWidget *w = create_window(app, GTK_WINDOW_TOPLEVEL, "title", 750, 440, TRUE, GTK_WIN_POS_CENTER, TRUE, NULL, 1.0, FALSE, NULL, "../assets/w160/ar.png");
 
-	GtkWidget *header_bar = create_header_bar("Ayyoub", "El kouri", NULL, TRUE);
+	GtkWidget *fqs = create_header_bar("d", "Default Subtitle", NULL, TRUE);
 
-	add_header_bar_to_window(window, header_bar);
+	add_header_bar_to_window(w, fqs);
 
-	GtkWidget *main_box = create_box(GTK_ORIENTATION_HORIZONTAL, GTK_ALIGN_CENTER, 0);
-
-	GtkWidget *main_box_2 = create_box(GTK_ORIENTATION_VERTICAL, GTK_ALIGN_CENTER, 0);
-
-	GtkWidget *image = create_image("../assets/w160/ar.png");
-
-	add_to_box(main_box_2, image, START, TRUE, TRUE, 0, 0, 0, 0, 0);
-
-	add_to_box(main_box, main_box_2, START, TRUE, TRUE, 0, 0, 0, 0, 0);
-
-	add_to_container(window, main_box);
-
-	show_widget(window);
+	show_widget(w);
 
 }
 
