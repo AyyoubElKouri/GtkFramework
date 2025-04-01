@@ -114,6 +114,7 @@ GtkWidget *set_properties_window(windowInfos *windowInformations)
             // Appliquer le CSS au GtkWindow
             GtkStyleContext *context = gtk_widget_get_style_context(window);
             gtk_style_context_add_provider(context, GTK_STYLE_PROVIDER(provider), GTK_STYLE_PROVIDER_PRIORITY_USER);
+            
         }
         
 
