@@ -4,11 +4,82 @@
 #include "t/widget_callbacks.h"
 #include "t/xml_generate.h"
 
+typedef enum{
+	Windows,
+	Containers,
+	Widgets
+} Section;
+
+typedef void (*Callback)(GtkWidget *widget, gpointer data);
+
+
 extern GtkWidget *test_box;
 extern GtkWidget *global_tree;
 extern data_widget* global_widget_data_pointer;
 extern GtkWidget *drag_button;
+extern GtkWidget *box_test;
+ GtkWidget *window_case;
+ GtkWidget *Windows_box;
+ GtkWidget *Containers_box ;
+ GtkWidget *Widgets_box;
 
+GtkWidget *working_stack = NULL;
+
+
+void function(){
+	printf("test\n");
+}
+
+
+void AjouterButton(void (*function)()){
+	GtkWidget *button = create_button(GTK_RELIEF_NORMAL, "click", FALSE, NULL, NULL, NULL);
+	add_to_box(window_case, button, START, FALSE, FALSE, 0, 0, 0, 0, 0);
+
+	g_signal_connect(button, "clicked", G_CALLBACK(function), NULL);
+}
+
+
+
+void charger_fichier(GtkWidget *widget, gpointer data){
+	char *chemin = get_text((GtkWidget *)data);
+
+	char *commande = malloc(100 * sizeof(char));
+	sprintf(commande, "cd XML; xsc %s", chemin);
+
+
+
+	system(commande);
+}
+
+
+void onglet_fichier(GtkWidget *widget, gpointer data){
+	char *chaine = get_text((GtkWidget *)data);
+	box_test =create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
+	add_to_stack(working_stack, box_test, chaine);
+	show_widget(working_stack);
+	show_widget(box_test);
+}
+
+void addElement(char *buttonName, Section section, int size, Callback callback)
+{
+	GtkWidget *button = create_button(GTK_RELIEF_NORMAL, buttonName, FALSE, NULL, G_CALLBACK(callback), NULL);
+
+	GtkWidget *charge_frame = create_frame(buttonName, 0.5, 1);
+
+	GtkWidget *charge_box = create_box(GTK_ORIENTATION_VERTICAL, GTK_ALIGN_CENTER, 10);
+
+	add_to_box(charge_box, button, START, FALSE, FALSE, 0, 0, 0, 0, 0);
+
+	add_to_frame(charge_frame, charge_box, 2, 2, 2, 2);
+
+	if(section == Windows) add_to_box(Windows_box, charge_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
+	else if (section == Containers) add_to_box(Containers_box, charge_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
+	else add_to_box(Widgets_box, charge_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
+}
+
+void printhello(GtkWidget *widget, gpointer data){
+	printf("hello\n");
+}
 
 
 static void activate(GtkApplication *app, gpointer data)
@@ -66,9 +137,17 @@ static void activate(GtkApplication *app, gpointer data)
 
 	GtkWidget *working_space_frame = create_frame(NULL, 0.5, 0.5);
 
+	GtkWidget *working_switcher = create_switcher(5, TRUE);
+
+	add_to_box(working_space_box_content, working_switcher, START, FALSE, FALSE, 0, 0, 0, 0, 0);
+
+	working_stack = create_stack(working_switcher, 1, 600);
+
 	test_box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
 
-	add_to_frame(working_space_frame, test_box, 5, 5, 5, 5);
+	add_to_stack(working_stack, test_box, "Principale");
+
+	add_to_frame(working_space_frame, working_stack, 5, 5, 5, 5);
 
 	add_to_box(working_space_box_content, working_space_frame, START, TRUE, TRUE, 0, 0, 0, 0, 0);
 
@@ -156,9 +235,9 @@ static void activate(GtkApplication *app, gpointer data)
 
 	GtkWidget *scrolled_window_window = create_scrolled_window(FALSE, TRUE);
 
-	GtkWidget *Windows_box = create_box(GTK_ORIENTATION_VERTICAL, -1, 7);
+	Windows_box = create_box(GTK_ORIENTATION_VERTICAL, -1, 7);
 
-	GtkWidget *window_case = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
+	window_case = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
 
 	GtkWidget *window_label_frame = create_frame(NULL, 0.5, 0.5);
 
@@ -488,13 +567,50 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_box(Windows_box, scrolled_window_case, START, FALSE, FALSE, 0, 25, 0, 0, 0);
 
+	GtkWidget *charge_frame = create_frame("Charger une fichier", 0.5, 1);
+
+	GtkWidget *charge_box = create_box(GTK_ORIENTATION_VERTICAL, GTK_ALIGN_CENTER, 10);
+
+	GtkWidget *charge_entry = create_entry(NULL, NULL, TRUE, TRUE, 200, 0.5);
+
+	add_to_box(charge_box, charge_entry, START, FALSE, FALSE, 0, 0, 0, 0, 0);
+
+	GtkWidget *charge_button = create_button(GTK_RELIEF_NORMAL, "Add  ", FALSE, NULL, G_CALLBACK(charger_fichier), charge_entry);
+
+	add_to_box(charge_box, charge_button, START, FALSE, FALSE, 0, 0, 0, 0, 0);
+
+
+	add_to_frame(charge_frame, charge_box, 2, 2, 2, 2);
+
+
+	add_to_box(Windows_box, charge_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
+
+
+	//-----------------
+
+	GtkWidget *onglet_frame = create_frame("Ongletr une fichier", 0.5, 1);
+
+	GtkWidget *onglet_box = create_box(GTK_ORIENTATION_VERTICAL, GTK_ALIGN_CENTER, 10);
+
+	GtkWidget *onglet_entry = create_entry(NULL, NULL, TRUE, TRUE, 200, 0.5);
+
+	add_to_box(onglet_box, onglet_entry, START, FALSE, FALSE, 0, 0, 0, 0, 0);
+
+	GtkWidget *onglet_button = create_button(GTK_RELIEF_NORMAL, "Add  ", FALSE, NULL, G_CALLBACK(onglet_fichier), onglet_entry);
+
+	add_to_box(onglet_box, onglet_button, START, FALSE, FALSE, 0, 0, 0, 0, 0);
+
+	add_to_frame(onglet_frame, onglet_box, 2, 2, 2, 2);
+
+	add_to_box(Windows_box, onglet_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
+
 	add_to_scrolled_window(scrolled_window_window, Windows_box);
 
 	add_to_stack(stack_catalog, scrolled_window_window, "Windows");
 
 	GtkWidget *scrolled_containers_window = create_scrolled_window(FALSE, TRUE);
 
-	GtkWidget *Containers_box = create_box(GTK_ORIENTATION_VERTICAL, -1, 7);
+	Containers_box = create_box(GTK_ORIENTATION_VERTICAL, -1, 7);
 
 	GtkWidget *Box_case = create_box(GTK_ORIENTATION_VERTICAL, GTK_ALIGN_START, 0);
 
@@ -993,7 +1109,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	GtkWidget *scrolled_widgets_window = create_scrolled_window(FALSE, TRUE);
 
-	GtkWidget *Widgets_box = create_box(GTK_ORIENTATION_VERTICAL, -1, 7);
+	Widgets_box = create_box(GTK_ORIENTATION_VERTICAL, -1, 7);
 
 	GtkWidget *button_box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
 
@@ -2212,10 +2328,21 @@ static void activate(GtkApplication *app, gpointer data)
 
 	add_to_container(window, main_box);
 
+	AjouterButton(function);
+
+	// Module 2
+	// ----------------------------------------------------------------------------------------------------------------------
+	addElement("hello bro", Windows, 20, printhello);
+
+	
+
+
+
+	// ----------------------------------------------------------------------------------------------------------------------
+
 	show_widget(window);
 
     
-
 
 }
 

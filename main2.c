@@ -14,6 +14,8 @@ extern GtkWidget *drag_button;
 static void activate(GtkApplication *app, gpointer data)
 {
     GtkWidget *window = create_window(app, GTK_WINDOW_TOPLEVEL, "Hello world", 700, 550, TRUE, GTK_WIN_POS_CENTER, TRUE, NULL, 1, FALSE, "#9bd461", NULL);
+
+    
     
     show_widget(window);
 }

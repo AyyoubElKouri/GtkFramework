@@ -16,10 +16,4 @@ void ok_function(GtkWidget *widget, gpointer data){
 	gint reponse = run_dialog(dialog);
     destroy_widget(dialog);
 
-    if(reponse == 1){
-        g_application_quit(G_APPLICATION(data));
-    } else if (reponse == 2){
-        
-    }
-    
 }
