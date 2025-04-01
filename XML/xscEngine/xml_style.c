@@ -155,6 +155,6 @@ int main(int argc, char *argv[])
 
     // auto compile and run
     system("make");
-    system("application");
+    system("./application");
     return 0;
 }
