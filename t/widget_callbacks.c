@@ -18,6 +18,7 @@ data_widget* global_widget_data_pointer = NULL;
 GtkWidget *drag_button;
 GtkCssProvider *provider = NULL;
 GtkWidget *box_test = NULL;
+GtkWidget *main_window = NULL;
 
 
 
@@ -36,6 +37,9 @@ void on_click_window(gpointer data){
 			}
 		}
 		
+        
+
+
 		add_to_box(test_box, obj, START, (strcmp(widget_name, "header_bar") == 0) ? FALSE : TRUE, (strcmp(widget_name, "header_bar") == 0) ? FALSE : TRUE, 0, 0, 0, 0, 0);
 		show_widget(obj);	
 

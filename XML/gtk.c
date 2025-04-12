@@ -1,16 +1,22 @@
 #include <gtk/gtk.h>
 #include "../include/GtkFramework/GtkFramework.h"
+void ayyoub(){ printf("Welcome\n"); }
+
 
 
 static void activate(GtkApplication *app, gpointer data)
 {
-	GtkWidget *w = create_window(app, GTK_WINDOW_TOPLEVEL, "title", 750, 440, TRUE, GTK_WIN_POS_CENTER, TRUE, NULL, 1.0, FALSE, NULL, "../assets/w160/ar.png");
+	GtkWidget *fsf = create_window(app, GTK_WINDOW_TOPLEVEL, "title", 750, 440, TRUE, GTK_WIN_POS_CENTER, TRUE, NULL, 1.0, FALSE, "#FF33FF", NULL);
 
-	GtkWidget *fqs = create_header_bar("d", "Default Subtitle", NULL, TRUE);
+	GtkWidget *qsdf = create_header_bar("header", "Default Subtitle", NULL, TRUE);
 
-	add_header_bar_to_window(w, fqs);
+	add_header_bar_to_window(fsf, qsdf);
 
-	show_widget(w);
+	GtkWidget *rsfd = create_button(GTK_RELIEF_NORMAL, "yassine", TRUE, NULL, G_CALLBACK(ayyoub), NULL);
+
+	add_to_container(fsf, rsfd);
+
+	show_widget(fsf);
 
 }
 

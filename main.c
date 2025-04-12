@@ -18,6 +18,7 @@ extern GtkWidget *global_tree;
 extern data_widget* global_widget_data_pointer;
 extern GtkWidget *drag_button;
 extern GtkWidget *box_test;
+extern GtkWidget *main_window;
  GtkWidget *window_case;
  GtkWidget *Windows_box;
  GtkWidget *Containers_box ;
@@ -119,6 +120,19 @@ void dialog_function(GtkWidget *widget, gpointer data){
 
 void exit_function(){
     g_application_quit(G_APPLICATION(app));
+}
+
+
+void changeCouleur(){
+    GtkCssProvider *provider = gtk_css_provider_new();
+    GString *css = g_string_new(".test_box {");
+    g_string_append_printf(css, " background-color: %s;  }", "#FF22FF");
+
+    gtk_css_provider_load_from_data(provider, css->str, -1, NULL);
+    GtkStyleContext *context = gtk_widget_get_style_context(test_box);
+    gtk_style_context_add_class(context, "test_box");
+    gtk_style_context_add_provider(context, GTK_STYLE_PROVIDER(provider), GTK_STYLE_PROVIDER_PRIORITY_USER);
+
 }
 
 
@@ -2394,9 +2408,10 @@ static void activate(GtkApplication *app, gpointer data)
     addEvents("Button", Containers, 50, "#91d823", NULL);
     addEvents("Ayyoub", Containers, 25, "#FF33FF", NULL);
 
-    addEvents("Exit", Widgets, 20, "#ff0000", exit_function);
-    
+    addEvents("Exit", Widgets, 20, "#ffffff", exit_function);
 
+    addEvents("Change Couleur", Widgets, 20, "#ffffff", changeCouleur);
+    addEvents("abdrahmad", Windows, 50, "#FF33FF", dialog_function);
 
 
 
