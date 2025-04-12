@@ -30,6 +30,8 @@ void call_database_function(NodeA *widget_linked_list, FILE *file)
 }
 
 
+
+
 void use_xml_style_file(GtkApplication *app, arg *myarg)
 {
     char line[MAX_LINE_SIZE]; // to store the line
