@@ -60,9 +60,17 @@ void onglet_fichier(GtkWidget *widget, gpointer data){
 	show_widget(box_test);
 }
 
-void addElement(char *buttonName, Section section, int size, Callback callback)
+void addEvents(char *buttonName, Section section, int size, char *color,  Callback callback)
 {
 	GtkWidget *button = create_button(GTK_RELIEF_NORMAL, buttonName, FALSE, NULL, G_CALLBACK(callback), NULL);
+    gtk_button_set_relief(GTK_BUTTON(button) , GTK_RELIEF_NONE);
+
+    GtkCssProvider *provider = gtk_css_provider_new();
+    char *mycolor = g_strdup_printf("button { background-color: %s; }", color);
+    gtk_css_provider_load_from_data(provider, mycolor, -1, NULL);
+    GtkStyleContext *context = gtk_widget_get_style_context(button);
+    gtk_style_context_add_provider(context, GTK_STYLE_PROVIDER(provider), GTK_STYLE_PROVIDER_PRIORITY_USER);
+    g_object_unref(provider);
 
 	GtkWidget *charge_frame = create_frame(buttonName, 0.5, 1);
 
@@ -2332,7 +2340,8 @@ static void activate(GtkApplication *app, gpointer data)
 
 	// Module 2
 	// ----------------------------------------------------------------------------------------------------------------------
-	addElement("hello bro", Windows, 20, printhello);
+	addEvents("Test", Windows, 20, "#FF11FF",  NULL);
+
 
 	
 
