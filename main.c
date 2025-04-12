@@ -22,7 +22,7 @@ extern GtkWidget *box_test;
  GtkWidget *Windows_box;
  GtkWidget *Containers_box ;
  GtkWidget *Widgets_box;
-
+ GtkApplication *app;
 GtkWidget *working_stack = NULL;
 
 
@@ -65,6 +65,8 @@ void addEvents(char *buttonName, Section section, int size, char *color,  Callba
 	GtkWidget *button = create_button(GTK_RELIEF_NORMAL, buttonName, FALSE, NULL, G_CALLBACK(callback), NULL);
     gtk_button_set_relief(GTK_BUTTON(button) , GTK_RELIEF_NONE);
 
+    gtk_widget_set_size_request(button, size, size);
+
     GtkCssProvider *provider = gtk_css_provider_new();
     char *mycolor = g_strdup_printf("button { background-color: %s; }", color);
     gtk_css_provider_load_from_data(provider, mycolor, -1, NULL);
@@ -88,6 +90,54 @@ void addEvents(char *buttonName, Section section, int size, char *color,  Callba
 void printhello(GtkWidget *widget, gpointer data){
 	printf("hello\n");
 }
+
+
+// Callback Module : -----------------------------------------------------------------------------------------------------
+
+void dialog_function(GtkWidget *widget, gpointer data){
+    GtkWidget *box = create_box(GTK_ORIENTATION_HORIZONTAL, -1, 0);
+
+    GtkWidget *image = create_image("assets/w160/ar.png");
+
+    add_to_box(box, image, START, TRUE, TRUE, 0, 0, 0, 0, 0);
+
+    GtkWidget *dialog = create_dialog("Faire un choix", NULL, GTK_DIALOG_MODAL, 300, 300, 1, box, "OK", 1, "Annuler", 2, NULL, 3);
+	gint reponse = run_dialog(dialog);
+    destroy_widget(dialog);
+
+    if(reponse == 1){
+        GtkWidget *dialog = create_dialog("Vous avez clicker sur ok", NULL, GTK_DIALOG_MODAL, 30, 30, 1, NULL, "                                               OK                                               ", 1, NULL, 2, NULL, 3);
+        gint reponse = run_dialog(dialog);
+        destroy_widget(dialog);
+    } else {
+        GtkWidget *dialog = create_dialog("Vous avez clicker sur Annuler", NULL, GTK_DIALOG_MODAL, 30, 30, 1, NULL, "                                               OK                                               ", 1, NULL, 2, NULL, 3);
+        gint reponse = run_dialog(dialog);
+        destroy_widget(dialog);
+    }
+}
+
+
+void exit_function(){
+    g_application_quit(G_APPLICATION(app));
+}
+
+
+
+
+
+
+
+
+
+
+// -----------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
 
 
 static void activate(GtkApplication *app, gpointer data)
@@ -2338,12 +2388,17 @@ static void activate(GtkApplication *app, gpointer data)
 
 	AjouterButton(function);
 
-	// Module 2
+	// Module : Add Events
 	// ----------------------------------------------------------------------------------------------------------------------
-	addEvents("Test", Windows, 20, "#FF11FF",  NULL);
+	addEvents("Test", Windows, 20, "#FF11FF",  dialog_function);
+    addEvents("Button", Containers, 50, "#91d823", NULL);
+    addEvents("Ayyoub", Containers, 25, "#FF33FF", NULL);
+
+    addEvents("Exit", Widgets, 20, "#ff0000", exit_function);
+    
 
 
-	
+
 
 
 
@@ -2357,7 +2412,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 
 int main(int argc, char *argv[]){
-    GtkApplication *app = gtk_application_new("org.example.app", G_APPLICATION_DEFAULT_FLAGS);
+    app = gtk_application_new("org.example.app", G_APPLICATION_DEFAULT_FLAGS);
     g_signal_connect(app, "activate", G_CALLBACK(activate), NULL);
     int status = g_application_run(G_APPLICATION(app), argc, argv);
     g_object_unref(app);
