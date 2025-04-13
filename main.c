@@ -4,6 +4,12 @@
 #include "t/widget_callbacks.h"
 #include "t/xml_generate.h"
 
+#ifdef _WIN32
+    #include <windows.h>
+#else
+    #include <unistd.h>
+#endif
+
 typedef enum{
 	Windows,
 	Containers,
@@ -29,6 +35,36 @@ GtkWidget *working_stack = NULL;
 
 void function(){
 	printf("test\n");
+}
+void relancer_application(const char *executable_path, char *const argv[]) {
+    gtk_main_quit();  // Quitter proprement l'app GTK
+
+#ifdef _WIN32
+    // Construire la ligne de commande (Windows attend une chaîne unique)
+    char command_line[1024] = {0};
+    strcat(command_line, executable_path);
+    for (int i = 1; argv[i] != NULL; i++) {
+        strcat(command_line, " ");
+        strcat(command_line, argv[i]);
+    }
+
+    STARTUPINFO si = { sizeof(si) };
+    PROCESS_INFORMATION pi;
+
+    if (!CreateProcess(NULL, command_line, NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi)) {
+        MessageBox(NULL, "Échec du redémarrage", "Erreur", MB_OK | MB_ICONERROR);
+        exit(1);
+    }
+
+    CloseHandle(pi.hProcess);
+    CloseHandle(pi.hThread);
+
+#else
+    // Remplacer le processus actuel par le nouveau avec arguments
+    execv(executable_path, argv);
+    perror("Erreur lors du redémarrage");
+    exit(1);
+#endif
 }
 
 
@@ -121,11 +157,16 @@ void charger_fichier_callback(){
     char *chaine = g_strdup(gtk_entry_get_text(GTK_ENTRY(entry)));
     destroy_widget(dialog);
 
+    char *arg[] = {
+        "A",
+        "hello",
+        NULL
+    };
+
     if(response != GTK_RESPONSE_CLOSE){
         if(is_valid_path(chaine)){
-            printf("c\'est valide : %s\n", chaine);
-            system("bin/application");
-            // exit(-1);
+            relancer_application("bin/application", arg);
+            
         } else {
             printf("Fichier non valide: %s\n", chaine);
         }
@@ -2474,6 +2515,10 @@ static void activate(GtkApplication *app, gpointer data)
 
 
 int main(int argc, char *argv[]){
+    if(argc != 1){
+        printf("il y a une argument\n");
+    }
+
     app = gtk_application_new("org.example.app", G_APPLICATION_DEFAULT_FLAGS);
     g_signal_connect(app, "activate", G_CALLBACK(activate), NULL);
     int status = g_application_run(G_APPLICATION(app), argc, argv);
