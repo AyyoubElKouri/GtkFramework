@@ -124,6 +124,26 @@ void addEvents(char *buttonName, Section section, int size, char *color,  Callba
 	else add_to_box(Widgets_box, charge_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
 }
 
+static int on_command_line(GApplication *app, GApplicationCommandLine *cmdline, gpointer user_data) {
+    int argc;
+    char **argv = g_application_command_line_get_arguments(cmdline, &argc);
+
+    for (int i = 1; i < argc; i++) {
+        g_print("Argument custom reçu : %s\n", argv[i]);
+
+        if (g_str_has_prefix(argv[i], "--value=")) {
+            const char *val_str = argv[i] + 8;
+            int val = atoi(val_str);
+            g_print("Valeur traitée = %d\n", val);
+            // tu peux stocker `val` dans une variable globale si besoin
+        }
+    }
+
+    g_application_activate(app);  // continue vers "activate"
+    return 0;
+}
+
+
 void printhello(GtkWidget *widget, gpointer data){
 	printf("hello\n");
 }
@@ -158,8 +178,7 @@ void charger_fichier_callback(){
     destroy_widget(dialog);
 
     char *arg[] = {
-        "A",
-        "hello",
+        "main.c",
         NULL
     };
 
@@ -2520,7 +2539,11 @@ int main(int argc, char *argv[]){
     }
 
     app = gtk_application_new("org.example.app", G_APPLICATION_DEFAULT_FLAGS);
+
+    g_application_add_main_option_entries(G_APPLICATION(app), NULL); // évite toute option implicite
+
     g_signal_connect(app, "activate", G_CALLBACK(activate), NULL);
+
     int status = g_application_run(G_APPLICATION(app), argc, argv);
     g_object_unref(app);
     return status;
