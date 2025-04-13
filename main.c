@@ -161,6 +161,10 @@ static void activate(GtkApplication *app, gpointer data)
 
 	GtkWidget *Header_bar = create_header_bar("UIBuilder", "Build your UI Application", NULL, TRUE);
 
+    GtkWidget *Charger_button = create_button(GTK_RELIEF_NORMAL, "Charger Fichier", FALSE, NULL, NULL, NULL);
+
+    add_to_header_bar(Header_bar, Charger_button, LEFT);
+
 	add_header_bar_to_window(window, Header_bar);
 
 	GtkWidget *main_box = create_box(GTK_ORIENTATION_VERTICAL, -1, 0);
@@ -2413,14 +2417,14 @@ static void activate(GtkApplication *app, gpointer data)
     addEvents("Change Couleur", Widgets, 20, "#ffffff", changeCouleur);
     addEvents("abdrahmad", Windows, 50, "#FF33FF", dialog_function);
 
+    
 
 
-
+    
 
 	// ----------------------------------------------------------------------------------------------------------------------
 
 	show_widget(window);
-
     
 
 }
