@@ -92,6 +92,47 @@ void printhello(GtkWidget *widget, gpointer data){
 	printf("hello\n");
 }
 
+int is_valid_path(const char *path) {
+    FILE *file = fopen(path, "r");  // "r" : mode lecture
+    if (file) {
+        fclose(file);  // Si le fichier est ouvert avec succès, le fermer
+        return 1;  // Le fichier existe et est accessible
+    }
+    return 0;  // Le fichier n'existe pas ou ne peut pas être ouvert
+}
+
+void charger_fichier_callback(){
+    GtkWidget *box = create_box(GTK_ORIENTATION_HORIZONTAL, GTK_ALIGN_CENTER, 0);
+
+    GtkWidget *box2 = create_box(GTK_ORIENTATION_VERTICAL, GTK_ALIGN_CENTER, 0);
+
+
+
+
+    GtkWidget *entry = create_entry(NULL, "Your file path", TRUE, TRUE, 100, 0.5);
+
+
+    add_to_box(box2, entry, START, FALSE, FALSE, 0, 0, 0, 0, 0);
+    add_to_box(box, box2, START, FALSE, FALSE, 0, 0, 0, 0, 0);
+
+    GtkWidget *dialog = create_dialog("Faire un choix", NULL, GTK_DIALOG_MODAL, 300, 300, 1, box, "                                          OK                                          ", 1, NULL, 2, NULL, 3);
+	gint response = run_dialog(dialog);
+    
+    char *chaine = g_strdup(gtk_entry_get_text(GTK_ENTRY(entry)));
+    destroy_widget(dialog);
+
+    if(response != GTK_RESPONSE_CLOSE){
+        if(is_valid_path(chaine)){
+            printf("c\'est valide : %s\n", chaine);
+        } else {
+            printf("Fichier non valide: %s\n", chaine);
+        }
+    }
+
+    
+}
+
+
 
 // Callback Module : -----------------------------------------------------------------------------------------------------
 
@@ -161,7 +202,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 	GtkWidget *Header_bar = create_header_bar("UIBuilder", "Build your UI Application", NULL, TRUE);
 
-    GtkWidget *Charger_button = create_button(GTK_RELIEF_NORMAL, "Charger Fichier", FALSE, NULL, NULL, NULL);
+    GtkWidget *Charger_button = create_button(GTK_RELIEF_NORMAL, "Charger Fichier", FALSE, NULL, charger_fichier_callback, NULL);
 
     add_to_header_bar(Header_bar, Charger_button, LEFT);
 
