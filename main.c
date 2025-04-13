@@ -124,6 +124,8 @@ void charger_fichier_callback(){
     if(response != GTK_RESPONSE_CLOSE){
         if(is_valid_path(chaine)){
             printf("c\'est valide : %s\n", chaine);
+            system("bin/application");
+            // exit(-1);
         } else {
             printf("Fichier non valide: %s\n", chaine);
         }
