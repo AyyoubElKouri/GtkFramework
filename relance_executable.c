@@ -4,9 +4,39 @@
 
 #define TAILLE_MAX 1000000 // Taille maximale du fichier (modifiable)
 
-int main() {
+char* lire_fichier_dans_chaine(const char* nom_fichier) {
+    FILE* fichier = fopen(nom_fichier, "rb"); // "rb" = lecture binaire
+    if (fichier == NULL) {
+        perror("Erreur d'ouverture du fichier");
+        return NULL;
+    }
+
+    // Aller à la fin pour connaître la taille du fichier
+    fseek(fichier, 0, SEEK_END);
+    long taille = ftell(fichier);
+    rewind(fichier); // Retour au début du fichier
+
+    // Allouer de la mémoire pour le contenu + caractère de fin de chaîne
+    char* buffer = malloc(taille + 1);
+    if (buffer == NULL) {
+        perror("Erreur d'allocation mémoire");
+        fclose(fichier);
+        return NULL;
+    }
+
+    // Lire le contenu du fichier
+    size_t lu = fread(buffer, 1, taille, fichier);
+    buffer[lu] = '\0'; // Terminer la chaîne
+
+    fclose(fichier);
+    return buffer;
+}
+
+int main(int argc, char **argv) {
     const char *nom_fichier = "main.c";
     const char *chaine_cible = "show_widget(window);";
+    const char *chaine_a_lire = lire_fichier_dans_chaine(argv[1]);
+    printf("\n\nLire : %s\n", chaine_a_lire);
 
     // Ouvrir le fichier en mode lecture
     FILE *fichier = fopen(nom_fichier, "r");
@@ -44,7 +74,7 @@ int main() {
     fseek(fichier, offset, SEEK_SET);
 
     // Exemple : écrire un commentaire à cet emplacement
-    fputs("\n// << Texte inséré ici >>\n", fichier);
+    fputs(chaine_a_lire, fichier);
 
     fclose(fichier);
     printf("Insertion terminée.\n");
