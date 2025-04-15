@@ -2,21 +2,17 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define TAILLE_MAX 1000000 // Taille maximale du fichier (modifiable)
-
 char* lire_fichier_dans_chaine(const char* nom_fichier) {
-    FILE* fichier = fopen(nom_fichier, "rb"); // "rb" = lecture binaire
+    FILE* fichier = fopen(nom_fichier, "rb");
     if (fichier == NULL) {
         perror("Erreur d'ouverture du fichier");
         return NULL;
     }
 
-    // Aller à la fin pour connaître la taille du fichier
     fseek(fichier, 0, SEEK_END);
     long taille = ftell(fichier);
-    rewind(fichier); // Retour au début du fichier
+    rewind(fichier);
 
-    // Allouer de la mémoire pour le contenu + caractère de fin de chaîne
     char* buffer = malloc(taille + 1);
     if (buffer == NULL) {
         perror("Erreur d'allocation mémoire");
@@ -24,59 +20,81 @@ char* lire_fichier_dans_chaine(const char* nom_fichier) {
         return NULL;
     }
 
-    // Lire le contenu du fichier
     size_t lu = fread(buffer, 1, taille, fichier);
-    buffer[lu] = '\0'; // Terminer la chaîne
+    buffer[lu] = '\0';
 
     fclose(fichier);
     return buffer;
 }
 
 int main(int argc, char **argv) {
+    if (argc < 2) {
+        fprintf(stderr, "Utilisation : %s fichier_a_inserer\n", argv[0]);
+        return 1;
+    }
+
     const char *nom_fichier = "main.c";
     const char *chaine_cible = "show_widget(window);";
-    const char *chaine_a_lire = lire_fichier_dans_chaine(argv[1]);
-    printf("\n\nLire : %s\n", chaine_a_lire);
 
-    // Ouvrir le fichier en mode lecture
-    FILE *fichier = fopen(nom_fichier, "r");
+    // Lire le texte à insérer
+    char *chaine_a_inserer = lire_fichier_dans_chaine(argv[1]);
+    if (chaine_a_inserer == NULL)
+        return 1;
+
+    // Lire le contenu du fichier à modifier
+    char *contenu = lire_fichier_dans_chaine(nom_fichier);
+    if (contenu == NULL) {
+        free(chaine_a_inserer);
+        return 1;
+    }
+
+    // Chercher la position de la chaîne cible
+    char *pos = strstr(contenu, chaine_cible);
+    if (pos == NULL) {
+        printf("Chaîne '%s' non trouvée dans %s.\n", chaine_cible, nom_fichier);
+        free(chaine_a_inserer);
+        free(contenu);
+        return 1;
+    }
+
+    size_t index = pos - contenu;
+    size_t len_cible = strlen(chaine_cible);
+    size_t nouvelle_taille = strlen(contenu) + strlen(chaine_a_inserer) + 1;
+
+    // Créer le nouveau contenu avec insertion AVANT la chaîne cible
+    char *nouveau_contenu = malloc(nouvelle_taille);
+    if (!nouveau_contenu) {
+        perror("Erreur d'allocation mémoire");
+        free(chaine_a_inserer);
+        free(contenu);
+        return 1;
+    }
+
+    // Construire le nouveau contenu
+    strncpy(nouveau_contenu, contenu, index);
+    nouveau_contenu[index] = '\0';
+    strcat(nouveau_contenu, chaine_a_inserer);
+    strcat(nouveau_contenu, contenu + index);
+
+    // Écrire le résultat dans le fichier
+    FILE *fichier = fopen(nom_fichier, "w");
     if (fichier == NULL) {
-        perror("Erreur lors de l'ouverture du fichier");
+        perror("Erreur ouverture fichier écriture");
+        free(chaine_a_inserer);
+        free(contenu);
+        free(nouveau_contenu);
         return 1;
     }
 
-    // Lire tout le contenu du fichier en mémoire
-    char buffer[TAILLE_MAX];
-    size_t taille_lue = fread(buffer, 1, TAILLE_MAX - 1, fichier);
-    buffer[taille_lue] = '\0'; // Assurer la terminaison de la chaîne
-
-    // Chercher la première occurrence de la chaîne
-    char *position = strstr(buffer, chaine_cible);
-    if (position == NULL) {
-        printf("Chaîne '%s' non trouvée dans le fichier.\n", chaine_cible);
-        fclose(fichier);
-        return 1;
-    }
-
-    // Calcul de l'offset : position dans le fichier juste après la chaîne
-    long offset = position - buffer + strlen(chaine_cible);
-    printf("Offset trouvé : %ld (juste après 'show_widget(window);')\n", offset);
-
-    // Fermer et rouvrir le fichier pour positionner le curseur
+    fputs(nouveau_contenu, fichier);
     fclose(fichier);
-    fichier = fopen(nom_fichier, "r+"); // Mode lecture/écriture
-    if (fichier == NULL) {
-        perror("Erreur lors de la réouverture du fichier");
-        return 1;
-    }
 
-    // Positionner le curseur
-    fseek(fichier, offset, SEEK_SET);
+    // Libération mémoire
+    free(chaine_a_inserer);
+    free(contenu);
+    free(nouveau_contenu);
 
-    // Exemple : écrire un commentaire à cet emplacement
-    fputs(chaine_a_lire, fichier);
-
-    fclose(fichier);
-    printf("Insertion terminée.\n");
+    printf("Insertion AVANT la chaîne cible effectuée avec succès.\n");
     return 0;
 }
+    
