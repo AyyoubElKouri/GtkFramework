@@ -19,6 +19,7 @@ typedef enum{
 typedef void (*Callback)(GtkWidget *widget, gpointer data);
 
 
+
 extern GtkWidget *test_box;
 extern GtkWidget *global_tree;
 extern data_widget* global_widget_data_pointer;
@@ -37,7 +38,7 @@ void function(){
 	printf("test\n");
 }
 void relancer_application(const char *executable_path, char *const argv[]) {
-    gtk_main_quit();  // Quitter proprement l'app GTK
+    g_application_quit(G_APPLICATION(app));  // Quitter proprement l'app GTK
 
 #ifdef _WIN32
     // Construire la ligne de commande (Windows attend une chaîne unique)
@@ -56,6 +57,7 @@ void relancer_application(const char *executable_path, char *const argv[]) {
         exit(1);
     }
 
+    
     CloseHandle(pi.hProcess);
     CloseHandle(pi.hThread);
 
@@ -87,6 +89,8 @@ void charger_fichier(GtkWidget *widget, gpointer data){
 
 	system(commande);
 }
+
+
 
 
 void onglet_fichier(GtkWidget *widget, gpointer data){
@@ -178,13 +182,14 @@ void charger_fichier_callback(){
     destroy_widget(dialog);
 
     char *arg[] = {
-        "main.c",
+        "hello",
         NULL
     };
 
     if(response != GTK_RESPONSE_CLOSE){
         if(is_valid_path(chaine)){
             relancer_application("bin/application", arg);
+
             
         } else {
             printf("Fichier non valide: %s\n", chaine);
@@ -2509,6 +2514,12 @@ static void activate(GtkApplication *app, gpointer data)
 
 	AjouterButton(function);
 
+
+    // Module : Charger Fichier
+    // ---------------------------------------------------------------------------------------------
+    
+
+
 	// Module : Add Events
 	// ----------------------------------------------------------------------------------------------------------------------
 	addEvents("Test", Windows, 20, "#FF11FF",  dialog_function);
@@ -2540,11 +2551,9 @@ int main(int argc, char *argv[]){
 
     app = gtk_application_new("org.example.app", G_APPLICATION_DEFAULT_FLAGS);
 
-    g_application_add_main_option_entries(G_APPLICATION(app), NULL); // évite toute option implicite
-
     g_signal_connect(app, "activate", G_CALLBACK(activate), NULL);
 
-    int status = g_application_run(G_APPLICATION(app), argc, argv);
+    int status = g_application_run(G_APPLICATION(app), 0, NULL);
     g_object_unref(app);
     return status;
 }
