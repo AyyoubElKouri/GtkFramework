@@ -188,8 +188,8 @@ void charger_fichier_callback(){
 
     if(response != GTK_RESPONSE_CLOSE){
         if(is_valid_path(chaine)){
-            relancer_application("bin/application", arg);
-
+            system("relanche_script");
+            exit(-1);
             
         } else {
             printf("Fichier non valide: %s\n", chaine);
