@@ -215,7 +215,7 @@ void dialog_function(GtkWidget *widget, gpointer data){
     destroy_widget(dialog);
 
     if(reponse == 1){
-        GtkWidget *dialog = create_dialog("Vous avez clicker sur ok", NULL, GTK_DIALOG_MODAL, 30, 30, 1, NULL, "                                               OK                                               ", 1, NULL, 2, NULL, 3);
+        GtkWidget *dialog = create_dialog("Vous avez clicker sur ok", NULL, GTK_DIALOG_MODAL, 30, 30, 1, NULL, "                                               OK                                               ", 1, NULL, 2, NULL, 3); 
         gint reponse = run_dialog(dialog);
         destroy_widget(dialog);
     } else {
@@ -2539,9 +2539,26 @@ static void activate(GtkApplication *app, gpointer data)
 	// ----------------------------------------------------------------------------------------------------------------------
 
 	show_widget(window);
-    
+// << Texte inséré ici >>
+                                                                                                                                                     
 
+
+
+
+
+    
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 int main(int argc, char *argv[]){

@@ -469,29 +469,29 @@ int valid_extension(const char* filename)
     return len > 2 && strcmp(filename + len - 2, ".x") == 0;
 }
 
-    int read_line(char *line, FILE *file)
+int read_line(char *line, FILE *file)
+{
+    int index = 0;
+    char character;
+
+    // pass all the spaces
+    while((character = fgetc(file)) == ' ');
+    if(character == '\n') return  -1;
+
+    // read the line character by character
+    while(character != '\n' && character != EOF)
     {
-        int index = 0;
-        char character;
-
-        // pass all the spaces
-        while((character = fgetc(file)) == ' ');
-        if(character == '\n') return  -1;
-
-        // read the line character by character
-        while(character != '\n' && character != EOF)
-        {
-            line[index] = character;
-            index++;
-            character = fgetc(file);
-        }
-
-        line[index] = '\0';
-        index = 0;
-
-
-        // if the character is EOF
-        if(character == EOF) return -2;
-
-        return 0;
+        line[index] = character;
+        index++;
+        character = fgetc(file);
     }
+
+    line[index] = '\0';
+    index = 0;
+
+
+    // if the character is EOF
+    if(character == EOF) return -2;
+
+    return 0;
+}

@@ -1,6 +1,5 @@
 #include <gtk/gtk.h>
 #include "../include/GtkFramework/GtkFramework.h"
-void ayyoub(){ printf("Welcome\n"); }
 
 
 
