@@ -9,5 +9,5 @@ Un petit framework basé sur **GTK+ 3.0** pour simplifier le développement d'in
 - Gestion d'événements (callbacks) centralisée
 - Structure modulaire pour séparer logique et UI
 
-## 📁 Arborescence du projet
+
 
