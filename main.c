@@ -290,7 +290,23 @@ void ajouterButton(){
 }
 
 
+void ajouterLinkButton(){
+    linkButtonInfos *linkButtonInformations = malloc(sizeof(linkButtonInfos));
+    if(!linkButtonInformations) return;
 
+    linkButtonInformations->label = g_strdup("Google");
+    linkButtonInformations->url = g_strdup("http://google.com");
+
+    data_widget *widget_data = malloc(sizeof(data_widget));
+	if(!widget_data) exit(EXIT_FAILURE);	
+
+	widget_data->id_widget = "button-id";
+	widget_data->data = linkButtonInformations;
+	widget_data->widget_name = "link_button";
+
+	global_widget_data_pointer = widget_data;
+	drag(drag_button);
+}
 
 
 
@@ -2575,6 +2591,8 @@ static void activate(GtkApplication *app, gpointer data)
     addEvents("abdrahmad", Windows, 50, "#FF33FF", dialog_function);
     addEvents("Add Header", Windows, 20, "#FFFF11", AjouterHeaderBar);
     addEvents("Add Button", Widgets, 20, "#FF33FF", ajouterButton);
+    addEvents("Add Link  Button", Widgets, 20, "#FF33FF", ajouterLinkButton);
+    
 
 	// ---------------------------------------------------------------------------------------------
 
