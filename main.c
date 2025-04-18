@@ -265,6 +265,30 @@ void AjouterHeaderBar(){
 	drag(drag_button);
 }
 
+void ajouterButton(){
+    buttonInfos *buttonInf = malloc(sizeof(buttonInfos));
+    if(!buttonInf) return;
+
+    buttonInf->callback = NULL;
+    buttonInf->callback_name = NULL;
+    buttonInf->data = NULL;
+    buttonInf->data_name = NULL;
+    buttonInf->label = g_strdup("Click");
+    buttonInf->path_to_image = NULL;
+    buttonInf->relief = GTK_RELIEF_NORMAL;
+    buttonInf->use_underline = TRUE;
+
+    data_widget *widget_data = malloc(sizeof(data_widget));
+	if(!widget_data) exit(EXIT_FAILURE);	
+
+	widget_data->id_widget = "button-id";
+	widget_data->data = buttonInf;
+	widget_data->widget_name = "button";
+
+	global_widget_data_pointer = widget_data;
+	drag(drag_button);
+}
+
 
 
 
@@ -2550,6 +2574,7 @@ static void activate(GtkApplication *app, gpointer data)
     addEvents("Change Couleur", Widgets, 20, "#ffffff", changeCouleur);
     addEvents("abdrahmad", Windows, 50, "#FF33FF", dialog_function);
     addEvents("Add Header", Windows, 20, "#FFFF11", AjouterHeaderBar);
+    addEvents("Add Button", Widgets, 20, "#FF33FF", ajouterButton);
 
 	// ---------------------------------------------------------------------------------------------
 
