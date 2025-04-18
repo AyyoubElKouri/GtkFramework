@@ -245,6 +245,25 @@ void changeCouleur(){
 
 
 
+void AjouterHeaderBar(){
+    headerBarInfos *headerInfos = malloc(sizeof(headerBarI));
+    if(!headerInfos) return;
+
+    headerInfos->title = g_strdup("Title");
+    headerInfos->subtitle = g_strdup("Subtitle");
+    headerInfos->settings = TRUE;
+    headerInfos->icon_path = NULL;
+
+    data_widget *widget_data = malloc(sizeof(data_widget));
+	if(!widget_data) exit(EXIT_FAILURE);	
+
+	widget_data->id_widget = "header-bar-id";
+	widget_data->data = headerInfos;
+	widget_data->widget_name = "header_bar";
+
+	global_widget_data_pointer = widget_data;
+	drag(drag_button);
+}
 
 
 
@@ -2521,7 +2540,7 @@ static void activate(GtkApplication *app, gpointer data)
 
 
 	// Module : Add Events
-	// ----------------------------------------------------------------------------------------------------------------------
+	// ---------------------------------------------------------------------------------------------
 	addEvents("Test", Windows, 20, "#FF11FF",  dialog_function);
     addEvents("Button", Containers, 50, "#91d823", NULL);
     addEvents("Ayyoub", Containers, 25, "#FF33FF", NULL);
@@ -2530,13 +2549,11 @@ static void activate(GtkApplication *app, gpointer data)
 
     addEvents("Change Couleur", Widgets, 20, "#ffffff", changeCouleur);
     addEvents("abdrahmad", Windows, 50, "#FF33FF", dialog_function);
+    addEvents("Add Header", Windows, 20, "#FFFF11", AjouterHeaderBar);
+
+	// ---------------------------------------------------------------------------------------------
 
     
-
-
-    
-
-	// ----------------------------------------------------------------------------------------------------------------------
 
     
 
@@ -2552,16 +2569,6 @@ static void activate(GtkApplication *app, gpointer data)
 
 
 
-	GtkWidget *qsdf = create_header_bar("header", "Default Subtitle", NULL, TRUE);
-
-	add_to_box(test_box, qsdf, START, FALSE, FALSE, 0, 0, 0, 0, 0);
-
-	GtkWidget *dernier = create_button(GTK_RELIEF_NORMAL, "yassine", TRUE, NULL, NULL, NULL);
-
-    // Autre traitement ne contient j'amais une déclaration GtkWidget *blabla
-
-    // Fin 
-    add_to_box(test_box, dernier, START, FALSE, FALSE, 0, 0, 0, 0, 0);
 show_widget(window);
 
 
