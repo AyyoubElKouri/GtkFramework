@@ -1,0 +1,10 @@
+    créeModul("Test", Windows, 20, "#FF11FF",  dialog_function);
+
+    créeModul("Exit", Widgets, 20, "#ffffff", exit_function);
+
+    créeModul("Change Couleur", Widgets, 20, "#ffffff", changeCouleur);
+    créeModul("abdrahmad", Windows, 50, "#FF33FF", dialog_function);
+    créeModul("Add Header", Windows, 20, "#FFFF11", AjouterHeaderBar);
+    créeModul("Add Button", Widgets, 20, "#FF33FF", ajouterButton);
+    créeModul("Add Link  Button", Widgets, 20, "#FF33FF", ajouterLinkButton);
+    créeModul("Add Check Button", Widgets, 20, "#FF33FF", ajouterCheckButton);

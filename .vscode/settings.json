@@ -1,6 +1,7 @@
 {
     "C_Cpp.errorSquiggles": "disabled",
     "files.associations": {
+        "*.ejs": "html",
         "*.x": "html",
         "*.txt": "html",
         "link_button.h": "c",
@@ -20,6 +21,7 @@
         "supp.h": "c",
         "xml_generate.h": "c",
         "linked_list.h": "c",
-        "cstdlib": "c"
+        "cstdlib": "c",
+        "widget_callbacks.h": "c"
     }
 }

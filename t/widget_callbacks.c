@@ -1665,3 +1665,4 @@ void drop(GtkWidget *button) {
     // Réinitialiser le texte
     gtk_button_set_label(GTK_BUTTON(button), "Drag/Drop");
 }
+

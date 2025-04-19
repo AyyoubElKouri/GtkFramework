@@ -21,7 +21,7 @@ char* lire_fichier_dans_chaine(const char* nom_fichier) {
     }
 
     size_t lu = fread(buffer, 1, taille, fichier);
-    buffer[lu] = '\0';
+    buffer[lu] = '\0';  
 
     fclose(fichier);
     return buffer;

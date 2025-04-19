@@ -83,11 +83,10 @@ void charger_fichier(GtkWidget *widget, gpointer data){
 	char *chemin = get_text((GtkWidget *)data);
 
 	char *commande = malloc(100 * sizeof(char));
-	sprintf(commande, "cd XML; xsc %s", chemin);
+	sprintf(commande, "relanche_script %s", chemin);
 
-
-
-	system(commande);
+	system("relanche_script");
+    exit(1);
 }
 
 
@@ -101,7 +100,16 @@ void onglet_fichier(GtkWidget *widget, gpointer data){
 	show_widget(box_test);
 }
 
-void addEvents(char *buttonName, Section section, int size, char *color,  Callback callback)
+
+
+
+
+
+
+
+
+
+void créeModul(char *buttonName, Section section, int size, char *color,  Callback callback)
 {
 	GtkWidget *button = create_button(GTK_RELIEF_NORMAL, buttonName, FALSE, NULL, G_CALLBACK(callback), NULL);
     gtk_button_set_relief(GTK_BUTTON(button) , GTK_RELIEF_NONE);
@@ -127,6 +135,28 @@ void addEvents(char *buttonName, Section section, int size, char *color,  Callba
 	else if (section == Containers) add_to_box(Containers_box, charge_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
 	else add_to_box(Widgets_box, charge_frame, START, FALSE, FALSE, 0, 0, 0, 0, 0);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 static int on_command_line(GApplication *app, GApplicationCommandLine *cmdline, gpointer user_data) {
     int argc;
@@ -181,14 +211,13 @@ void charger_fichier_callback(){
     char *chaine = g_strdup(gtk_entry_get_text(GTK_ENTRY(entry)));
     destroy_widget(dialog);
 
-    char *arg[] = {
-        "hello",
-        NULL
-    };
+    
 
     if(response != GTK_RESPONSE_CLOSE){
         if(is_valid_path(chaine)){
-            system("relanche_script");
+            char *newChaine = malloc(200 * sizeof(char));
+            sprintf(newChaine, "relanche_script %s &", chaine);
+            system(newChaine);
             exit(-1);
             
         } else {
@@ -306,6 +335,29 @@ void ajouterLinkButton(){
 
 	global_widget_data_pointer = widget_data;
 	drag(drag_button);
+}
+
+void ajouterCheckButton(){
+    checkButtonInfos *check = malloc(sizeof(checkButtonInfos));
+    if(!check) return;
+
+    check->active = FALSE;
+    check->callback = NULL;
+    check->callback_name = NULL;
+    check->data = NULL;
+    check->data_name = NULL;
+    check->label = "Ayyoub";
+    check->use_underline = FALSE;
+
+    data_widget *widget_data = malloc(sizeof(data_widget));
+	if(!widget_data) exit(EXIT_FAILURE);	
+
+	widget_data->id_widget = "button-id";
+	widget_data->data = check;
+	widget_data->widget_name = "check_button";
+
+	global_widget_data_pointer = widget_data;
+	drag(drag_button);    
 }
 
 
@@ -2581,18 +2633,10 @@ static void activate(GtkApplication *app, gpointer data)
 
 	// Module : Add Events
 	// ---------------------------------------------------------------------------------------------
-	addEvents("Test", Windows, 20, "#FF11FF",  dialog_function);
-    addEvents("Button", Containers, 50, "#91d823", NULL);
-    addEvents("Ayyoub", Containers, 25, "#FF33FF", NULL);
-
-    addEvents("Exit", Widgets, 20, "#ffffff", exit_function);
-
-    addEvents("Change Couleur", Widgets, 20, "#ffffff", changeCouleur);
-    addEvents("abdrahmad", Windows, 50, "#FF33FF", dialog_function);
-    addEvents("Add Header", Windows, 20, "#FFFF11", AjouterHeaderBar);
-    addEvents("Add Button", Widgets, 20, "#FF33FF", ajouterButton);
-    addEvents("Add Link  Button", Widgets, 20, "#FF33FF", ajouterLinkButton);
     
+    créeModul("Change Couleur", Windows, 20, "#ffffff", changeCouleur);
+    créeModul("abdrahmad", Windows, 50, "#FF33FF", dialog_function);
+
 
 	// ---------------------------------------------------------------------------------------------
 
@@ -2602,6 +2646,13 @@ static void activate(GtkApplication *app, gpointer data)
 
     
 	
+
+
+
+
+
+
+
 
 
 
